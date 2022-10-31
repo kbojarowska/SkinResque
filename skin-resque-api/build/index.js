@@ -1,2 +1,2 @@
-"use strict";
-console.log("Build test");
+'use strict';
+console.log('Build test');
