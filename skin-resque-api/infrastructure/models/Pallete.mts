@@ -1,9 +1,5 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
+import { model } from 'mongoose';
+import { PaletteSchema } from '../schemas';
+import { PALETTES } from '../shared/constatns.mjs';
 
-const Palette = new Schema({
-    name: String,
-    colors: [String]
-})
-
-export default Palette
+export default model(PALETTES, PaletteSchema);

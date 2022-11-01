@@ -1,9 +1,5 @@
-import Palette from "./Pallete.mjs";
-import Cosmetic from "./Cosmetics.mjs";
-import User from "./User.mjs";
+import Cosmetic from './Cosmetic.mjs';
+import Pallete from './Pallete.mjs';
+import User from './User.mjs';
 
-export {
-    Palette,
-    Cosmetic,
-    User
-};
+export { Cosmetic, Pallete, User };
