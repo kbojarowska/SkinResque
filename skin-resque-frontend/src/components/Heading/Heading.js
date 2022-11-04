@@ -16,7 +16,7 @@ export default function Heading({size, children}){
 }
 
 Heading.defaultProps = {
-  size: 'large'
+  size: 'medium'
 }
 
 Heading.propTypes = {
