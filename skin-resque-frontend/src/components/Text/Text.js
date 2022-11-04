@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './Text.scss'
 
-export default function Text({size}) {
+export default function Text({size, children}) {
   return (
-    <p className={size}>Text</p>
+    <p className={size}>{children}</p>
   )
 }
 
