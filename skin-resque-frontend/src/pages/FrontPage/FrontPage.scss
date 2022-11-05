@@ -1,29 +1,30 @@
-* { 
-    width:100%;
-}
-
 .frontPage {
     display:flex;
     flex-direction: column;
     position:absolute;
     top:0;
     z-index: 0;
+    width:100%;
 
     .pink {
+        width:100%;
         height: 270px;
         background-color: #F3B4C5;
     }
 
     .white {
+        width:100%;
         height:270px;
     }
 
     .green {
+        width:100%;
         height:270px;
         background-color: #A2D3BC;
     }
 
-    img {
+    .skinPhoto {
+        width:100%;
         height:360px;
         object-fit: cover;
     }
