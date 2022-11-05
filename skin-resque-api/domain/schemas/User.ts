@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
-import { USERS } from '../shared/constatns.mjs';
-import CosmeticSchema from './Cosmetics.mjs';
-import PaletteSchema from './Pallete.mjs';
+import { USERS } from '../constants.mjs';
+import CosmeticSchema from './Cosmetics.js';
+import PaletteSchema from './Pallete.js';
 
 const UserSchema = new Schema(
     {

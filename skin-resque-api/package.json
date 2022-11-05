@@ -6,7 +6,7 @@
     "main": "index.js",
     "scripts": {
         "test": "test",
-        "start": "node build/index.mjs",
+        "start": "node build/index.js",
         "build": "npx tsc --project .",
         "prettier": "npx prettier --write .",
         "moduleRun": "node --experimental-specifier-resolution=node"

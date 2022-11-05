@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { COSMETICS } from '../shared/constatns.mjs';
+import { COSMETICS } from '../constants.mjs';
 
 const CosmeticSchema = new Schema(
     {

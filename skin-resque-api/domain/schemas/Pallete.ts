@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { PALETTES } from '../shared/constatns.mjs';
+import { PALETTES } from '../constants.mjs';
 
 const PaletteSchema = new Schema(
     {
