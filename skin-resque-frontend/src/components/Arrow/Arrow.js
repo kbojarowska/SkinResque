@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 
 function Arrow({left, right, onClick, color}) {
   return (
+    left || right ?
     <div onClick={onClick}>{left && !right ? <FiChevronLeft size={45} color={color}/> : <FiChevronRight size={45} color={color}/>}</div>
+    : null
   )
 }
 
