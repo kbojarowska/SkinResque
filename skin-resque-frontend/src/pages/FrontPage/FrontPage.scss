@@ -1,0 +1,30 @@
+* { 
+    width:100%;
+}
+
+.frontPage {
+    display:flex;
+    flex-direction: column;
+    position:absolute;
+    top:0;
+    z-index: 0;
+
+    .pink {
+        height: 270px;
+        background-color: #F3B4C5;
+    }
+
+    .white {
+        height:270px;
+    }
+
+    .green {
+        height:270px;
+        background-color: #A2D3BC;
+    }
+
+    img {
+        height:360px;
+        object-fit: cover;
+    }
+}
