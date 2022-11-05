@@ -16,7 +16,6 @@ jobs:
       - name: install dependencies
         working-directory: ./skin-resque-frontend
         run: |
-          npm cache clean
           rm -rf node_modules
           npm install
   eslint:
