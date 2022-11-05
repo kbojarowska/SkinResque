@@ -1,8 +1,6 @@
 import './FrontPage.scss';
 import photo from '../../resources/front-page-skin-photo.jpg';
 
-// const photo = require();
-
 function FrontPage() {
   return (
     <div className='frontPage'>
