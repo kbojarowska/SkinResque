@@ -1,6 +1,8 @@
 import './FrontPage.scss';
 import photo from '../../resources/front-page-skin-photo.jpg';
 import skintypeTestPhoto from '../../resources/skintype-test.png';
+import colorTestPhoto from '../../resources/color-test.png';
+import cosmeticRecipesPhoto from '../../resources/cosmetic-recipes.png'
 import Button from '../../components/Button/Button'
 import { Link } from 'react-router-dom';
 import Heading from '../../components/Heading/Heading';
@@ -25,11 +27,11 @@ sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
         <Button><Link to='/skintype-test'>Skintype Test</Link></Button>
         </div>
         <div className='photo-button'>
-        <img src={skintypeTestPhoto}></img>
+        <img src={colorTestPhoto}></img>
           <Button><Link to='/color-test'>Color Test</Link></Button>
         </div>
         <div className='photo-button'>
-        <img src={skintypeTestPhoto}></img>
+        <img src={cosmeticRecipesPhoto}></img>
           <Button><Link to='/cosmetic-list'>Cosmetic Recipes</Link></Button>
         </div>
       </div>
