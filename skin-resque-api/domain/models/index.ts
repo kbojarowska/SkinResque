@@ -2,4 +2,6 @@ import Cosmetic from './Cosmetic.js';
 import Pallete from './Pallete.js';
 import User from './User.js';
 
-export { Cosmetic, Pallete, User };
+import { ICosmetics } from './types.js';
+
+export { Cosmetic, Pallete, User, ICosmetics };

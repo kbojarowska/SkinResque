@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { USERS } from '../constants.mjs';
+import { USERS } from '../constants.js';
 import CosmeticSchema from './Cosmetics.js';
 import PaletteSchema from './Pallete.js';
 
