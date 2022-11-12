@@ -5,12 +5,10 @@ import './Pagination.scss';
 
 export default function Pagination({ color, size }) {
 
-	let pages = [];
-	for (let i = 1; i <= size; i++) {
-		pages.push(i);
-	};
+	const pages = (new Array(size)).fill(0);
 
-	const pagesList = pages.map((pageNumber) => {
+	const pagesList = pages.map((_, index) => {
+		const pageNumber = index + 1;
 		return (
 			<Link to={`/cosmetics/page/${pageNumber}`} key={pageNumber} className={color}>
 				<Heading key={pageNumber}>
