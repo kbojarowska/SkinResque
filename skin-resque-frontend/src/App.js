@@ -7,7 +7,6 @@ import React from 'react'
 import './App.scss';
 import Navbar from './components/Navbar/Navbar';
 import FrontPage from './pages/FrontPage/FrontPage';
-import Pagination from './components/Pagination/Pagination';
 
 function App() {
   return (
@@ -17,7 +16,6 @@ function App() {
       <Routes>
           <Route path='/' element={<FrontPage/>}/>
         </Routes>
-		<Pagination size={15} color='gray'/>
     </div>
     </Router>
   );
