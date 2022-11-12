@@ -1,9 +1,18 @@
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+
+	&:hover,
+	&:focus,
+	&:visited,
+	&:link,
+	&:active {
+		text-decoration: none;
+		color: inherit;
+	}
 }
 
 .App {
-  position: relative;
+	position: relative;
 }
