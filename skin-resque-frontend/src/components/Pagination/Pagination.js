@@ -3,14 +3,12 @@ import PropTypes from 'prop-types';
 import Heading from '../Heading/Heading';
 import './Pagination.scss';
 
-export default function Pagination({ color, size }) {
+export default function Pagination({ url, color, size }) {
 
-	const pages = (new Array(size)).fill(0);
-
-	const pagesList = pages.map((_, index) => {
+	const pagesList = (new Array(size)).fill(0).map((_, index) => {
 		const pageNumber = index + 1;
 		return (
-			<Link to={`/cosmetics/page/${pageNumber}`} key={pageNumber} className={color}>
+			<Link to={`${url}/${pageNumber}`} key={pageNumber} className={color}>
 				<Heading key={pageNumber}>
 					{pageNumber}
 				</Heading>
@@ -26,6 +24,7 @@ export default function Pagination({ color, size }) {
 }
 
 Pagination.propTypes = {
-	colors: PropTypes.oneOf(['green', 'gray']),
+	url: PropTypes.string,
+	color: PropTypes.oneOf(['green', 'gray']),
 	size: PropTypes.number
 };

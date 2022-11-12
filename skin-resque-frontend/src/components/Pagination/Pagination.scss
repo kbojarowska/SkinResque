@@ -11,7 +11,8 @@
 	.gray {
 		color: #C9C1C2;
 
-		&:hover {
+		&:hover,
+		.current {
 			color: #875160;
 		}
 	}
@@ -19,7 +20,8 @@
 	.green {
 		color: #8BC8AB;
 
-		&:hover {
+		&:hover,
+		.current {
 			color: #5F8874
 		}
 	}
