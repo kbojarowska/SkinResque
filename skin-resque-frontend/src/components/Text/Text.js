@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types'
 import './Text.scss'
 
-export default function Text({size, children}) {
+export default function Text({size, className='', children}) {
+  const classes = `${size} ${className}`
   return (
-    <p className={size}>{children}</p>
+    <p className={classes}>{children}</p>
   )
 }
 
