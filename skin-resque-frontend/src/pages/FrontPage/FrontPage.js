@@ -1,10 +1,10 @@
+import { useState } from 'react';
 import './FrontPage.scss';
 import photo from '../../resources/front-page-skin-photo.jpg';
 import Button from '../../components/Button/Button';
 import Text from '../../components/Text/Text';
 import Heading from '../../components/Heading/Heading';
 import Arrow from '../../components/Arrow/Arrow';
-import { useState } from 'react';
 
 function FrontPage() {
 
