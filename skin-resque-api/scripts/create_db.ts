@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 import { uniqueNamesGenerator, colors, adjectives, starWars, names } from 'unique-names-generator';
 import { LoremIpsum } from 'lorem-ipsum';
-import { Cosmetic, Pallete, User } from '../infrastructure/models';
+import { Cosmetic, Pallete, User } from '../domain/models/index.js';
 import { CosmeticFromDB, PalleteFromDB } from './types';
 dotenv.config();
 
