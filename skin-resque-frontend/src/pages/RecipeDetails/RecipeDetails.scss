@@ -60,4 +60,79 @@
     top: 1010px;
 }
 
+.beige-bg {
+    position: relative;
+    background-color: #F6EFF0;
+    height: 400px;
+    width: 70%;
+    z-index: 2;
+    top: 35%;
+    margin: auto;
+}
 
+.beige-bg-recipe {
+    position: relative;
+    background-color: #F6EFF0;
+    height: 800px;
+    width: 70%;
+    z-index: 2;
+    top: 25%;
+    margin: auto;
+}
+
+.heading {
+    padding: 30px;
+    display: flex;
+    margin: auto;
+    align-items:center;
+    justify-content:center;
+}
+
+.dark-beige-bg {
+    background-color: #EEE1E3;
+    height: 275px;
+    width: 45%;
+}
+
+.details-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.img {
+    width: 14%;
+    height: 14%;
+}
+
+.border {
+    padding: 20px;
+    border: 1px dashed #875160;
+    box-sizing: border-box;
+    position:relative;
+    width: 95%;
+    height: 90%;
+    display: block;
+    margin: auto;
+    margin-top: 2%;
+}
+
+.text {
+    text-align: justify;
+}
+
+.ingredients {
+    width: 35%;
+    padding: 30px;
+    height: 500px;
+}
+
+.recipe {
+    padding: 30px;
+    width: 55%;
+    margin-right: 30px;
+}
+
+.ing {
+    padding-bottom: 10px;
+}
