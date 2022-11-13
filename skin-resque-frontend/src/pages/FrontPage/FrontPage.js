@@ -77,9 +77,12 @@ function FrontPage() {
             <Heading>{showIngredient.name.toUpperCase()}</Heading>
             <Text>{showIngredient.description}</Text>
           </div>
-          <div className='bg-pink'>
-            <div className='behind-bg'>
-              <img src={showIngredient.photo} className='info-pic'></img>
+          <div className='photo-container'>
+            <img src='/images/dots.png' className='dots'></img>
+            <div className='bg-pink'>
+              <div className='behind-bg'>
+                <img src={showIngredient.photo} className='info-pic'></img>
+              </div>
             </div>
           </div>
           <Arrow right onClick={nextIngredient}/>

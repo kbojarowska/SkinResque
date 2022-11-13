@@ -36,6 +36,13 @@
         object-fit: cover;
     }
 
+    .dots {
+        position: relative;
+        display: block;
+        z-index: 1;
+        top: 400px;
+    }
+
     .info-pic {
         height: 350px;
         width: 350px;
@@ -68,29 +75,15 @@
         justify-content: center;
         align-items: center;
         justify-content: space-evenly;
-        gap: 100px;
+        gap: 110px;
+    }
+
+    .photo-container {
+        position: relative;
+        top: -225px;
     }
     
     .info-text {
         width: 500px;
-    }
-
-    .animation{
-        animation: wobble 1s 1;
-    }
-      
-    @keyframes wobble {
-        25% {
-          transform: rotate(15deg);
-        }
-        50% {
-          transform: rotate(-30deg);
-        }
-        75% {
-          transform: rotate(5deg);
-        }
-        100% {
-          transform: rotate(0deg);
-        }
     }
 }
