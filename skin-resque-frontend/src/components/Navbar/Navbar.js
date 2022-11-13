@@ -10,7 +10,7 @@ function Navbar() {
         </div>
         <div className='linkList'>
                 <Link to='/'><Heading size='small'>HOME</Heading></Link>
-                <Link to='/cosmetics'><Heading size='small'>COSMETICS</Heading></Link>
+                <Link to='/cosmetics/page/1'><Heading size='small'>COSMETICS</Heading></Link>
                 <Link to='/login'><Heading size='small'>LOG IN</Heading></Link>
         </div>
     </div>

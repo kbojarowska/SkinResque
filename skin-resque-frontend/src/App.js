@@ -8,6 +8,7 @@ import './App.scss';
 import Navbar from './components/Navbar/Navbar';
 import FrontPage from './pages/FrontPage/FrontPage';
 import CosmeticsCatalogue from './pages/CosmeticsCatalogue/CosmeticsCatalogue';
+import RecipeDetails from './pages/RecipeDetails/RecipeDetails'
 
 function App() {
 	return (
@@ -16,7 +17,8 @@ function App() {
 				<Navbar />
 				<Routes>
 					<Route path='/' element={<FrontPage />} />
-					<Route path='/cosmetics' element={<CosmeticsCatalogue/>} />
+					<Route path='/cosmetics/page/:currentPage' element={<CosmeticsCatalogue/>} />
+					<Route path='/cosmetics/:cosmeticId' element={<RecipeDetails/>}/>
 				</Routes>
 			</div>
 		</Router>
