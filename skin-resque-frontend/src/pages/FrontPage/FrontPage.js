@@ -1,22 +1,15 @@
-import './FrontPage.scss';
-import photo from '../../resources/front-page-skin-photo.jpg';
-import skintypeTestPhoto from '../../resources/skintype-test.png';
-import colorTestPhoto from '../../resources/color-test.png';
-import cosmeticRecipesPhoto from '../../resources/cosmetic-recipes.png';
-import pinkDots from '../../resources/small-pink-dots.png'
-import coniferBush from '../../resources/conifer-bush.png'
-import waterDrops from '../../resources/water-drops.png'
-import Button from '../../components/Button/Button';
 import { Link } from 'react-router-dom';
+import Button from '../../components/Button/Button';
 import Heading from '../../components/Heading/Heading';
 import Text from '../../components/Text/Text';
+import './FrontPage.scss';
 
 function FrontPage() {
 	return (
 		<div className='front-page'>
 			<div className='pink'>
 				<div className='conifer-bush-about'>
-					<img src={coniferBush} />
+					<img src='/images/conifer-bush.png' />
 					<div className='about'>
 						<div className='page-about'>
 							<Heading size='medium'>Page Information</Heading>
@@ -31,30 +24,30 @@ function FrontPage() {
 			</div>
 			<div className='white'>
 				<div className='pink-dots'>
-					<img src={pinkDots}></img>
+					<img src='/images/small-pink-dots.png'></img>
 				</div>
 			</div>
 			<div className='photo-button-list linkList'>
 				<div className='photo-button'>
-					<img src={skintypeTestPhoto}></img>
+					<img src='/images/skintype-test.png'></img>
 					<Button><Link to='/skintype-test'>Skintype Test</Link></Button>
 				</div>
 				<div className='photo-button'>
-					<img src={colorTestPhoto}></img>
+					<img src='/images/color-test.png'></img>
 					<Button><Link to='/color-test'>Color Test</Link></Button>
 				</div>
 				<div className='photo-button'>
-					<img src={cosmeticRecipesPhoto}></img>
+					<img src='/images/cosmetic-recipes.png'></img>
 					<Button><Link to='/cosmetic-list'>Cosmetic Recipes</Link></Button>
 				</div>
 			</div>
 			<div className='water-drops'>
-				<img src={waterDrops}></img>
-				<img src={waterDrops}></img>
-				<img src={waterDrops} ></img>
+				<img src='/images/water-drops.png'></img>
+				<img src='/images/water-drops.png'></img>
+				<img src='/images/water-drops.png' ></img>
 			</div>
 			<div className='green'></div>
-			<img src={photo} className='skin-photo'></img>
+			<img src='/images/front-page-skin-photo.jpg' className='skin-photo'></img>
 			<div className='white'></div>
 		</div>
 	);
