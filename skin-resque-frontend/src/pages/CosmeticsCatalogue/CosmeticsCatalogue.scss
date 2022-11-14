@@ -94,12 +94,12 @@
 				width: 250px;
 
 				&:hover {
-					filter: drop-shadow(30px 10px 4px #D3D3D3);
+					box-shadow: 66px 96px 47px rgba(49, 28, 31, 0.01), 37px 54px 39px rgba(49, 28, 31, 0.05), 17px 24px 29px rgba(49, 28, 31, 0.09), 4px 6px 16px rgba(49, 28, 31, 0.1), 0px 0px 0px rgba(49, 28, 31, 0.1);
 				}
 
 				img {
 					height: 189px;
-					width: 94px;
+					width: 120px;
 				}
 
 				p {
