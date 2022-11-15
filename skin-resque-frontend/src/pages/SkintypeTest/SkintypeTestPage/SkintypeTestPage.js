@@ -1,11 +1,8 @@
-import { useParams } from 'react-router-dom';
 import Heading from '../../../components/Heading/Heading';
 import './SkintypeTestPage.scss';
 import Info from '../Info/Info';
 
 function CosmeticsCatalogue() {
-
-	const { questionNumber } = useParams();
 
 	return (
 		<div className='skintype-test-page'>
