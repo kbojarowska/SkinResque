@@ -1,0 +1,18 @@
+.info-container {
+	background-color: #F6EFF0;
+	padding:10px;
+	width: 50%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 50px;
+	align-items: center;
+
+	.info {
+		margin:50px;
+	}
+
+	.start-button {
+		margin-bottom: 50px;
+	}
+}
