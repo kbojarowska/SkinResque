@@ -9,7 +9,7 @@ const UserSchema = new Schema<IUser>(
         name: { type: String, required: true },
         email: { type: String, required: true },
         skin_type: String,
-        saved_cosmetics: [CosmeticSchema],
+        saved_cosmetics: [{type: Schema.Types.ObjectId, ref: "Cosmetic"}],
         saved_palletes: [PaletteSchema],
     },
     { collection: USERS }
