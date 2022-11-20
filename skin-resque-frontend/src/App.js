@@ -9,6 +9,7 @@ import Navbar from './components/Navbar/Navbar';
 import FrontPage from './pages/FrontPage/FrontPage';
 import CosmeticsCatalogue from './pages/CosmeticsCatalogue/CosmeticsCatalogue';
 import RecipeDetails from './pages/RecipeDetails/RecipeDetails'
+import Results from './pages/SkintypeTest/Results/Results';
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 					<Route path='/' element={<FrontPage />} />
 					<Route path='/cosmetics/page/:currentPage' element={<CosmeticsCatalogue/>} />
 					<Route path='/cosmetics/:cosmeticId' element={<RecipeDetails/>}/>
+					<Route path='/result' element={<Results/>}/>
 				</Routes>
 			</div>
 		</Router>
