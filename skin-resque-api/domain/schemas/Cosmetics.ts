@@ -1,7 +1,8 @@
-import mongoose, { Schema } from 'mongoose';
+import { Schema } from 'mongoose';
 import { COSMETICS } from '../constants.js';
+import { ICosmetics } from '../shared/types.js';
 
-const CosmeticSchema = new Schema(
+const CosmeticSchema = new Schema<ICosmetics>(
     {
         name: { type: String, required: true },
         description: { type: String, required: true },
