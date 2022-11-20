@@ -2,7 +2,7 @@ import Heading from '../../../components/Heading/Heading';
 import './SkintypeTestPage.scss';
 import Info from '../Info/Info';
 
-function CosmeticsCatalogue() {
+function SkintypeTestPage() {
 
 	return (
 		<div className='skintype-test-page'>
@@ -22,4 +22,4 @@ function CosmeticsCatalogue() {
 	);
 }
 
-export default CosmeticsCatalogue;
+export default SkintypeTestPage;
