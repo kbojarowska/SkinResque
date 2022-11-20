@@ -7,7 +7,7 @@ function CosmeticsCatalogue() {
 	return (
 		<div className='skintype-test-page'>
 			<div className='page-title'>
-				<Heading size='large'>Skintype Test</Heading>
+				<Heading size='large'>Skintype test</Heading>
 			</div>
 			<div className='pink' />
 			<img src='/images/pink-spot.png' className='pink-spot'></img>
