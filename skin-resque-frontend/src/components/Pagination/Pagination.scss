@@ -1,0 +1,29 @@
+.pagination-container {
+	background-color: transparent;
+	display: flex;
+	height: 40px;
+	width: 600px;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	padding: 10px;
+
+	.gray {
+		color: #C9C1C2;
+
+
+		&:hover,
+		.current {
+			color: #875160;
+		}
+	}
+
+	.green {
+		color: #8BC8AB;
+
+		&:hover,
+		.current {
+			color: #5F8874
+		}
+	}
+}
