@@ -103,7 +103,7 @@ paths:
         - in: path
           name: id
           required:  true
-          description:  description
+          description:  User's id
           schema:
             type:  string
       responses:
@@ -131,6 +131,35 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+    put:
+      summary: Update whole user profile
+      description: Updates whole users profile. Any unfilled data means wipe of previous data 
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          description: User's id
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: 
+                email:
+                  type: string
+                  description: New email
+                login:
+                  type: string
+                  description: New login
+                skinType:
+                  $ref: "#/components/schemas/SkinType"
+      responses:
+        204:
+          description: User successfuly updated
+        
           
 
 components:
@@ -222,8 +251,7 @@ components:
         - skinType
         - savedCosmetics
         - savedPalletes
-
-                  
+           
     Error:
       type: object
       properties:
