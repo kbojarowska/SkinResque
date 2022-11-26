@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import Arrow from '../../../components/Arrow/Arrow';
-//import Checkbox from '../../../components/Checkbox/Checkbox';
+import Checkbox from '../../../components/Checkbox/Checkbox';
 import Heading from '../../../components/Heading/Heading';
 import Pagination from '../../../components/Pagination/Pagination';
 import './Questions.scss';
@@ -24,13 +24,13 @@ function Questions({ currentQuestion, numberOfQuestions }) {
 							</div>
 							<div className='answers'>
 								<div className='answer'>
-									{/*<Checkbox checked={false}>Ut enim ad minim veniam, quis nostrud exercitation ullamco</Checkbox>*/}
+									<Checkbox checked={false}>Ut enim ad minim veniam, quis nostrud exercitation ullamco</Checkbox>
 								</div>
 								<div className='answer'>
-									{/*<Checkbox checked={false}>Ut enim ad minim veniam, quis nostrud exercitation ullamco</Checkbox>*/}
+									<Checkbox checked={false}>Ut enim ad minim veniam, quis nostrud exercitation ullamco</Checkbox>
 								</div>
 								<div className='answer'>
-									{/*<Checkbox checked={false}>Ut enim ad minim veniam, quis nostrud exercitation ullamco</Checkbox>*/}
+									<Checkbox checked={false}>Ut enim ad minim veniam, quis nostrud exercitation ullamco</Checkbox>
 								</div>
 							</div>
 							<div className='arrow'>
