@@ -3,29 +3,25 @@
 		position: absolute;
 		top: 120px;
 		z-index: 1;
-		display: flex;
-		justify-content: center;
-		align-items: center;
 		width: 100%;
 		margin-bottom:50px;
+        text-align: center;
 	}
 
     .results{
         position: absolute;
 		top: 170px;
 		z-index: 1;
-		display: flex;
-		justify-content: center;
-		align-items: center;
 		width: 100%;
 		margin-bottom:50px;
+        letter-spacing: 20px;
+        text-align: center;
     }
 
     .result-container {
         position: relative;
         top: -200px;
         display: flex;
-        gap: 40px;
 
         .img-skin {
             position: relative;
@@ -136,5 +132,13 @@
         position: relative;
         z-index: 2;
         height: 50%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
+
+    .centered-div {
+        display: block;
+        text-align: center;
+     }
 }

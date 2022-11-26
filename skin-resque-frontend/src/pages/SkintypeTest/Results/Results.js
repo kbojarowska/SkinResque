@@ -55,7 +55,7 @@ function Results() {
 	return (
 		<div className='skintype-results'>
 			<Heading size='large' className='page-title'>Skintype test</Heading>
-            <Heading className='results'>R E S U L T S</Heading>
+            <Heading className='results'>RESULS</Heading>
 			<div className='pink' />
 			<img src='/images/pink-spot.png' className='pink-spot'></img>
 			<img src='/images/small-pink-dots.png' className='small-pink-dots'></img>
@@ -72,14 +72,14 @@ function Results() {
                         <div className='best-match'>
                             {bestMatch.map((el)=>{
                                 return(
-                                <div key={el.id} className='cosmetics-container'>
-                                    <img className='cosmetics' src={el.photo}></img>
-                                    <Text>{el.name}</Text>
+                                <div key={el.id} className='cosmetics-container-col'>
+                                    <img className='cosmetics cosmetics-container-row' src={el.photo}></img>
+                                    <Text className='centered-div'>{el.name}</Text>
                                 </div>
                                 )
                             })}
                         </div>
-                        <Link to='/cosmetics/page/:currentPage'><Text size='small' className='view-more'>View more <FiArrowRight style={{position: 'relative', top: '2px'}}/></Text></Link>
+                        <Link to='/cosmetics/page/1'><Text size='small' className='view-more'>View more <FiArrowRight style={{position: 'relative', top: '2px'}}/></Text></Link>
                     </div>
                     }
                     {infoPage ? <Arrow className='arrow-right' right onClick={() => setInfoPage(!infoPage)}/> : null}
