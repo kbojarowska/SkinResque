@@ -8,7 +8,7 @@ function Checkbox({checked, children}) {
 
 	return (
 		<div className='checkbox-wrapper'>
-			<input type='checkbox' onChange={() => setIsChecked((checked) => !checked)}/>
+			<input type='checkbox' onChange={() => setIsChecked((prev) => !prev)} value={isChecked}/>
 			<Text>{children}</Text>
 		</div>
 	);
