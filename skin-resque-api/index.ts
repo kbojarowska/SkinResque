@@ -1,7 +1,8 @@
 import express, { Application } from 'express';
 import * as dotenv from 'dotenv';
 import Dba from './infrastructure/database_abstraction/Dba.js';
-import { Cosmetic, ICosmetics } from './domain/models/index.js';
+import { Cosmetic } from './domain/models/index.js';
+import { ICosmetics } from "./domain/shared/types.js"
 dotenv.config();
 
 const DB = new Dba();

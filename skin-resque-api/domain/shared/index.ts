@@ -1,3 +1,3 @@
-import { ICosmetics, IPallete, IUser } from './types.js';
+import { ICosmetics, IPalette, IUser } from './types.js';
 
-export { ICosmetics, IPallete, IUser };
+export { ICosmetics, IPalette as IPallete, IUser };

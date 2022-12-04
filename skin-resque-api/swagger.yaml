@@ -1,0 +1,469 @@
+openapi: 3.0.0
+
+info:
+  title: SkinResqueApi
+  description: Serving content for SkinResque
+  version: "1.0"
+
+servers:
+  - url: http://localhost:3000
+    description: Local instance
+
+paths:
+  /cosmetics:
+    get:
+      summary: Retrives all cosmetics
+      description: Retrives all cosmetics
+      operationId: cosmeticsAll
+      parameters:
+        - in: "query"
+          name: size
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+          description: Size of page
+        - in: "query"
+          name: page
+          schema:
+            type: integer
+            minimum: 0
+          description: Number of page
+        - in: "query"
+          name: "name"
+          schema:
+            type: string
+          description: "Name to look for"
+        - in: "query"
+          name: "type"
+          schema:
+            $ref: "#/components/schemas/SkinType"
+          description: "Type of skin to look for"
+      responses: 
+        204:
+          $ref: "#/components/responses/204"
+        400:
+          $ref: "#/components/responses/400"
+        500:
+          $ref: "#/components/responses/500" 
+  /cosmetics/random:
+    get:
+      description: Get random cosmetics of choosen amount
+      summary: Get random cosmetics of choosen amount
+      parameters:
+        - in: "query"
+          name: "amount"
+          schema: 
+            type: number
+            minimum: 1
+            maximum: 50
+      responses:
+        200:
+          description: Retrives specified amount of random cosmetics
+          content: 
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Cosmetics"
+
+        400:
+          $ref: "#/components/responses/400"
+        500:
+          $ref: "#/components/responses/500"
+  /cosmetics/{id}:
+    get:
+      summary: Retrive specific cosmetic
+      description: Retrive specific cosmetic
+      operationId: cosmeticOne
+      parameters:
+        - in: "path"
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          $ref: "#/components/responses/204"
+        400:
+          $ref: "#/components/responses/400"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500" 
+
+  /users/{id}:
+    get:
+      summary: Retrive specific user
+      description: Retrive specific user
+      parameters:
+        - in: path
+          name: id
+          required:  true
+          description:  User's id
+          schema:
+            type:  string
+      responses:
+        200:
+          description: Description
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        400:
+          $ref: "#/components/responses/400"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500" 
+    put:
+      summary: Update whole user profile
+      description: Updates whole users profile. Any unfilled data means wipe of previous data 
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          description: User's id
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: 
+                email:
+                  type: string
+                  description: New email
+                  minLength: 3
+                  maxLength: 50
+                login:
+                  type: string
+                  description: New login
+                  minLength: 3
+                  maxLength: 50
+                skinType:
+                  $ref: "#/components/schemas/SkinType"
+      responses:
+        204:
+          $ref: "#/components/responses/204"
+        400:
+          $ref: "#/components/responses/400"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500"
+    delete: 
+      description: Delete user account
+      summary: Delete user account
+      parameters:
+        - in: path
+          name: id
+          required:  true
+          description:  User's Id
+          schema:
+            type:  string
+      responses:
+        204: 
+          $ref: "#/components/responses/204"
+        404:
+          $ref: "#/components/responses/404"
+        400:
+          $ref: "#/components/responses/400"
+        500:
+          $ref: "#/components/responses/500"
+  /users:
+    post:
+      description: Creates new user
+      summary: Creates new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: New email
+                  example: example@example.net
+                  minLength: 3
+                  maxLength: 50
+                login:
+                  type: string
+                  description: New login
+                  example: "MrSpaceMan1"
+                  minLength: 3
+                  maxLength: 50
+                password:
+                  type: string
+                  format: "password"
+                  example: $ecret
+                  minLength: 3
+                  maxLength: 50
+              required:
+                - email
+                - login
+                - password
+      responses:
+        204:
+          $ref: "#/components/responses/204"
+        400:
+          $ref: "#/components/responses/400"
+        500:
+          $ref: "#/components/responses/500" 
+  /user/{id}/palettes:
+    post:
+      description: Add palette to user
+      summary: Add palette to user
+      parameters:
+      - in: "path"
+        name: id
+        description: User id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: 
+                  type: string
+                  minLength: 3
+                  maxLength: 50
+                colors:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/HexColor"
+              required:
+                - name
+                - colors
+      responses:
+        204:
+          $ref: "#/components/responses/204"
+        400:
+          $ref: "#/components/responses/400"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500"
+  /user/{id}/palette/{paletteId}:
+    delete:
+      description: Deletes cosmetic from user's saved cosmetics
+      summary: Deletes saved cosmetic
+      parameters:
+        - in: path
+          name: id
+          required:  true
+          description:  User's id
+          schema:
+            type:  string
+        - in: path
+          name: paletteId
+          required:  true
+          description:  Palette's id
+          schema:
+            type:  string
+      responses:
+        204:
+          $ref: "#/components/responses/204"
+        400:
+          $ref: "#/components/responses/400"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500"
+
+  /user/{id}/cosmetics:
+    post:
+      description: Add cosmetic to user
+      summary: Add cosmetic to user
+      parameters:
+      - in: "path"
+        name: id
+        description: User id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+      responses:
+        204:
+          $ref: "#/components/responses/204"
+        400:
+          $ref: "#/components/responses/400"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500"
+  /user/{id}/cosmetics/{cosmeticId}:
+    delete:
+      description: Deletes cosmetic from user's saved cosmetics
+      summary: Deletes saved cosmetic
+      parameters:
+        - in: path
+          name: id
+          required:  true
+          description:  User's id
+          schema:
+            type:  string
+        - in: path
+          name: cosmeticId
+          required:  true
+          description:  Cosmetics's id
+          schema:
+            type:  string
+      responses:
+        204:
+          $ref: "#/components/responses/204"
+        400:
+          $ref: "#/components/responses/400"
+        404:
+          $ref: "#/components/responses/404"
+        500:
+          $ref: "#/components/responses/500"
+
+components:
+  schemas:
+    SkinType:
+      type: string
+      enum: 
+        - dry
+        - else
+
+    Ingredient:
+      type: string
+      example: "Water"
+
+    HexColor:
+      type: string
+      maxLength: 7
+      minLength: 7
+      example: "#141617"
+
+    Palette:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "5effaa5662679b5af2c58829"
+        name: 
+          type: string
+          example: "Autumn vibes"
+          minLength: 3
+          maxLength: 50
+        colors:
+          type: array
+          items:
+            $ref: "#/components/schemas/HexColor"
+      required:
+        - id
+        - name
+        - colors 
+
+    Cosmetic:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "5effaa5662679b5af2c58829"
+        name:
+          type: string
+          example: "Fancy goo serum"
+          minLength: 3
+          maxLength: 50
+        description:
+          type: string
+          example: "Cosmetic for dry skin"
+          minLength: 3
+          maxLength: 500
+        recipe:
+          type: string
+          example: "Add salt to water, then stir"
+          minLength: 3
+          maxLength: 500
+        ingredients:
+          type: array
+          items: 
+            $ref: "#/components/schemas/Ingredient"    
+      required: 
+        - id
+        - name
+        - description
+        - ingredients
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "5effaa5662679b5af2c58829"
+        name:
+          type: string
+          example: "MrSpaceMan1"
+          minLength: 3
+          maxLength: 50
+        email:
+          type: string
+          example: "example@example.net"
+          minLength: 3
+          maxLength: 50
+        skinType:
+          $ref: "#/components/schemas/SkinType"
+        savedCosmetics:
+          type: array
+          items:
+            $ref: "#/components/schemas/Cosmetic"
+        savedPalettes:
+          type: array
+          items:
+            $ref: "#/components/schemas/Palette"
+      required:
+        - id
+        - name
+        - email
+        - savedCosmetics
+        - savedPalettes
+           
+    Error:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Service down
+        code:
+          type: integer
+          example: 23
+            
+  responses:
+    400:
+      description: Bad request
+      content: 
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    500:
+      description: Couldn't execute requested operation
+      content: 
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    204:
+      description: Operation successful
+    404:
+      description: Not found
+      content: 
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"

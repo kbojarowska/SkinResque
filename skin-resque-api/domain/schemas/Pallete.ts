@@ -1,8 +1,8 @@
 import { Schema } from 'mongoose';
 import { PALETTES } from '../constants.js';
-import { IPallete } from '../shared/types.js';
+import { IPalette } from '../shared/types.js';
 
-const PaletteSchema = new Schema<IPallete>(
+const PaletteSchema = new Schema<IPalette>(
     {
         name: { type: String, required: true },
         colors: { type: [String], required: true },

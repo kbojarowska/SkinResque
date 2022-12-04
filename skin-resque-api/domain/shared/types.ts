@@ -10,7 +10,7 @@ export interface ICosmetics {
     ingredients: Array<string>;
 }
 
-export interface IPallete {
+export interface IPalette {
     name: string;
     colors: Array<hexColor>;
 }
