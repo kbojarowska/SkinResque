@@ -1,13 +1,14 @@
 import { Schema } from 'mongoose';
 
 type hexColor = `#${string}`;
-type skinType = string;
+export type skinType = 'drySkin' | 'else';
 
 export interface ICosmetics {
     name: string;
     description: string;
     recipe?: string;
     ingredients: Array<string>;
+    skinTypeRecomendation: Array<skinType>;
 }
 
 export interface IPalette {

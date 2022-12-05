@@ -8,6 +8,7 @@ const CosmeticSchema = new Schema<ICosmetics>(
         description: { type: String, required: true },
         recipe: String,
         ingredients: [String],
+        skinTypeRecomendation: [String],
     },
     { collection: COSMETICS }
 );
