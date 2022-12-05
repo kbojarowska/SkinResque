@@ -73,7 +73,6 @@ paths:
                 type: array
                 items: 
                   $ref: "#/components/schemas/Cosmetic"
-
         400:
           $ref: "#/components/responses/400"
         500:

@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 import DB from './infrastructure/database_abstraction/index.js';
 import users from './routes/users.js';
 import cosmetics from './routes/cosmetics.js';
+
 dotenv.config();
 
 const server_params = {
