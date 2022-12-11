@@ -10,6 +10,7 @@ import FrontPage from './pages/FrontPage/FrontPage';
 import CosmeticsCatalogue from './pages/CosmeticsCatalogue/CosmeticsCatalogue';
 import RecipeDetails from './pages/RecipeDetails/RecipeDetails'
 import SkintypeTestPage from './pages/SkintypeTest/SkintypeTestPage/SkintypeTestPage'
+import LoginRegister from './pages/LoginRegister/LoginRegister';
 
 function App() {
 	return (
@@ -22,6 +23,8 @@ function App() {
 					<Route path='/cosmetics/:cosmeticId' element={<RecipeDetails/>}/>
 					<Route path='/skintype-test' element={<SkintypeTestPage/>}/>
 					<Route path='/skintype-test/question/:questionNumber' element={<SkintypeTestPage/>}/>
+					<Route path='/login' element={<LoginRegister isLogin={true}/>}/>
+					<Route path='/register' element={<LoginRegister isLogin={false}/>}/>
 				</Routes>
 			</div>
 		</Router>
