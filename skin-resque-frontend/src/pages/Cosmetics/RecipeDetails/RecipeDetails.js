@@ -1,6 +1,5 @@
 //import { useParams } from 'react-router-dom';
-import Heading from '../../../components/Heading/Heading'
-import Text from '../../../components/Text/Text'
+import { Heading, Text } from '../../components'
 import './RecipeDetails.scss'
 function RecipeDetails() {
 
