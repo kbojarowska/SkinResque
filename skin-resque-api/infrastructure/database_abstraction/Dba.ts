@@ -13,54 +13,70 @@ export default class Dba {
         queryParams: mongoose.FilterQuery<T>,
         queryOptions?: mongoose.QueryOptions
     ): Promise<Array<T>> {
-        return new Promise(
-            (resolve: (value: Array<T>) => void, reject: (err: Error) => void) => {
-                model.find(queryParams, undefined, queryOptions, function (err, docs) {
-                    if (err) return reject(new Error(err.message));
-                    return resolve(docs);
-                });
-            }
-        );
+        return new Promise((resolve: (value: Array<T>) => void, reject: (err: Error) => void) => {
+            model.find(queryParams, undefined, queryOptions, function (err, docs) {
+                if (err) return reject(new Error(err.message));
+                return resolve(docs);
+            });
+        });
     }
 
     public async update<T>(
         model: mongoose.Model<T>,
         queryParams: mongoose.FilterQuery<T>,
-        // @ts-ignore 
+        // @ts-ignore
         update: Partial<T>,
         queryOptions?: mongoose.QueryOptions
     ): Promise<UpdateReturns> {
-        return new Promise((resolve: (value: UpdateReturns) => void, reject: (err: Error) => void) => {
-            model.updateMany(queryParams, update, queryOptions, function (err, updateReturns) {
-               if(err) return reject(new Error(err.message))
-               return resolve(updateReturns) 
-            });
-        })
+        return new Promise(
+            (resolve: (value: UpdateReturns) => void, reject: (err: Error) => void) => {
+                model.updateMany(queryParams, update, queryOptions, function (err, updateReturns) {
+                    if (err) return reject(new Error(err.message));
+                    return resolve(updateReturns);
+                });
+            }
+        );
     }
 
     public async delete<T>(
         model: mongoose.Model<T>,
         queryParams: mongoose.FilterQuery<T>,
         queryOptions?: mongoose.QueryOptions
-    ): Promise<DeleteReturns>{
-        return new Promise((resolve: (value: DeleteReturns) => void, reject: (err: Error) => void) => {
-            // @ts-ignore error in type definitions; callback has returns argument
-            model.deleteMany(queryParams, queryOptions, function (err, returns) {
-                if(err) return reject(new Error(err.message))
-                return resolve(returns)
-            })
-        })
+    ): Promise<DeleteReturns> {
+        return new Promise(
+            (resolve: (value: DeleteReturns) => void, reject: (err: Error) => void) => {
+                // @ts-ignore error in type definitions; callback has returns argument
+                model.deleteMany(queryParams, queryOptions, function (err, returns) {
+                    if (err) return reject(new Error(err.message));
+                    return resolve(returns);
+                });
+            }
+        );
     }
 
     public async insert<T>(
         model: mongoose.Model<T>,
         docs: mongoose.Document<Types.ObjectId, any, T>
-        ): Promise<{}>{
+    ): Promise<{}> {
         return new Promise((resolve, reject) => {
-            model.insertMany(docs, {ordered: false}, (err, res) => {
-                if(err) return reject(new Error(err.message))
-                return resolve(res)
-            })
-        })
+            model.insertMany(docs, { ordered: false }, (err, res) => {
+                if (err) return reject(new Error(err.message));
+                return resolve(res);
+            });
+        });
+    }
+
+    public async aggregate<T>(
+        model: mongoose.Model<T>,
+        aggregatePipeline: mongoose.PipelineStage[],
+        aggregateOptions?: mongoose.AggregateOptions
+    ): Promise<Array<T>> {
+        return new Promise((resolve: (value: Array<T>) => void, reject: (err: Error) => void) => {
+            // @ts-ignore
+            model.aggregate(aggregatePipeline, aggregateOptions, function (err, docs) {
+                if (err) return reject(new Error(err.message));
+                return resolve(docs);
+            });
+        });
     }
 }

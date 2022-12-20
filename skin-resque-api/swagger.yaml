@@ -56,7 +56,7 @@ paths:
     get:
       description: Get random cosmetics of choosen amount
       summary: Get random cosmetics of choosen amount
-      operationId: getCosmeticRandom
+      operationId: getCosmeticsRandom
       parameters:
         - in: "query"
           name: "amount"
@@ -64,6 +64,7 @@ paths:
             type: number
             minimum: 1
             maximum: 50
+          required: true
       responses:
         200:
           description: Retrives specified amount of random cosmetics
