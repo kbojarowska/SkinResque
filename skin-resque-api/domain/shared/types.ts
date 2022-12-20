@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-type hexColor = `#${string}`;
+export type hexColor = `#${string}`;
 export type skinType = 'drySkin' | 'else';
 
 export interface ICosmetics {

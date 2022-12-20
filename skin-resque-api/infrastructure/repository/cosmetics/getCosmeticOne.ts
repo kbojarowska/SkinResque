@@ -1,6 +1,6 @@
-import { Cosmetic } from '../../../domain/models';
-import { ICosmetics } from '../../../domain/shared';
-import DB from '../../database_abstraction';
+import { Cosmetic } from '../../../domain/models/index.js';
+import { ICosmetics } from '../../../domain/shared/index.js';
+import DB from '../../database_abstraction/index.js';
 
 export const getCosmeticOne = async (id: string): Promise<ICosmetics | null> => {
     const result = await DB.find(Cosmetic, {

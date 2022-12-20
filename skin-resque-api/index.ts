@@ -25,5 +25,7 @@ app.use('/cosmetics', cosmetics);
 
 app.listen(server_params.PORT, async () => {
     console.log(`Server running on port ${server_params.PORT}`);
-    await DB.connect(DB_DATA.HOST, DB_DATA.PORT, DB_DATA.NAME);
+    DB.connect(DB_DATA.HOST, DB_DATA.PORT, DB_DATA.NAME).then(success =>
+        console.log('Connected with mongodb')
+    );
 });

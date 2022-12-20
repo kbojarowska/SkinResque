@@ -1,8 +1,15 @@
 import { Router } from 'express';
+import { isValidObjectId } from 'mongoose';
 import * as yup from 'yup';
 import { SKIN_TYPES } from '../domain/constants.js';
+import { getCosmeticOne } from '../infrastructure/repository/cosmetics/getCosmeticOne.js';
 import { getCosmeticsAll } from '../infrastructure/repository/cosmetics/getCosmeticsAll.js';
-import { badRequestError } from '../infrastructure/repository/shared.js';
+import { getCosmeticsRandom } from '../infrastructure/repository/cosmetics/getCosmeticsRandom.js';
+import {
+    badRequestError,
+    notFoundError,
+    serverExceptionError,
+} from '../infrastructure/repository/shared.js';
 
 const cosmetics = Router({ mergeParams: true });
 
@@ -40,7 +47,58 @@ cosmetics.get('/', async (req, res) => {
         ])
             .then(_ => {
                 // @ts-ignore
-                getCosmeticsAll(size, page, name, type).then(success => {
+                getCosmeticsAll(size, page, name, type).then(success =>
+                    res.status(200).send(success)
+                );
+            })
+            .catch(err => {
+                return res.status(400).send(badRequestError(err));
+            });
+    } catch (err) {
+        res.status(500).send(serverExceptionError());
+    }
+});
+
+cosmetics.get('/random', async (req, res) => {
+    try {
+        const size = parseInt(req.query.size as string);
+
+        yup.number()
+            .defined()
+            .positive()
+            .moreThan(0)
+            .lessThan(51)
+            .integer()
+            .validate(size)
+            .then(_ => {
+                getCosmeticsRandom(size).then(success => res.status(200).send(success));
+            })
+            .catch(err => {
+                return res.status(400).send(badRequestError(err));
+            });
+    } catch (err) {
+        res.status(500).send(serverExceptionError());
+    }
+});
+
+cosmetics.get('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        yup.string()
+            .defined()
+            .length(24)
+            .test(
+                'isValidObjectId',
+                'Invalid id',
+                (val: string | undefined, ctx: yup.TestContext): boolean => {
+                    return isValidObjectId(val);
+                }
+            )
+            .validate(id)
+            .then(_ => {
+                getCosmeticOne(id).then(success => {
+                    if (!success) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
                 });
             })
@@ -48,12 +106,8 @@ cosmetics.get('/', async (req, res) => {
                 return res.status(400).send(badRequestError(err));
             });
     } catch (err) {
-        res.sendStatus(500);
+        res.status(500).send(serverExceptionError());
     }
 });
-
-cosmetics.get('/random', async (req, res) => {});
-
-cosmetics.get('/:id', async (req, res) => {});
 
 export default cosmetics;
