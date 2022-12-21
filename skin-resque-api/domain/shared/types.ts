@@ -21,5 +21,5 @@ export interface IUser {
     email: string;
     skin_type: null | skinType;
     saved_cosmetics: Array<Schema.Types.ObjectId>;
-    saved_palletes: Array<string>;
+    saved_palettes: Array<string>;
 }

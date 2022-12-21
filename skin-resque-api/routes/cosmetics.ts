@@ -15,7 +15,9 @@ const cosmetics = Router({ mergeParams: true });
 
 cosmetics.get('/', async (req, res) => {
     try {
-        const { size, page, name, type } = req.query;
+        const { name, type } = req.query;
+        const size = parseInt(req.query.size as string);
+        const page = parseInt(req.query.page as string);
 
         Promise.all([
             yup

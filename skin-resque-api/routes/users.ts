@@ -24,7 +24,7 @@ users.get('/:id', async (req, res) => {
 
         validationSchema
             .validate(id)
-            .then(success => {
+            .then(_ => {
                 getUserOne(id).then((success: IUser[]) => {
                     if (success.length === 0) return res.status(404).send(notFoundError());
                     res.status(200).send(success[0]);

@@ -9,7 +9,7 @@ const UserSchema = new Schema<IUser>(
         email: { type: String, required: true },
         skin_type: String,
         saved_cosmetics: [{ type: Schema.Types.ObjectId, ref: 'Cosmetic' }],
-        saved_palletes: [PaletteSchema],
+        saved_palettes: [PaletteSchema],
     },
     { collection: USERS }
 );

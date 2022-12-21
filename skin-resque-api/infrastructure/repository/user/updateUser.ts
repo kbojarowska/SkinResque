@@ -15,7 +15,7 @@ export const updateUser = async (
     if (login) update.name = login;
     if (skinType) update.skin_type = skinType;
 
-    const body = (await DB.find(User, { id }))?.[0] || {};
+    const body = (await DB.find(User, { _id: id }))?.[0] || {};
 
-    return DB.update(User, { id }, { ...body, ...update }, { upsert: false });
+    return DB.update(User, { _id: id }, { ...body, ...update }, { upsert: false });
 };

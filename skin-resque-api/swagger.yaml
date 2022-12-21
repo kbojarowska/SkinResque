@@ -90,8 +90,12 @@ paths:
           schema:
             type: string
       responses:
-        204:
-          $ref: "#/components/responses/204"
+        200:
+          description: Retrives specified amount of random cosmetics
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cosmetic"
         400:
           $ref: "#/components/responses/400"
         404:

@@ -1,5 +1,5 @@
 import Cosmetic from './Cosmetic.js';
-import Pallete from './Palette.js';
+import Palette from './Palette.js';
 import User from './User.js';
 
-export { Cosmetic, Pallete, User };
+export { Cosmetic, Palette, User };
