@@ -56,7 +56,7 @@ export default class Dba {
 
     public async insert<T>(
         model: mongoose.Model<T>,
-        docs: mongoose.Document<Types.ObjectId, any, T>
+        docs: mongoose.Document<Types.ObjectId, any, T>[]
     ): Promise<{}> {
         return new Promise((resolve, reject) => {
             model.insertMany(docs, { ordered: false }, (err, res) => {

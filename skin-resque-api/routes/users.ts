@@ -14,15 +14,12 @@ const users = Router({ mergeParams: true });
 users.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const validationSchema = yup
-            .string()
+        yup.string()
             .length(24)
             .test('isValidObjectId', 'Not a valid ObjectId', (value, context) => {
                 return isValidObjectId(value);
             })
-            .required();
-
-        validationSchema
+            .required()
             .validate(id)
             .then(_ => {
                 getUserOne(id).then((success: IUser[]) => {
@@ -39,7 +36,18 @@ users.get('/:id', async (req, res) => {
     }
 });
 
-users.put('/:id', async (req, res) => {});
+users.put('/:id', async (req, res) => {
+    // TODO - Finish
+    try {
+        const { id } = req.query;
+        yup.string()
+            .length(24)
+            .test('isValidObjectId', 'Not a valid ObjectId', (value, context) => {
+                return isValidObjectId(value);
+            })
+            .required();
+    } catch (err) {}
+});
 
 users.delete('/:id', async (req, res) => {});
 
