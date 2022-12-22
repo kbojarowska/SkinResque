@@ -1,4 +1,4 @@
-import { Formik, Field, ErrorMessage } from 'formik';
+import { Formik, Field } from 'formik';
 import { Link } from 'react-router-dom';
 import Heading from '../../components/Heading/Heading';
 import Button from '../../components/Button/Button';
@@ -53,17 +53,14 @@ function LoginRegister({ isLogin }) {
 								<Heading size='small'>Username</Heading>
 								<Field type='text' name='username' />
 							</div>
-							<ErrorMessage name='username' component='div' />
 							<div className='field'>
 								<Heading size='small'>Password</Heading>
 								<Field type='password' name='password' />
 							</div>
-							<ErrorMessage name='password' component='div' />
 							{!isLogin && <div className='field'>
 								<Heading size='small'>Email</Heading>
 								<Field type='text' name='email' />
 							</div>}
-							{!isLogin && <ErrorMessage name='email' component='div' />}
 							<Button onClick={formProps.handleSubmit}>{isLogin ? 'Log in' : 'Sign up'}</Button>
 						</form>
 					)}
