@@ -1,12 +1,12 @@
 .navbar {
-    background: rgba(255, 255, 255, 0.1);
+    background-color: #F5C3D1;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: absolute;
-    top: 0;
-    z-index:1;
-    width:100%;
+    // // position: absolute;
+    // top: 0;
+    // z-index:1;
+    // width:100%;
 
     .pageTitle {
         font-family: 'Cormorant Garamond';

@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../../components/Button/Button';
-import Heading from '../../components/Heading/Heading';
-import Text from '../../components/Text/Text';
-import Arrow from '../../components/Arrow/Arrow';
+import { Arrow, Button, Heading, Text } from '../../components';
 import './FrontPage.scss';
 
 function FrontPage() {

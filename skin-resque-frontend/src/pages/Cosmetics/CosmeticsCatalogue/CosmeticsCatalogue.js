@@ -1,8 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import './CosmeticsCatalogue.scss';
-import Heading from '../../components/Heading/Heading';
-import Text from '../../components/Text/Text';
-import Pagination from '../../components/Pagination/Pagination'
+import { Heading, Pagination, Text } from '../../components';
+
 
 const cosmetics = [
 	{
@@ -73,11 +72,7 @@ function CosmeticsCatalogue() {
 	})
 
 	return (
-		<div className='cosmetics-page'>
-			<div className='pink' />
-			<img src='/images/pink-spot.png' className='pink-spot'></img>
-			<img src='/images/small-pink-dots.png' className='small-pink-dots'></img>
-			<img src='/images/yellow-spot.png' className='yellow-spot'></img>
+		<div className='cosmetics-page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/bg-cosmetics.svg')` }}>
 			<div className='catalogue'>
 				<div className='page-title'>
 					<Heading size='large'>Cosmetics</Heading>
@@ -87,10 +82,6 @@ function CosmeticsCatalogue() {
 				</div>
 				<div className='pagination'>
 					<Pagination size={15} url='/cosmetics/page' color='gray' currentPage={currentPage} />
-				</div>
-				<div className='white'>
-					<img src='/images/rosemary-sprig.png' className='rosemary-sprig-left'></img>
-					<img src='/images/rosemary-sprig.png' className='rosemary-sprig-right'></img>
 				</div>
 			</div>
 		</div>

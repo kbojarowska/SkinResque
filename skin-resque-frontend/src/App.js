@@ -7,8 +7,8 @@ import React from 'react'
 import './App.scss';
 import Navbar from './components/Navbar/Navbar';
 import FrontPage from './pages/FrontPage/FrontPage';
-import CosmeticsCatalogue from './pages/CosmeticsCatalogue/CosmeticsCatalogue';
-import RecipeDetails from './pages/RecipeDetails/RecipeDetails'
+import CosmeticsCatalogue from './pages/Cosmetics/CosmeticsCatalogue/CosmeticsCatalogue';
+import RecipeDetails from './pages/Cosmetics/RecipeDetails/RecipeDetails'
 import SkintypeTestPage from './pages/SkintypeTest/SkintypeTestPage/SkintypeTestPage'
 import LoginRegister from './pages/LoginRegister/LoginRegister';
 
