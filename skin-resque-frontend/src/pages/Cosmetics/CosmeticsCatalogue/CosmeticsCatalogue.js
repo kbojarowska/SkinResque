@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import './CosmeticsCatalogue.scss';
-import { Heading, Pagination, Text } from '../../components';
+import { Heading, Pagination, Text } from '../../../components';
 
 
 const cosmetics = [
