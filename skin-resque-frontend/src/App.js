@@ -10,7 +10,7 @@ import FrontPage from './pages/FrontPage/FrontPage';
 import CosmeticsCatalogue from './pages/Cosmetics/CosmeticsCatalogue/CosmeticsCatalogue';
 import RecipeDetails from './pages/Cosmetics/RecipeDetails/RecipeDetails'
 import SkintypeTestPage from './pages/SkintypeTest/SkintypeTestPage/SkintypeTestPage'
-import Info from './pages/ColorPallete/Info';
+import Info from './pages/ColorPalette/Info';
 
 function App() {
 	return (
