@@ -5,7 +5,7 @@ import './Test.scss'
 function Test() {
   return (
 	<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/bg-cosmetics.svg')` }}>
-            <Heading className="heading">Color pallete finder</Heading>
+        <Heading className="heading">Color palette finder</Heading>
         <div className="beige-bg">
             <div className='info'>
                 <Text className="txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
