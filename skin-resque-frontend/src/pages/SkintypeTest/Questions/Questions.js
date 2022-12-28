@@ -10,12 +10,78 @@ function Questions({ currentQuestion, numberOfQuestions }) {
 
 	const currentQuestionNumber = parseInt(currentQuestion);
 
+	const questions = [
+		{
+			'id': 1,
+			'question': 'Lorem ipsum?',
+			'answers': [
+				{
+					'id': 1,
+					'answer': 'Lorem ipsum'
+				},
+				{
+					'id': 2,
+					'answer': 'Dolor Sit Amet'
+				},
+				{
+					'id': 3,
+					'answer': 'nie'
+				}
+			]
+		},
+		{
+			'id': 2,
+			'question': 'Lorem ipsum2?',
+			'answers': [
+				{
+					'id': 4,
+					'answer': 'Lorem ipsum2'
+				},
+				{
+					'id': 5,
+					'answer': 'Dolor Sit Amet2'
+				},
+				{
+					'id': 6,
+					'answer': 'nie2'
+				}
+			]
+		},
+		{
+			'id': 3,
+			'question': 'Lorem ipsum3?',
+			'answers': [
+				{
+					'id': 7,
+					'answer': 'Lorem ipsum3'
+				},
+				{
+					'id': 8,
+					'answer': 'Dolor Sit Amet3'
+				},
+				{
+					'id': 9,
+					'answer': 'nie3'
+				}
+			]
+		},
+	]
+
+	const answersToDisplay = questions.filter((question) => {
+		return question.id == currentQuestionNumber
+	})[0].answers.map((answer) => {
+			return (<div className='answer' key={answer.id}>
+			<Checkbox checked={false}>{answer.answer}</Checkbox>
+					</div>
+			)
+	})
+
 	return (
 		<div className='questions-pagination'>
 			<div className='questions-container'>
 				<div className='questions'>
 					<div className='question-number'>
-						<Heading>Question 1.</Heading>
+						<Heading>Question {currentQuestionNumber}.</Heading>
 					</div>
 					<div className='answers-arrows'>
 						<div className='arrows'>
@@ -23,15 +89,7 @@ function Questions({ currentQuestion, numberOfQuestions }) {
 								{currentQuestionNumber != 1 ? <Link to={`/skintype-test/question/${currentQuestionNumber - 1}`}><Arrow left /></Link> : <div className='hide'><Arrow left /></div>}
 							</div>
 							<div className='answers'>
-								<div className='answer'>
-									<Checkbox checked={false}>Ut enim ad minim veniam, quis nostrud exercitation ullamco</Checkbox>
-								</div>
-								<div className='answer'>
-									<Checkbox checked={false}>Ut enim ad minim veniam, quis nostrud exercitation ullamco</Checkbox>
-								</div>
-								<div className='answer'>
-									<Checkbox checked={false}>Ut enim ad minim veniam, quis nostrud exercitation ullamco</Checkbox>
-								</div>
+							{answersToDisplay && answersToDisplay}
 							</div>
 							<div className='arrow'>
 								{currentQuestionNumber != numberOfQuestions ? <Link to={`/skintype-test/question/${currentQuestionNumber + 1}`}><Arrow right /></Link> : <div className='hide'><Arrow right /></div>}
