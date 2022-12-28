@@ -11,6 +11,8 @@ import CosmeticsCatalogue from './pages/Cosmetics/CosmeticsCatalogue/CosmeticsCa
 import RecipeDetails from './pages/Cosmetics/RecipeDetails/RecipeDetails'
 import SkintypeTestPage from './pages/SkintypeTest/SkintypeTestPage/SkintypeTestPage'
 import Info from './pages/ColorPalette/Info';
+import Test from './pages/ColorPalette/Test/Test';
+
 
 function App() {
 	return (
@@ -24,6 +26,8 @@ function App() {
 					<Route path='/skintype-test' element={<SkintypeTestPage/>}/>
 					<Route path='/skintype-test/question/:questionNumber' element={<SkintypeTestPage/>}/>
 					<Route path='/color-test' element={<Info/>}/>
+					<Route path='/color-test/try' element={<Test/>}/>
+
 				</Routes>
 			</div>
 		</Router>
