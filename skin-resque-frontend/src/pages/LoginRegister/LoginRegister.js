@@ -22,6 +22,7 @@ function LoginRegister({ isLogin }) {
 								{
 									username: '',
 									password: '',
+									repeatPassword: '',
 									email: ''
 								}
 						}
@@ -53,13 +54,17 @@ function LoginRegister({ isLogin }) {
 								<Heading size='small'>Username</Heading>
 								<Field type='text' name='username' />
 							</div>
+							{!isLogin && <div className='field'>
+								<Heading size='small'>Email</Heading>
+								<Field type='text' name='email' />
+							</div>}
 							<div className='field'>
 								<Heading size='small'>Password</Heading>
 								<Field type='password' name='password' />
 							</div>
 							{!isLogin && <div className='field'>
-								<Heading size='small'>Email</Heading>
-								<Field type='text' name='email' />
+								<Heading size='small'>Password</Heading>
+								<Field type='text' name='repeatPassword' />
 							</div>}
 							<Button onClick={formProps.handleSubmit}>{isLogin ? 'Log in' : 'Sign up'}</Button>
 						</form>

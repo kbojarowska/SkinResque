@@ -5,13 +5,13 @@
 	align-items: center;
 
 	.login-register {
-		width: 50%;
+		width: 60%;
 		background: #F6EFF0;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		gap: 30px;
+		gap: 2rem;
 		padding: 20px;
 
 		.form-links {
@@ -55,6 +55,12 @@
 				align-self: center;
 				display: flex;
 				gap: 0.4em;
+
+				a {
+					&:hover {
+						text-decoration: underline;
+					}
+				}
 			}
 		}
 
