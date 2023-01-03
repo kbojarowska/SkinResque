@@ -12,6 +12,7 @@ import RecipeDetails from './pages/Cosmetics/RecipeDetails/RecipeDetails'
 import SkintypeTestPage from './pages/SkintypeTest/SkintypeTestPage/SkintypeTestPage'
 import Info from './pages/ColorPalette/Info';
 import Test from './pages/ColorPalette/Test/Test';
+import LoginRegister from './pages/LoginRegister/LoginRegister';
 
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
 					<Route path='/skintype-test/question/:questionNumber' element={<SkintypeTestPage/>}/>
 					<Route path='/color-test' element={<Info/>}/>
 					<Route path='/color-test/try' element={<Test/>}/>
-
+					<Route path='/login' element={<LoginRegister isLogin={true}/>}/>
+					<Route path='/register' element={<LoginRegister isLogin={false}/>}/>
 				</Routes>
 			</div>
 		</Router>
