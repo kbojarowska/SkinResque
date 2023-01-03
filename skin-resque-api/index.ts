@@ -20,6 +20,11 @@ const app: Application = express();
 
 app.use(json());
 app.use(urlencoded({ extended: true }));
+app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', '*');
+    res.append('Access-Control-Expose-Headers', '*');
+    next();
+});
 app.use('/users', users);
 app.use('/cosmetics', cosmetics);
 
