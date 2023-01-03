@@ -14,7 +14,7 @@ paths:
     get:
       summary: Retrives all cosmetics
       description: Retrives all cosmetics
-      operationId: cosmeticsAll
+      operationId: getCosmeticsAll
       parameters:
         - in: "query"
           name: size
@@ -40,8 +40,14 @@ paths:
             $ref: "#/components/schemas/SkinType"
           description: "Type of skin to look for"
       responses: 
-        204:
-          $ref: "#/components/responses/204"
+        200:
+          description: Retrives cosmetics specified by query
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Cosmetic"
         400:
           $ref: "#/components/responses/400"
         500:
@@ -50,6 +56,7 @@ paths:
     get:
       description: Get random cosmetics of choosen amount
       summary: Get random cosmetics of choosen amount
+      operationId: getCosmeticsRandom
       parameters:
         - in: "query"
           name: "amount"
@@ -57,6 +64,7 @@ paths:
             type: number
             minimum: 1
             maximum: 50
+          required: true
       responses:
         200:
           description: Retrives specified amount of random cosmetics
@@ -65,8 +73,7 @@ paths:
               schema:
                 type: array
                 items: 
-                  $ref: "#/components/schemas/Cosmetics"
-
+                  $ref: "#/components/schemas/Cosmetic"
         400:
           $ref: "#/components/responses/400"
         500:
@@ -75,7 +82,7 @@ paths:
     get:
       summary: Retrive specific cosmetic
       description: Retrive specific cosmetic
-      operationId: cosmeticOne
+      operationId: getCosmeticOne
       parameters:
         - in: "path"
           name: id
@@ -83,8 +90,12 @@ paths:
           schema:
             type: string
       responses:
-        204:
-          $ref: "#/components/responses/204"
+        200:
+          description: Retrives specified amount of random cosmetics
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cosmetic"
         400:
           $ref: "#/components/responses/400"
         404:
@@ -96,6 +107,7 @@ paths:
     get:
       summary: Retrive specific user
       description: Retrive specific user
+      operationId: getUserOne
       parameters:
         - in: path
           name: id
@@ -119,6 +131,7 @@ paths:
     put:
       summary: Update whole user profile
       description: Updates whole users profile. Any unfilled data means wipe of previous data 
+      operationId: updateUser
       parameters:
         - in: path
           name: id
@@ -157,6 +170,7 @@ paths:
     delete: 
       description: Delete user account
       summary: Delete user account
+      operationId: deleteUser
       parameters:
         - in: path
           name: id
@@ -177,6 +191,7 @@ paths:
     post:
       description: Creates new user
       summary: Creates new user
+      operationId: createUser
       requestBody:
         required: true
         content:
@@ -217,6 +232,7 @@ paths:
     post:
       description: Add palette to user
       summary: Add palette to user
+      operationId: addPalette
       parameters:
       - in: "path"
         name: id
@@ -253,8 +269,9 @@ paths:
           $ref: "#/components/responses/500"
   /user/{id}/palette/{paletteId}:
     delete:
-      description: Deletes cosmetic from user's saved cosmetics
-      summary: Deletes saved cosmetic
+      description: Deletes palette from user's saved palettes
+      summary: Deletes saved palette
+      operationId: removePalette
       parameters:
         - in: path
           name: id
@@ -282,6 +299,7 @@ paths:
     post:
       description: Add cosmetic to user
       summary: Add cosmetic to user
+      operationId: saveCosmetic
       parameters:
       - in: "path"
         name: id
@@ -311,6 +329,7 @@ paths:
     delete:
       description: Deletes cosmetic from user's saved cosmetics
       summary: Deletes saved cosmetic
+      operationId: removeSavedCosmetic
       parameters:
         - in: path
           name: id
