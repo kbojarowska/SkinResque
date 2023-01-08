@@ -1,6 +1,5 @@
 //import { useParams } from 'react-router-dom';
-import Heading from '../../components/Heading/Heading'
-import Text from '../../components/Text/Text'
+import { Heading, Text } from '../../../components'
 import './RecipeDetails.scss'
 function RecipeDetails() {
 
@@ -25,35 +24,24 @@ function RecipeDetails() {
 	}
 
 	return (
-		<div className='page'>
-			<div className='pink'>
-				<img src='/images/pink-spot.png' className='pink-spot'></img>
-				<img src='/images/small-pink-dots.png' className='small-pink-dots'></img>
-				<img src='/images/yellow-spot.png' className='yellow-spot'></img>
-				<div className='beige-bg'>
-					<Heading className='heading'>{cosmetic.name.toUpperCase()}</Heading>
-					<div className='details-container'>
-						<img src={cosmetic.img} className='img'></img>
-						<div className='dark-beige-bg'>
-							<div className='border'>
-								<Text size='small' className='text'> {cosmetic.details}</Text>
-							</div>
+		<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/bg-cosmetics.svg')` }}>
+			<div className='beige-bg'>
+				<Heading className='heading'>{cosmetic.name.toUpperCase()}</Heading>
+				<div className='details-container'>
+					<img src={cosmetic.img} className='img'></img>
+					<div className='dark-beige-bg'>
+						<div className='border'>
+							<Text size='small' className='text'> {cosmetic.details}</Text>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div className='white'>
-				<img src='/images/rosemary-sprig.png' className='rosemary-sprig-left'></img>
-				<img src='/images/rosemary-sprig.png' className='rosemary-sprig-right'></img>
-				<div className='beige-bg-recipe'>
-					<Heading className='heading'>Recipe</Heading>
-					<div className='details-container'>
-						<div className='dark-beige-bg border ingredients'>
-							<Heading className='ing'>Ingredients</Heading>
-							<Text size="small">{cosmetic.ingredients}</Text>
-						</div>
-						<Text className='recipe text'>{cosmetic.recipe}{cosmetic.recipe}</Text>
+				<Heading className='heading'>Recipe</Heading>
+				<div className='details-container'>
+					<div className='dark-beige-bg border ingredients'>
+						<Heading className='ing'>Ingredients</Heading>
+						<Text size="small">{cosmetic.ingredients}</Text>
 					</div>
+					<Text className='recipe text'>{cosmetic.recipe}{cosmetic.recipe}</Text>
 				</div>
 			</div>
 		</div>

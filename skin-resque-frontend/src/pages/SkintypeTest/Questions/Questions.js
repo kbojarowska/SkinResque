@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import Arrow from '../../../components/Arrow/Arrow';
-import Checkbox from '../../../components/Checkbox/Checkbox';
-import Heading from '../../../components/Heading/Heading';
-import Pagination from '../../../components/Pagination/Pagination';
+import { Arrow, Checkbox, Heading, Pagination } from '../../../components';
 import './Questions.scss';
 
 function Questions({ currentQuestion, numberOfQuestions }) {
