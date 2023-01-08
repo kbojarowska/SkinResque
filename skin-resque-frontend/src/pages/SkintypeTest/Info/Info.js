@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom';
 import { Button, Text } from '../../../components';
 import './Info.scss';
 
-function Info() {
+function Info({setShowQuestions}) {
 	return (
 		<div className='info-container'>
 			<div className='info'>
@@ -13,7 +12,7 @@ function Info() {
 					sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
 			</div>
 			<div className='start-button'>
-				<Link to='/skintype-test/question/1'><Button>Start</Button></Link>
+				<Button onClick={() => setShowQuestions(true)}>Start</Button>
 			</div>
 		</div>
 	);

@@ -1,11 +1,9 @@
-import { Link } from 'react-router-dom';
-
-import { Arrow, Checkbox, Heading, Pagination } from '../../../components';
+import { useState } from 'react';
+import { Arrow, Button, Checkbox, Heading } from '../../../components';
 import './Questions.scss';
 
-function Questions({ currentQuestion, numberOfQuestions }) {
+function Questions() {
 
-	const currentQuestionNumber = parseInt(currentQuestion);
 
 	const questions = [
 		{
@@ -64,8 +62,10 @@ function Questions({ currentQuestion, numberOfQuestions }) {
 		},
 	]
 
+	const [currentQuestion, setCurrentQuestion] = useState(1);
+
 	const answersToDisplay = questions.filter((question) => {
-		return question.id == currentQuestionNumber
+		return question.id == currentQuestion
 	})[0].answers.map((answer) => {
 			return (<div className='answer' key={answer.id}>
 			<Checkbox checked={false}>{answer.answer}</Checkbox>
@@ -78,26 +78,23 @@ function Questions({ currentQuestion, numberOfQuestions }) {
 			<div className='questions-container'>
 				<div className='questions'>
 					<div className='question-number'>
-						<Heading>Question {currentQuestionNumber}.</Heading>
+						<Heading>Question {currentQuestion}.</Heading>
 					</div>
 					<div className='answers-arrows'>
 						<div className='arrows'>
 							<div className='arrow'>
-								{currentQuestionNumber != 1 ? <Link to={`/skintype-test/question/${currentQuestionNumber - 1}`}><Arrow left /></Link> : <div className='hide'><Arrow left /></div>}
+								{currentQuestion != 1 ? <Arrow left onClick={() => setCurrentQuestion(currentQuestion - 1)}/> : <div className='hide'><Arrow left /></div>}
 							</div>
 							<div className='answers'>
-							{answersToDisplay && answersToDisplay}
+							{answersToDisplay}
 							</div>
 							<div className='arrow'>
-								{currentQuestionNumber != numberOfQuestions ? <Link to={`/skintype-test/question/${currentQuestionNumber + 1}`}><Arrow right /></Link> : <div className='hide'><Arrow right /></div>}
+								{currentQuestion != Object.keys(questions).length ? <Arrow right onClick={() => setCurrentQuestion(currentQuestion + 1)} /> : <div className='hide'><Arrow right /></div>}
+								{currentQuestion == Object.keys(questions).length && <Button className='submit-answers'>Submit</Button>}
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div className='pagination'>
-				<Pagination size={numberOfQuestions} color='gray' currentPage={currentQuestionNumber.toString()} url='/skintype-test/question' />
-				<img src='/images/urban-stone.png' />
 			</div>
 		</div>
 	);

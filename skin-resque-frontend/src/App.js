@@ -25,7 +25,6 @@ function App() {
 					<Route path='/cosmetics/page/:currentPage' element={<CosmeticsCatalogue/>} />
 					<Route path='/cosmetics/:cosmeticId' element={<RecipeDetails/>}/>
 					<Route path='/skintype-test' element={<SkintypeTestPage/>}/>
-					<Route path='/skintype-test/question/:questionNumber' element={<SkintypeTestPage/>}/>
 					<Route path='/color-test' element={<Info/>}/>
 					<Route path='/color-test/try' element={<Test/>}/>
 					<Route path='/login' element={<LoginRegister isLogin={true}/>}/>
