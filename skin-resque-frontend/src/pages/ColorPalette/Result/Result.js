@@ -1,5 +1,6 @@
-import { Arrow, Heading } from "../../../components"
-import './Result.scss'
+import { FiSave } from 'react-icons/fi';
+import { Arrow, Heading } from "../../../components";
+import './Result.scss';
 
 function CollorPalletResults() {
 	return (
@@ -12,7 +13,8 @@ function CollorPalletResults() {
 				<div className='uploaded-photo'>
 					<img src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8d29tYW4lMjBzbWlsaW5nfGVufDB8fDB8fA%3D%3D&w=1000&q=80' />
 				</div>
-				<div className='results'>
+				<div className='results-save'>
+					<div className='results'>
 					<Arrow left />
 					<div className='color-palletes'>
 						<div className='color-container'>
@@ -30,6 +32,10 @@ function CollorPalletResults() {
 						</div>
 					</div>
 					<Arrow right />
+					</div>
+					<div className='save'>
+					<FiSave size={25}/>
+					</div>
 				</div>
 			</div>
 		</div>
