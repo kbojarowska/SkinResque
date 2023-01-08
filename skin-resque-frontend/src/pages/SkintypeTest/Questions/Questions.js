@@ -49,7 +49,7 @@ function Questions() {
 		},
 		{
 			'id': 3,
-			'question': 'Do you have a lot of imprefections like pimples, blackheads?',
+			'question': 'Do you have a lot of imprefections?',
 			'answers': [
 				{
 					'id': 6,
