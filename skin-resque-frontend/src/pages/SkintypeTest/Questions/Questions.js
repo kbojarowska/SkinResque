@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import { Arrow, Button, Checkbox, Heading } from '../../../components';
 import './Questions.scss';
 
@@ -202,19 +203,20 @@ function Questions() {
 
 	const handleCheckAnswer = (answertoChange) => {
 		const questionsToSet = questions.map((question) => {
-			for (let answer in question.answers) {
-				if (question.answers[answer].id ==  answertoChange.id) {
-					question.answers[answer].checked = !question.answers[answer].checked;
+			const answersToSet = question.answers.map((answer) => {
+				if (answer.id == answertoChange.id) {
+					answer.checked = !answer.checked;
 				}
-				return question;
-			}
+				return answer
+			})
+			questions.answers = answersToSet;
 			return question;
 		})
 
 		setQuestions(questionsToSet);
-	}
+	};
 
-	const getSkinTypeAccordingToGivenAnswers = () => {
+	const getSkinTypeAccordingToGivenAnswers = (questions) => {
 		let answers = [];
 		questions.forEach((question) => {
 			for (let answer in question.answers) {
@@ -235,7 +237,18 @@ function Questions() {
 			answers.filter(v => v === a).length
 			- answers.filter(v => v === b).length
 		).pop();
-	}
+	};
+
+	const setSkinTypeForUser = (questions) => {
+		const skinType = getSkinTypeAccordingToGivenAnswers(questions);
+
+		axios.post(`http://localhost:5000/users/userId`, skinType).then((result) => {
+			console.log(result)
+		}).catch((error) => {	
+			console.log(error);
+			alert('Something went wrong')
+		})
+	};
 
 	const answersToDisplay = questions.filter((question) => {
 		return question.id == currentQuestion
@@ -244,11 +257,11 @@ function Questions() {
 			<Checkbox checked={answer.checked} onClick={() => {handleCheckAnswer(answer)}}>{answer.answer}</Checkbox>
 		</div>
 		)
-	})
+	});
 
 	const questionToDisplay = questions.filter((question) => {
 		return question.id == currentQuestion
-	})[0].question
+	})[0].question;
 
 	return (
 		<div className='questions-pagination'>
@@ -267,7 +280,7 @@ function Questions() {
 							</div>
 							<div className='arrow'>
 								{currentQuestion != Object.keys(questions).length ? <Arrow right onClick={() => setCurrentQuestion(currentQuestion + 1)} /> : <div className='hide'><Arrow right /></div>}
-								{currentQuestion == Object.keys(questions).length && <Button className='submit-answers' onClick={() => console.log(getSkinTypeAccordingToGivenAnswers())}>Submit</Button>}
+								{currentQuestion == Object.keys(questions).length && <Button className='submit-answers' onClick={() => console.log(setSkinTypeForUser(questions))}>Submit</Button>}
 							</div>
 						</div>
 					</div>
