@@ -4,7 +4,7 @@ import './Questions.scss';
 
 function Questions() {
 
-	let questions = [
+	const [questions, setQuestions] = useState([
 		{
 			'id': 1,
 			'question': 'Does your skin feel tight and dry after washing your face?',
@@ -197,24 +197,51 @@ function Questions() {
 				},
 			]
 		},
-	]
+	]);
+	const [currentQuestion, setCurrentQuestion] = useState(1);
 
-	console.log(questions);
-	const getSkinTypeAccordingToGivenAnswers = (answers) => {
+	const handleCheckAnswer = (answertoChange) => {
+		const questionsToSet = questions.map((question) => {
+			for (let answer in question.answers) {
+				if (question.answers[answer].id ==  answertoChange.id) {
+					question.answers[answer].checked = !question.answers[answer].checked;
+				}
+				return question;
+			}
+			return question;
+		})
+
+		setQuestions(questionsToSet);
+	}
+
+	const getSkinTypeAccordingToGivenAnswers = () => {
+		let answers = [];
+		questions.forEach((question) => {
+			for (let answer in question.answers) {
+				if (question.answers[answer].checked) {
+					if (Array.isArray(question.answers[answer].type)) {
+						for (let index in question.answers[answer].type) {
+							answers = [...answers, question.answers[answer].type[index]];
+						}
+					}
+					else {
+						answers = [...answers, question.answers[answer].type];
+					}
+				}
+			}
+		})
+	
 		return answers.sort((a, b) =>
 			answers.filter(v => v === a).length
 			- answers.filter(v => v === b).length
 		).pop();
 	}
 
-	const [currentQuestion, setCurrentQuestion] = useState(1);
-	const [answers, setAnswers] = useState([]);
-
 	const answersToDisplay = questions.filter((question) => {
 		return question.id == currentQuestion
 	})[0].answers.map((answer) => {
 		return (<div className='answer' key={answer.id}>
-			<Checkbox checked={answer.checked} onClick={() => {answer.checked = !answer.checked;}}>{answer.answer}</Checkbox>
+			<Checkbox checked={answer.checked} onClick={() => {handleCheckAnswer(answer)}}>{answer.answer}</Checkbox>
 		</div>
 		)
 	})
@@ -240,7 +267,7 @@ function Questions() {
 							</div>
 							<div className='arrow'>
 								{currentQuestion != Object.keys(questions).length ? <Arrow right onClick={() => setCurrentQuestion(currentQuestion + 1)} /> : <div className='hide'><Arrow right /></div>}
-								{currentQuestion == Object.keys(questions).length && <Button className='submit-answers' onClick={() => console.log(getSkinTypeAccordingToGivenAnswers(answers))}>Submit</Button>}
+								{currentQuestion == Object.keys(questions).length && <Button className='submit-answers' onClick={() => console.log(getSkinTypeAccordingToGivenAnswers())}>Submit</Button>}
 							</div>
 						</div>
 					</div>
