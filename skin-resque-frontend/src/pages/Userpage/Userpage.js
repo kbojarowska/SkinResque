@@ -103,7 +103,7 @@ function Userpage() {
               
             </div>
             <div className='row'>
-              <Text>Saved palette:</Text>
+              <Text>Saved palettes:</Text>
               <Text>{user.savedPalette.length}</Text>
             </div>
             <div className='row'>
@@ -123,7 +123,7 @@ function Userpage() {
         }
       </div>
       <div className='beige-palette-bg'>
-        <Heading>Saved palette:</Heading>
+        <Heading>Saved palettes:</Heading>
         {user.savedPalette.length > 0 ?
           <div className='container'>
             {paletteList}
