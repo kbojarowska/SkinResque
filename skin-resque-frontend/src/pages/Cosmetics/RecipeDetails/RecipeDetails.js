@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Heading, Text } from '../../../components'
 import axios from 'axios';
+
 import './RecipeDetails.scss'
 function RecipeDetails() {
 
