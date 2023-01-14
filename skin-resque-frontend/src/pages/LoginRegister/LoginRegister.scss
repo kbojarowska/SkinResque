@@ -1,0 +1,71 @@
+.page {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	.login-register {
+		width: 60%;
+		background: #F6EFF0;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 2rem;
+		padding: 20px;
+
+		.form-links {
+			width: 80%;
+			padding: 50px;
+			border: 1px dashed #875160;
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			margin-bottom: 50px;
+
+			form {
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+
+
+				.field {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+
+					h4 {
+						min-width: 100px;
+					}
+					input {
+						margin-left: 10px;
+						height: 50px;
+						width: 400px;
+						border: 1px dashed #A39A9A;
+						background: #F6EFF0;
+					}
+				}
+			}
+
+
+			button {
+				margin-top: 50px;
+				align-self: center;
+				width: 50%;
+			}
+
+			.links {
+				align-self: center;
+				display: flex;
+				gap: 0.4em;
+
+				a {
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+
+	}
+}
