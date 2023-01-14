@@ -13,6 +13,7 @@ import SkintypeTestPage from './pages/SkintypeTest/SkintypeTestPage/SkintypeTest
 import Userpage from './pages/Userpage/Userpage';
 import Info from './pages/ColorPalette/Info';
 import Test from './pages/ColorPalette/Test/Test';
+import CollorPalletResults from './pages/ColorPalette/Result/Result';
 import LoginRegister from './pages/LoginRegister/LoginRegister';
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
 					<Route path='/cosmetics/:cosmeticId' element={<RecipeDetails/>}/>
 					<Route path='/skintype-test' element={<SkintypeTestPage/>}/>
 					<Route path='/skintype-test/question/:questionNumber' element={<SkintypeTestPage/>}/>
+					<Route path='/color-test' element={<Test/>}/>
+					<Route path='/color-test/results' element={<CollorPalletResults/>}/>
 					<Route path='/userprofile' element={<Userpage/>}/>
 					<Route path='/color-test' element={<Info/>}/>
 					<Route path='/color-test/try' element={<Test/>}/>
