@@ -1,9 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose, { ObjectId } from 'mongoose';
 import * as dotenv from 'dotenv';
 import { uniqueNamesGenerator, colors, adjectives, starWars, names } from 'unique-names-generator';
 import { LoremIpsum } from 'lorem-ipsum';
-import { Cosmetic, Pallete, User } from '../domain/models/index.js';
-import { CosmeticFromDB, PalleteFromDB } from './types';
+import { Cosmetic, Palette, User } from '../domain/models/index.js';
+import { PalleteFromDB } from './types';
+import { ICosmetics } from '../domain/shared/types.js';
 dotenv.config();
 
 const DB_DATA = {
@@ -33,6 +34,7 @@ function next8BitHex(): String {
         },
     });
 
+    // Creating cosmetics
     for (let i = 0; i < 20; i++) {
         const includeRecipe = Math.random() > 0.5;
         const cosmetic = new Cosmetic({
@@ -52,8 +54,9 @@ function next8BitHex(): String {
         await cosmetic.save();
     }
 
+    // Creating palettes
     for (let i = 0; i < 30; i++) {
-        const palette = new Pallete({
+        const palette = new Palette({
             name: uniqueNamesGenerator({
                 dictionaries: [colors, colors, adjectives],
                 separator: ' ',
@@ -65,15 +68,18 @@ function next8BitHex(): String {
         await palette.save();
     }
 
+    // Creating user
     for (let i = 0; i < 10; i++) {
-        const saved_cosmetics: CosmeticFromDB[] = await Cosmetic.aggregate([
-            { $sample: { size: 5 } },
-        ]);
-        const saved_palletes: PalleteFromDB[] = await Pallete.aggregate([
+        const saved_cosmetics: ObjectId[] = (
+            await Cosmetic.aggregate([{ $sample: { size: 5 } }])
+        ).map((cosmetic: ICosmetics & { _id: ObjectId }): ObjectId => cosmetic._id);
+        const saved_palettes: PalleteFromDB[] = await Palette.aggregate([
             {
                 $sample: { size: 2 },
             },
         ]);
+
+        console.log(saved_palettes);
 
         const user = new User({
             name: uniqueNamesGenerator({
@@ -87,11 +93,11 @@ function next8BitHex(): String {
                 separator: '',
             })}@example.org`,
             saved_cosmetics: saved_cosmetics,
-            saved_palletes: saved_palletes,
+            saved_palettes: saved_palettes,
         });
         await user
             .save()
-            .then(v => console.log(v))
+            // .then(v => console.log(v))
             .catch(err => console.log(err));
     }
     await mongoose.connection.close();
