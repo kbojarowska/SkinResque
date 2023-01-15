@@ -1,0 +1,122 @@
+[
+    {
+        "name": "Anti-Aging Cocoa Face Mask",
+        "description": "Dry",
+        "recipe": "Combine all ingredients. Apply to face and let dry before rinsing. The powerful ingredients make this a multi-tasking wonder-cream: Sour cream is a form of lactic acid that hydrates as it gently exfoliates; honey is a humectant that also boosts hydration while the protein in the egg white tightens and firms skin.",
+        "ingredients": ["1 tablespoon cocoa powder", "1 tablespoon sour cream", "1 egg white"]
+    },
+    {
+        "name": "Nourishing Milk Hand Soak",
+        "description": "Dry",
+        "recipe": "Heat 2 to 3 cups whole milk (enough to completely submerge both hands) in the microwave until it's warm. Pour into a bowl and let hands soak for five to 10 minutes, allowing the fat from the milk to hydrate, and vitamins A and E to nourish dry skin.",
+        "ingredients": ["2-3 cups whole milk"]
+    },
+    {
+        "name": "Clarifying Oat Face Mask",
+        "description": "Oily",
+        "recipe": "Combine 3 teaspoons ground oats and ¼ teaspoon apple cider in a bowl until a smooth paste forms. Then add ¼ tablespoon lemon juice and ½ tablespoon brown sugar; stir until the mixture is even. Apply to freshly cleansed skin and let sit for five to 10 minutes, allowing ingredients to penetrate top layers of the skin. Then rub in circular motions to exfoliate and increase blood-flow. Rinse off with warm water and pat dry with a towel.",
+        "ingredients": ["3 teaspoons ground oats", "1/4 tablespoon apple cider", "1/4 tablespoon lemon juice", "1/2 tablespoon brown sugar"]
+    },
+    {
+        "name": "Brightening Blueberry Face Mask",
+        "description": "Oily",
+        "recipe": "Combine all ingredients, spread onto face. Let sit for 15 to 20 minutes. Gently rinse with hands and warm water.",
+        "ingredients": ["1 tablespoon crushed ripe blueberries", "1 tablespoon lemon juice", "1 tablespoon cucumber juice", "2 tablespoons baking soda", "2 tablespoons water"]
+    },
+    {
+        "name": "Acne-Fighting Tea Leaves Face Toner",
+        "description": "Oily",
+        "recipe": "Combine 1 teaspoon peppermint tea leaves, 4 teaspoons white tea leaves, ½ cup boiled distilled water, and 2 drops of lavender oil in a French press. Let steep for 10 minutes before pouring into a glass container to cool. Combine with enough aloe vera gel to fill a 4-oz spray bottle atomizer. Store in the refrigerator before spritzing.",
+        "ingredients": ["1 teaspoon pepermint tea leaves", "4 teaspoons white tea leaves", "1/2 cup boiled distilled water", "2 drops of lavender oil", "aloe vera gel"]
+    },
+    {
+        "name": "Smoothing Honey Lip Scrub",
+        "description": "Normal",
+        "recipe": "Combine ingredients in a small bowl. Apply mixture with a new toothbrush in a gentle circular motion. Rinse off and follow up with your favorite lip balm.",
+        "ingredients": ["1 teaspoon coconut oil", "1 teaspoon raw honey", "2 tablespoons raw sugar", "dash of lemon juice"]
+    },
+    {
+        "name": "Exfoliating Sugar Face Scrub",
+        "description": "Normal",
+        "recipe": "Mix 1/2 cup brown sugar and 3 tablespoons of honey in a small bowl and stir until a thick paste forms. Add two tablespoons of an oil of your choice (olive, almond, or coconut) and blend until it integrates with the paste to make it a little lighter. Spread the paste all over clean skin — your face, neck, and decollete. Leave it on for five to 10 minutes and rinse with warm water. You can use any leftover scrub on the body for the same effect.",
+        "ingredients": [ "1/2 cup brown sugar", "3 tablespoons of honey", "2 tablespoons of oil"]
+    },
+    {
+        "name": "Soothing Aloe Face Mask",
+        "description": "Sensitive",
+        "recipe": "Mix 1/2 tablespoon of almond milk with one tablespoon of brown sugar until the sugar dissolves. Add four tablespoons (approximately) of aloe vera juice or gel. Apply the mixture onto your face, let it sit for 15 to 20 minutes and remove with warm water and a soft towel.",
+        "ingredients": ["1/2 tablespoon of almond milk", "1 tablespoon of brown sugar", "4 tablespoons of aloe vera juice or gel"]
+    },
+    {
+        "name": "Depuffing Cucumber Eye Mask",
+        "description": "Normal",
+        "recipe": "Take a cold cucumber and grate it over a paper towel on top of a plate. Once you've finished grating, wrap the pieces like a burrito and compress it. Rest your head back and apply onto closed eyes for an instant soothing effect.",
+        "ingredients": ["cucumber"]
+    },
+    {
+        "name": "Spirulina and Manuka Honey Hydration Mask",
+        "description": "Dry",
+        "recipe": "Mix all ingredients together in a jar or bowl. Apply the mixture gently directly to your skin. Leave on for 30 minutes. Rinse off with water.",
+        "ingredients": ["2 tablespoons manuka honey", "1 teaspoon spirulina powder", "1 teaspoon water"]
+    },
+    {
+        "name": "Oat Banana Exfoliating Mask",
+        "description": "Dry",
+        "recipe": "Combine mashed banana with the oats. As you blend, add small amounts of liquid until you have a thick consistency. Apply to your face with your fingers. Leave on for 20–30 minutes. Remove with lukewarm water using small circles so the oats can help lift off dead skin.",
+        "ingredients": ["1/2 ripe banana, mashed", "1 tablespoon oats", "1 tablespoon liquid of your choice (water, yogurt, rose water)"]
+    },
+    {
+        "name": "Herbal Facial Steam Treatment",
+        "description": "Dry",
+        "recipe": "Place a handful of herbs and boiling water into a basin or large pot. Cover with a towel and let it steep for 5 minutes. Tuck your head under the towel, creating a little “tent” over your head while you place your face over the basin or large pot. Steam for around 10 minutes. Rinse gently with lukewarm water. Apply mask, oils, serums or balm (optional)",
+        "ingredients": ["calendula, for its healing properties", "chamomile, for its calming properties", "rosemary, for toning", "rose petals, for moisturizing", "1 liter boiling water"]
+    },
+    {
+        "name": "Castile Jojoba Cleanser",
+        "description": "Oily",
+        "recipe": "Mix all the ingredients directly in a small, airtight storage container. Wash face with warm water. Apply a dime-sized amount of cleanser to the palm of your hands and massage the cleanser into the face. Let sit for 1-2 minutes and rinse off with warm water. Note: this is a very concentrated face cleanser and you only need a very small amount. If you add the water to your cleanser, this recipe will only last 1 week. Without the water, you can keep the cleanser for one month.",
+        "ingredients": ["1/4 cup Castile soap", "1 tablespoon jojoba oil", "3 drops lemon essential oil", "2 tablespoons of water (if desired)"]
+    },
+    {
+        "name": "Shea Face Moisturizer",
+        "description": "Oily",
+        "recipe": "Mix everything together well in a small glass bowl. Store any extra in an airtight container. Use this moisturizer after washing and using toner. Use a small amount and apply to the face like normal—no need to wash off.",
+        "ingredients": ["1 teaspoon shea butter", "5 drops argan oil", "1 drop rosemary essential oil (optional)"]
+    },
+    {
+        "name": "Gram Flour And Turmeric Face Cleanser",
+        "description": "Normal",
+        "recipe": "Mix both the ingredients, add some rose water or normal water to make the paste. Apply onto the face, massage and exfoliate for about a minute. Rinse the face with normal water.",
+        "ingredients": ["2 tablespoons of besan",  "1/2 teaspoon turmeric"]
+    },
+    {
+        "name": "Fuller’s Earth And Rose Water Face cleanser",
+        "description": "Normal",
+        "recipe": "Prepare the face wash by adding an adequate amount of rose water in one tablespoon of Multani mitti. Make a paste and thoroughly apply it to the face. Exfoliate the skin to clear all dirt, dead skin cells, grime, sweat & rinse with water.",
+        "ingredients": ["rose water", "1 tablespoon Multani mitti"]
+    },
+    {
+        "name": "Three-Ingredient Magical Lotion",
+        "description": "Sensitive",
+        "recipe": "Measure out one cup of coconut oil and one cup of cocoa butter. Depending on the temperature of your kitchen, the coconut oil will probably be in a soft solid state similar to the consistency of Crisco. The cocoa butter on the other hand is more solid. I usually take a butter knife and hack at the cocoa butter container until I get enough chunks to fill the measuring cup. It’s a great way to take out your frustrations from the week! Put the coconut oil and cocoa butter into a small to medium saucepan on medium heat. Melt the contents until completely liquid, and there are no longer any chunks. It usually takes 4-5 minutes. Transfer to a mixing bowl and refrigerate until the liquid becomes a soft solid again. This took about a few hours for me, but I’m sure all refrigerators are different. Add your essential oil to your liking. For this batch,  I used two cap-fulls of peppermint. Mix until light and fluffy, similar to whipped cream consistency. This took me about 10 minutes on a high setting on my Kitchenaid stand mixer. Transfer to a jar, and enjoy. That’s it!",
+        "ingredients": ["1 cup organic coconut oil", "1 cup organic cocoa butter", "essential oil of your choice"]
+    },
+    {
+        "name": "Shea and Coconut Body Butter",
+        "description": "Sensitive",
+        "recipe": "Combine all the ingredients in a double boiler or small saucepan over medium heat. Heat until everything is melted. Pour into another bowl and let cool for a good hour (in the fridge if you're in a hurry), or until the oils are just starting to consider re-solidifying (this is important - you won't be able to whip it up if they're still too liquid). When the oil mixture is starting to solidify around the edges, start beating with a hand mixer. Continue for a few more minutes, or until it looks kinda like whipped cream, forming stiff peaks. Transfer to a jar or other storage. Should keep for a long while.",
+        "ingredients": ["1/2 cup shea butter", "1/4 cup coconut oil", "1/4 cup olive or almond oil", "10-15 drops your favorite essential oil, if you need it to smell pretty (I like orange, or sandalwood for something a little more manly)"]
+    },
+    {
+        "name": "Warming Rub For Sore Muscles",
+        "description": "Sensitive",
+        "recipe": "Place coconut oil and cayenne in a double boiler and gently warm the oil. Be careful not to let it get hot because the smell of cayenne will fill the room and make you cough. (Not that I would know that from experience – ahem). Once the oil is slightly warm give it a stir and then turn off the stove. Allow it to sit for half an hour and then repeat the process.At this point you can move on to step 3, or you can warm it again and allow to infuse 1-2 more times for a stronger oil. Overall this process should take 1-2 hours, depending on how many times you reheat the oil to intensify the infusion. Using a cheesecloth or old t-shirt, strain the mixture mixture over a measuring cup. After straining out the cayenne, add enough coconut oil so that the final amount is 1/4 cup. Melt beeswax and shea butter in a double boiler and add to the coconut oil. Stir in essential oils and allow to cool completely. Store in an airtight jar – Amber or cobalt are best but a clear jar is fine if kept out of direct sunlight (which promotes oxidation).",
+        "ingredients": ["4 fluid ounces (1/2 cup) melted coconut oil – this will yields about 2 fluid ounces of infused oil", "4 fluid ounces (1/2 cup) shea butter", "2 tablespoons grated beeswax, tightly packed", "2 tablespoons cayenne pepper", "100 drops peppermint essential oil or eucalyptus globulus – 50 drops of wintergreen essential oil can be used in place of peppermint or eucalyptus", "40 drops copaiba essential oil", "40 drops juniper berry essential oil"]
+    },
+    {
+        "name": "Lavender Lotion Bars",
+        "description": "Sensitive",
+        "recipe": "In a small saucepan over low heat, melt the beeswax, coconut oil, and shea butter just until they turn to liquid. Immediately remove from the heat. Stir in the essential oil and pour into 2-ounce silicone molds. Set aside until cool. Unmold the bars and store in a cool, dry place. To use, rub over skin and then rub in as you would your daily lotion. Notes: You can increase the ratio of beeswax to shea butter and coconut oil to make a firmer bar for hotter temperatures.",
+        "ingredients": ["2 ounces beeswax", "2 ounces coconut oil", "2 ounces shea butter or cocoa butter", "10-20 drops lavender essential oil"]
+    }
+]
