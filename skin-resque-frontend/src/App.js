@@ -15,6 +15,7 @@ import Info from './pages/ColorPalette/Info';
 import Test from './pages/ColorPalette/Test/Test';
 import CollorPalletResults from './pages/ColorPalette/Result/Result';
 import LoginRegister from './pages/LoginRegister/LoginRegister';
+import SkintypeResult from './pages/SkintypeTest/Result/Result';
 
 function App() {
 	return (
@@ -34,6 +35,7 @@ function App() {
 					<Route path='/color-test/try' element={<Test/>}/>
 					<Route path='/login' element={<LoginRegister isLogin={true}/>}/>
 					<Route path='/register' element={<LoginRegister isLogin={false}/>}/>
+					<Route path='/result' element={<SkintypeResult/>}/>
 				</Routes>
 			</div>
 		</Router>
