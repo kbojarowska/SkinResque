@@ -2,10 +2,10 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import PropTypes from 'prop-types'
 
 
-function Arrow({left, right, onClick, color}) {
+function Arrow({left, right, onClick, className='', color}) {
   return (
     left || right ?
-    <div onClick={onClick}>{left && !right ? <FiChevronLeft size={45} color={color}/> : <FiChevronRight size={45} color={color}/>}</div>
+    <div className={className} onClick={onClick}>{left && !right ? <FiChevronLeft size={45} color={color}/> : <FiChevronRight size={45} color={color}/>}</div>
     : null
   )
 }
