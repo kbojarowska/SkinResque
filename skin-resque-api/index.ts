@@ -7,7 +7,7 @@ import cosmetics from './routes/cosmetics.js';
 dotenv.config();
 
 const server_params = {
-    PORT: process.env.PORT || 3000,
+    PORT: process.env.PORT || 5000,
 };
 
 const DB_DATA = {
@@ -21,9 +21,10 @@ const app: Application = express();
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', '*');
-    res.append('Access-Control-Expose-Headers', '*');
-    next();
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+	next();
 });
 app.use('/users', users);
 app.use('/cosmetics', cosmetics);

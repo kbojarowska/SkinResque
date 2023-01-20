@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { Arrow, Button, Checkbox, Heading } from '../../../components';
 import './Questions.scss';
 
@@ -200,6 +200,7 @@ function Questions() {
 		},
 	]);
 	const [currentQuestion, setCurrentQuestion] = useState(1);
+	const [skinTypeResult, setSkinTypeResult] = useState(null);
 
 	const handleCheckAnswer = (answertoChange) => {
 		const questionsToSet = questions.map((question) => {
@@ -207,13 +208,14 @@ function Questions() {
 				if (answer.id == answertoChange.id) {
 					answer.checked = !answer.checked;
 				}
-				return answer
+				return answer;
 			})
 			questions.answers = answersToSet;
 			return question;
 		})
 
 		setQuestions(questionsToSet);
+		setSkinTypeForUser(questions);
 	};
 
 	const getSkinTypeAccordingToGivenAnswers = (questions) => {
@@ -232,7 +234,7 @@ function Questions() {
 				}
 			}
 		})
-	
+		
 		return answers.sort((a, b) =>
 			answers.filter(v => v === a).length
 			- answers.filter(v => v === b).length
@@ -241,13 +243,7 @@ function Questions() {
 
 	const setSkinTypeForUser = (questions) => {
 		const skinType = getSkinTypeAccordingToGivenAnswers(questions);
-
-		axios.post(`http://localhost:5000/users/userId`, skinType).then((result) => {
-			console.log(result)
-		}).catch((error) => {	
-			console.log(error);
-			alert('Something went wrong')
-		})
+		setSkinTypeResult(skinType);
 	};
 
 	const answersToDisplay = questions.filter((question) => {
@@ -280,7 +276,7 @@ function Questions() {
 							</div>
 							<div className='arrow'>
 								{currentQuestion != Object.keys(questions).length ? <Arrow right onClick={() => setCurrentQuestion(currentQuestion + 1)} /> : <div className='hide'><Arrow right /></div>}
-								{currentQuestion == Object.keys(questions).length && <Button className='submit-answers' onClick={() => console.log(setSkinTypeForUser(questions))}>Submit</Button>}
+								{currentQuestion == Object.keys(questions).length && <Button className='submit-answers'><Link to={`/skintype-test/results/${skinTypeResult}`}>Submit</Link></Button>}
 							</div>
 						</div>
 					</div>

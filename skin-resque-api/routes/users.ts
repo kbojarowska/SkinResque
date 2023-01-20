@@ -39,7 +39,6 @@ users.get('/:id', async (req, res) => {
 users.put('/:id', async (req, res) => {
     // TODO - Finish
     try {
-        const { id } = req.query;
         yup.string()
             .length(24)
             .test('isValidObjectId', 'Not a valid ObjectId', (value, context) => {

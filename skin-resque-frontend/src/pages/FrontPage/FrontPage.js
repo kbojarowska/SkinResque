@@ -75,7 +75,7 @@ function FrontPage() {
 				</div>
 				<div className='photo-button'>
 					<img src='/images/color-test.png'></img>
-					<Button><Link to='/color-test'>Color Test</Link></Button>
+					<Button><Link to='/color-test/try'>Color Test</Link></Button>
 				</div>
 				<div className='photo-button'>
 					<img src='/images/cosmetic-recipes.png'></img>
