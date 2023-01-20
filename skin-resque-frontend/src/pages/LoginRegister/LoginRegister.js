@@ -32,8 +32,8 @@ function LoginRegister({ isLogin, users, setUser, setUsers }) {
 		})) {
 			return alert('This username is already taken');
 		}
-		
-		const newUsers = [ ...users, {
+
+		const newUsers = [...users, {
 			username: values.username,
 			email: values.email,
 			password: values.password
@@ -103,13 +103,13 @@ function LoginRegister({ isLogin, users, setUser, setUsers }) {
 								<Field type='password' name='password' />
 							</div>
 							{formProps.touched.password && formProps.errors.password ? <div>{formProps.errors.password}</div> : null}
-							{!isLogin && 
-							<><div className='field'>
-								<Heading size='small'>Password</Heading>
-								<Field type='text' name='repeatPassword' />
-							</div>
-							{formProps.touched.repeatPassword && formProps.errors.repeatPassword ? <div>{formProps.errors.repeatPassword}</div> : null}
-							</>}
+							{!isLogin &&
+								<><div className='field'>
+									<Heading size='small'>Repeat Password</Heading>
+									<Field type='text' name='repeatPassword' />
+								</div>
+									{formProps.touched.repeatPassword && formProps.errors.repeatPassword ? <div>{formProps.errors.repeatPassword}</div> : null}
+								</>}
 							<Button onClick={formProps.handleSubmit}>{isLogin ? 'Sign in' : 'Sign up'}</Button>
 						</form>
 					)}
