@@ -4,7 +4,22 @@ import Heading from '../../components/Heading/Heading';
 import Button from '../../components/Button/Button';
 import './LoginRegister.scss'
 
-function LoginRegister({ isLogin }) {
+function LoginRegister({ isLogin, users, setUser, setUsers }) {
+
+	const logIn = (values) => {
+		const user = users.find((user) => {
+			return user.username == values.username;
+		});
+
+		if (user) {
+			if (user.password == values.password) {
+				return alert('Logged in');
+			}
+			return alert('Wrong password provided');
+		}
+
+		return alert('There is no user with given username');
+	}
 
 	return (
 		<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/login-register.svg')` }}>
@@ -42,12 +57,7 @@ function LoginRegister({ isLogin }) {
 							}
 							return errors;
 						}}
-						onSubmit={(values, { setSubmitting }) => {
-							setTimeout(() => {
-								alert(JSON.stringify(values, null, 2));
-								setSubmitting(false);
-							}, 400);
-						}}
+						onSubmit={logIn}
 					>{(formProps) => (
 						<form>
 							<div className='field'>

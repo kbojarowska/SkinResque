@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Heading, Pagination, Text } from '../../../components';
 import './CosmeticsCatalogue.scss';
-import { Heading, Pagination, Text } from '../../../components';
 
 function CosmeticsCatalogue() {
 
