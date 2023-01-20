@@ -37,13 +37,12 @@ function App() {
 		}
 	]);
 
-	console.log(users);
-	const [user, setUser] = useState({});
+	const [user, setUser] = useState(null);
 
 	return (
 		<Router>
 			<div className='App'>
-				<Navbar />
+				<Navbar user={user} setUser={setUser}/>
 				<Routes>
 					<Route path='/' element={<FrontPage />} />
 					<Route path='/cosmetics/page/:currentPage' element={<CosmeticsCatalogue />} />
@@ -55,8 +54,9 @@ function App() {
 					<Route path='/userprofile' element={<Userpage />} />
 					<Route path='/color-test' element={<Info />} />
 					<Route path='/color-test/try' element={<Test />} />
+					<Route path='/result' element={<SkintypeResult/>}/>
 					<Route path='/login' element={<LoginRegister isLogin={true} setUser={setUser} users={users} />} />
-					<Route path='/register' element={<LoginRegister isLogin={false} setUsers={setUsers} />} />
+					<Route path='/register' element={<LoginRegister isLogin={false} setUsers={setUsers} users={users} />} />
 				</Routes>
 			</div>
 		</Router>
