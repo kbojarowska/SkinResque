@@ -1,0 +1,68 @@
+.page {
+	background-image: url(../../../../public/images/bg-color-finder.svg);
+	display: flex;
+	gap: 20px;
+
+	.results-container {
+		display: flex;
+		gap: 50px;
+		justify-content: center;
+		height: 100%;
+		width: 100%;
+
+		.results-save {
+			background-color: #F6EFF0;
+			width: 50%;
+            display: flex;
+                .title{
+                    padding: 1rem;
+                }
+                .arrow-right {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-bottom: auto;
+                    margin-top: auto;
+                }
+                .arrow-left {
+                    display: flex;
+                    justify-content: flex-start;
+                }
+                .text{
+                    width: 80%;
+                    margin-left: 3rem;
+                }
+
+                .sub-skin-type-text{
+                    display:flex;
+                    justify-content: center;
+                }
+
+                .best-match {
+                    padding-top: 2rem;
+                    display: flex;
+                    justify-content: space-around;
+                }
+                .shadow {
+                    width: 90%;
+                }
+            
+                .view-more {
+                    color: #A39A9A;
+                    float: right;
+                }
+                .cosmetics-container-col{
+                    .cosmetics {
+                        height: 40%;
+                        display: block;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                    .centered-div {
+                        display: block;
+                        text-align: center;
+                     }
+                }
+                
+			}
+		}
+	}
