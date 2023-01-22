@@ -71,15 +71,15 @@ function CosmeticsCatalogue() {
 		}
 	]);
 
-	useEffect(() => {
-		console.log(`${API_URL}cosmetics?size=10&page=${currentPage}`)
-		axios.get(`${API_URL}cosmetics?size=10&page=${currentPage}`).then((response) => {
-			setCosmetics(response.data);
-		}).catch((error) => {
-			console.error(error);
-			// alert('Something went wrong while downloading cosmetics data')
-		})
-	}, []);
+	// useEffect(() => {
+	// 	console.log(`${API_URL}cosmetics?size=10&page=${currentPage}`)
+	// 	axios.get(`${API_URL}cosmetics?size=10&page=${currentPage}`).then((response) => {
+	// 		setCosmetics(response.data);
+	// 	}).catch((error) => {
+	// 		console.error(error);
+	// 		alert('Something went wrong while downloading cosmetics data')
+	// 	})
+	// }, []);
 
 	const cosmeticsList = cosmetics.map((cosmetic) => {
 		return (

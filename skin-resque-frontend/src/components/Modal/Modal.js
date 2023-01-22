@@ -9,7 +9,7 @@ const Modal = ({ setIsOpen }) => {
       <div className="centered">
         <div className="modal">
           <div className="modalHeader">
-            <h5 className="heading">Dialog</h5>
+            <h5 className="dialog-heading">Dialog</h5>
           </div>
           <button className="closeBtn" onClick={() => setIsOpen(false)}>
             <RiCloseLine style={{ marginBottom: "-3px" }} />
