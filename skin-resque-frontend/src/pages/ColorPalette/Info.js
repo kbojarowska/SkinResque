@@ -7,15 +7,12 @@ function Info() {
 	<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/bg-cosmetics.svg')` }}>
     <Heading className="heading">Color palette finder</Heading>
       <div className="beige-bg">
-        <Text className="txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-          in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-          sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <Text className="txt">You dont know what color of clothes you should wear? Do you want to go wild doing your makeup? We will hepl you! Just this color pallete test!
+        The color finder test is allows you to upload a photo of your skin in order to receive color palettes that match your skin color.
+        We provide a list of colors that are said to be flattering for the your skin tone.
         </Text>
         <div className="btns">
-          <Button><Link to='/color-test/try'>Example</Link></Button>
-          <Button><Link to='/color-test/example'>Try it</Link></Button>
+          <Button><Link to='/color-test/test'>Try it!</Link></Button>
         </div>
       </div>
     </div>

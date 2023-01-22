@@ -45,18 +45,16 @@ function App() {
 				<Navbar user={user} setUser={setUser}/>
 				<Routes>
 					<Route path='/' element={<FrontPage />} />
-					<Route path='/cosmetics/page/:currentPage' element={<CosmeticsCatalogue />} />
-					<Route path='/cosmetics/:cosmeticId' element={<RecipeDetails />} />
-					<Route path='/skintype-test' element={<SkintypeTestPage />} />
-          <Route path='/skintype-test/results/:skintype' element={<SkintypeResult/>}/>
-					<Route path='/color-test' element={<Test />} />
-					<Route path='/color-test/results' element={<CollorPalletResults />} />
-					<Route path='/userprofile' element={<Userpage />} />
-					<Route path='/color-test' element={<Info />} />
-					<Route path='/color-test/try' element={<Test />} />
-					<Route path='/result' element={<SkintypeResult/>}/>
-					<Route path='/login' element={<LoginRegister isLogin={true} setUser={setUser} users={users} />} />
-					<Route path='/register' element={<LoginRegister isLogin={false} setUsers={setUsers} users={users} />} />
+					<Route path='/cosmetics/page/:currentPage' element={<CosmeticsCatalogue/>} />
+					<Route path='/cosmetics/:cosmeticId' element={<RecipeDetails/>}/>
+					<Route path='/skintype-test' element={<SkintypeTestPage/>}/>
+					<Route path='/skintype-test/results/:skintype' element={<SkintypeResult/>}/>
+					<Route path='/color-test/results' element={<CollorPalletResults/>}/>
+					<Route path='/userprofile' element={<Userpage/>}/>
+					<Route path='/color-test/info' element={<Info/>}/>
+					<Route path='/color-test/test' element={<Test/>}/>
+					<Route path='/login' element={<LoginRegister isLogin={true}/>}/>
+					<Route path='/register' element={<LoginRegister isLogin={false}/>}/>
 				</Routes>
 			</div>
 		</Router>
