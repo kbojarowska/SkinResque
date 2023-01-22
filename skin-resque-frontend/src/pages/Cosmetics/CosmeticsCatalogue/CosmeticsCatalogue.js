@@ -12,7 +12,7 @@ function CosmeticsCatalogue() {
 	const [cosmetics, setCosmetics] = useState([
 		{
 			"_id": 1,
-			"name": "osemary cream",
+			"name": "rosemary cream",
 			"description": "Dry",
 			"recipe": "Combine all ingredients. Apply to face and let dry before rinsing. The powerful ingredients make this a multi-tasking wonder-cream: Sour cream is a form of lactic acid that hydrates as it gently exfoliates; honey is a humectant that also boosts hydration while the protein in the egg white tightens and firms skin.",
 			"ingredients": ["1 tablespoon cocoa powder", "1 tablespoon sour cream", "1 egg white"],
