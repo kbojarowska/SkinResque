@@ -19,6 +19,7 @@ function Navbar({ user, setUser }) {
 			</div>
 			<div className='linkList'>
 				<Link to='/'><Heading size='small'>HOME</Heading></Link>
+				{user && <Link to='/userprofile'><Heading size='small'>PROFILE</Heading></Link>}
 				<Link to='/cosmetics/page/1'><Heading size='small'>COSMETICS</Heading></Link>
 				{user ? <Heading size='small'><button className='button-no-decoration' onClick={logOut}>SIGN OUT</button></Heading> : <Link to='/login'><Heading size='small'>SIGN IN</Heading></Link>}
 			</div>

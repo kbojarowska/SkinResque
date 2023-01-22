@@ -77,7 +77,7 @@ function LoginRegister({ isLogin, users, setUser, setUsers }) {
 								errors.username = 'Username is required';
 							} else if (!values.password) {
 								errors.password = 'Password is required';
-							} else if (values.password !== values.repeatPassword) {
+							}  else if (!isLogin && values.password !== values.repeatPassword) {
 								errors.repeatPassword = 'Passwords do not match';
 							}
 							return errors;
@@ -106,7 +106,7 @@ function LoginRegister({ isLogin, users, setUser, setUsers }) {
 							{!isLogin &&
 								<><div className='field'>
 									<Heading size='small'>Repeat Password</Heading>
-									<Field type='text' name='repeatPassword' />
+									<Field type='password' name='repeatPassword' />
 								</div>
 									{formProps.touched.repeatPassword && formProps.errors.repeatPassword ? <div>{formProps.errors.repeatPassword}</div> : null}
 								</>}

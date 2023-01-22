@@ -5,11 +5,10 @@ function Info({setShowQuestions}) {
 	return (
 		<div className='info-container'>
 			<div className='info'>
-				<Text size='small'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-					ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-					ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-					in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-					sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+				<Text size='small'>
+{`SkinType Test is a diagnostic tool that helps you determine your specific skin type by answering a series of questions. The test is designed to identify your skin concerns, the appearance and texture of your skin, and your daily skincare routine. The answers to these questions are then analyzed to determine your skin type, which can be dry, oily, combination or normal.
+Once you had completed the test, you will be provided with recommendations for cosmetics that are best suited for your skin.
+Please note that you should always consult a dermatologist if you have any concerns.`}</Text>
 			</div>
 			<div className='start-button'>
 				<Button onClick={() => setShowQuestions(true)}>Start</Button>
