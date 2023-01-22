@@ -6,7 +6,7 @@ import './Result.scss';
 function CollorPalletResults() {
 	const colorPallets = [
 		['#5BDCE1', '#E73BA5', '#F4975B','#F9D8CE'],
-		['#95d126', '#fade3d', 'f35b05', '#f595a9']
+		['#95d126', '#fade3d', '#f35b05', '#f595a9']
 	]
 	const [currentPallete, setCurrentPalette] = useState(colorPallets[0])
 
