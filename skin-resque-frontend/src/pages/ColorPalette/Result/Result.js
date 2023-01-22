@@ -1,8 +1,15 @@
+import { useState } from 'react';
 import { FiSave } from 'react-icons/fi';
 import { Arrow, Heading } from "../../../components";
 import './Result.scss';
 
 function CollorPalletResults() {
+	const colorPallets = [
+		['#5BDCE1', '#E73BA5', '#F4975B','#F9D8CE'],
+		['#95d126', '#fade3d', 'f35b05', '#f595a9']
+	]
+	const [currentPallete, setCurrentPalette] = useState(colorPallets[0])
+
 	return (
 		<div className='page'>
 			<div className='title'>
@@ -15,7 +22,7 @@ function CollorPalletResults() {
 				</div>
 				<div className='results-save'>
 					<div className='results'>
-					<Arrow left />
+					<Arrow left onClick={() => setCurrentPalette(colorPallets[0])}/>
 					<div className='color-palletes'>
 						<div className='color-container'>
 							<Heading>Your color</Heading>
@@ -24,14 +31,14 @@ function CollorPalletResults() {
 						<div className='palletes-container'>
 							<Heading>Palletes</Heading>
 							<ul className='palletes-list'>
-								<li className='blue' />
-								<li className='pink' />
-								<li className='orange' />
-								<li className='beige' />
+								<li style={{ background: currentPallete[0]}} />
+								<li style={{ background: currentPallete[1]}} />
+								<li style={{ background: currentPallete[2]}} />
+								<li style={{ background: currentPallete[3]}} />
 							</ul>
 						</div>
 					</div>
-					<Arrow right />
+					<Arrow right onClick={() => setCurrentPalette(colorPallets[1])}/>
 					</div>
 					<div className='save'>
 					<FiSave size={25}/>

@@ -8,11 +8,9 @@ function Test() {
         <Heading className="heading">Color palette finder</Heading>
         <div className="beige-bg">
             <div className='info'>
-                <Text className="txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-                    in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-                    sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <Text className="txt">
+                    When taking a photo of someones face, it is important to have them look directly into the camera. This will help to ensure that the persons features are properly visible. It is also important to have them smile slightly, as this will make the photo look more natural.
+                    When taking a photo of someone with a darker skin tone, it is important to avoid taking photos in direct sunlight. The best time to take a photo is in the early morning or evening when the sun is not as bright. If taking a photo in direct sunlight is unavoidable, try to have the person stand in the shade. It is also important to use a flash if taking a photo indoors.
                 </Text>
                 <img src='/images/person.svg' alt="Person" />
             </div>
