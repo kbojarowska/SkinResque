@@ -1,9 +1,9 @@
+import React, { useState } from 'react';
 import {
 	BrowserRouter as Router,
 	Routes,
 	Route
 } from 'react-router-dom';
-import React from 'react'
 import './App.scss';
 import Navbar from './components/Navbar/Navbar';
 import FrontPage from './pages/FrontPage/FrontPage';
@@ -17,24 +17,46 @@ import CollorPalletResults from './pages/ColorPalette/Result/Result';
 import LoginRegister from './pages/LoginRegister/LoginRegister';
 import SkintypeResult from './pages/SkintypeTest/Result/Result';
 
+
 function App() {
+	const [users, setUsers] = useState([
+		{
+			username: 'dpionk',
+			password: 'password',
+			email: 'dpionk@domain.com'
+		},
+		{
+			username: 'kbojarowska',
+			password: 'password',
+			email: 'kbojarowska@domain.com'
+		},
+		{
+			username: 'bwujec',
+			password: 'password',
+			email: 'bwujec@domain.com'
+		}
+	]);
+
+	const [user, setUser] = useState(null);
+
 	return (
 		<Router>
 			<div className='App'>
-				<Navbar />
+				<Navbar user={user} setUser={setUser}/>
 				<Routes>
 					<Route path='/' element={<FrontPage />} />
-					<Route path='/cosmetics/page/:currentPage' element={<CosmeticsCatalogue/>} />
-					<Route path='/cosmetics/:cosmeticId' element={<RecipeDetails/>}/>
-					<Route path='/skintype-test' element={<SkintypeTestPage/>}/>
-					<Route path='/skintype-test/results/:skintype' element={<SkintypeResult/>}/>
-					<Route path='/color-test' element={<Test/>}/>
-					<Route path='/color-test/results' element={<CollorPalletResults/>}/>
-					<Route path='/userprofile' element={<Userpage/>}/>
-					<Route path='/color-test' element={<Info/>}/>
-					<Route path='/color-test/try' element={<Test/>}/>
-					<Route path='/login' element={<LoginRegister isLogin={true}/>}/>
-					<Route path='/register' element={<LoginRegister isLogin={false}/>}/>
+					<Route path='/cosmetics/page/:currentPage' element={<CosmeticsCatalogue />} />
+					<Route path='/cosmetics/:cosmeticId' element={<RecipeDetails />} />
+					<Route path='/skintype-test' element={<SkintypeTestPage />} />
+          <Route path='/skintype-test/results/:skintype' element={<SkintypeResult/>}/>
+					<Route path='/color-test' element={<Test />} />
+					<Route path='/color-test/results' element={<CollorPalletResults />} />
+					<Route path='/userprofile' element={<Userpage />} />
+					<Route path='/color-test' element={<Info />} />
+					<Route path='/color-test/try' element={<Test />} />
+					<Route path='/result' element={<SkintypeResult/>}/>
+					<Route path='/login' element={<LoginRegister isLogin={true} setUser={setUser} users={users} />} />
+					<Route path='/register' element={<LoginRegister isLogin={false} setUsers={setUsers} users={users} />} />
 				</Routes>
 			</div>
 		</Router>
