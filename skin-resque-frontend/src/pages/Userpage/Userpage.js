@@ -1,6 +1,6 @@
 import { Heading, Text } from '../../components';
 import { Link } from 'react-router-dom';
-import { FiTrash2, FiEdit3 } from 'react-icons/fi';
+// import { FiTrash2, FiEdit3 } from 'react-icons/fi';
 import './Userpage.scss';
 
 function Userpage() {
@@ -15,8 +15,8 @@ function Userpage() {
       },
       {
         'id': 2,
-        'name': 'Summer vibes',
-        'colors': ['#F9D8CE', '#E73BA5', '#F4975B', '#5BDCE1']
+        'name': 'Hawaii',
+        'colors': ['#95d126', '#fade3d', '#f35b05', '#f595a9']
       },
     ],
     savedCosmetics: 
@@ -33,23 +33,23 @@ function Userpage() {
       },
       {
         'id': 2,
-        'name': 'rosemary cream',
+        'name': 'coconut balm',
         'description': `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
           ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
           in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
           sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-        'photo': '/images/cream.png',
+        'photo': '/images/pink-cream.png',
       },
       {
         'id': 3,
-        'name': 'rosemary cream',
+        'name': 'lemon hydrolat',
         'description': `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
           ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
           in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
           sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-        'photo': '/images/cream.png',
+        'photo': '/images/blue-cream.png',
       }
     ],
   }
@@ -58,9 +58,9 @@ function Userpage() {
 		return (
 			<Link to={`/cosmetics/${cosmetic.id}`} key={cosmetic.id}>
 				<div className='cosmetic' >
-          <div className='bin'>
+          {/* <div className='bin'>
               <FiTrash2/>
-          </div>
+          </div> */}
 					<img src={cosmetic.photo} className='cosmetic-img'/>
 					<Text size='small'>{cosmetic.name}</Text>
 				</div>
@@ -71,18 +71,18 @@ function Userpage() {
   const paletteList = user.savedPalette.map((palette) => {
 		return (
 			<div className='palette' key={palette.id}>
-        <div className='bin'>
-          <FiTrash2/>
-        </div>
+        {/* <div className='bin'> */}
+          {/* <FiTrash2/> */}
+        {/* </div> */}
         <div className='color-container'>
         {palette.colors.map((color, index) => (
             <div className='palette-element' key={index} style={{'background-color': color}}></div>
         ))}
         </div>
 				<Text size='small'>{palette.name}</Text>
-        <div className='edit'>
+        {/* <div className='edit'>
           <FiEdit3/>
-        </div>
+        </div> */}
 			</div>
 		)
 	})

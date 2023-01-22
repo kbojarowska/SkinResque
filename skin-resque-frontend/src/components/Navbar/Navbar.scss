@@ -20,6 +20,11 @@
         gap: 10px;
         padding: 10px;
 
+		.button-no-decoration {
+			background-color: transparent;
+			padding:0;
+		}
+
         * {
             text-decoration: none;
             color: black;
