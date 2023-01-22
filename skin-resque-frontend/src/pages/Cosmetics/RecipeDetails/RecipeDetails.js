@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { FiSave } from 'react-icons/fi';
 import { useParams } from 'react-router-dom';
-import { Heading, Text } from '../../../components'
-import axios from 'axios';
+import { Heading, Modal, Text } from '../../../components'
+// import axios from 'axios';
 
 import './RecipeDetails.scss'
 function RecipeDetails() {
 
 	const { cosmeticId } = useParams();
+	const [isOpen, setIsOpen] = useState(false);
 
 	const cosmetics = [{
 		"_id": 1,
@@ -49,7 +52,11 @@ function RecipeDetails() {
 			<div className='beige-bg'>
 				{cosmetic ?
 					<div>
-						<Heading className='heading'>{cosmetic.name.toUpperCase()}</Heading>
+						<Heading className='heading'>{cosmetic.name.toUpperCase()}
+						<div className='save' onClick={() => setIsOpen(true)}>
+						<FiSave size={25}/>
+						</div>
+						{isOpen && <Modal setIsOpen={setIsOpen} />}</Heading>
 						<div className='details-container'>
 							<img src={cosmetic.photo} className='img'></img>
 							<div className='dark-beige-bg'>
