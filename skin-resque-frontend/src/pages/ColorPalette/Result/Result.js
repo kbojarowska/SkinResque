@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { FiSave } from 'react-icons/fi';
-import { Arrow, Heading } from "../../../components";
+import { Arrow, Heading, Modal } from "../../../components";
 import './Result.scss';
 
 function CollorPalletResults() {
+	const [isOpen, setIsOpen] = useState(false);
 	const colorPallets = [
 		['#5BDCE1', '#E73BA5', '#F4975B','#F9D8CE'],
 		['#95d126', '#fade3d', '#f35b05', '#f595a9']
@@ -40,9 +41,10 @@ function CollorPalletResults() {
 					</div>
 					<Arrow right onClick={() => setCurrentPalette(colorPallets[1])}/>
 					</div>
-					<div className='save'>
+					<div className='save' onClick={() => setIsOpen(true)}>
 					<FiSave size={25}/>
 					</div>
+					{isOpen && <Modal setIsOpen={setIsOpen} />}
 				</div>
 			</div>
 		</div>
