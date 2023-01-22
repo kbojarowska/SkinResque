@@ -53,8 +53,8 @@ function App() {
 					<Route path='/userprofile' element={<Userpage/>}/>
 					<Route path='/color-test/info' element={<Info/>}/>
 					<Route path='/color-test/test' element={<Test/>}/>
-					<Route path='/login' element={<LoginRegister isLogin={true}/>}/>
-					<Route path='/register' element={<LoginRegister isLogin={false}/>}/>
+					<Route path='/login' element={<LoginRegister isLogin={true} users={users} setUser={setUser}/>}/>
+					<Route path='/register' element={<LoginRegister isLogin={false} users={users} setUsers={setUsers}/>}/>
 				</Routes>
 			</div>
 		</Router>
