@@ -27,7 +27,7 @@ function App() {
 					<Route path='/cosmetics/page/:currentPage' element={<CosmeticsCatalogue/>} />
 					<Route path='/cosmetics/:cosmeticId' element={<RecipeDetails/>}/>
 					<Route path='/skintype-test' element={<SkintypeTestPage/>}/>
-					<Route path='/skintype-test/question/:questionNumber' element={<SkintypeTestPage/>}/>
+					<Route path='/skintype-test/results/:skintype' element={<SkintypeResult/>}/>
 					<Route path='/color-test' element={<Test/>}/>
 					<Route path='/color-test/results' element={<CollorPalletResults/>}/>
 					<Route path='/userprofile' element={<Userpage/>}/>
@@ -35,7 +35,6 @@ function App() {
 					<Route path='/color-test/try' element={<Test/>}/>
 					<Route path='/login' element={<LoginRegister isLogin={true}/>}/>
 					<Route path='/register' element={<LoginRegister isLogin={false}/>}/>
-					<Route path='/result' element={<SkintypeResult/>}/>
 				</Routes>
 			</div>
 		</Router>
