@@ -1,6 +1,6 @@
 import { Heading, Text } from '../../components';
 import { Link } from 'react-router-dom';
-import { FiTrash2, FiEdit3 } from 'react-icons/fi';
+// import { FiTrash2, FiEdit3 } from 'react-icons/fi';
 import './Userpage.scss';
 
 function Userpage() {
