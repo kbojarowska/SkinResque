@@ -48,10 +48,12 @@
 				}
 
 				.answers {
+					margin-top: 1em;
 					margin-left: 20px;
 					display: flex;
 					flex-direction: column;
-					justify-content: space-evenly;
+					justify-content: center;
+					gap: 1em;
 					flex: 2;
 				}
 			}

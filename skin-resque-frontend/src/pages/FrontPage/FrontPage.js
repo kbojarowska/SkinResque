@@ -1,64 +1,63 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Arrow, Button, Heading, Text } from '../../components';
+import { Button, Heading, Text } from '../../components';
 import './FrontPage.scss';
 
 function FrontPage() {
 
-  const ingredients = [
-    {
-      "id": 1,
-      "name": "rosemary",
-      "description": `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-      ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-      in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-      sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-      "photo": '/images/rosemary.jpg',
-    },
-    {
-      "id": 2,
-      "name": "rosemary2",
-      "description": `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-      ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-      in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-      sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-      "photo": '/images/rosemary.jpg',
-    }
-  ]
+//  const ingredients = [
+//    {
+//      "id": 1,
+//      "name": "rosemary",
+//      "description": `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+//      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+//      ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+//      in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
+//      sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+//      "photo": '/images/rosemary.jpg',
+//    },
+//    {
+//      "id": 2,
+//      "name": "rosemary2",
+//      "description": `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+//      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+//      ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+//      in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
+//      sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+//      "photo": '/images/rosemary.jpg',
+//    }
+//  ]
 
-  const [showIngredient, setShowIngredient] = useState(ingredients[0])
+//  const [showIngredient, setShowIngredient] = useState(ingredients[0])
 
-  function nextIngredient(){
-    if(ingredients.find(el => el.id === showIngredient.id+1)){
-      setShowIngredient(ingredients.find(el => el.id === showIngredient.id+1))
-    } else {
-      setShowIngredient(ingredients[0])
-    }
-  }
+//  function nextIngredient(){
+//    if(ingredients.find(el => el.id === showIngredient.id+1)){
+//      setShowIngredient(ingredients.find(el => el.id === showIngredient.id+1))
+//    } else {
+//      setShowIngredient(ingredients[0])
+//    }
+//  }
 
-  function previousIngredient(){
-    if(ingredients.find(el => el.id === showIngredient.id-1)){
-      setShowIngredient(ingredients.find(el => el.id === showIngredient.id-1))
-    } else {
-      setShowIngredient(ingredients[ingredients.length -1 ])
-    }
-  }
+//  function previousIngredient(){
+//    if(ingredients.find(el => el.id === showIngredient.id-1)){
+//      setShowIngredient(ingredients.find(el => el.id === showIngredient.id-1))
+//    } else {
+//      setShowIngredient(ingredients[ingredients.length -1 ])
+//    }
+//  }
   
 	return (
 		<div className='front-page'>
 			<div className='pink'>
 				<div className='conifer-bush-about'>
-					<img src='/images/conifer-bush.png' />
+					<img className='conifer'src='/images/conifer-bush.png' />
 					<div className='about'>
 						<div className='page-about'>
-							<Heading size='medium'>Page Information</Heading>
-							<Text size='small'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-								ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-								ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-								in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-								sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+							<Heading size='medium'>We care about skin</Heading>
+							<Text size='small'>{
+							`Skin ResQ was created for people who want to start their journey with natural cosmetics.
+							We offer a wide range of recipes, which everyone will find effortless.
+							Don't know which cosmetics you should use? Try our dedicated test to find your skin type!
+							`}</Text>
 						</div>
 					</div>
 				</div>
@@ -89,7 +88,7 @@ function FrontPage() {
 			</div>
 			<div className='green'></div>
 			<img src='/images/front-page-skin-photo.jpg' className='skin-photo'></img>
-			<div className='white-info'>
+			{/*<div className='white-info'>
         <div key={showIngredient.id} className='info-container'>
           <Arrow left onClick={previousIngredient}/>
           <div className='info-text'>
@@ -106,7 +105,7 @@ function FrontPage() {
           </div>
           <Arrow right onClick={nextIngredient}/>
         </div>
-      </div>
+      </div>*/}
 		</div>
 	);
 }
