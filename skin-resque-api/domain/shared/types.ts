@@ -9,6 +9,7 @@ export interface ICosmetics {
     recipe?: string;
     ingredients: Array<string>;
     skinTypeRecomendation: Array<skinType>;
+    photo?: string;
 }
 
 export interface IPalette {
