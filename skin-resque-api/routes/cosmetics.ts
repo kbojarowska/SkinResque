@@ -2,9 +2,7 @@ import { Router } from 'express';
 import { isValidObjectId } from 'mongoose';
 import * as yup from 'yup';
 import { SKIN_TYPES } from '../domain/constants.js';
-import { getCosmeticOne } from '../infrastructure/repository/cosmetics/getCosmeticOne.js';
-import { getCosmeticsAll } from '../infrastructure/repository/cosmetics/getCosmeticsAll.js';
-import { getCosmeticsRandom } from '../infrastructure/repository/cosmetics/getCosmeticsRandom.js';
+import { getCosmeticOne, getCosmeticsAll, getCosmeticsRandom, getCosmeticFilterSkintype } from '../infrastructure/repository/cosmetics/index.js';
 import {
     badRequestError,
     notFoundError,
@@ -100,6 +98,27 @@ cosmetics.get('/:id', async (req, res) => {
             .validate(id)
             .then(_ => {
                 getCosmeticOne(id).then(success => {
+                    if (!success) return res.status(404).send(notFoundError());
+                    res.status(200).send(success);
+                });
+            })
+            .catch(err => {
+                return res.status(400).send(badRequestError(err));
+            });
+    } catch (err) {
+        res.status(500).send(serverExceptionError());
+    }
+});
+
+cosmetics.get('/:skintype', async (req, res) => {
+    try {
+        const { skintype } = req.params;
+
+        yup.string()
+            .defined()
+            .validate(skintype)
+            .then(_ => {
+                getCosmeticFilterSkintype(skintype).then(success => {
                     if (!success) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
                 });
