@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getUserOne, deleteUser, removePalette, removeSavedCosmetics, removeProfilePicture } from '../infrastructure/repository/user/index.js';
+import { getUserOne, deleteUser, removePalette, removeSavedCosmetics, removeProfilePicture, updateUser } from '../infrastructure/repository/user/index.js';
 import { IUser } from '../domain/shared';
 import { isValidObjectId } from 'mongoose';
 import {
@@ -38,15 +38,29 @@ users.get('/:id', async (req, res) => {
 });
 
 users.put('/:id', async (req, res) => {
-    // TODO - Finish
     try {
+        const { id } = req.params;
+        const { email, login, profilePicture, skinType } = req.body;
         yup.string()
             .length(24)
             .test('isValidObjectId', 'Not a valid ObjectId', (value, context) => {
                 return isValidObjectId(value);
             })
-            .required();
-    } catch (err) {}
+            .required()
+            .validate(id)
+            .then(_ => {
+                updateUser(id, email, login, profilePicture, skinType).then((success: UpdateReturns) => {
+                    if (success.acknowledged === false) return res.status(404).send(notFoundError());
+                    res.status(200).send(success);
+                });
+            })
+            .catch(err => {
+                return res.status(400).send(badRequestError(err));
+            });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send(serverExceptionError());
+    }
 });
 
 users.delete('/:id', async (req, res) => {
