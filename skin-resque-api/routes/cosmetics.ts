@@ -2,7 +2,12 @@ import { Router } from 'express';
 import { isValidObjectId } from 'mongoose';
 import * as yup from 'yup';
 import { SKIN_TYPES } from '../domain/constants.js';
-import { getCosmeticOne, getCosmeticsAll, getCosmeticsRandom, getCosmeticFilterSkintype } from '../infrastructure/repository/cosmetics/index.js';
+import { getCosmeticOne } from '../infrastructure/repository/cosmetics/getCosmeticOne.js';
+import { getCosmeticsAll } from '../infrastructure/repository/cosmetics/getCosmeticsAll.js';
+import { getCosmeticsRandom } from '../infrastructure/repository/cosmetics/getCosmeticsRandom.js';
+import { deleteCosmetic } from '../infrastructure/repository/cosmetics/deleteCosmetic.js';
+import { getCosmeticFilterSkintype } from '../infrastructure/repository/cosmetics/getCosmeticFilterSkintype.js';
+import { DeleteReturns } from '../infrastructure/database_abstraction/types.js';
 import {
     badRequestError,
     notFoundError,
@@ -130,5 +135,29 @@ cosmetics.get('/:skintype', async (req, res) => {
         res.status(500).send(serverExceptionError());
     }
 });
+
+cosmetics.delete('/:id', async (req, res) => {
+	try {
+        const { id } = req.params;
+        yup.string()
+            .length(24)
+            .test('isValidObjectId', 'Not a valid ObjectId', (value, context) => {
+                return isValidObjectId(value);
+            })
+            .required()
+            .validate(id)
+            .then(_ => {
+                deleteCosmetic(id).then((success: DeleteReturns) => {
+                    if (success.deletedCount === 0) return res.status(404).send(notFoundError());
+                    res.status(200).send(success);
+                });
+            })
+            .catch(err => {
+                return res.status(400).send(badRequestError(err));
+            });
+    } catch (err) {
+        res.status(500).send(serverExceptionError());
+    }
+})
 
 export default cosmetics;
