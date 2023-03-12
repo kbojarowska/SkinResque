@@ -24,7 +24,8 @@ users.get('/:id', async (req, res) => {
             .then(_ => {
                 getUserOne(id).then((success: IUser[]) => {
                     if (success.length === 0) return res.status(404).send(notFoundError());
-                    res.status(200).send(success[0]);
+					const result = req.query.palettes ? success[0].saved_palettes : req.query.cosmetics ? success[0].saved_cosmetics : success[0];
+                    res.status(200).send(result);
                 });
             })
             .catch(err => {
