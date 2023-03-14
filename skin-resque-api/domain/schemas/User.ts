@@ -7,6 +7,7 @@ const UserSchema = new Schema<IUser>(
     {
         name: { type: String, required: true },
         email: { type: String, required: true },
+        profile_picture: String,
         skin_type: String,
         saved_cosmetics: [{ type: Schema.Types.ObjectId, ref: 'Cosmetic' }],
         saved_palettes: [PaletteSchema],

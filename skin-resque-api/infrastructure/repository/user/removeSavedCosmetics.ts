@@ -1,5 +1,5 @@
-import { User } from '../../../domain/models';
-import DB from '../../database_abstraction';
+import { User } from '../../../domain/models/index.js';
+import DB from '../../database_abstraction/index.js';
 import { UpdateReturns } from '../../database_abstraction/types';
 
 export const removeSavedCosmetics = async (
