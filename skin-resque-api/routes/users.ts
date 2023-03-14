@@ -50,7 +50,7 @@ users.put('/:id', async (req, res) => {
             .validate(id)
             .then(_ => {
                 updateUser(id, email, login, profilePicture, skinType).then((success: UpdateReturns) => {
-                    if (success.acknowledged === false) return res.status(404).send(notFoundError());
+                    if (!success.acknowledged) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
                 });
             })
@@ -75,7 +75,7 @@ users.delete('/:id', async (req, res) => {
             .validate(id)
             .then(_ => {
                 deleteUser(id).then((success: DeleteReturns) => {
-                    if (success.acknowledged === false) return res.status(404).send(notFoundError());
+                    if (!success.acknowledged) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
                 });
             })
@@ -100,7 +100,7 @@ users.delete('/profile-picture/:id', async (req, res) => {
             .validate(id)
             .then(_ => {
                 removeProfilePicture(id).then((success: UpdateReturns) => {
-                    if (success.acknowledged === false) return res.status(404).send(notFoundError());
+                    if (!success.acknowledged) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
                 });
             })
@@ -129,7 +129,7 @@ users.delete('/:id/palettes/:paletteId', async (req, res) => {
             .validate(id)
             .then(_ => {
                 removePalette(id, paletteId).then((success: UpdateReturns) => {
-                    if (success.acknowledged === false) return res.status(404).send(notFoundError());
+                    if (!success.acknowledged) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
                 });
             })
@@ -156,7 +156,7 @@ users.delete('/:id/cosmetics/:cosmeticId', async (req, res) => {
             .validate(id)
             .then(_ => {
                 removeSavedCosmetics(id, cosmeticId).then((success: UpdateReturns) => {
-                    if (success.acknowledged === false) return res.status(404).send(notFoundError());
+                    if (!success.acknowledged) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
                 });
             })
