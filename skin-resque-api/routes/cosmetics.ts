@@ -6,6 +6,9 @@ import { getCosmeticOne } from '../infrastructure/repository/cosmetics/getCosmet
 import { getCosmeticsAll } from '../infrastructure/repository/cosmetics/getCosmeticsAll.js';
 import { getCosmeticsRandom } from '../infrastructure/repository/cosmetics/getCosmeticsRandom.js';
 import { createCosmetic } from '../infrastructure/repository/cosmetics/createCosmetic.js';
+import { deleteCosmetic } from '../infrastructure/repository/cosmetics/deleteCosmetic.js';
+import { getCosmeticFilterSkintype } from '../infrastructure/repository/cosmetics/getCosmeticFilterSkintype.js';
+import { DeleteReturns } from '../infrastructure/database_abstraction/types.js';
 import {
     badRequestError,
     notFoundError,
@@ -140,5 +143,50 @@ cosmetics.post('/', async (req, res) => {
         res.status(500).send(serverExceptionError());
     });
 });
+
+cosmetics.get('/:skintype', async (req, res) => {
+    try {
+        const { skintype } = req.params;
+
+        yup.string()
+            .defined()
+            .validate(skintype)
+            .then(_ => {
+                getCosmeticFilterSkintype(skintype).then(success => {
+                    if (!success) return res.status(404).send(notFoundError());
+                    res.status(200).send(success);
+                });
+            })
+            .catch(err => {
+                return res.status(400).send(badRequestError(err));
+            });
+    } catch (err) {
+        res.status(500).send(serverExceptionError());
+    }
+});
+
+cosmetics.delete('/:id', async (req, res) => {
+	try {
+        const { id } = req.params;
+        yup.string()
+            .length(24)
+            .test('isValidObjectId', 'Not a valid ObjectId', (value, context) => {
+                return isValidObjectId(value);
+            })
+            .required()
+            .validate(id)
+            .then(_ => {
+                deleteCosmetic(id).then((success: DeleteReturns) => {
+                    if (success.deletedCount === 0) return res.status(404).send(notFoundError());
+                    res.status(200).send(success);
+                });
+            })
+            .catch(err => {
+                return res.status(400).send(badRequestError(err));
+            });
+    } catch (err) {
+        res.status(500).send(serverExceptionError());
+    }
+})
 
 export default cosmetics;

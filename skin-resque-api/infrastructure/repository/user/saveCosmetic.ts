@@ -1,6 +1,6 @@
-import { User } from '../../../domain/models';
-import DB from '../../database_abstraction';
-import { UpdateReturns } from '../../database_abstraction/types';
+import { User } from '../../../domain/models/index.js';
+import DB from '../../database_abstraction/index.js';
+import { UpdateReturns } from '../../database_abstraction/types.js';
 
 export const saveCosmetics = async (id: string, cosmeticId: string): Promise<UpdateReturns> => {
     return DB.update(
