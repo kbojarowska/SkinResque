@@ -94,7 +94,6 @@ users.delete('/profile-picture/:id', async (req, res) => {
                 return res.status(400).send(badRequestError(err));
             });
     } catch (err) {
-        console.log(err);
         res.status(500).send(serverExceptionError());
     }
 });
@@ -123,7 +122,6 @@ users.delete('/:id/palettes/:paletteId', async (req, res) => {
                 return res.status(400).send(badRequestError(err));
             });
     } catch (err) {
-        console.log(err);
         res.status(500).send(serverExceptionError());
     }
 });
@@ -150,7 +148,6 @@ users.delete('/:id/cosmetics/:cosmeticId', async (req, res) => {
                 return res.status(400).send(badRequestError(err));
             });
     } catch (err) {
-        console.log(err);
         res.status(500).send(serverExceptionError());
     }
 });
