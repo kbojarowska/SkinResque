@@ -5,6 +5,7 @@ import { SKIN_TYPES } from '../domain/constants.js';
 import { getCosmeticOne } from '../infrastructure/repository/cosmetics/getCosmeticOne.js';
 import { getCosmeticsAll } from '../infrastructure/repository/cosmetics/getCosmeticsAll.js';
 import { getCosmeticsRandom } from '../infrastructure/repository/cosmetics/getCosmeticsRandom.js';
+import { createCosmetic } from '../infrastructure/repository/cosmetics/createCosmetic.js';
 import { deleteCosmetic } from '../infrastructure/repository/cosmetics/deleteCosmetic.js';
 import { getCosmeticFilterSkintype } from '../infrastructure/repository/cosmetics/getCosmeticFilterSkintype.js';
 import { DeleteReturns } from '../infrastructure/database_abstraction/types.js';
@@ -113,6 +114,34 @@ cosmetics.get('/:id', async (req, res) => {
     } catch (err) {
         res.status(500).send(serverExceptionError());
     }
+});
+
+cosmetics.post('/', async (req, res) => {
+	const body = req.body;
+
+	yup.object({
+		name: yup.string().min(8).max(32).required(),
+		description: yup.string().min(8).max(255).required(),
+		recipe: yup.string(),
+		ingredients: yup.array().of(yup.string()),
+		skinTypeRecomendation: yup.array().of(yup.string()),
+		photo: yup.string()
+	})
+	.validate(body)
+	.then(_ => {
+		createCosmetic(body.name, body.description, body.recipe,
+		body.ingredients, body.skinTypeRecomendation, body.photo)
+		.then(success => {
+			if (!success) return res.status(404);
+            res.status(200).send(success);
+		})
+		.catch(err => {
+			return res.status(400).send(badRequestError(err));
+		});
+	})
+	.catch(_ => {
+        res.status(500).send(serverExceptionError());
+    });
 });
 
 cosmetics.get('/:skintype', async (req, res) => {
