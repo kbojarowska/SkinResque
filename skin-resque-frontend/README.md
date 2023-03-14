@@ -1,5 +1,4 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![FE check](https://github.com/MrSpaceMan1/SkinResque/actions/workflows/eslint.yml/badge.svg)](https://github.com/MrSpaceMan1/SkinResque/actions/workflows/eslint.yml)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
