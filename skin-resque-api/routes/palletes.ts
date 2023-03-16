@@ -3,6 +3,8 @@ import { isValidObjectId } from 'mongoose';
 import * as yup from 'yup';
 import { getPalleteOne } from '../infrastructure/repository/palletes/getPalleteOne.js';
 import { getPalleteAll } from '../infrastructure/repository/palletes/getPalleteAll.js';
+import { deletePallete } from '../infrastructure/repository/palletes/deletePallete.js';
+import { DeleteReturns } from '../infrastructure/database_abstraction/types.js';
 import {
     badRequestError,
     notFoundError,
@@ -86,3 +88,27 @@ palletes.get('/:id', async (req, res) => {
         res.status(500).send(serverExceptionError());
     }
 });
+
+palletes.delete('/:id', async (req, res) => {
+	try {
+        const { id } = req.params;
+        yup.string()
+            .length(24)
+            .test('isValidObjectId', 'Not a valid ObjectId', (value, context) => {
+                return isValidObjectId(value);
+            })
+            .required()
+            .validate(id)
+            .then(_ => {
+                deletePallete(id).then((success: DeleteReturns) => {
+                    if (success.deletedCount === 0) return res.status(404).send(notFoundError());
+                    res.status(200).send(success);
+                });
+            })
+            .catch(err => {
+                return res.status(400).send(badRequestError(err));
+            });
+    } catch (err) {
+        res.status(500).send(serverExceptionError());
+    }
+})
