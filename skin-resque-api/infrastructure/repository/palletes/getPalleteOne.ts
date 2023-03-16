@@ -2,7 +2,7 @@ import { Palette } from '../../../domain/models/index.js';
 import { IPalette } from '../../../domain/shared/index.js';
 import DB from '../../database_abstraction/index.js';
 
-export const getPaletteOne = async (id: string): Promise<IPalette | null> => {
+export const getPalleteOne = async (id: string): Promise<IPalette | null> => {
     const result = await DB.find(Palette, {
         _id: id,
     });
