@@ -43,13 +43,8 @@ function UploadFile() {
   return (
     <div>
       {fileName && (
-        <React.Fragment>
-          {imgData && (
-            <div>
-              <img src={imgData} width="250" />
-            </div>
-          )}
-          <div className="upload-list">
+        <>
+          <div className="upload">
             <Text className="file-name" size='small'>
               <b>{fileName}</b>
             </Text>
@@ -59,7 +54,7 @@ function UploadFile() {
                 strokeWidth={9}
                 trailWidth={9}
                 trailColor="#FFF"
-                strokeColor={isUploading ? "#41C3D2" : "#92ed14"}
+                strokeColor={isUploading ? "#C1E1D2" : "#C1E1D2"}
               />
               <Text className="progress-text" size='small'>
                 {isUploading ? `Uploading ${percentage}% ` : `Finished`}
@@ -67,7 +62,7 @@ function UploadFile() {
             </div>
             <Text className="file-size" size='small'>{`${fileSize} KB`}</Text>
           </div>
-        </React.Fragment>
+        </>
       )}
       <Upload {...props}>
         <Button>Upload File</Button>
