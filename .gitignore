@@ -102,5 +102,10 @@ typings/
 # TernJS port file
 .tern-port
 
+# virtualenv
+venv/
+ENV/
+
 # Vscode settings
 .vscode/
+.idea/
