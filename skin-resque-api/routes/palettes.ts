@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { isValidObjectId } from 'mongoose';
 import * as yup from 'yup';
-import { getPalleteOne } from '../infrastructure/repository/palletes/getPalleteOne.js';
-import { getPalleteAll } from '../infrastructure/repository/palletes/getPalleteAll.js';
-import { deletePallete } from '../infrastructure/repository/palletes/deletePallete.js';
+import { getPaletteOne } from '../infrastructure/repository/palettes/getPaletteOne.js';
+import { getPaletteAll } from '../infrastructure/repository/palettes/getPaletteAll.js';
+import { deletePalette } from '../infrastructure/repository/palettes/deletePalette.js';
 import { DeleteReturns } from '../infrastructure/database_abstraction/types.js';
 import {
     badRequestError,
@@ -48,7 +48,7 @@ palletes.get('/', async (req, res) => {
         ])
             .then(_ => {
                 // @ts-ignore
-                getPalleteAll(size, page, name).then(success =>
+                getPaletteAll(size, page, name).then(success =>
                     res.status(200).send(success)
                 );
             })
@@ -76,7 +76,7 @@ palletes.get('/:id', async (req, res) => {
             )
             .validate(id)
             .then(_ => {
-                getPalleteOne(id).then(success => {
+                getPaletteOne(id).then(success => {
                     if (!success) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
                 });
@@ -100,7 +100,7 @@ palletes.delete('/:id', async (req, res) => {
             .required()
             .validate(id)
             .then(_ => {
-                deletePallete(id).then((success: DeleteReturns) => {
+                deletePalette(id).then((success: DeleteReturns) => {
                     if (success.deletedCount === 0) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
                 });
