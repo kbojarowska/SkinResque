@@ -2,7 +2,10 @@ import { Router } from 'express';
 import { isValidObjectId } from 'mongoose';
 import * as yup from 'yup';
 import { SKIN_TYPES } from '../domain/constants.js';
-import { getCosmeticOne, getCosmeticsAll, getCosmeticsRandom, getCosmeticFilterSkintype } from '../infrastructure/repository/cosmetics/index.js';
+import { getCosmeticFilterSkintype } from '../infrastructure/repository/cosmetics/getCosmeticFilterSkintype.js';
+import { getCosmeticOne } from '../infrastructure/repository/cosmetics/getCosmeticOne.js';
+import { getCosmeticsAll } from '../infrastructure/repository/cosmetics/getCosmeticsAll.js';
+import { getCosmeticsRandom } from '../infrastructure/repository/cosmetics/getCosmeticsRandom.js';
 import {
     badRequestError,
     notFoundError,
