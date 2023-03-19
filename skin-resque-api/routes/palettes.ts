@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { isValidObjectId } from 'mongoose';
 import * as yup from 'yup';
-import { getPaletteOne  } from '../infrastructure/repository/palletes/getPaletteOne.js';
-import { getPalleteAll } from '../infrastructure/repository/palletes/getPalleteAll.js';
+import { getPaletteOne  } from '../infrastructure/repository/palettes/getPaletteOne.js';
+import { getPaletteAll } from '../infrastructure/repository/palettes/getPaletteAll.js';
 import {
     badRequestError,
     notFoundError,
@@ -46,7 +46,7 @@ palletes.get('/', async (req, res) => {
         ])
             .then(_ => {
                 // @ts-ignore
-                getPalleteAll(size, page, name).then(success =>
+                getPaletteAll(size, page, name).then(success =>
                     res.status(200).send(success)
                 );
             })

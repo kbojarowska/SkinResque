@@ -3,7 +3,7 @@ import { Palette } from '../../../domain/models/index.js';
 import { IPalette } from '../../../domain/shared/index.js';
 import { FilterQuery } from 'mongoose';
 
-export const getPalleteAll = async (
+export const getPaletteAll = async (
     size?: number,
     page?: number,
     name?: string,
