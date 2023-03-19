@@ -8,22 +8,22 @@ const Modal = ({ setIsOpen }) => {
       <div className="darkBG" onClick={() => setIsOpen(false)} />
       <div className="centered">
         <div className="modal">
-          <div className="modalHeader">
+          <div className="modal-header">
             <h5 className="dialog-heading">Dialog</h5>
           </div>
-          <button className="closeBtn" onClick={() => setIsOpen(false)}>
+          <button className="btn-close" onClick={() => setIsOpen(false)}>
             <RiCloseLine style={{ marginBottom: "-3px" }} />
           </button>
-          <div className="modalContent">
+          <div className="modal-content-container">
             Are you sure you want to save the item?
           </div>
-          <div className="modalActions">
-            <div className="actionsContainer">
-              <button className="deleteBtn" onClick={() => setIsOpen(false)}>
+          <div className="btn-container">
+            <div className="button-container">
+              <button className="btn-save" onClick={() => setIsOpen(false)}>
                 Save
               </button>
               <button
-                className="cancelBtn"
+                className="btn-cancel"
                 onClick={() => setIsOpen(false)}
               >
                 Cancel
