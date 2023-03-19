@@ -1,15 +1,14 @@
 import { Router } from 'express';
 import { isValidObjectId } from 'mongoose';
 import * as yup from 'yup';
-import { getPaletteOne } from '../infrastructure/repository/palettes/getPaletteOne.js';
-import { getPaletteAll } from '../infrastructure/repository/palettes/getPaletteAll.js';
-import { deletePalette } from '../infrastructure/repository/palettes/deletePalette.js';
+import { getPaletteOne, getPaletteAll, createPalette, deletePalette}  from '../infrastructure/repository/palettes/index.js';
 import { DeleteReturns } from '../infrastructure/database_abstraction/types.js';
 import {
     badRequestError,
     notFoundError,
     serverExceptionError,
 } from '../infrastructure/repository/shared.js';
+
 
 const palletes = Router({ mergeParams: true });
 
@@ -88,6 +87,28 @@ palletes.get('/:id', async (req, res) => {
         res.status(500).send(serverExceptionError());
     }
 });
+
+palletes.post('/', async (req, res) => {
+	const body = req.body;
+
+	yup.object({
+		name: yup.string().required(),
+		colors: yup.array().of(yup.string()).required()
+	})
+	.validate(body)
+	.then(_ => {
+		return createPalette(body.name, body.colors)
+		.then((success) => {
+			return res.status(200).send(success);
+		})
+		.catch(err => {
+			return res.status(400).send(badRequestError(err));
+		})
+	})
+	.catch(err => {
+		return res.status(400).send(badRequestError(err));
+	})
+})
 
 palletes.delete('/:id', async (req, res) => {
 	try {
