@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { isValidObjectId } from 'mongoose';
 import * as yup from 'yup';
-import { getPalleteOne } from '../infrastructure/repository/palletes/getPalleteOne.js';
+import { getPaletteOne  } from '../infrastructure/repository/palletes/getPaletteOne.js';
 import { getPalleteAll } from '../infrastructure/repository/palletes/getPalleteAll.js';
 import {
     badRequestError,
@@ -74,7 +74,7 @@ palletes.get('/:id', async (req, res) => {
             )
             .validate(id)
             .then(_ => {
-                getPalleteOne(id).then(success => {
+                getPaletteOne(id).then(success => {
                     if (!success) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
                 });
