@@ -1,13 +1,8 @@
   .progress-container {
-    width: 250px;
-    color: #363a43;
+    width: 15.625rem;
+    color: #252525;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
     height: 19px;
-    font-weight: normal;
-    font-size: 14px;
-    color: #363a43;
   }
   
   .file-name {
@@ -16,15 +11,13 @@
     text-overflow: ellipsis;
     width: 200px;
   }
-  .upload-list {
+  .upload {
     display: flex;
-    gap: 10px;
+    gap: .8rem;
     align-items: center;
-    background: #f0f0f0;
     border: 0.1rem solid #cfdbde;
-    border-radius: 0.2rem;
-    padding: 10px;
-    width: 550px;
+    padding: .7rem;
+    width: 35rem;
   }
   .file-size {
     color: #7eb631;
