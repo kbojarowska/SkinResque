@@ -1,5 +1,7 @@
 import { Router } from 'express';
-import { getUserOne, deleteUser, removePalette, removeSavedCosmetics, removeProfilePicture, updateUser } from '../infrastructure/repository/user/index.js';
+import { getUserOne, deleteUser, removePalette, savePalette, saveCosmetics, removeSavedCosmetics, removeProfilePicture, updateUser } from '../infrastructure/repository/user/index.js';
+import { getCosmeticOne } from '../infrastructure/repository/cosmetics/index.js';
+import { getPaletteOne } from '../infrastructure/repository/palettes/index.js';
 import { IUser } from '../domain/shared';
 import { isValidObjectId } from 'mongoose';
 import {
@@ -11,6 +13,7 @@ import { createUser } from '../infrastructure/repository/user/createUser.js';
 import { getUserOneByUsernameOrEmail } from '../infrastructure/repository/user/getUserOne.js';
 import * as yup from 'yup';
 import { DeleteReturns, UpdateReturns } from '../infrastructure/database_abstraction/types.js';
+
 
 const users = Router({ mergeParams: true });
 

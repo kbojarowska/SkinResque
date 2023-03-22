@@ -5,4 +5,4 @@ import { getCosmeticFilterSkintype } from './getCosmeticFilterSkintype';
 import { getCosmeticOne } from './getCosmeticOne';
 import { deleteCosmetic } from './deleteCosmetic';
 
-export { getCosmeticOne, getCosmeticsAll, createCosmetic getCosmeticsRandom, getCosmeticFilterSkintype, deleteCosmetic };
+export { getCosmeticOne, getCosmeticsAll, createCosmetic, getCosmeticsRandom, getCosmeticFilterSkintype, deleteCosmetic };
