@@ -5,17 +5,17 @@ import {
 	Route
 } from 'react-router-dom';
 import './App.scss';
-import Navbar from './components/Navbar/Navbar';
-import FrontPage from './pages/FrontPage/FrontPage';
-import CosmeticsCatalogue from './pages/Cosmetics/CosmeticsCatalogue/CosmeticsCatalogue';
-import RecipeDetails from './pages/Cosmetics/RecipeDetails/RecipeDetails'
-import SkintypeTestPage from './pages/SkintypeTest/SkintypeTestPage/SkintypeTestPage'
-import Userpage from './pages/Userpage/Userpage';
-import Info from './pages/ColorPalette/Info';
-import Test from './pages/ColorPalette/Test/Test';
-import CollorPalletResults from './pages/ColorPalette/Result/Result';
-import LoginRegister from './pages/LoginRegister/LoginRegister';
-import SkintypeResult from './pages/SkintypeTest/Result/Result';
+import Navbar from './ui/components/Navbar/Navbar';
+import FrontPage from './ui/pages/FrontPage/FrontPage';
+import CosmeticsCatalogue from './ui/pages/Cosmetics/CosmeticsCatalogue/CosmeticsCatalogue';
+import RecipeDetails from './ui/pages/Cosmetics/RecipeDetails/RecipeDetails'
+import SkintypeTestPage from './ui/pages/SkintypeTest/SkintypeTestPage/SkintypeTestPage'
+import Userpage from './ui/pages/Userpage/Userpage';
+import Info from './ui/pages/ColorPalette/Info';
+import Test from './ui/pages/ColorPalette/Test/Test';
+import CollorPalletResults from './ui/pages/ColorPalette/Result/Result';
+import LoginRegister from './ui/pages/LoginRegister/LoginRegister';
+import SkintypeResult from './ui/pages/SkintypeTest/Result/Result';
 
 
 function App() {
