@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 import DB from './infrastructure/database_abstraction/index.js';
 import users from './routes/users.js';
 import cosmetics from './routes/cosmetics.js';
+import palettes from './routes/palettes.js';
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
 });
 app.use('/users', users);
 app.use('/cosmetics', cosmetics);
+app.use('/palettes', palettes);
 
 app.listen(server_params.PORT, async () => {
     console.log(`Server running on port ${server_params.PORT}`);

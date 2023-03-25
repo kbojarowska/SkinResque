@@ -1,6 +1,6 @@
-import { getPaletteAll } from './getPaletteAll';
-import { getPaletteOne } from './getPaletteOne';
-import { createPalette } from './createPalette';
-import { deletePalette } from './deletePalette';
+import { getPaletteAll } from './getPaletteAll.js';
+import { getPaletteOne } from './getPaletteOne.js';
+import { createPalette } from './createPalette.js';
+import { deletePalette } from './deletePalette.js';
 
 export { getPaletteAll, getPaletteOne, createPalette, deletePalette};
