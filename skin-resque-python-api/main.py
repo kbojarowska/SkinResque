@@ -1,33 +1,31 @@
-from flask import Flask
-import cv2
+import base64
 
+import cv2
+import numpy as np
+from flask import Flask, request, jsonify, abort
+from face_detect import face_detect
 
 app = Flask(__name__)
-
-
-def face_detect(photo_path):
-    image = cv2.imread(photo_path)
-    face_cascade = cv2.CascadeClassifier("haarcascade_fontalface_default.xml")
-
-    gray_img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    faces_detected = face_cascade.detectMultiScale(
-        gray_img,
-        scaleFactor=1.1,
-        minNeighbors=5,
-        minSize=(30, 30),
-        flags=cv2.CASCADE_SCALE_IMAGE
-    )
-
-    for (x, y, w, h) in faces_detected:
-        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
-
-    cv2.imshow("Faces found", image)
-    cv2.waitKey(0)
 
 
 @app.route('/')
 def hello():
     return 'Hello, World!'
+
+
+@app.route('/palettes', methods=['POST'])
+def create_palettes():
+    encoded_image = request.json['image']
+
+    decoded_image = np.frombuffer(base64.b64decode(encoded_image), dtype=np.uint8)
+    decoded_image = cv2.imdecode(decoded_image, cv2.IMREAD_COLOR)
+
+    return_img = face_detect(decoded_image)
+
+    if np.any(return_img):
+        return jsonify({'message': 'success'})
+    else:
+        abort(400, 'Invalid data provided')
 
 
 if __name__ == "__main__":
