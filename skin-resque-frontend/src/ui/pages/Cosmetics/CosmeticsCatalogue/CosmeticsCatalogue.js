@@ -9,6 +9,7 @@ function CosmeticsCatalogue() {
 	const { currentPage } = useParams();
 	const API_URL = 'http://localhost:5000/'
 
+	
 	const [cosmetics, setCosmetics] = useState([
 		{
 			"_id": 1,
