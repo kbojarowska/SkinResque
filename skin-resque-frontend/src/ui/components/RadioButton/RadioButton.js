@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import Text from '../Text/Text';
 import './RadioButton.scss'
 
 export default function RadioButton(props){
