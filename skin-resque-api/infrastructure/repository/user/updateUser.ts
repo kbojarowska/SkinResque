@@ -1,7 +1,7 @@
-import { User } from '../../../domain/models';
-import { skinType } from '../../../domain/shared/types';
-import DB from '../../database_abstraction';
-import { UpdateReturns } from '../../database_abstraction/types';
+import { User } from '../../../domain/models/index.js';
+import { skinType } from '../../../domain/shared/types.js';
+import DB from '../../database_abstraction/index.js';
+import { UpdateReturns } from '../../database_abstraction/types.js';
 
 export const updateUser = async (
     id: string,

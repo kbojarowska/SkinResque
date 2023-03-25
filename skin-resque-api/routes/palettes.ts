@@ -10,9 +10,9 @@ import {
 } from '../infrastructure/repository/shared.js';
 
 
-const palletes = Router({ mergeParams: true });
+const palettes = Router({ mergeParams: true });
 
-palletes.get('/', async (req, res) => {
+palettes.get('/', async (req, res) => {
     try {
         const { name, type } = req.query;
         const size = parseInt(req.query.size as string);
@@ -59,7 +59,7 @@ palletes.get('/', async (req, res) => {
     }
 });
 
-palletes.get('/:id', async (req, res) => {
+palettes.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -88,7 +88,7 @@ palletes.get('/:id', async (req, res) => {
     }
 });
 
-palletes.post('/', async (req, res) => {
+palettes.post('/', async (req, res) => {
 	const body = req.body;
 
 	yup.object({
@@ -110,7 +110,7 @@ palletes.post('/', async (req, res) => {
 	})
 })
 
-palletes.delete('/:id', async (req, res) => {
+palettes.delete('/:id', async (req, res) => {
 	try {
         const { id } = req.params;
         yup.string()
@@ -133,3 +133,5 @@ palletes.delete('/:id', async (req, res) => {
         res.status(500).send(serverExceptionError());
     }
 })
+
+export default palettes;
