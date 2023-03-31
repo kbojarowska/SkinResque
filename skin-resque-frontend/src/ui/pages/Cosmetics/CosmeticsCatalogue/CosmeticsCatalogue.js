@@ -1,5 +1,5 @@
-import { connect } from "react-redux";
-import { getCosmetics } from "../../../../ducks/Cosmetics/selectors";
+import { connect } from 'react-redux';
+import { getCosmetics } from '../../../../ducks/Cosmetics/selectors';
 import { Link, useParams } from 'react-router-dom';
 import { Heading, Pagination, Text } from '../../../components';
 import './CosmeticsCatalogue.scss';
@@ -37,7 +37,7 @@ function CosmeticsCatalogue({cosmetics}) {
 	);
 }
 const mapStateToProps = (state) =>{
-    return{
+    return {
         cosmetics: getCosmetics(state),
     }
 }

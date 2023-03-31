@@ -1,11 +1,13 @@
 import { Formik, Field } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Cookies from 'js-cookie';
 import Heading from '../../components/Heading/Heading';
 import Button from '../../components/Button/Button';
+import { createUser } from '../../../ducks/User/operations';
 import './LoginRegister.scss'
 
-function LoginRegister({ isLogin, users, setUser, setUsers }) {
+function LoginRegister({ isLogin, users, setUser }) {
 
 	const navigate = useNavigate();
 
@@ -26,24 +28,6 @@ function LoginRegister({ isLogin, users, setUser, setUsers }) {
 		return alert('There is no user with given username');
 	}
 
-	const signUp = (values) => {
-		if (users.find((user) => {
-			return user.username == values.username;
-		})) {
-			return alert('This username is already taken');
-		}
-
-		const newUsers = [...users, {
-			username: values.username,
-			email: values.email,
-			password: values.password
-		}]
-
-		setUsers(newUsers);
-
-		return alert('Succesfully signed up. You can now sign in');
-	}
-
 	return (
 		<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/login-register.svg')` }}>
 			<div className='login-register'>
@@ -60,7 +44,7 @@ function LoginRegister({ isLogin, users, setUser, setUsers }) {
 								{
 									username: '',
 									password: '',
-									repeatPassword: '',
+									repeatedPassword: '',
 									email: ''
 								}
 						}
@@ -77,12 +61,12 @@ function LoginRegister({ isLogin, users, setUser, setUsers }) {
 								errors.username = 'Username is required';
 							} else if (!values.password) {
 								errors.password = 'Password is required';
-							}  else if (!isLogin && values.password !== values.repeatPassword) {
-								errors.repeatPassword = 'Passwords do not match';
+							}  else if (!isLogin && values.password !== values.repeatedPassword) {
+								errors.repeatedPassword = 'Passwords do not match';
 							}
 							return errors;
 						}}
-						onSubmit={isLogin ? logIn : signUp}
+						onSubmit={isLogin ? logIn : createUser}
 					>{(formProps) => (
 						<form>
 							<div className='field'>
@@ -106,9 +90,9 @@ function LoginRegister({ isLogin, users, setUser, setUsers }) {
 							{!isLogin &&
 								<><div className='field'>
 									<Heading size='small'>Repeat Password</Heading>
-									<Field type='password' name='repeatPassword' />
+									<Field type='password' name='repeatedPassword' />
 								</div>
-									{formProps.touched.repeatPassword && formProps.errors.repeatPassword ? <div>{formProps.errors.repeatPassword}</div> : null}
+									{formProps.touched.repeatedPassword && formProps.errors.repeatedPassword ? <div>{formProps.errors.repeatedPassword}</div> : null}
 								</>}
 							<Button onClick={formProps.handleSubmit}>{isLogin ? 'Sign in' : 'Sign up'}</Button>
 						</form>
@@ -123,4 +107,9 @@ function LoginRegister({ isLogin, users, setUser, setUsers }) {
 	);
 }
 
-export default LoginRegister;
+const mapDispatchToProps = dispatch => ({
+	createUser: createUser(dispatch)
+});
+
+export default connect(null, mapDispatchToProps)(LoginRegister);
+
