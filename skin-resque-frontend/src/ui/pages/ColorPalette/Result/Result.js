@@ -1,15 +1,20 @@
 import { useState } from 'react';
 import { FiSave } from 'react-icons/fi';
+import { getUploadedImage, getUploadedPalettes } from '../../../../ducks/UploadImage/selectors';
+import { connect } from "react-redux";
 import { Arrow, Heading, Modal } from "../../../components";
 import './Result.scss';
 
-function CollorPalletResults() {
+function CollorPalletResults({palettes, image}) {
 	const [isOpen, setIsOpen] = useState(false);
-	const colorPallets = [
-		['#5BDCE1', '#E73BA5', '#F4975B','#F9D8CE'],
-		['#95d126', '#fade3d', '#f35b05', '#f595a9']
-	]
-	const [currentPallete, setCurrentPalette] = useState(colorPallets[0])
+	const [index, setIndex] = useState(0);
+	const handleNext = () => {
+		setIndex(index => (index + 1) % palettes.length);
+	  };
+	
+	  const handlePrev = () => {
+		setIndex(index => (index - 1 + palettes.length) % palettes.length);
+	  };
 
 	return (
 		<div className='page'>
@@ -19,27 +24,27 @@ function CollorPalletResults() {
 			</div>
 			<div className='results-container'>
 				<div className='uploaded-photo'>
-					<img src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8d29tYW4lMjBzbWlsaW5nfGVufDB8fDB8fA%3D%3D&w=1000&q=80' />
+					<img src={image} alt="Uploaded image"/>
 				</div>
 				<div className='results-save'>
 					<div className='results'>
-					<Arrow left onClick={() => setCurrentPalette(colorPallets[0])}/>
+					<Arrow left onClick={() => handlePrev()}/>
 					<div className='color-palletes'>
 						<div className='color-container'>
 							<Heading>Your color</Heading>
-							<div className='color' />
+							<div className='color' style={{ background: "#" + palettes[index].colors[0]}}/>
 						</div>
 						<div className='palletes-container'>
 							<Heading>Palletes</Heading>
 							<ul className='palletes-list'>
-								<li style={{ background: currentPallete[0]}} />
-								<li style={{ background: currentPallete[1]}} />
-								<li style={{ background: currentPallete[2]}} />
-								<li style={{ background: currentPallete[3]}} />
+								<li style={{ background: "#" + palettes[index].colors[1]}} />
+								<li style={{ background: "#" +palettes[index].colors[2]}} />
+								<li style={{ background: "#" +palettes[index].colors[3]}} />
+								<li style={{ background: "#" +palettes[index].colors[4]}} />
 							</ul>
 						</div>
 					</div>
-					<Arrow right onClick={() => setCurrentPalette(colorPallets[1])}/>
+					<Arrow right onClick={() => handleNext()}/>
 					</div>
 					<div className='save' onClick={() => setIsOpen(true)}>
 					<FiSave size={25}/>
@@ -51,4 +56,11 @@ function CollorPalletResults() {
 	);
 }
 
-export default CollorPalletResults;
+const mapStateToProps = (state) =>{
+    return{
+        palettes: getUploadedPalettes(state),
+		image: getUploadedImage(state)
+    }
+}
+
+export default connect(mapStateToProps, null)(CollorPalletResults);

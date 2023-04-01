@@ -1,74 +1,36 @@
-import React, { useState } from 'react';
-import { Line } from "rc-progress";
-import Upload from "rc-upload";
-import Button from '../Button/Button';
 import Text from '../Text/Text';
+import { connect } from 'react-redux';
 import './UploadFile.scss';
+import { uploadImage } from '../../../ducks/UploadImage/actions';
+import { useState } from 'react';
 
 
-function UploadFile() {
-    const [imgData, setImgdata] = useState();
-    const [fileName, setFileName] = useState();
-    const [fileSize, setFileSize] = useState();
-    const [percentage, setPercentage] = useState(0);
-    const [isUploading, setIsUploading] = useState(false);
+function UploadFile({ error, uploadImage }) {
 
-    const props = {
-        action: "https://httpbin.org/post",
-        accept: ".png, .jpg",
-        beforeUpload(file) {
-          setIsUploading(true);
-          setFileName(file.name);
-          setFileSize(Math.floor(file.size / 1000));
-          if (file.type === "image/png") {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-              setImgdata(reader.result);
-            };
-            reader.readAsDataURL(file);
-          }
-        },
-        onSuccess() {
-          setIsUploading(false);
-        },
-        onProgress(step) {
-          setPercentage(Math.round(step.percent));
-        },
-        onError(err) {
-          console.log("onError", err);
-        }
-      };
-      
+  const [fileName, setFileName] = useState('');
 
+    const handleUpload = (event) => {
+      setFileName(event.target.files[0].name);
+      const imageFile = event.target.files[0];
+      uploadImage(imageFile);
+    }   
+    
   return (
     <div>
-      {fileName && (
-        <>
-          <div className="upload">
-            <Text className="file-name" size='small'>
-              <b>{fileName}</b>
-            </Text>
-            <div className="progress-container">
-              <Line
-                percent={percentage}
-                strokeWidth={9}
-                trailWidth={9}
-                trailColor="#FFF"
-                strokeColor={isUploading ? "#C1E1D2" : "#C1E1D2"}
-              />
-              <Text className="progress-text" size='small'>
-                {isUploading ? `Uploading ${percentage}% ` : `Finished`}
-              </Text>
-            </div>
-            <Text className="file-size" size='small'>{`${fileSize} KB`}</Text>
-          </div>
-        </>
-      )}
-      <Upload {...props}>
-        <Button>Upload File</Button>
-      </Upload>
+      <div className='upload'>
+        <Text className='file-name' size='small'>{fileName ? fileName: "No image uploaded"}</Text>
+        <label className='upload-btn'>
+          Upload image
+          <input type="file" onChange={handleUpload} />
+        </label>
+      </div>
+      {error && <Text className='error'>{error.message}</Text>}
     </div>
-  )
-}
-
-export default UploadFile
+    );
+  };
+  
+  const mapStateToProps = (state) => ({
+    error: state.upload.error,
+  });
+  
+  export default connect(mapStateToProps, { uploadImage })(UploadFile);
