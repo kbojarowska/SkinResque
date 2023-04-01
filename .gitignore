@@ -109,3 +109,4 @@ ENV/
 # Vscode settings
 .vscode/
 .idea/
+__pycache__
