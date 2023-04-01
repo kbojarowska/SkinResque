@@ -1,3 +1,5 @@
+@import './src/variables';
+
 .cosmetics-page {
 	z-index: 1;
 	display: flex;
@@ -7,27 +9,69 @@
 	padding: 3rem;
 	background-size: cover;
 
+	.filter-container {
+		background-color: $green;
+		position: fixed;
+		left: 0;
+		top: 25%;
+		width: 3rem;
+		height: 20rem;
+		border-radius: 0px 2.5rem 2.5rem 0px;
+		transition: transform 0.3s ease-out;
+
+		.arrow {
+			display: flex;
+			align-items: center;
+			height: 20rem;
+			cursor: pointer;
+		}
+	}
+
+	.filter {
+		background-color: $green;
+		position: fixed;
+		left: 0;
+		top: -2.5rem;
+		transition: transform 0.3s ease-out;
+		border-radius: 0px 2.188rem 2.188rem 0px;
+		box-shadow: 222px 249px 133px rgba(0, 0, 0, 0.02), 125px 140px 112px rgba(0, 0, 0, 0.08), 55px 62px 83px rgba(0, 0, 0, 0.13), 14px 16px 46px rgba(0, 0, 0, 0.15), 0px 0px 0px rgba(0, 0, 0, 0.15);
+
+		.text{
+			margin: 1rem 0 0 .5rem;
+		}
+	  }
+	  
+	  .filter.open {
+		transform: translateX(-15.625rem);
+		width: 15.625rem;
+		height: 25rem;
+	  }
+
+	.filter-container.open {
+		transform: translateX(15.625rem);
+	  }
+
 	.catalogue {
 		background-color: #F6EFF0;
 		width: 70%;
 		height: auto;
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
+		gap: 1.25rem;
 		align-items: center;
 
 		.page-title {
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			padding: 20px;
+			padding: 1.25rem;
 		}
 
 		.cosmetics-list {
 			justify-content: center;
 			align-items: center;
 			display: flex;
-			gap: 100px;
+			gap: 6.25rem;
 			flex-wrap: wrap;
 			width: 80%;
 			padding-bottom: 4rem;
@@ -38,16 +82,16 @@
 				justify-content: space-between;
 				align-items: center;
 				background-color: #EEE1E3;
-				height: 300px;
-				width: 250px;
+				height: 18.75rem;
+				width: 15.625rem;
 
 				&:hover {
 					box-shadow: 66px 96px 47px rgba(49, 28, 31, 0.01), 37px 54px 39px rgba(49, 28, 31, 0.05), 17px 24px 29px rgba(49, 28, 31, 0.09), 4px 6px 16px rgba(49, 28, 31, 0.1), 0px 0px 0px rgba(49, 28, 31, 0.1);
 				}
 
 				img {
-					height: 189px;
-					width: 120px;
+					height: 11.813rem;
+					width: 7.5rem;
 				}
 
 				p {

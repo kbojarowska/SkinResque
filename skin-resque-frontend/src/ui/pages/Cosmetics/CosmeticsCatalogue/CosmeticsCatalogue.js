@@ -1,13 +1,29 @@
 import { connect } from "react-redux";
 import { getCosmetics } from "../../../../ducks/Cosmetics/selectors";
 import { Link, useParams } from 'react-router-dom';
-import { Heading, Pagination, Text } from '../../../components';
+import { Arrow, Heading, Pagination, RadioButton, Text } from '../../../components';
 import './CosmeticsCatalogue.scss';
+import { useState } from "react";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function CosmeticsCatalogue({cosmetics}) {
 
 	const { currentPage } = useParams();
-	console.log(cosmetics)
+	const [ isOpen, setIsOpen ] = useState(false);
+	const [filterBy, setFilterBy] = useState("");
+	const navigate = useNavigate();
+  	const location = useLocation();
+
+	const skintypeFilterChangeHandler = (e) => {
+		const type = e.target.value;
+		setFilterBy(type);
+		navigate({
+			search: new URLSearchParams({
+			  ...Object.fromEntries(new URLSearchParams(location.search)),
+			  type,
+			}).toString(),
+		  });
+	  };
 
 	const cosmeticsList = cosmetics.map((cosmetic) => {
 		return (
@@ -22,6 +38,17 @@ function CosmeticsCatalogue({cosmetics}) {
 
 	return (
 		<div className='cosmetics-page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/bg-cosmetics.svg')` }}>
+			<div className={`filter-container ${isOpen ? 'open' : ''}`}>
+				{isOpen ? <Arrow left className="arrow" onClick={() => setIsOpen(!isOpen)}/> : <Arrow right className="arrow" onClick={() => setIsOpen(!isOpen)}/>}
+				{isOpen && <div className={`filter ${isOpen ? 'open' : ''}`}>
+					<Text className='text'>Filter by skintype:</Text>
+					<RadioButton key="0" changed={skintypeFilterChangeHandler} isSelected={filterBy=== ""} value="" label="no filter"/>
+					<RadioButton key="dry" changed={skintypeFilterChangeHandler} isSelected={filterBy=== "dry"} value="dry" label="dry"/>
+					<RadioButton key="normal" changed={skintypeFilterChangeHandler} isSelected={filterBy=== "normal"} value="normal" label="normal"/>
+					<RadioButton key="oily" changed={skintypeFilterChangeHandler} isSelected={filterBy=== "oily"} value="oily" label="oily"/>
+					<RadioButton key="mixed" changed={skintypeFilterChangeHandler} isSelected={filterBy=== "mixed"} value="mixed" label="mixed"/>
+				</div>}
+			</div>
 			<div className='catalogue'>
 				<div className='page-title'>
 					<Heading size='large'>Cosmetics</Heading>

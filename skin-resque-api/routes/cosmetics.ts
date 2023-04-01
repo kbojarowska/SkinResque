@@ -7,7 +7,6 @@ import { getCosmeticsAll } from '../infrastructure/repository/cosmetics/getCosme
 import { getCosmeticsRandom } from '../infrastructure/repository/cosmetics/getCosmeticsRandom.js';
 import { createCosmetic } from '../infrastructure/repository/cosmetics/createCosmetic.js';
 import { deleteCosmetic } from '../infrastructure/repository/cosmetics/deleteCosmetic.js';
-import { getCosmeticFilterSkintype } from '../infrastructure/repository/cosmetics/getCosmeticFilterSkintype.js';
 import { DeleteReturns } from '../infrastructure/database_abstraction/types.js';
 import {
     badRequestError,
@@ -142,27 +141,6 @@ cosmetics.post('/', async (req, res) => {
 	.catch(_ => {
         res.status(500).send(serverExceptionError());
     });
-});
-
-cosmetics.get('/:skintype', async (req, res) => {
-    try {
-        const { skintype } = req.params;
-
-        yup.string()
-            .defined()
-            .validate(skintype)
-            .then(_ => {
-                getCosmeticFilterSkintype(skintype).then(success => {
-                    if (!success) return res.status(404).send(notFoundError());
-                    res.status(200).send(success);
-                });
-            })
-            .catch(err => {
-                return res.status(400).send(badRequestError(err));
-            });
-    } catch (err) {
-        res.status(500).send(serverExceptionError());
-    }
 });
 
 cosmetics.delete('/:id', async (req, res) => {
