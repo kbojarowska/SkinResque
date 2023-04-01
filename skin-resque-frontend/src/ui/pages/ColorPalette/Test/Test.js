@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Button, Heading, Text, UploadFile } from "../../../components"
+import { connect } from 'react-redux';
 import './Test.scss'
 
-function Test() {
+function Test({ palettes}) {
   return (
 	<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/bg-cosmetics.svg')` }}>
         <Heading className="heading">Color palette finder</Heading>
@@ -16,13 +17,17 @@ function Test() {
             </div>
             <div className="btns">
                 <UploadFile/>
-                <div className='btn'>
+                {palettes && <div className='btn'>
                     <Button><Link to='/color-test/results'>Find it!</Link></Button>
-                </div>
+                </div>}
             </div>
         </div>
     </div>
   )
 }
 
-export default Test
+const mapStateToProps = (state) => ({
+    palettes: state.upload.palettes,
+  });
+  
+export default connect(mapStateToProps, null)(Test);

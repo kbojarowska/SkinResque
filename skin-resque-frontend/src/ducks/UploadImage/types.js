@@ -1,0 +1,9 @@
+const UPLOAD_IMAGE_SUCCESS = 'UPLOAD_IMAGE_SUCCESS';
+const UPLOAD_IMAGE_FAILURE = 'UPLOAD_IMAGE_FAILURE';
+
+const types = {
+    UPLOAD_IMAGE_SUCCESS,
+    UPLOAD_IMAGE_FAILURE,
+}
+
+export default types;
