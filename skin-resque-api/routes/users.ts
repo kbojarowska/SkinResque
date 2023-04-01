@@ -145,6 +145,8 @@ users.delete('/profile-picture/:id', async (req, res) => {
 users.post('/', async (req, res) => {
 	const body = req.body;
 
+	console.log(body)
+
 	yup.object({
 		username: yup.string().required(),
 		email: yup.string().email().required(),

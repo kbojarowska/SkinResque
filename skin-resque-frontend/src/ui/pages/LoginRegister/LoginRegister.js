@@ -1,12 +1,14 @@
 import { Formik, Field } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import Heading from '../../components/Heading/Heading';
 import Button from '../../components/Button/Button';
+import { createUser } from '../../../ducks/User/operations';
 import './LoginRegister.scss'
 
-function LoginRegister({ isLogin, users, setUser, setUsers }) {
+function LoginRegister({ isLogin, users, setUser }) {
 
 	const URL = 'http://localhost:5000/users';
 
@@ -81,7 +83,7 @@ function LoginRegister({ isLogin, users, setUser, setUsers }) {
 							}
 							return errors;
 						}}
-						onSubmit={isLogin ? logIn : signUp}
+						onSubmit={isLogin ? logIn : createUser}
 					>{(formProps) => (
 						<form>
 							<div className='field'>
@@ -122,4 +124,9 @@ function LoginRegister({ isLogin, users, setUser, setUsers }) {
 	);
 }
 
-export default LoginRegister;
+const mapDispatchToProps = dispatch => ({
+	createUser: createUser(dispatch)
+});
+
+export default connect(null, mapDispatchToProps)(LoginRegister);
+
