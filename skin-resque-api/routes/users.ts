@@ -146,16 +146,16 @@ users.post('/', async (req, res) => {
 	const body = req.body;
 
 	yup.object({
-		name: yup.string().required(),
+		username: yup.string().required(),
 		email: yup.string().email().required(),
 		password: yup.string().min(8).max(32).required(),
 		repeatedPassword: yup.string().min(8).max(32).oneOf([yup.ref('password'), null], 'Passwords must match').required()
 	})
 	.validate(body)
 	.then(_ => {
-		getUserOneByUsernameOrEmail(body.name, body.email)
+		getUserOneByUsernameOrEmail(body.username, body.email)
 		.then(result => {
-			if (!!result) return createUser(body.name, body.email, body.password)
+			if (result.length === 0) return createUser(body.username, body.email, body.password)
 			.then(success => {
 				if (!success) return res.status(404);
 				res.status(200).send(success);
@@ -163,7 +163,7 @@ users.post('/', async (req, res) => {
 			.catch(err => {
 				return res.status(400).send(badRequestError(err));
 			})
-			res.status(404);
+			res.status(400).send('USERNAME_OR_EMAIL_EXISTS');
 		})
 		.catch(_ => {
 			res.status(500).send(serverExceptionError());
