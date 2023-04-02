@@ -83,7 +83,7 @@ function LoginRegister({ isLogin, users, setUser }) {
 							}
 							return errors;
 						}}
-						onSubmit={isLogin ? logIn : createUser}
+						onSubmit={isLogin ? logIn : signUp}
 					>{(formProps) => (
 						<form>
 							<div className='field'>
