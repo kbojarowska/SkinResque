@@ -4,7 +4,6 @@ import types from './types';
 const URL = 'http://localhost:5000/users';
 
 export const createUser = dispatch => (user) => {
-	console.log('AAAAAAAAAAAAAA');
 	return dispatch(createAction({
 		[RSAA]: {
 			endpoint: URL,
