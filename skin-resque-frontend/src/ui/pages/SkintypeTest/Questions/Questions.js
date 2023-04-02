@@ -1,10 +1,13 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import axios from 'axios';
 import { Arrow, Button, Checkbox, Heading } from '../../../components';
 import './Questions.scss';
 
 function Questions() {
-
+	const navigate = useNavigate();
+	const URL = 'http://localhost:5000';
 	const [questions, setQuestions] = useState([
 		{
 			'id': 1,
@@ -199,8 +202,14 @@ function Questions() {
 			]
 		},
 	]);
+	const [userId, setUserId] = useState(null);
 	const [currentQuestion, setCurrentQuestion] = useState(1);
 	const [skinTypeResult, setSkinTypeResult] = useState(null);
+
+		
+	useEffect(() => {
+		setUserId(Cookies.get('userId'));
+	}, []);
 
 	const handleCheckAnswer = (answertoChange) => {
 		const questionsToSet = questions.map((question) => {
@@ -246,6 +255,15 @@ function Questions() {
 		setSkinTypeResult(skinType);
 	};
 
+	const submitAnswers = () => {
+		if (userId) {
+			axios.put(`${URL}/users/${userId}`, {skinType: skinTypeResult}).catch(() => {
+				alert('Something went wrong while saving skin type to profile.');
+			})
+		}
+		return navigate(`/skintype-test/results/${skinTypeResult}`);
+	}
+
 	const answersToDisplay = questions.filter((question) => {
 		return question.id == currentQuestion
 	})[0].answers.map((answer) => {
@@ -276,7 +294,7 @@ function Questions() {
 							</div>
 							<div className='arrow'>
 								{currentQuestion != Object.keys(questions).length ? <Arrow right onClick={() => setCurrentQuestion(currentQuestion + 1)} /> : <div className='hide'><Arrow right /></div>}
-								{currentQuestion == Object.keys(questions).length && <Button className='submit-answers'><Link to={`/skintype-test/results/${skinTypeResult}`}>Submit</Link></Button>}
+								{currentQuestion == Object.keys(questions).length && <Button className='submit-answers' onClick={submitAnswers}>Submit</Button>}
 							</div>
 						</div>
 					</div>

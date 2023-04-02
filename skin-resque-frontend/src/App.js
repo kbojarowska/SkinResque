@@ -19,24 +19,6 @@ import SkintypeResult from './ui/pages/SkintypeTest/Result/Result';
 
 
 function App() {
-	const [users, setUsers] = useState([
-		{
-			username: 'dpionk',
-			password: 'password',
-			email: 'dpionk@domain.com'
-		},
-		{
-			username: 'kbojarowska',
-			password: 'password',
-			email: 'kbojarowska@domain.com'
-		},
-		{
-			username: 'bwujec',
-			password: 'password',
-			email: 'bwujec@domain.com'
-		}
-	]);
-
 	const [user, setUser] = useState(null);
 
 	return (
@@ -53,8 +35,8 @@ function App() {
 					<Route path='/userprofile' element={<Userpage/>}/>
 					<Route path='/color-test/info' element={<Info/>}/>
 					<Route path='/color-test/test' element={<Test/>}/>
-					<Route path='/login' element={<LoginRegister isLogin={true} users={users} setUser={setUser}/>}/>
-					<Route path='/register' element={<LoginRegister isLogin={false} users={users} setUsers={setUsers}/>}/>
+					<Route path='/login' element={<LoginRegister isLogin={true} setUser={setUser}/>}/>
+					<Route path='/register' element={<LoginRegister isLogin={false}/>}/>
 				</Routes>
 			</div>
 		</Router>

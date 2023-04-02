@@ -9,6 +9,7 @@ function Navbar({ user, setUser }) {
 
 	const logOut = () => {
 		Cookies.remove('username');
+		Cookies.remove('userId');
 		setUser(null);
 		return navigate('/login');
 	}

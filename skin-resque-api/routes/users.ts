@@ -189,8 +189,8 @@ users.post('/login', async (req, res) => {
 			if (result.length === 0) return res.status(400).send("USER_DOES_NOT_EXIST");
 
 			compare(body.password, result[0].password)
-			.then(result => {
-				res.status(200).send(result);
+			.then(passwordCorrect => {
+				res.status(200).send({ passwordCorrect: passwordCorrect, id: result[0]._id });
 			})
 			.catch(err => {
 				res.status(400).send(badRequestError(err));

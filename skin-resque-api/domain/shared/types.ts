@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import { Schema, Types } from 'mongoose';
 
 export type hexColor = `#${string}`;
 export type skinType = 'drySkin' | 'else';
@@ -18,6 +18,7 @@ export interface IPalette {
 }
 
 export interface IUser {
+	_id: Types.ObjectId;
     name: string;
     email: string;
 	password: string;

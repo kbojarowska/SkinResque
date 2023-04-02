@@ -16,9 +16,10 @@ function LoginRegister({ isLogin, setUser }) {
 
 	const signIn = (values) => {
 		axios.post(`${URL}/login`, values).then((response) => {
-			if (response.data) {
+			if (response.data.passwordCorrect) {
 				setUser(values.username);
 				Cookies.set('username', values.username);
+				Cookies.set('userId', response.data.id);
 				return navigate('/');
 			}
 			alert('Wrong password provided.');

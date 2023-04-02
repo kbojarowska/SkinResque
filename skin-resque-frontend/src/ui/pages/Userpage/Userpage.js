@@ -2,69 +2,35 @@ import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { Heading, Text } from '../../components';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 // import { FiTrash2, FiEdit3 } from 'react-icons/fi';
 import './Userpage.scss';
 
 function Userpage() {
 
-	const [username, setUsername] = useState('Username');
+	const URL = 'http://localhost:5000';
+	const [user, setUser] = useState(null);
+	const [skinType, setSkinType] = useState(null);
+	const [savedPalettes, setSavedPalettes] = useState([]);
+	const [savedCosmetics, setSavedCosmetics] = useState([]);
 
 	useEffect(() => {
 		const username = Cookies.get('username');
-		setUsername(username);
+		const id = Cookies.get('userId');
+		setUser({username: username, id: id});
+
+		axios.get(`${URL}/users/${id}`).then((response) => {
+			setSavedPalettes(response.data.saved_palettes);
+			setSavedCosmetics(response.data.saved_cosmetics);
+			response.data.skin_type && setSkinType(response.data.skin_type);
+		})
+		.catch(() => {
+			alert('Something went wrong while downloading user data.');
+		})
+
 	}, []);
 
-	const user = {
-		name: 'Username',
-		skintype: 'Dry',
-		savedPalette: [
-			{
-				'id': 1,
-				'name': 'Summer vibes',
-				'colors': ['#F9D8CE', '#E73BA5', '#F4975B', '#5BDCE1']
-			},
-			{
-				'id': 2,
-				'name': 'Hawaii',
-				'colors': ['#95d126', '#fade3d', '#f35b05', '#f595a9']
-			},
-		],
-		savedCosmetics:
-			[
-				{
-					'id': 1,
-					'name': 'rosemary cream',
-					'description': `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-          in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-          sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-					'photo': '/images/cream.png',
-				},
-				{
-					'id': 2,
-					'name': 'coconut balm',
-					'description': `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-          in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-          sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-					'photo': '/images/pink-cream.png',
-				},
-				{
-					'id': 3,
-					'name': 'lemon hydrolat',
-					'description': `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-          in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-          sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-					'photo': '/images/blue-cream.png',
-				}
-			],
-	}
-
-	const cosmeticsList = user.savedCosmetics.map((cosmetic) => {
+	const cosmeticsList = savedCosmetics.map((cosmetic) => {
 		return (
 			<Link to={`/cosmetics/${cosmetic.id}`} key={cosmetic.id}>
 				<div className='cosmetic' >
@@ -78,7 +44,7 @@ function Userpage() {
 		)
 	})
 
-	const paletteList = user.savedPalette.map((palette) => {
+	const paletteList = savedPalettes.map((palette) => {
 		return (
 			<div className='palette' key={palette.id}>
 				{/* <div className='bin'> */}
@@ -100,32 +66,32 @@ function Userpage() {
 	return (
 		<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/bg-user-profile.svg')` }}>
 			<div className='beige-bg'>
-				<Heading className='heading'>{username}</Heading>
+				<Heading className='heading'>{user && user.username}</Heading>
 				<div className='profile-info'>
 					<div className='profile-img'></div>
 					<div className='outer'>
 						<div className='row'>
 							<Text>Skintype:</Text>
-							{user.skintype == null ?
+							{skinType == null ?
 								<Text>Start test <Link to='/skintype-test' className='link'>here</Link></Text> :
-								<Text>{user.skintype}</Text>
+								<Text>{skinType}</Text>
 							}
 
 						</div>
 						<div className='row'>
 							<Text>Saved palettes:</Text>
-							<Text>{user.savedPalette.length}</Text>
+							<Text>{savedPalettes.length}</Text>
 						</div>
 						<div className='row'>
 							<Text>Saved cosmetics:</Text>
-							<Text>{user.savedCosmetics.length}</Text>
+							<Text>{savedCosmetics.length}</Text>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div className='green-bg'>
 				<Heading>Saved cosmetics:</Heading>
-				{user.savedCosmetics.length > 0 ?
+				{savedCosmetics.length > 0 ?
 					<div className='container'>
 						{cosmeticsList}
 					</div> :
@@ -134,15 +100,15 @@ function Userpage() {
 			</div>
 			<div className='beige-palette-bg'>
 				<Heading>Saved palettes:</Heading>
-				{user.savedPalette.length > 0 ?
+				{savedPalettes.length > 0 ?
 					<div className='container'>
 						{paletteList}
 					</div> :
-					<Heading size="x-large" style={{ color: "#F3B4C5" }} className="empty" >No palette saved</Heading>
+					<Heading size="x-large" style={{ color: "#F3B4C5" }} className="empty" >No palettes saved</Heading>
 				}
 			</div>
 		</div>
 	)
 }
 
-export default Userpage
+export default Userpage;
