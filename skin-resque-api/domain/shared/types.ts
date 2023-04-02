@@ -20,6 +20,7 @@ export interface IPalette {
 export interface IUser {
     name: string;
     email: string;
+	password: string;
     profile_picture: string;
     skin_type: null | skinType;
     saved_cosmetics: Array<Schema.Types.ObjectId>;

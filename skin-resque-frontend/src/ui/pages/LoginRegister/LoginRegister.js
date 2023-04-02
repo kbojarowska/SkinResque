@@ -8,27 +8,27 @@ import Button from '../../components/Button/Button';
 import { createUser } from '../../../ducks/User/operations';
 import './LoginRegister.scss'
 
-function LoginRegister({ isLogin, users, setUser }) {
+function LoginRegister({ isLogin, setUser }) {
 
 	const URL = 'http://localhost:5000/users';
 
 	const navigate = useNavigate();
 
-	const logIn = (values) => {
-		const user = users.find((user) => {
-			return user.username == values.username;
-		});
-
-		if (user) {
-			if (user.password == values.password) {
+	const signIn = (values) => {
+		axios.post(`${URL}/login`, values).then((response) => {
+			if (response.data) {
 				setUser(values.username);
-				Cookies.set('username', user.username);
+				Cookies.set('username', values.username);
 				return navigate('/');
 			}
-			return alert('Wrong password provided');
-		}
-
-		return alert('There is no user with given username');
+			alert('Wrong password provided.');
+		})
+		.catch((error) => {
+			if (error.response.status === 400) {
+				return alert('There is no user with given username.');
+			}
+			return alert('Something went wrong while creating user. Please try again.');
+		})
 	}
 
 	const signUp = (values) => {
@@ -36,8 +36,6 @@ function LoginRegister({ isLogin, users, setUser }) {
 			alert('Successfully signed up. You can now sign in.');
 		})
 		.catch((error) => {
-			console.log(error);
-
 			if (error.response.status === 400) {
 				return alert('This username or email is already taken.');
 			}
@@ -83,7 +81,7 @@ function LoginRegister({ isLogin, users, setUser }) {
 							}
 							return errors;
 						}}
-						onSubmit={isLogin ? logIn : signUp}
+						onSubmit={isLogin ? signIn : signUp}
 					>{(formProps) => (
 						<form>
 							<div className='field'>

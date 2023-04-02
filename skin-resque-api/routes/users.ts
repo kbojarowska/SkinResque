@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import { getUserOne, deleteUser, removePalette, savePalette, saveCosmetics, removeSavedCosmetics, removeProfilePicture, updateUser } from '../infrastructure/repository/user/index.js';
+import { compare } from 'bcrypt';
+import { isValidObjectId } from 'mongoose';
+import { getUserOne, getUserOneByUsername, deleteUser, removePalette, savePalette, saveCosmetics, removeSavedCosmetics, removeProfilePicture, updateUser } from '../infrastructure/repository/user/index.js';
 import { getCosmeticOne } from '../infrastructure/repository/cosmetics/index.js';
 import { getPaletteOne } from '../infrastructure/repository/palettes/index.js';
-import { IUser } from '../domain/shared';
-import { isValidObjectId } from 'mongoose';
+import { IUser } from '../domain/shared/types.js';
 import {
     badRequestError,
     notFoundError,
@@ -173,6 +174,36 @@ users.post('/', async (req, res) => {
 		res.status(500).send(serverExceptionError());
 	})
 });
+
+users.post('/login', async (req, res) => {
+	const body = req.body;
+
+	yup.object({
+		username: yup.string().required(),
+		password: yup.string().min(8).max(32).required()
+	})
+	.validate(body)
+	.then(_ => {
+		getUserOneByUsername(body.username)
+		.then((result) => {
+			if (result.length === 0) return res.status(400).send("USER_DOES_NOT_EXIST");
+
+			compare(body.password, result[0].password)
+			.then(result => {
+				res.status(200).send(result);
+			})
+			.catch(err => {
+				res.status(400).send(badRequestError(err));
+			})
+		})
+		.catch(err => {
+			res.status(500).send(serverExceptionError());
+		})
+	})
+	.catch(() => {
+		res.status(500).send(serverExceptionError());
+	});
+})
 
 users.patch('/:id/cosmetics/:cosmeticId', async (req, res) => {
 	try {

@@ -5,9 +5,9 @@ import { hash } from 'bcrypt';
 export const createUser = async (name: string, email: string, password: string) => {
     const hashedPassword = await hash(password, 10);
     const userToInsert = new User({
-        name,
-        email,
-        hashedPassword,
+        name: name,
+        email: email,
+        password: hashedPassword,
     });
     return DB.insert(User, [userToInsert]);
 };
