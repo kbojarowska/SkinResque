@@ -20,6 +20,7 @@ function LoginRegister({ isLogin, setUser }) {
 				setUser(values.username);
 				Cookies.set('username', values.username);
 				Cookies.set('userId', response.data.id);
+				Cookies.set('accessToken', response.data.access_token);
 				return navigate('/');
 			}
 			alert('Wrong password provided.');

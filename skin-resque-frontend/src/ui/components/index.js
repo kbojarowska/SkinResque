@@ -6,5 +6,6 @@ export {default as Modal} from './Modal/Modal';
 export {default as Navbar } from './Navbar/Navbar';
 export { default as Pagination } from './Pagination/Pagination';
 export { default as RadioButton } from './RadioButton/RadioButton';
-export {default as Text} from './Text/Text';
-export {default as UploadFile} from './UploadFile/UploadFile';
+export {default as Text } from './Text/Text';
+export {default as UploadFile } from './UploadFile/UploadFile';
+export {default as Dropdown } from './Dropdown/Dropdown';

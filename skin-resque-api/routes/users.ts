@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+import jwt from 'jsonwebtoken';
 import { Router } from 'express';
 import { compare } from 'bcrypt';
 import { isValidObjectId } from 'mongoose';
@@ -18,7 +21,23 @@ import { DeleteReturns, UpdateReturns } from '../infrastructure/database_abstrac
 
 const users = Router({ mergeParams: true });
 
-users.get('/:id', async (req, res) => {
+const authorization = (req: any, res: any, next: any) => {
+    const token =
+      req.body.token || req.query.token || req.headers['x-access-token'];
+  
+    if (!token) {
+      return res.status(403).send('Token is required for authentication');
+    }
+    try {
+      const decoded = jwt.verify(token, process.env.TOKEN_KEY as string);
+      req.user = decoded;
+    } catch (err) {
+      return res.status(401).send('Invalid Token');
+    }
+    return next();
+};
+
+users.get('/:id', authorization, async (req, res) => {
     try {
         const { id } = req.params;
         yup.string()
@@ -43,7 +62,7 @@ users.get('/:id', async (req, res) => {
     }
 });
 
-users.put('/:id', async (req, res) => {
+users.put('/:id', authorization, async (req, res) => {
     try {
         const { id } = req.params;
         const { email, login, profilePicture, skinType } = req.body;
@@ -69,7 +88,7 @@ users.put('/:id', async (req, res) => {
     }
 });
 
-users.delete('/:id', async (req, res) => {
+users.delete('/:id', authorization, async (req, res) => {
     try {
         const { id } = req.params;
         yup.string()
@@ -94,7 +113,7 @@ users.delete('/:id', async (req, res) => {
     }
 });
 
-users.delete('/profile-picture/:id', async (req, res) => {
+users.delete('/profile-picture/:id', authorization, async (req, res) => {
     try {
         const { id } = req.params;
         yup.string()
@@ -118,7 +137,7 @@ users.delete('/profile-picture/:id', async (req, res) => {
     }
 });
 
-users.delete('/profile-picture/:id', async (req, res) => {
+users.delete('/profile-picture/:id', authorization, async (req, res) => {
     try {
         const { id } = req.params;
         yup.string()
@@ -188,9 +207,23 @@ users.post('/login', async (req, res) => {
 		.then((result) => {
 			if (result.length === 0) return res.status(400).send("USER_DOES_NOT_EXIST");
 
-			compare(body.password, result[0].password)
+            const user = result[0];
+            
+			compare(body.password, user.password)
 			.then(passwordCorrect => {
-				res.status(200).send({ passwordCorrect: passwordCorrect, id: result[0]._id });
+                const token = jwt.sign(
+                    { user_id: user._id, user },
+                    process.env.TOKEN_KEY as string,
+                    {
+                        expiresIn: '1h'
+                    }
+                );
+                user.token = token;
+
+				console.log(token);
+
+				console.log(user);
+				res.status(200).send({ passwordCorrect: passwordCorrect, id: result[0]._id, access_token: token });
 			})
 			.catch(err => {
 				res.status(400).send(badRequestError(err));
@@ -205,7 +238,7 @@ users.post('/login', async (req, res) => {
 	});
 })
 
-users.patch('/:id/cosmetics/:cosmeticId', async (req, res) => {
+users.patch('/:id/cosmetics/:cosmeticId', authorization, async (req, res) => {
 	try {
         const { id, cosmeticId } = req.params;
 
@@ -242,7 +275,7 @@ users.patch('/:id/cosmetics/:cosmeticId', async (req, res) => {
     }
 });
 
-users.patch('/:id/palettes/:paletteId', async (req, res) => {
+users.patch('/:id/palettes/:paletteId', authorization, async (req, res) => {
 	try {
         const { id, paletteId } = req.params;
 
@@ -279,7 +312,7 @@ users.patch('/:id/palettes/:paletteId', async (req, res) => {
     }
 });
 
-users.delete('/:id/palettes/:paletteId', async (req, res) => {
+users.delete('/:id/palettes/:paletteId', authorization, async (req, res) => {
     try {
         const { id, paletteId } = req.params;
         yup.string()
@@ -305,7 +338,7 @@ users.delete('/:id/palettes/:paletteId', async (req, res) => {
 
 users.post('/:id/cosmetic', async (req, res) => {});
 
-users.delete('/:id/cosmetics/:cosmeticId', async (req, res) => {
+users.delete('/:id/cosmetics/:cosmeticId', authorization, async (req, res) => {
     try {
         const { id, cosmeticId } = req.params;
         yup.string()

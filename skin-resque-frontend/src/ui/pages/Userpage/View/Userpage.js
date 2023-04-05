@@ -1,27 +1,34 @@
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
-import { Heading, Text } from '../../components';
-import { Link } from 'react-router-dom';
+import { Heading, Text } from '../../../components';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import { FiTrash2, FiEdit3 } from 'react-icons/fi';
-import './Userpage.scss';
+ import { FiTrash2, FiEdit3 } from 'react-icons/fi';
+import '../Userpage.scss';
 
 function Userpage() {
 
+	const navigate = useNavigate();
 	const URL = 'http://localhost:5000';
 	const [user, setUser] = useState(null);
+	const [profilePicture, setProfilePicture] = useState(null);
 	const [skinType, setSkinType] = useState(null);
 	const [savedPalettes, setSavedPalettes] = useState([]);
 	const [savedCosmetics, setSavedCosmetics] = useState([]);
 
 	useEffect(() => {
 		const username = Cookies.get('username');
+		if (!username) {
+			return navigate('/login');
+		}
 		const id = Cookies.get('userId');
-		setUser({username: username, id: id});
+		const token = Cookies.get('accessToken');
+		setUser({username: username, id: id, token: token});
 
-		axios.get(`${URL}/users/${id}`).then((response) => {
+		axios.get(`${URL}/users/${id}?token=${token}`).then((response) => {
 			setSavedPalettes(response.data.saved_palettes);
 			setSavedCosmetics(response.data.saved_cosmetics);
+			setProfilePicture(response.data.profile_picture);
 			response.data.skin_type && setSkinType(response.data.skin_type);
 		})
 		.catch(() => {
@@ -34,9 +41,9 @@ function Userpage() {
 		return (
 			<Link to={`/cosmetics/${cosmetic.id}`} key={cosmetic.id}>
 				<div className='cosmetic' >
-					{/* <div className='bin'>
+					<div className='bin'>
               <FiTrash2/>
-          </div> */}
+          </div>
 					<img src={cosmetic.photo} className='cosmetic-img' />
 					<Text size='small'>{cosmetic.name}</Text>
 				</div>
@@ -47,18 +54,18 @@ function Userpage() {
 	const paletteList = savedPalettes.map((palette) => {
 		return (
 			<div className='palette' key={palette.id}>
-				{/* <div className='bin'> */}
-				{/* <FiTrash2/> */}
-				{/* </div> */}
+				<div className='bin'>
+				<FiTrash2/>
+				 </div>
 				<div className='color-container'>
 					{palette.colors.map((color, index) => (
 						<div className='palette-element' key={index} style={{ 'background-color': color }}></div>
 					))}
 				</div>
 				<Text size='small'>{palette.name}</Text>
-				{/* <div className='edit'>
-          <FiEdit3/>
-        </div> */}
+				<div className='edit'>
+          			<FiEdit3/>
+        		</div>
 			</div>
 		)
 	})
@@ -68,7 +75,13 @@ function Userpage() {
 			<div className='beige-bg'>
 				<Heading className='heading'>{user && user.username}</Heading>
 				<div className='profile-info'>
-					<div className='profile-img'></div>
+					<div className='profile-img'>
+						<div>
+						{!profilePicture && <div className='no-img'/>}
+						<img></img>
+						</div>
+						<FiEdit3 className='show-on-hover'/>
+					</div>
 					<div className='outer'>
 						<div className='row'>
 							<Text>Skintype:</Text>
@@ -76,7 +89,6 @@ function Userpage() {
 								<Text>Start test <Link to='/skintype-test' className='link'>here</Link></Text> :
 								<Text>{skinType}</Text>
 							}
-
 						</div>
 						<div className='row'>
 							<Text>Saved palettes:</Text>
@@ -86,6 +98,7 @@ function Userpage() {
 							<Text>Saved cosmetics:</Text>
 							<Text>{savedCosmetics.length}</Text>
 						</div>
+
 					</div>
 				</div>
 			</div>
