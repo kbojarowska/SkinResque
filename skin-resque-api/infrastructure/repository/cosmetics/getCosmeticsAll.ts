@@ -11,7 +11,7 @@ export const getCosmeticsAll = async (
 ): Promise<ICosmetics[]> => {
     const query: Partial<{
         name: FilterQuery<any>;
-        skinTypeRecomendation: FilterQuery<any>;
+        skinTypeRecommendation: FilterQuery<any>;
     }> = {};
     if (name)
         query['name'] = {
@@ -20,7 +20,7 @@ export const getCosmeticsAll = async (
             },
         };
     if (type)
-        query['skinTypeRecomendation'] = {
+        query['skinTypeRecommendation'] = {
             $elemMatch: {
                 $eq: type,
             },

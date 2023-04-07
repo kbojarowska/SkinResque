@@ -8,7 +8,7 @@ export interface ICosmetics {
     description: string;
     recipe?: string;
     ingredients: Array<string>;
-    skinTypeRecomendation: Array<skinType>;
+    skinTypeRecommendation: Array<skinType>;
     photo?: string;
 }
 
