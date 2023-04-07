@@ -84,8 +84,8 @@ function UserEdit( { setCurrentUser }) {
 	}, []);
 
 	useEffect(() => {
-		console.log(currentlyChosenOption)
-		setValue(user[currentlyChosenOption])
+		console.log(currentlyChosenOption);
+		user && setValue(user[currentlyChosenOption]);
 	}, [currentlyChosenOption]);
 
 	return (
