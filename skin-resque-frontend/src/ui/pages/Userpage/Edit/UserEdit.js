@@ -1,12 +1,14 @@
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useState, useEffect } from 'react'; 
-import { Formik, Field } from 'formik';
-import { Heading, Text, Button } from '../../../components';
+import { useNavigate } from 'react-router-dom';
+import { Heading, Button } from '../../../components';
 import '../Userpage.scss';
 
-function UserEdit() {
-	const URL = 'http://localhost:5000';
+function UserEdit( { setCurrentUser }) {
+
+	const navigate = useNavigate();
+	const URL = 'http://localhost:5000/users';
 	
 	const actions = [
 		{	
@@ -23,36 +25,68 @@ function UserEdit() {
 		},
 		{
 			id: 3,
-			name: 'Delete profile'
+			name: 'Delete profile',
+			property: null
 		}
 	];
 
 	const [user, setUser] = useState(null);
-	const [currentlyChosenOption, setCurrentlyChosenOption] = useState(null);
+	const [token, setToken] = useState(null);
+	const [currentlyChosenOption, setCurrentlyChosenOption] = useState(actions[0].property);
+	const [value, setValue] = useState('');
 
 	const actionsList = actions.map((action) => {
 		return (
 			<Heading
 				size='small'
 				key={action.id} 
-				className={`action-name ${currentlyChosenOption && currentlyChosenOption.id == action.id ? 'chosen' : null}`}
-				onClick={() => setCurrentlyChosenOption(action)}
+				className={`action-name ${currentlyChosenOption && currentlyChosenOption == action.property ? 'chosen' : null}`}
+				onClick={() => setCurrentlyChosenOption(action.property)}
 			>
 				{action.name}
 			</Heading>);
 	});
 
+	const updateUser = (values) => {
+		console.log(values);
+		//return axios.put(`${URL}/${user._id}?token=${token}`, values).then((response) => {
+		//	console.log(response);
+		//}).catch((error) => {
+		//	console.log(error);
+		//})
+	}
+
+	const deleteUser = () => {
+		return axios.delete(`${URL}/${user._id}?token=${token}`).then(() => {
+			Cookies.remove('username');
+			Cookies.remove('userId');
+			Cookies.remove('accessToken');
+			setCurrentUser(null);
+			return navigate('/login');
+		}).catch(() => {
+			alert('Something went wrong while deleting account.');
+		})
+	}
+
 	useEffect(() => {
 		const id = Cookies.get('userId');
 		const token = Cookies.get('accessToken');
-		axios.get(`${URL}/users/${id}?token=${token}`).then((response) => {
+		setToken(token);
+		axios.get(`${URL}/${id}?token=${token}`).then((response) => {
 			setUser(response.data);
+			setValue(response.data[currentlyChosenOption]);
 		})
-		.catch(() => {
+		.catch((error) => {
+			console.log(error);
 			alert('Something went wrong while downloading user data.');
 		})
 
 	}, []);
+
+	useEffect(() => {
+		console.log(currentlyChosenOption)
+		setValue(user[currentlyChosenOption])
+	}, [currentlyChosenOption]);
 
 	return (
 		<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/bg-user-profile.svg')` }}>
@@ -61,26 +95,23 @@ function UserEdit() {
 					{actionsList}
 				</div>
 				<div className='actions-forms'>
-						{!currentlyChosenOption && <Text>No option selected</Text>}
-						{currentlyChosenOption && 'property' in currentlyChosenOption &&
-						<Formik
-						initialValues={{
-							[currentlyChosenOption.property]: user[currentlyChosenOption.property]
-						}}
-						onSubmit={(values) => console.log(values)}
-					>
-						{(formProps) => (
+						{currentlyChosenOption &&
 						<form>
 							<div className='field'>
-								<Heading size='small'>{currentlyChosenOption.display}</Heading>
-								<Field type='text' name={currentlyChosenOption.property} value={user[currentlyChosenOption.property]}/>
+								<Heading size='small'>{actions.find((action) => action.property === currentlyChosenOption).display}</Heading>
+								<input
+									type='text'
+									value={value}
+									name={[currentlyChosenOption]}
+									onChange={(e) => {
+										setValue(e.target.value);
+									}}
+								/>
 							</div>
-							<Button onClick={formProps.handleSubmit}>{'Submit'}</Button>
-						</form>
-					)}
-					</Formik>}
-					{currentlyChosenOption && !('property' in currentlyChosenOption) &&
-					<Button>{'Delete profile'}</Button>
+							<Button onClick={() => updateUser({[currentlyChosenOption]: value})}>Submit</Button>
+						</form>}
+					{!currentlyChosenOption &&
+					<Button onClick={deleteUser}>{'Delete profile'}</Button>
 					}
 				</div>
 			</div>

@@ -22,14 +22,11 @@ import UserEdit from './ui/pages/Userpage/Edit/UserEdit';
 
 
 function App() {
-	const URL = 'http://localhost:5000';
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
 		const id = Cookies.get('userId');
-		axios.get(`${URL}/users/${id}`).then((response) => {
-			setUser(response.data);
-		});
+		setUser(id);
 	}, []);
 
 	return (
@@ -44,7 +41,7 @@ function App() {
 					<Route path='/skintype-test/results/:skintype' element={<SkintypeResult/>}/>
 					<Route path='/color-test/results' element={<CollorPalletResults/>}/>
 					<Route path='/userprofile' element={<Userpage/>}/>
-					<Route path='/editprofile' element={<UserEdit/>}/>
+					<Route path='/editprofile' element={<UserEdit setCurrentUser={setUser}/>}/>
 					<Route path='/color-test/info' element={<Info/>}/>
 					<Route path='/color-test/test' element={<Test/>}/>
 					<Route path='/login' element={<LoginRegister isLogin={true} setUser={setUser}/>}/>

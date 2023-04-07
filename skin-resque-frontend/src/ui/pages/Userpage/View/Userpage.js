@@ -26,6 +26,7 @@ function Userpage() {
 		setUser({username: username, id: id, token: token});
 
 		axios.get(`${URL}/users/${id}?token=${token}`).then((response) => {
+			console.log(response)
 			setSavedPalettes(response.data.saved_palettes);
 			setSavedCosmetics(response.data.saved_cosmetics);
 			setProfilePicture(response.data.profile_picture);
@@ -37,12 +38,30 @@ function Userpage() {
 
 	}, []);
 
+	const deleteCosmetic = (cosmeticId) => {
+		const token = Cookies.get('accessToken');
+		return axios.delete(`${URL}/${user.id}/cosmetics/${cosmeticId}?token=${token}`).then((response) => {
+			console.log(response.data);
+		}).catch((error) => {
+			console.log(error);
+		});
+	};
+
+	const deletePalette = (paletteId) => {
+		const token = Cookies.get('accessToken');
+		return axios.delete(`${URL}/${user.id}/palettes/${paletteId}?token=${token}`).then((response) => {
+			console.log(response.data);
+		}).catch((error) => {
+			console.log(error);
+		});
+	};
+
 	const cosmeticsList = savedCosmetics.map((cosmetic) => {
 		return (
 			<Link to={`/cosmetics/${cosmetic.id}`} key={cosmetic.id}>
 				<div className='cosmetic' >
 					<div className='bin'>
-              <FiTrash2/>
+              <FiTrash2 onClick={deleteCosmetic(cosmetic.id)}/>
           </div>
 					<img src={cosmetic.photo} className='cosmetic-img' />
 					<Text size='small'>{cosmetic.name}</Text>
@@ -55,7 +74,7 @@ function Userpage() {
 		return (
 			<div className='palette' key={palette.id}>
 				<div className='bin'>
-				<FiTrash2/>
+				<FiTrash2 onClick={deletePalette(palette.id)}/>
 				 </div>
 				<div className='color-container'>
 					{palette.colors.map((color, index) => (
