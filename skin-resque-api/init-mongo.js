@@ -1,16 +1,3 @@
-db.auth("admin", "admin");
-
-db.createUser({
-    user: 'root',
-    pwd: 'toor',
-    roles: [
-        {
-            role: 'readWrite',
-            db: 'testDB',
-        },
-    ],
-});
-
 db = new Mongo().getDB("skin-resque");
 
 db.createCollection('Cosmetics', {capped: false});
