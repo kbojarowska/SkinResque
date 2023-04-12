@@ -44,7 +44,7 @@ function RecipeDetails({ cosmetic }) {
 								</div>
 							</div>
 						</div>
-						<Heading className='heading'>Recipe</Heading>
+						<Heading className='heading-recipe'>Recipe</Heading>
 						<div className='details-container'>
 							<div className='dark-beige-bg border ingredients'>
 								<Heading className='ing'>Ingredients</Heading>
