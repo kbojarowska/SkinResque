@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Arrow, Button, Checkbox, Heading } from '../../../components';
 import './Questions.scss';
 
@@ -199,8 +199,22 @@ function Questions() {
 			]
 		},
 	]);
+
+	const navigate = useNavigate();
 	const [currentQuestion, setCurrentQuestion] = useState(1);
 	const [skinTypeResult, setSkinTypeResult] = useState(null);
+
+	const checkIfAllQuestionsAnswered = () => {
+		const numberOfQuestions = questions.length;
+		const questionsAnswered = questions.filter((question) => {
+			return question.answers.some((answer) => answer.checked);
+		}).length;
+
+		if (numberOfQuestions !== questionsAnswered) {
+			return false;
+		}
+		return true;
+	}
 
 	const checkIfQuestionAlreadyAnswered = (answertoChange) => {
 		const questionId = answertoChange.id.split('-')[0];
@@ -255,6 +269,15 @@ function Questions() {
 		setSkinTypeResult(skinType);
 	};
 
+	const handleSubmitAnswers = () => {
+		const allQuestionsAnswered = checkIfAllQuestionsAnswered();
+
+		if (allQuestionsAnswered) {
+			return navigate(`/skintype-test/results/${skinTypeResult}`);
+		}
+		alert('You need to answer all of the questions');
+	}
+
 	const answersToDisplay = questions.filter((question) => {
 		return question.id == currentQuestion
 	})[0].answers.map((answer) => {
@@ -286,7 +309,7 @@ function Questions() {
 							</div>
 							<div className='arrow'>
 								{currentQuestion != Object.keys(questions).length ? <Arrow right onClick={() => setCurrentQuestion(currentQuestion + 1)} /> : <div className='hide'><Arrow right /></div>}
-								{currentQuestion == Object.keys(questions).length && <Button className='submit-answers'><Link to={`/skintype-test/results/${skinTypeResult}`}>Submit</Link></Button>}
+								{currentQuestion == Object.keys(questions).length && <Button className='submit-answers' onClick={handleSubmitAnswers}>Submit</Button>}
 							</div>
 						</div>
 					</div>
