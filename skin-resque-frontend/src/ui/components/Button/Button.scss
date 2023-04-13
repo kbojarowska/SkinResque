@@ -11,3 +11,15 @@ button {
         background-color: #B7D8C9;
     }
 }
+
+button.small {
+	width: 5rem;
+}
+
+button.medium {
+	width: 10rem;
+}
+
+button.large {
+	width: 15rem;
+}

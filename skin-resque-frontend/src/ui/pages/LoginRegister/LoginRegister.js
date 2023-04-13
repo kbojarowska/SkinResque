@@ -110,7 +110,7 @@ function LoginRegister({ isLogin, users, setUser, setUsers }) {
 								</div>
 									{formProps.touched.repeatPassword && formProps.errors.repeatPassword ? <div>{formProps.errors.repeatPassword}</div> : null}
 								</>}
-							<Button onClick={formProps.handleSubmit}>{isLogin ? 'Sign in' : 'Sign up'}</Button>
+							<Button onClick={formProps.handleSubmit} size='large'>{isLogin ? 'Sign in' : 'Sign up'}</Button>
 						</form>
 					)}
 					</Formik>
