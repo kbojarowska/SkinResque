@@ -11,19 +11,19 @@ function Questions() {
 			'question': 'Does your skin feel tight and dry after washing your face?',
 			'answers': [
 				{
-					'id': 1,
+					'id': '1-a',
 					'answer': 'Yes, my whole skin feel like it',
 					'type': 'dry',
 					'checked': false
 				},
 				{
-					'id': 2,
+					'id': '1-b',
 					'answer': 'Only on cheeks',
 					'type': 'mixed',
 					'checked': false
 				},
 				{
-					'id': 3,
+					'id': '1-c',
 					'answer': 'No, it does not feel like it',
 					'type': ['oily', 'normal'],
 					'checked': false
@@ -35,13 +35,13 @@ function Questions() {
 			'question': 'Is your skin reactive to changes of seasons?',
 			'answers': [
 				{
-					'id': 4,
+					'id': '2-a',
 					'answer': 'No',
 					'type': ['normal'],
 					'checked': false
 				},
 				{
-					'id': 5,
+					'id': '2-b',
 					'answer': 'Yes',
 					'type': ['oily', 'dry', 'mixed'],
 					'checked': false
@@ -53,19 +53,19 @@ function Questions() {
 			'question': 'Do you have a lot of imprefections?',
 			'answers': [
 				{
-					'id': 6,
+					'id': '3-a',
 					'answer': 'No, I rarely have any imperfection on my skin',
 					'type': ['dry', 'normal'],
 					'checked': false
 				},
 				{
-					'id': 7,
+					'id': '3-b',
 					'answer': 'Yes, but only in T-zone',
 					'type': 'mixed',
 					'checked': false
 				},
 				{
-					'id': 8,
+					'id': '3-c',
 					'answer': 'Yes, on my whole face, including cheeks',
 					'type': 'oily',
 					'checked': false
@@ -77,19 +77,19 @@ function Questions() {
 			'question': 'Do you have a problem with shiny face after a whole day?',
 			'answers': [
 				{
-					'id': 9,
+					'id': '4-a',
 					'answer': 'No, my skin is rather dull',
 					'type': ['dry', 'normal'],
 					'checked': false
 				},
 				{
-					'id': 10,
+					'id': '4-b',
 					'answer': 'Yes, but only in T-zone',
 					'type': 'mixed',
 					'checked': false
 				},
 				{
-					'id': 11,
+					'id': '4-c',
 					'answer': 'Yes, on my whole face, including cheeks',
 					'type': 'oily',
 					'checked': false
@@ -101,19 +101,19 @@ function Questions() {
 			'question': 'Does your skin itch sometimes?',
 			'answers': [
 				{
-					'id': 12,
+					'id': '5-a',
 					'answer': 'Yes, it does happen sometimes',
 					'type': 'dry',
 					'checked': false
 				},
 				{
-					'id': 13,
+					'id': '5-b',
 					'answer': 'Yes, but only on my cheeks',
 					'type': 'mixed',
 					'checked': false
 				},
 				{
-					'id': 14,
+					'id': '5-c',
 					'answer': 'No, not really',
 					'type': ['oily', 'normal'],
 					'checked': false
@@ -125,25 +125,25 @@ function Questions() {
 			'question': 'Are you getting redness on your skin?',
 			'answers': [
 				{
-					'id': 15,
+					'id': '6-a',
 					'answer': 'Yes, it does happen sometimes',
 					'type': 'dry',
 					'checked': false
 				},
 				{
-					'id': 16,
+					'id': '6-b',
 					'answer': 'Yes, but only on my cheeks',
 					'type': 'mixed',
 					'checked': false
 				},
 				{
-					'id': 17,
+					'id': '6-c',
 					'answer': 'No, not really',
 					'type': 'normal',
 					'checked': false
 				},
 				{
-					'id': 18,
+					'id': '6-d',
 					'answer': 'Only because of my pimples',
 					'type': 'oily',
 					'checked': false
@@ -155,19 +155,19 @@ function Questions() {
 			'question': 'How would you describe your pores?',
 			'answers': [
 				{
-					'id': 19,
+					'id': '7-a',
 					'answer': 'They are hardly visible',
 					'type': ['dry', 'normal'],
 					'checked': false
 				},
 				{
-					'id': 20,
+					'id': '7-b',
 					'answer': 'They are very visible',
 					'type': 'oily',
 					'checked': false
 				},
 				{
-					'id': 21,
+					'id': '7-c',
 					'answer': 'They are hardly visible on cheeks and very visible in T-zone',
 					'type': ['mixed'],
 					'checked': false
@@ -179,19 +179,19 @@ function Questions() {
 			'question': 'How prone to wrinkles are you?',
 			'answers': [
 				{
-					'id': 22,
+					'id': '8-a',
 					'answer': 'Very',
 					'type': 'dry',
 					'checked': false
 				},
 				{
-					'id': 23,
+					'id': '8-b',
 					'answer': 'Not really',
 					'type': 'mixed',
 					'checked': false
 				},
 				{
-					'id': 24,
+					'id': '8-c',
 					'answer': "I can't really tell",
 					'type': '',
 					'checked': false
@@ -202,11 +202,20 @@ function Questions() {
 	const [currentQuestion, setCurrentQuestion] = useState(1);
 	const [skinTypeResult, setSkinTypeResult] = useState(null);
 
+	const checkIfQuestionAlreadyAnswered = (answertoChange) => {
+		const questionId = answertoChange.id.split('-')[0];
+		const questionAlreadyAnswered = questions.filter((question) => question.id == questionId)[0].answers.some((answer) => answer.checked);
+		return questionAlreadyAnswered;
+	}
+
 	const handleCheckAnswer = (answertoChange) => {
+		const questionAlreadyAnswered = checkIfQuestionAlreadyAnswered(answertoChange);
 		const questionsToSet = questions.map((question) => {
 			const answersToSet = question.answers.map((answer) => {
 				if (answer.id == answertoChange.id) {
 					answer.checked = !answer.checked;
+				} else if (answer.id != answertoChange.id && questionAlreadyAnswered) {
+					answer.checked = false;
 				}
 				return answer;
 			})
@@ -234,7 +243,7 @@ function Questions() {
 				}
 			}
 		})
-		
+
 		return answers.sort((a, b) =>
 			answers.filter(v => v === a).length
 			- answers.filter(v => v === b).length
@@ -249,9 +258,10 @@ function Questions() {
 	const answersToDisplay = questions.filter((question) => {
 		return question.id == currentQuestion
 	})[0].answers.map((answer) => {
-		return (<div className='answer' key={answer.id}>
-			<Checkbox checked={answer.checked} onClick={() => {handleCheckAnswer(answer)}}>{answer.answer}</Checkbox>
-		</div>
+		return (
+			<div className='answer' key={answer.id}>
+				<Checkbox checked={answer.checked} onClick={() => { handleCheckAnswer(answer) }}>{answer.answer}</Checkbox>
+			</div>
 		)
 	});
 
