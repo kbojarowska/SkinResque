@@ -57,11 +57,11 @@ function UserEdit({ setCurrentUser }) {
 
 	const updateUser = (values) => {
 		console.log(values);
-		//return axios.put(`${URL}/${user._id}?token=${token}`, values).then((response) => {
-		//	console.log(response);
-		//}).catch((error) => {
-		//	console.log(error);
-		//})
+		return axios.put(`${URL}/${user._id}?token=${token}`, values).then((response) => {
+			console.log(response);
+		}).catch((error) => {
+			console.log(error);
+		})
 	}
 
 	const deleteUser = () => {
