@@ -17,7 +17,7 @@ import { createUser } from '../infrastructure/repository/user/createUser.js';
 import { getUserOneByUsernameOrEmail } from '../infrastructure/repository/user/getUserOne.js';
 import * as yup from 'yup';
 import { DeleteReturns, UpdateReturns } from '../infrastructure/database_abstraction/types.js';
-
+import fs from 'fs';
 
 const users = Router({ mergeParams: true });
 
@@ -74,6 +74,13 @@ users.put('/:id', authorization, async (req, res) => {
             .required()
             .validate(id)
             .then(_ => {
+				if (profilePicture) {
+					fs.writeFile(`${id}.jpg`, profilePicture, 'binary', function(error) {
+						if (error) return res.status(500).send(serverExceptionError());
+						console.log('File saved');
+					})
+				}
+				
                 updateUser(id, email, login, profilePicture, skinType).then((success: UpdateReturns) => {
                     if (!success.acknowledged) return res.status(404).send(notFoundError());
                     res.status(200).send(success);

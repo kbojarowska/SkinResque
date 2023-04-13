@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Heading, Text } from '../../../components';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
- import { FiTrash2, FiEdit3 } from 'react-icons/fi';
+import { FiTrash2, FiEdit3 } from 'react-icons/fi';
 import '../Userpage.scss';
 
 function Userpage() {
@@ -23,7 +23,7 @@ function Userpage() {
 		}
 		const id = Cookies.get('userId');
 		const token = Cookies.get('accessToken');
-		setUser({username: username, id: id, token: token});
+		setUser({ username: username, id: id, token: token });
 
 		axios.get(`${URL}/users/${id}?token=${token}`).then((response) => {
 			console.log(response)
@@ -32,15 +32,15 @@ function Userpage() {
 			setProfilePicture(response.data.profile_picture);
 			response.data.skin_type && setSkinType(response.data.skin_type);
 		})
-		.catch(() => {
-			alert('Something went wrong while downloading user data.');
-		})
+			.catch(() => {
+				alert('Something went wrong while downloading user data.');
+			})
 
 	}, []);
 
 	const deleteCosmetic = (cosmeticId) => {
 		const token = Cookies.get('accessToken');
-		return axios.delete(`${URL}/${user.id}/cosmetics/${cosmeticId}?token=${token}`).then((response) => {
+		return axios.delete(`${URL}/users/${user.id}/cosmetics/${cosmeticId}?token=${token}`).then((response) => {
 			console.log(response.data);
 		}).catch((error) => {
 			console.log(error);
@@ -49,11 +49,42 @@ function Userpage() {
 
 	const deletePalette = (paletteId) => {
 		const token = Cookies.get('accessToken');
-		return axios.delete(`${URL}/${user.id}/palettes/${paletteId}?token=${token}`).then((response) => {
+		return axios.delete(`${URL}/users/${user.id}/palettes/${paletteId}?token=${token}`).then((response) => {
 			console.log(response.data);
 		}).catch((error) => {
 			console.log(error);
 		});
+	};
+
+	const readAsBinaryString = (e) => {
+		const file = e.target.files[0];
+
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+
+			reader.onerror = (error) => {
+				reject(error);
+			};
+
+			reader.onload = (e) => {
+				resolve(e.target.result);
+			};
+
+			reader.readAsBinaryString(file);
+		});
+	}
+
+	const handleFileChange = (e) => {
+		if (e.target.files) {
+			readAsBinaryString(e).then((binaryFile) => {
+				const token = Cookies.get('accessToken');
+				return axios.put(`${URL}/users/${user.id}?token=${token}`, { profilePicture: binaryFile }).then((response) => {
+					console.log(response);
+				}).catch((error) => {
+					console.log(error);
+				});
+			});
+		}
 	};
 
 	const cosmeticsList = savedCosmetics.map((cosmetic) => {
@@ -61,8 +92,8 @@ function Userpage() {
 			<Link to={`/cosmetics/${cosmetic.id}`} key={cosmetic.id}>
 				<div className='cosmetic' >
 					<div className='bin'>
-              <FiTrash2 onClick={deleteCosmetic(cosmetic.id)}/>
-          </div>
+						<FiTrash2 onClick={deleteCosmetic(cosmetic.id)} />
+					</div>
 					<img src={cosmetic.photo} className='cosmetic-img' />
 					<Text size='small'>{cosmetic.name}</Text>
 				</div>
@@ -74,8 +105,8 @@ function Userpage() {
 		return (
 			<div className='palette' key={palette.id}>
 				<div className='bin'>
-				<FiTrash2 onClick={deletePalette(palette.id)}/>
-				 </div>
+					<FiTrash2 onClick={deletePalette(palette.id)} />
+				</div>
 				<div className='color-container'>
 					{palette.colors.map((color, index) => (
 						<div className='palette-element' key={index} style={{ 'background-color': color }}></div>
@@ -83,8 +114,8 @@ function Userpage() {
 				</div>
 				<Text size='small'>{palette.name}</Text>
 				<div className='edit'>
-          			<FiEdit3/>
-        		</div>
+					<FiEdit3 />
+				</div>
 			</div>
 		)
 	})
@@ -96,10 +127,11 @@ function Userpage() {
 				<div className='profile-info'>
 					<div className='profile-img'>
 						<div>
-						{!profilePicture && <div className='no-img'/>}
-						<img></img>
+							{!profilePicture && <div className='no-img' />}
+							<img></img>
 						</div>
-						<FiEdit3 className='show-on-hover'/>
+						<label htmlFor='file' className='show-on-hover'><FiEdit3 /></label>
+						<input id='file' type='file' accept='image/png, image/jpeg' onChange={handleFileChange} />
 					</div>
 					<div className='outer'>
 						<div className='row'>

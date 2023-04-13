@@ -257,7 +257,8 @@ function Questions() {
 
 	const submitAnswers = () => {
 		if (userId) {
-			axios.put(`${URL}/users/${userId}`, {skinType: skinTypeResult}).catch(() => {
+			const token = Cookies.get('accessToken');
+			axios.put(`${URL}/users/${userId}?token=${token}`, {skinType: skinTypeResult}).catch(() => {
 				alert('Something went wrong while saving skin type to profile.');
 			})
 		}
