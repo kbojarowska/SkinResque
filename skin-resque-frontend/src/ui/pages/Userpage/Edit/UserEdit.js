@@ -1,23 +1,23 @@
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import { useState, useEffect } from 'react'; 
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Heading, Button } from '../../../components';
 import '../Userpage.scss';
 
-function UserEdit( { setCurrentUser }) {
+function UserEdit({ setCurrentUser }) {
 
 	const navigate = useNavigate();
 	const URL = 'http://localhost:5000/users';
-	
+
 	const actions = [
-		{	
+		{
 			id: 1,
 			name: 'Edit email',
 			display: 'Email',
 			property: 'email'
 		},
-		{	
+		{
 			id: 2,
 			name: 'Edit username',
 			display: 'Username',
@@ -25,6 +25,12 @@ function UserEdit( { setCurrentUser }) {
 		},
 		{
 			id: 3,
+			name: 'Edit password',
+			display: 'New password',
+			property: 'password'
+		},
+		{
+			id: 4,
 			name: 'Delete profile',
 			property: null
 		}
@@ -34,12 +40,14 @@ function UserEdit( { setCurrentUser }) {
 	const [token, setToken] = useState(null);
 	const [currentlyChosenOption, setCurrentlyChosenOption] = useState(actions[0].property);
 	const [value, setValue] = useState('');
+	const [currentPassword, setCurrentPassword] = useState('');
+	const [repeatNewPassword, setRepeatNewPassword] = useState('');
 
 	const actionsList = actions.map((action) => {
 		return (
 			<Heading
 				size='small'
-				key={action.id} 
+				key={action.id}
 				className={`action-name ${currentlyChosenOption && currentlyChosenOption == action.property ? 'chosen' : null}`}
 				onClick={() => setCurrentlyChosenOption(action.property)}
 			>
@@ -74,18 +82,17 @@ function UserEdit( { setCurrentUser }) {
 		setToken(token);
 		axios.get(`${URL}/${id}?token=${token}`).then((response) => {
 			setUser(response.data);
-			setValue(response.data[currentlyChosenOption]);
+			currentlyChosenOption !== 'password' && setValue(response.data[currentlyChosenOption]);
 		})
-		.catch((error) => {
-			console.log(error);
-			alert('Something went wrong while downloading user data.');
-		})
+			.catch((error) => {
+				console.log(error);
+				alert('Something went wrong while downloading user data.');
+			})
 
 	}, []);
 
 	useEffect(() => {
-		console.log(currentlyChosenOption);
-		user && setValue(user[currentlyChosenOption]);
+		user && setValue(currentlyChosenOption !== 'password' ? user[currentlyChosenOption] : '');
 	}, [currentlyChosenOption]);
 
 	return (
@@ -95,8 +102,22 @@ function UserEdit( { setCurrentUser }) {
 					{actionsList}
 				</div>
 				<div className='actions-forms'>
-						{currentlyChosenOption &&
+
+					{currentlyChosenOption &&
 						<form>
+							{currentlyChosenOption === 'password' &&
+								<div className='field'>
+									<Heading size='small'>Current password</Heading>
+									<input
+										type='text'
+										value={currentPassword}
+										name='currentPassword'
+										onChange={(e) => {
+											setCurrentPassword(e.target.value);
+										}}
+									/>
+								</div>}
+
 							<div className='field'>
 								<Heading size='small'>{actions.find((action) => action.property === currentlyChosenOption).display}</Heading>
 								<input
@@ -108,10 +129,23 @@ function UserEdit( { setCurrentUser }) {
 									}}
 								/>
 							</div>
-							<Button onClick={() => updateUser({[currentlyChosenOption]: value})}>Submit</Button>
+							{currentlyChosenOption === 'password' &&
+								<div className='field'>
+									<Heading size='small'>Repeat new password</Heading>
+									<input
+										type='text'
+										value={repeatNewPassword}
+										name={[currentlyChosenOption]}
+										onChange={(e) => {
+											setRepeatNewPassword(e.target.value);
+										}}
+									/>
+								</div>
+							}
+							<Button onClick={() => updateUser({ [currentlyChosenOption]: value })}>Submit</Button>
 						</form>}
 					{!currentlyChosenOption &&
-					<Button onClick={deleteUser}>{'Delete profile'}</Button>
+						<Button onClick={deleteUser}>{'Delete profile'}</Button>
 					}
 				</div>
 			</div>
