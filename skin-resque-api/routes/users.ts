@@ -37,6 +37,12 @@ const authorization = (req: any, res: any, next: any) => {
     return next();
 };
 
+const checkIfDirectoryExistsAndCreateIfNot = (directoryPath: fs.PathLike) => {
+	if (!fs.existsSync(directoryPath)) {
+		fs.mkdirSync(directoryPath);
+	}
+};
+
 users.get('/:id', authorization, async (req, res) => {
     try {
         const { id } = req.params;
@@ -75,13 +81,13 @@ users.put('/:id', authorization, async (req, res) => {
             .validate(id)
             .then(_ => {
 				if (profilePicture) {
-					fs.writeFile(`${id}.jpg`, profilePicture, 'binary', function(error) {
+					checkIfDirectoryExistsAndCreateIfNot('./public/upload');
+					fs.writeFile(`./public/upload/${id}.jpg`, profilePicture, 'binary', function(error) {
 						if (error) return res.status(500).send(serverExceptionError());
-						console.log('File saved');
 					})
 				}
-				
-                updateUser(id, email, login, profilePicture, skinType).then((success: UpdateReturns) => {
+				const profilePicturePath = `./public/upload/${id}.jpg`;
+                updateUser(id, email, login, profilePicture ? profilePicturePath : profilePicture, skinType).then((success: UpdateReturns) => {
                     if (!success.acknowledged) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
                 });

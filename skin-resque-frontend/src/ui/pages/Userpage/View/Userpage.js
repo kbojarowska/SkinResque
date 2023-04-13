@@ -127,8 +127,9 @@ function Userpage() {
 				<div className='profile-info'>
 					<div className='profile-img'>
 						<div>
-							{!profilePicture && <div className='no-img' />}
-							<img></img>
+							{!profilePicture ? <div className='no-img' /> :
+								<img src={`${URL}/upload/${user.id}.jpg`}></img>
+							}
 						</div>
 						<label htmlFor='file' className='show-on-hover'><FiEdit3 /></label>
 						<input id='file' type='file' accept='image/png, image/jpeg' onChange={handleFileChange} />

@@ -30,6 +30,7 @@ app.use((req, res, next) => {
 app.use('/users', users);
 app.use('/cosmetics', cosmetics);
 app.use('/palettes', palettes);
+app.use(express.static('public'));
 
 app.listen(server_params.PORT, async () => {
     console.log(`Server running on port ${server_params.PORT}`);
