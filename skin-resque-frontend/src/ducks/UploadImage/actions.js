@@ -13,7 +13,7 @@ export const uploadImage = (imageFile) => {
         headers: { 'Content-Type': 'application/json' }
       })
         .then((response) => {
-          dispatch({ type: types.UPLOAD_IMAGE_SUCCESS, payload: response.data, img: base64Image });
+          dispatch({ type: types.UPLOAD_IMAGE_SUCCESS, payload: response.data.palettes, skin: response.data.skin, img: base64Image });
         })
         .catch((error) => {
           dispatch({ type: types.UPLOAD_IMAGE_FAILURE, payload: error });

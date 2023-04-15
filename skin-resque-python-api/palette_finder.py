@@ -8,7 +8,11 @@ headers = {
 
 
 def palette_finder(hexColor):
+    result = []
     response = requests.get(URL + hexColor, headers=headers)
     response.raise_for_status()
     if response.status_code != 204:
-        return response.json()
+        for res in response.json():
+            res['colors'].remove(hexColor)
+            result.append(res['colors'])
+        return result

@@ -26,7 +26,7 @@ def create_palettes():
     if np.any(return_img):
         found_color = color_finder(return_img)
         palettes = palette_finder(found_color)
-        return jsonify(palettes)
+        return jsonify(palettes=palettes, skin=found_color)
     else:
         abort(400, 'Invalid data provided')
 
