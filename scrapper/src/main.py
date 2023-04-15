@@ -10,7 +10,7 @@ import json
 
 chrome_options = Options()
 chrome_options.add_argument("--headless")
-service = Service('/path/to/chromedriver')
+service = Service('/dependencies/chromedriver.exe')
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
 data = []
@@ -47,7 +47,6 @@ for page in range(1, 12):
             data.append(recipe_data)
 
 json_data = json.dumps(data, indent=4)
-print(json_data)
 with open('cosmetics.json', 'w') as f:
     f.write(json_data)
 
