@@ -71,7 +71,7 @@ users.get('/:id', authorization, async (req, res) => {
 users.put('/:id', authorization, async (req, res) => {
     try {
         const { id } = req.params;
-        const { email, login, profilePicture, skinType } = req.body;
+        const { email, name, profilePicture, skinType } = req.body;
         yup.string()
             .length(24)
             .test('isValidObjectId', 'Not a valid ObjectId', (value, context) => {
@@ -87,7 +87,7 @@ users.put('/:id', authorization, async (req, res) => {
 					})
 				}
 				const profilePicturePath = `./public/upload/${id}.jpg`;
-                updateUser(id, email, login, profilePicture ? profilePicturePath : profilePicture, skinType).then((success: UpdateReturns) => {
+                updateUser(id, email, name, profilePicture ? profilePicturePath : profilePicture, skinType).then((success: UpdateReturns) => {
                     if (!success.acknowledged) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
                 });

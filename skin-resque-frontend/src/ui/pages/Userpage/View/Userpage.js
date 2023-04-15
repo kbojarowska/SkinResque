@@ -15,18 +15,17 @@ function Userpage() {
 	const [skinType, setSkinType] = useState(null);
 	const [savedPalettes, setSavedPalettes] = useState([]);
 	const [savedCosmetics, setSavedCosmetics] = useState([]);
+	const [profilePictureChanged, setProfilePictureChanged] = useState(false);
 
 	useEffect(() => {
-		const username = Cookies.get('username');
-		if (!username) {
+		const id = Cookies.get('userId');
+		if (!id) {
 			return navigate('/login');
 		}
-		const id = Cookies.get('userId');
 		const token = Cookies.get('accessToken');
-		setUser({ username: username, id: id, token: token });
 
 		axios.get(`${URL}/users/${id}?token=${token}`).then((response) => {
-			console.log(response)
+			setUser({ ...response.data, token: token });
 			setSavedPalettes(response.data.saved_palettes);
 			setSavedCosmetics(response.data.saved_cosmetics);
 			setProfilePicture(response.data.profile_picture);
@@ -34,13 +33,12 @@ function Userpage() {
 		})
 			.catch(() => {
 				alert('Something went wrong while downloading user data.');
-			})
-
+			});
 	}, []);
 
 	const deleteCosmetic = (cosmeticId) => {
 		const token = Cookies.get('accessToken');
-		return axios.delete(`${URL}/users/${user.id}/cosmetics/${cosmeticId}?token=${token}`).then((response) => {
+		return axios.delete(`${URL}/users/${user._id}/cosmetics/${cosmeticId}?token=${token}`).then((response) => {
 			console.log(response.data);
 		}).catch((error) => {
 			console.log(error);
@@ -49,7 +47,7 @@ function Userpage() {
 
 	const deletePalette = (paletteId) => {
 		const token = Cookies.get('accessToken');
-		return axios.delete(`${URL}/users/${user.id}/palettes/${paletteId}?token=${token}`).then((response) => {
+		return axios.delete(`${URL}/users/${user._id}/palettes/${paletteId}?token=${token}`).then((response) => {
 			console.log(response.data);
 		}).catch((error) => {
 			console.log(error);
@@ -78,10 +76,12 @@ function Userpage() {
 		if (e.target.files) {
 			readAsBinaryString(e).then((binaryFile) => {
 				const token = Cookies.get('accessToken');
-				return axios.put(`${URL}/users/${user.id}?token=${token}`, { profilePicture: binaryFile }).then((response) => {
-					console.log(response);
-				}).catch((error) => {
+				return axios.put(`${URL}/users/${user._id}?token=${token}`, { profilePicture: binaryFile }).then((response) => {
+					setProfilePictureChanged(!profilePictureChanged);
+				}).catch((error)=> {
 					console.log(error);
+					console.log(error.status);
+					alert('Something went wrong while uploading profile picture');
 				});
 			});
 		}
@@ -123,12 +123,12 @@ function Userpage() {
 	return (
 		<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/bg-user-profile.svg')` }}>
 			<div className='beige-bg'>
-				<Heading className='heading'>{user && user.username}</Heading>
+				<Heading className='heading'>{user && user.name}</Heading>
 				<div className='profile-info'>
 					<div className='profile-img'>
 						<div>
 							{!profilePicture ? <div className='no-img' /> :
-								<img src={`${URL}/upload/${user.id}.jpg`}></img>
+								<img src={`${URL}/upload/${user._id}.jpg`}></img>
 							}
 						</div>
 						<label htmlFor='file' className='show-on-hover'><FiEdit3 /></label>

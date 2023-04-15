@@ -55,14 +55,31 @@ function UserEdit({ setCurrentUser }) {
 			</Heading>);
 	});
 
-	const updateUser = (values) => {
-		console.log(values);
-		return axios.put(`${URL}/${user._id}?token=${token}`, values).then((response) => {
-			console.log(response);
-		}).catch((error) => {
-			console.log(error);
-		})
+	const validatePasswordChange = (givenCurrentPassword, newPassword, repeatNewPassword ) => {
+		const errors = {};
+
+		if (!givenCurrentPassword) {
+			errors.givenCurrentPassword = 'Current password is required';
+		} else if (!newPassword) {
+			errors.username = 'Username is required';
+		} else if (!repeatNewPassword) {
+			errors.password = 'Password is required';
+		}  else if (newPassword !== repeatNewPassword) {
+			errors.repeatedPassword = 'Passwords do not match';
+		}
+		
+		return errors;
 	}
+
+	const updateUser = (values) => {
+		const errors = validatePasswordChange(currentPassword, value, repeatNewPassword);
+		return axios.put(`${URL}/${user._id}?token=${token}`, values).then(_ => {
+			user[currentlyChosenOption] = value;
+			alert(`Succesfully updated ${currentlyChosenOption}`)
+		}).catch(_ => {
+			alert(`Something went wrong while updating ${currentlyChosenOption}`);
+		});
+	};
 
 	const deleteUser = () => {
 		return axios.delete(`${URL}/${user._id}?token=${token}`).then(() => {

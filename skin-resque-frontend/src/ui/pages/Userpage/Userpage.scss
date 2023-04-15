@@ -23,8 +23,15 @@
 				display: flex;
 
 				.no-img {
-					border-radius: 50%;
 					background-color: #C4C4C4;
+				}
+
+				img {
+					object-fit: cover;
+				}
+
+				img, .no-img {
+					border-radius: 50%;
 					width: 15rem;
 					height: 15rem;
 				}
