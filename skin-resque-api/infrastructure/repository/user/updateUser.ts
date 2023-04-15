@@ -7,7 +7,7 @@ export const updateUser = async (
     id: string,
     email: string,
     name: string,
-    profilePicture: string,
+    profilePicture: Boolean,
     skinType: skinType
 ): Promise<UpdateReturns> => {
     const update: Partial<Record<string, any>> = {};

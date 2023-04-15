@@ -30,7 +30,8 @@
 					object-fit: cover;
 				}
 
-				img, .no-img {
+				img,
+				.no-img {
 					border-radius: 50%;
 					width: 15rem;
 					height: 15rem;
@@ -42,7 +43,17 @@
 
 				&:hover>.show-on-hover {
 					visibility: visible;
-					cursor: pointer;
+				}
+
+				.profile-picture-buttons {
+					display: flex;
+					gap: 0.5em;
+
+					* {
+						&:hover {
+							cursor: pointer;
+						}
+					}
 				}
 			}
 

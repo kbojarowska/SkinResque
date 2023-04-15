@@ -2,11 +2,13 @@ import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { Heading, Text } from '../../../components';
 import { Link, useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import { FiTrash2, FiEdit3 } from 'react-icons/fi';
+import { deleteProfilePicture } from '../../../../ducks/User/actions';
 import '../Userpage.scss';
 
-function Userpage() {
+function Userpage({ deleteProfilePicture }) {
 
 	const navigate = useNavigate();
 	const URL = 'http://localhost:5000';
@@ -79,7 +81,7 @@ function Userpage() {
 				return axios.put(`${URL}/users/${user._id}?token=${token}`, { profilePicture: binaryFile }).then(() => {
 					setProfilePictureChanged(!profilePictureChanged);
 					window.location.reload();
-				}).catch((error)=> {
+				}).catch((error) => {
 					console.log(error);
 					console.log(error.status);
 					alert('Something went wrong while uploading profile picture');
@@ -124,7 +126,9 @@ function Userpage() {
 	return (
 		<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/bg-user-profile.svg')` }}>
 			<div className='beige-bg'>
-				<Heading className='heading'>{user && user.name}</Heading>
+				<Heading className='heading'>
+					{user && user.name}
+				</Heading>
 				<div className='profile-info'>
 					<div className='profile-img'>
 						<div>
@@ -132,8 +136,11 @@ function Userpage() {
 								<img src={`${URL}/upload/${user._id}.jpg`}></img>
 							}
 						</div>
-						<label htmlFor='file' className='show-on-hover'><FiEdit3 /></label>
-						<input id='file' type='file' accept='image/png, image/jpeg' onChange={handleFileChange} />
+						<div className='profile-picture-buttons show-on-hover'>
+							<label htmlFor='file'><FiEdit3/></label>
+							<FiTrash2 onClick={() => deleteProfilePicture(user)} display={!profilePicture && 'none'}/>
+							<input id='file' type='file' accept='image/png, image/jpeg' onChange={handleFileChange} />
+						</div>
 					</div>
 					<div className='outer'>
 						<div className='row'>
@@ -177,4 +184,8 @@ function Userpage() {
 	)
 }
 
-export default Userpage;
+const mapDispatchToProps = {
+    deleteProfilePicture
+};
+
+export default connect(null, mapDispatchToProps)(Userpage);

@@ -20,6 +20,7 @@ import { DeleteReturns, UpdateReturns } from '../infrastructure/database_abstrac
 import fs from 'fs';
 
 const users = Router({ mergeParams: true });
+const usersProfilePictureDirectoryPath = './public/upload';
 
 const authorization = (req: any, res: any, next: any) => {
     const token =
@@ -42,6 +43,14 @@ const checkIfDirectoryExistsAndCreateIfNot = (directoryPath: fs.PathLike) => {
 		fs.mkdirSync(directoryPath);
 	}
 };
+
+const removeProfilePictureFile = (id: string, callback: Function) => {
+	const userProfilePicturePath = `${usersProfilePictureDirectoryPath}/${id}.jpg`;
+	fs.unlink(userProfilePicturePath, err => {
+		if (err) return console.log(err);
+		callback();
+	});
+}
 
 users.get('/:id', authorization, async (req, res) => {
     try {
@@ -86,8 +95,7 @@ users.put('/:id', authorization, async (req, res) => {
 						if (error) return res.status(500).send(serverExceptionError());
 					})
 				}
-				const profilePicturePath = `./public/upload/${id}.jpg`;
-                updateUser(id, email, name, profilePicture ? profilePicturePath : profilePicture, skinType).then((success: UpdateReturns) => {
+                updateUser(id, email, name, profilePicture ? true : false, skinType).then((success: UpdateReturns) => {
                     if (!success.acknowledged) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
                 });
@@ -137,34 +145,10 @@ users.delete('/profile-picture/:id', authorization, async (req, res) => {
             .required()
             .validate(id)
             .then(_ => {
-                removeProfilePicture(id).then((success: UpdateReturns) => {
-                    if (success.acknowledged === false) return res.status(404).send(notFoundError());
-                    res.status(200).send(success);
-                });
-            })
-            .catch(err => {
-                return res.status(400).send(badRequestError(err));
-            });
-    } catch (err) {
-        res.status(500).send(serverExceptionError());
-    }
-});
-
-users.delete('/profile-picture/:id', authorization, async (req, res) => {
-    try {
-        const { id } = req.params;
-        yup.string()
-            .length(24)
-            .test('isValidObjectId', 'Not a valid ObjectId', (value, context) => {
-                return isValidObjectId(value);
-            })
-            .required()
-            .validate(id)
-            .then(_ => {
-                removeProfilePicture(id).then((success: UpdateReturns) => {
+				removeProfilePictureFile(id, () => removeProfilePicture(id).then((success: UpdateReturns) => {
                     if (!success.acknowledged) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
-                });
+                }));
             })
             .catch(err => {
                 return res.status(400).send(badRequestError(err));

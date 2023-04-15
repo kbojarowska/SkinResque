@@ -23,7 +23,7 @@ export interface IUser {
     email: string;
 	password: string;
 	token: string;
-    profile_picture: string;
+    profile_picture: Boolean;
     skin_type: null | skinType;
     saved_cosmetics: Array<Schema.Types.ObjectId>;
     saved_palettes: Array<string>;

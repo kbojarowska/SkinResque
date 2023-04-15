@@ -9,7 +9,7 @@ const UserSchema = new Schema<IUser>(
         email: { type: String, required: true },
 		password: { type: String, required: true},
 		token: { type: String },
-        profile_picture: String,
+        profile_picture: Boolean,
         skin_type: String,
         saved_cosmetics: [{ type: Schema.Types.ObjectId, ref: 'Cosmetic' }],
         saved_palettes: [PaletteSchema],

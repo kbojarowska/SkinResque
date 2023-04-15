@@ -8,7 +8,7 @@ export const removeProfilePicture = async (id: string): Promise<UpdateReturns> =
         { _id: id },
         {
             // @ts-ignore
-            $set: { skin_type: "" },
+            $set: { profile_picture: false },
         },
         { upsert: false }
     );
