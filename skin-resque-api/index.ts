@@ -19,7 +19,9 @@ const DB_DATA = {
 
 const app: Application = express();
 
-app.use(json());
+app.use(json({
+	limit: '20mb'
+}));
 app.use(urlencoded({ extended: true }));
 app.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');

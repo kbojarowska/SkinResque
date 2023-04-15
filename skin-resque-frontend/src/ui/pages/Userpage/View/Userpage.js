@@ -76,8 +76,9 @@ function Userpage() {
 		if (e.target.files) {
 			readAsBinaryString(e).then((binaryFile) => {
 				const token = Cookies.get('accessToken');
-				return axios.put(`${URL}/users/${user._id}?token=${token}`, { profilePicture: binaryFile }).then((response) => {
+				return axios.put(`${URL}/users/${user._id}?token=${token}`, { profilePicture: binaryFile }).then(() => {
 					setProfilePictureChanged(!profilePictureChanged);
+					window.location.reload();
 				}).catch((error)=> {
 					console.log(error);
 					console.log(error.status);
