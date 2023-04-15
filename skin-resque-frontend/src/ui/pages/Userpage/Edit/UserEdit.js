@@ -61,13 +61,13 @@ function UserEdit({ setCurrentUser }) {
 		if (!givenCurrentPassword) {
 			errors.givenCurrentPassword = 'Current password is required';
 		} else if (!newPassword) {
-			errors.username = 'Username is required';
+			errors.username = 'New password is required';
 		} else if (!repeatNewPassword) {
 			errors.password = 'Password is required';
 		}  else if (newPassword !== repeatNewPassword) {
 			errors.repeatedPassword = 'Passwords do not match';
 		}
-		
+
 		return errors;
 	}
 

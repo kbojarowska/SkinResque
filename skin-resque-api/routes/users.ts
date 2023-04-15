@@ -202,8 +202,8 @@ users.post('/', async (req, res) => {
 			res.status(500).send(serverExceptionError());
 		})
 	})
-	.catch(_ => {
-		res.status(500).send(serverExceptionError());
+	.catch((err) => {
+		res.status(400).send(badRequestError(err));
 	})
 });
 

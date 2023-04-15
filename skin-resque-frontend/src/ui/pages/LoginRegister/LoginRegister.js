@@ -5,10 +5,10 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import Heading from '../../components/Heading/Heading';
 import Button from '../../components/Button/Button';
-import { createUser } from '../../../ducks/User/operations';
+import { createUser } from '../../../ducks/User/actions';
 import './LoginRegister.scss'
 
-function LoginRegister({ isLogin, setUser }) {
+function LoginRegister({ isLogin, setUser, createUser }) {
 
 	const URL = 'http://localhost:5000/users';
 
@@ -34,15 +34,17 @@ function LoginRegister({ isLogin, setUser }) {
 	}
 
 	const signUp = (values) => {
-		return axios.post(URL, values).then(() => {
-			alert('Successfully signed up. You can now sign in.');
-		})
-		.catch((error) => {
-			if (error.response.status === 400) {
-				return alert('This username or email is already taken.');
-			}
-			return alert('Something went wrong while creating user. Please try again.');
-		})
+		console.log(values);
+		createUser(values);
+		//return axios.post(URL, values).then(() => {
+		//	alert('Successfully signed up. You can now sign in.');
+		//})
+		//.catch((error) => {
+		//	if (error.response.status === 400) {
+		//		return alert('This username or email is already taken.');
+		//	}
+		//	return alert('Something went wrong while creating user. Please try again.');
+		//})
 	}
 
 	return (
@@ -52,13 +54,12 @@ function LoginRegister({ isLogin, setUser }) {
 				<div className='form-links'>
 					<Formik
 						initialValues={
-							isLogin ?
-								{
+							isLogin
+								? {
 									username: '',
 									password: ''
 								}
-								:
-								{
+								: {
 									username: '',
 									password: '',
 									repeatedPassword: '',
@@ -83,7 +84,7 @@ function LoginRegister({ isLogin, setUser }) {
 							}
 							return errors;
 						}}
-						onSubmit={isLogin ? signIn : createUser}
+						onSubmit={isLogin ? signIn : signUp}
 					>{(formProps) => (
 						<form>
 							<div className='field'>
@@ -124,9 +125,9 @@ function LoginRegister({ isLogin, setUser }) {
 	);
 }
 
-const mapDispatchToProps = dispatch => ({
-	createUser: createUser(dispatch)
-});
+const mapDispatchToProps = {
+    createUser
+};
 
 export default connect(null, mapDispatchToProps)(LoginRegister);
 
