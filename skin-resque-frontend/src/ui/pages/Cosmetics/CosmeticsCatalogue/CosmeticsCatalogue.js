@@ -54,7 +54,7 @@ function CosmeticsCatalogue({cosmetics}) {
 					<Heading size='large'>Cosmetics</Heading>
 				</div>
 				<div className='cosmetics-list'>
-					{cosmetics.length>0 && cosmeticsList ?  cosmeticsList : <Text size='small'>No cosmetics to display</Text>}
+					{cosmetics.length>0 && cosmeticsList ?  cosmeticsList : <Heading size="x-large" className='no-data'>No cosmetics to display</Heading>}
 				</div>
 				<div className='pagination'>
 					<Pagination size={10} url='/cosmetics/page' color='gray' currentPage={currentPage} />
