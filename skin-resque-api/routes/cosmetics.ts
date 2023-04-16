@@ -123,13 +123,13 @@ cosmetics.post('/', async (req, res) => {
 		description: yup.string().min(8).max(255).required(),
 		recipe: yup.string(),
 		ingredients: yup.array().of(yup.string()),
-		skinTypeRecomendation: yup.array().of(yup.string()),
+		skinTypeRecommendation: yup.array().of(yup.string()),
 		photo: yup.string()
 	})
 	.validate(body)
 	.then(_ => {
 		createCosmetic(body.name, body.description, body.recipe,
-		body.ingredients, body.skinTypeRecomendation, body.photo)
+		body.ingredients, body.skinTypeRecommendation, body.photo)
 		.then(success => {
 			if (!success) return res.status(404);
             res.status(200).send(success);
