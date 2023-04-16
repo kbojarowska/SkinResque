@@ -57,7 +57,7 @@ function RecipeDetails({ cosmetic }) {
 								</div>
 							</div>
 						</div>
-						<Heading className='heading'>Recipe</Heading>
+						<Heading className='heading-recipe'>Recipe</Heading>
 						<div className='details-container'>
 							<div className='dark-beige-bg border ingredients'>
 								<Heading className='ing'>Ingredients</Heading>
@@ -66,7 +66,7 @@ function RecipeDetails({ cosmetic }) {
 							<Text className='recipe text'>{cosmetic.recipe}{cosmetic.recipe}</Text>
 						</div>
 					</div> : 
-					<Text size='small'>No cosmetic data</Text>
+					<Heading size="x-large" className='no-data'>No cosmetic data</Heading>
 				}
 			</div>
 		</div>

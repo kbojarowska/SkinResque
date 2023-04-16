@@ -17,10 +17,13 @@
 }
 
 .heading {
-    padding: 30px;
+    padding: 1.875rem;
     display: flex;
-    margin: auto;
-    align-items:center;
+    justify-content:center;
+}
+
+.heading-recipe {
+    display: flex;
     justify-content:center;
 }
 
@@ -47,8 +50,8 @@
 }
 
 .border {
-    padding: 20px;
-    border: 1px dashed #875160;
+    padding: 1.25rem;
+    border: 0.063rem dashed #875160;
     box-sizing: border-box;
     width: 95%;
     height: 90%;
@@ -70,11 +73,11 @@
 }
 
 .recipe {
-    padding: 30px;
+    padding: 1.875rem;
     width: 55%;
-    margin-right: 30px;
+    margin-right: 1.875rem;
 }
 
 .ing {
-    padding-bottom: 10px;
+    padding-bottom: 0.625rem;
 }

@@ -3,7 +3,7 @@ import numpy as np
 
 
 def rgbToHex(RGGBcolor):
-    return '%02x%02x%02x' % RGGBcolor
+    return '%02X%02X%02X' % RGGBcolor
 
 
 def color_finder(img):

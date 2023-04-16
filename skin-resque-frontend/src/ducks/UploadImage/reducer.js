@@ -9,7 +9,7 @@ const initialState = {
 export const uploadReducer = (state = initialState, action) => {
     switch (action.type) {
       case types.UPLOAD_IMAGE_SUCCESS:
-        return { ...state, palettes: action.payload, img:action.img, error: null };
+        return { ...state, palettes: action.payload, skin: action.skin,  img:action.img, error: null };
       case types.UPLOAD_IMAGE_FAILURE:
         return { ...state, error: action.payload };
       default:
