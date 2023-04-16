@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { FiSave } from 'react-icons/fi';
-import { getUploadedImage, getUploadedPalettes } from '../../../../ducks/UploadImage/selectors';
+import { getUploadedImage, getUploadedPalettes, getUploadedSkinTone } from '../../../../ducks/UploadImage/selectors';
 import { connect } from "react-redux";
 import { Arrow, Heading, Modal } from "../../../components";
 import './Result.scss';
 
-function CollorPalletResults({palettes, image}) {
+function CollorPalletResults({skin, palettes, image}) {
+	console.log(skin)
 	const [isOpen, setIsOpen] = useState(false);
 	const [index, setIndex] = useState(0);
 	const handleNext = () => {
@@ -32,15 +33,15 @@ function CollorPalletResults({palettes, image}) {
 					<div className='color-palletes'>
 						<div className='color-container'>
 							<Heading>Your color</Heading>
-							<div className='color' style={{ background: "#" + palettes[index].colors[0]}}/>
+							<div className='color' style={{ background: "#" + skin}}/>
 						</div>
 						<div className='palletes-container'>
 							<Heading>Palletes</Heading>
 							<ul className='palletes-list'>
-								<li style={{ background: "#" + palettes[index].colors[1]}} />
-								<li style={{ background: "#" +palettes[index].colors[2]}} />
-								<li style={{ background: "#" +palettes[index].colors[3]}} />
-								<li style={{ background: "#" +palettes[index].colors[4]}} />
+								<li style={{ background: "#" + palettes[index][0]}} />
+								<li style={{ background: "#" +palettes[index][1]}} />
+								<li style={{ background: "#" +palettes[index][2]}} />
+								<li style={{ background: "#" +palettes[index][3]}} />
 							</ul>
 						</div>
 					</div>
@@ -59,6 +60,7 @@ function CollorPalletResults({palettes, image}) {
 const mapStateToProps = (state) =>{
     return{
         palettes: getUploadedPalettes(state),
+		skin: getUploadedSkinTone(state),
 		image: getUploadedImage(state)
     }
 }
