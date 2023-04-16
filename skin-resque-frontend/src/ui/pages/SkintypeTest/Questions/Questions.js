@@ -1,12 +1,5 @@
-<<<<<<< HEAD
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
-import axios from 'axios';
-=======
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
->>>>>>> 47f20641fbb063d6c80760a841b0db225c5a9a97
+import { useNavigate } from 'react-router-dom';
 import { Arrow, Button, Checkbox, Heading } from '../../../components';
 import './Questions.scss';
 
@@ -207,18 +200,7 @@ function Questions() {
 			]
 		},
 	]);
-<<<<<<< HEAD
-	const [userId, setUserId] = useState(null);
-	const [currentQuestion, setCurrentQuestion] = useState(1);
-	const [skinTypeResult, setSkinTypeResult] = useState(null);
 
-		
-	useEffect(() => {
-		setUserId(Cookies.get('userId'));
-	}, []);
-=======
-
-	const navigate = useNavigate();
 	const [currentQuestion, setCurrentQuestion] = useState(1);
 	const [skinTypeResult, setSkinTypeResult] = useState(null);
 
@@ -239,7 +221,6 @@ function Questions() {
 		const questionAlreadyAnswered = questions.filter((question) => question.id == questionId)[0].answers.some((answer) => answer.checked);
 		return questionAlreadyAnswered;
 	}
->>>>>>> 47f20641fbb063d6c80760a841b0db225c5a9a97
 
 	const handleCheckAnswer = (answertoChange) => {
 		const questionAlreadyAnswered = checkIfQuestionAlreadyAnswered(answertoChange);
@@ -288,16 +269,6 @@ function Questions() {
 		setSkinTypeResult(skinType);
 	};
 
-<<<<<<< HEAD
-	const submitAnswers = () => {
-		if (userId) {
-			const token = Cookies.get('accessToken');
-			axios.put(`${URL}/users/${userId}?token=${token}`, {skinType: skinTypeResult}).catch(() => {
-				alert('Something went wrong while saving skin type to profile.');
-			})
-		}
-		return navigate(`/skintype-test/results/${skinTypeResult}`);
-=======
 	const handleSubmitAnswers = () => {
 		const allQuestionsAnswered = checkIfAllQuestionsAnswered();
 
@@ -305,7 +276,6 @@ function Questions() {
 			return navigate(`/skintype-test/results/${skinTypeResult}`);
 		}
 		alert('You need to answer all of the questions');
->>>>>>> 47f20641fbb063d6c80760a841b0db225c5a9a97
 	}
 
 	const answersToDisplay = questions.filter((question) => {
@@ -339,11 +309,7 @@ function Questions() {
 							</div>
 							<div className='arrow'>
 								{currentQuestion != Object.keys(questions).length ? <Arrow right onClick={() => setCurrentQuestion(currentQuestion + 1)} /> : <div className='hide'><Arrow right /></div>}
-<<<<<<< HEAD
-								{currentQuestion == Object.keys(questions).length && <Button className='submit-answers' onClick={submitAnswers}>Submit</Button>}
-=======
 								{currentQuestion == Object.keys(questions).length && <Button className='submit-answers' onClick={handleSubmitAnswers}>Submit</Button>}
->>>>>>> 47f20641fbb063d6c80760a841b0db225c5a9a97
 							</div>
 						</div>
 					</div>
