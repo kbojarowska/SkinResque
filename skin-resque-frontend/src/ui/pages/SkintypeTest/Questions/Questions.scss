@@ -19,7 +19,7 @@
 			height: 100%;
 			display: flex;
 			flex-direction: column;
-			
+
 			.submit-answers {
 				align-self: flex-end;
 			}
@@ -55,6 +55,12 @@
 					justify-content: center;
 					gap: 1em;
 					flex: 2;
+
+					.answer {
+						&:hover {
+							cursor: pointer;
+						}
+					}
 				}
 			}
 		}

@@ -1,14 +1,11 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Text from '../Text/Text';
 import './Checkbox.scss';
 
 function Checkbox({ checked, children, onClick }) {
-	const [isChecked, setIsChecked] = useState(checked);
-
 	return (
-		<div className='checkbox-wrapper'>
-			<input type='checkbox' onChange={() => {onClick(); setIsChecked((prev) => !prev)}} value={isChecked} className={isChecked ? 'checked' : ''}/>
+		<div className='checkbox-wrapper' onClick={onClick}>
+			<input type='checkbox' value={checked} className={checked ? 'checked' : ''} />
 			<Text>{children}</Text>
 		</div>
 	);
@@ -17,5 +14,5 @@ function Checkbox({ checked, children, onClick }) {
 export default Checkbox;
 
 Checkbox.propTypes = {
-  checked: PropTypes.bool
+	checked: PropTypes.bool
 };
