@@ -4,7 +4,17 @@ import jwt from 'jsonwebtoken';
 import { Router } from 'express';
 import { compare } from 'bcrypt';
 import { isValidObjectId } from 'mongoose';
-import { getUserOne, getUserOneByUsername, deleteUser, removePalette, savePalette, saveCosmetics, removeSavedCosmetics, removeProfilePicture, updateUser } from '../infrastructure/repository/user/index.js';
+import { 
+	getUserOne,
+	getUserOneByUsername,
+	deleteUser, 
+	removePalette, 
+	savePalette, 
+	saveCosmetics, 
+	removeSavedCosmetics, 
+	removeProfilePicture, 
+	updateUser, 
+	updateUserToken } from '../infrastructure/repository/user/index.js';
 import { getCosmeticOne } from '../infrastructure/repository/cosmetics/index.js';
 import { getPaletteOne } from '../infrastructure/repository/palettes/index.js';
 import { IUser } from '../domain/shared/types.js';
@@ -51,6 +61,28 @@ const removeProfilePictureFile = (id: string, callback: Function) => {
 		callback();
 	});
 }
+
+const generateUserToken = (user: any, hours: number) => {
+	const token = jwt.sign(
+		{ user_id: user._id, user },
+		process.env.TOKEN_KEY as string,
+		{
+			expiresIn: `${hours}h`
+		}
+	);
+	return token;
+}
+
+const generateUserTokenExpiryDate = (hours: number) => {
+	const tokenExpiryDate = new Date(Date.now());
+	tokenExpiryDate.setTime(tokenExpiryDate.getTime() + hours * 60 * 60 * 1000);
+	return tokenExpiryDate;
+}
+
+//const checkIfTokenExpired = (tokenExpiryDate: Date) => {
+//	const now = new Date(Date.now());
+//	return now > tokenExpiryDate;
+//}
 
 users.get('/:id', authorization, async (req, res) => {
     try {
@@ -208,25 +240,19 @@ users.post('/login', async (req, res) => {
             
 			compare(body.password, user.password)
 			.then(passwordCorrect => {
-                const token = jwt.sign(
-                    { user_id: user._id, user },
-                    process.env.TOKEN_KEY as string,
-                    {
-                        expiresIn: '1h'
-                    }
-                );
-                user.token = token;
-
-				console.log(token);
-
-				console.log(user);
-				res.status(200).send({ passwordCorrect: passwordCorrect, id: result[0]._id, access_token: token });
+				const tokenExpiryHours = 1;
+                const token = generateUserToken(user, tokenExpiryHours);
+				const tokenExpiryDate = generateUserTokenExpiryDate(tokenExpiryHours);
+				updateUserToken(user._id.toString(), token, tokenExpiryDate).then((success: UpdateReturns) => {
+					if (!success.acknowledged) return res.status(404).send(notFoundError());
+                    res.status(200).send({ passwordCorrect: passwordCorrect, id: result[0]._id, access_token: token, token_expiry_date: tokenExpiryDate });
+				})
 			})
 			.catch(err => {
 				res.status(400).send(badRequestError(err));
 			})
 		})
-		.catch(err => {
+		.catch(() => {
 			res.status(500).send(serverExceptionError());
 		})
 	})

@@ -7,5 +7,6 @@ import { saveCosmetics } from './saveCosmetic.js';
 import { removeSavedCosmetics } from './removeSavedCosmetics.js';
 import { removeProfilePicture } from './removeProfilePicture.js';
 import { updateUser } from './updateUser.js';
+import { updateUserToken } from './updateUserToken.js';
 
-export { getUserOne, getUserOneByUsername, deleteUser, savePalette, removePalette, saveCosmetics, removeSavedCosmetics, removeProfilePicture, updateUser };
+export { getUserOne, getUserOneByUsername, deleteUser, savePalette, removePalette, saveCosmetics, removeSavedCosmetics, removeProfilePicture, updateUser, updateUserToken };
