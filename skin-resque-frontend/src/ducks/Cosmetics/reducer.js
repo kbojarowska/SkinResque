@@ -1,7 +1,7 @@
 import types from './types';
 
 export const cosmeticsReducer = (state = [
-//     {
+    {
 //     "_id": 1,
 //     "name": "rosemary cream",
 //     "description": "Dry",
@@ -16,7 +16,7 @@ export const cosmeticsReducer = (state = [
 //     "recipe": "Heat 2 to 3 cups whole milk (enough to completely submerge both hands) in the microwave until it's warm. Pour into a bowl and let hands soak for five to 10 minutes, allowing the fat from the milk to hydrate, and vitamins A and E to nourish dry skin.",
 //     "ingredients": ["2-3 cups whole milk"],
 //     'photo': '/images/pink-cream.png',
-// },
+},
 ], action) => {
     switch(action.type){
         case types.GET_COSMETICS_LIST_SUCCESS:

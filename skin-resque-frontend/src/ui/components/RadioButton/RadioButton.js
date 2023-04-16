@@ -2,12 +2,13 @@ import PropTypes from 'prop-types'
 import './RadioButton.scss'
 
 export default function RadioButton(props){
-    const { changed, id, isSelected, label } = props;
+    const { changed, id, isSelected, label, value } = props;
     return (
       <label className="raadio-btn">
         <input
           id={id}
           onChange={changed}
+          value={value}
           type="radio"
           checked={isSelected}
         />
