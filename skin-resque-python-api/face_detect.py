@@ -2,7 +2,7 @@ import cv2
 
 
 def face_detect(image):
-    face_cascade = cv2.CascadeClassifier("haarcascade_fontalface_default.xml")
+    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
     gray_img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     faces_detected = face_cascade.detectMultiScale(
