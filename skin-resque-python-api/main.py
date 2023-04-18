@@ -11,11 +11,6 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 
-@app.route('/')
-def hello():
-    return 'Hello, World!'
-
-
 @app.route('/palettes', methods=['POST'])
 def create_palettes():
     encoded_image = request.json['image'].split(',')[1]
