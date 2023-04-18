@@ -23,7 +23,9 @@ def create_palettes():
         palettes = palette_finder(found_color)
         return jsonify(palettes=palettes, skin=found_color)
     else:
-        abort(400, 'Invalid data provided')
+        return app.response_class(
+            status=400, response="Invalid data provided.", content_type="text/plain"
+        )
 
 
 if __name__ == '__main__':
