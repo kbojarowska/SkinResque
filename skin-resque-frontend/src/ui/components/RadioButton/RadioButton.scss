@@ -1,7 +1,7 @@
 label {
 	input {
 		position: absolute;
-		left: -9999px;
+		left: -624.938rem;
 		&:checked + span {
 			background-color: mix(transparent, #F3B4C5, 90%);
 			&:before {
@@ -17,7 +17,7 @@ label {
 		transition: 0.25s ease;
         font-family: 'Unna', serif;
         color: #252525;
-        font-size: 20px;
+        font-size: 1.25rem;
 		&:before {
 			display: flex;
 			content: "";
