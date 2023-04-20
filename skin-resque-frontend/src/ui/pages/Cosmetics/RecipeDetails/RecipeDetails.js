@@ -22,9 +22,7 @@ function withRouter(Component){
 
 
 function RecipeDetails({ cosmetic }) {
-
 	const [isOpen, setIsOpen] = useState(false);
-	console.log(cosmetic)
 
 	return (
 		<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/bg-cosmetics.svg')` }}>
