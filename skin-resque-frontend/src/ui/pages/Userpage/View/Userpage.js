@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { FiTrash2, FiEdit3 } from 'react-icons/fi';
-import { deleteProfilePicture } from '../../../../ducks/User/actions';
+import { deleteProfilePicture, deleteCosmetic, deletePalette } from '../../../../ducks/User/actions';
 import '../Userpage.scss';
 
 function Userpage({ deleteProfilePicture }) {
@@ -18,6 +18,7 @@ function Userpage({ deleteProfilePicture }) {
 	const [savedPalettes, setSavedPalettes] = useState([]);
 	const [savedCosmetics, setSavedCosmetics] = useState([]);
 	const [profilePictureChanged, setProfilePictureChanged] = useState(false);
+	const token = Cookies.get('accessToken');
 
 	useEffect(() => {
 		const id = Cookies.get('userId');
@@ -37,24 +38,6 @@ function Userpage({ deleteProfilePicture }) {
 				alert('Something went wrong while downloading user data.');
 			});
 	}, []);
-
-	const deleteCosmetic = (cosmeticId) => {
-		const token = Cookies.get('accessToken');
-		return axios.delete(`${URL}/users/${user._id}/cosmetics/${cosmeticId}?token=${token}`).then((response) => {
-			console.log(response.data);
-		}).catch((error) => {
-			console.log(error);
-		});
-	};
-
-	const deletePalette = (paletteId) => {
-		const token = Cookies.get('accessToken');
-		return axios.delete(`${URL}/users/${user._id}/palettes/${paletteId}?token=${token}`).then((response) => {
-			console.log(response.data);
-		}).catch((error) => {
-			console.log(error);
-		});
-	};
 
 	const readAsBinaryString = (e) => {
 		const file = e.target.files[0];
@@ -81,9 +64,7 @@ function Userpage({ deleteProfilePicture }) {
 				return axios.put(`${URL}/users/${user._id}?token=${token}`, { profilePicture: binaryFile }).then(() => {
 					setProfilePictureChanged(!profilePictureChanged);
 					window.location.reload();
-				}).catch((error) => {
-					console.log(error);
-					console.log(error.status);
+				}).catch(() => {
 					alert('Something went wrong while uploading profile picture');
 				});
 			});
@@ -95,7 +76,7 @@ function Userpage({ deleteProfilePicture }) {
 			<Link to={`/cosmetics/${cosmetic.id}`} key={cosmetic.id}>
 				<div className='cosmetic' >
 					<div className='bin'>
-						<FiTrash2 onClick={deleteCosmetic(cosmetic.id)} />
+						<FiTrash2 onClick={() => deleteCosmetic(user._id, cosmetic.id, token)} />
 					</div>
 					<img src={cosmetic.photo} className='cosmetic-img' />
 					<Text size='small'>{cosmetic.name}</Text>
@@ -108,7 +89,7 @@ function Userpage({ deleteProfilePicture }) {
 		return (
 			<div className='palette' key={palette.id}>
 				<div className='bin'>
-					<FiTrash2 onClick={deletePalette(palette.id)} />
+					<FiTrash2 onClick={() => deletePalette(user._id, palette.id, token)} />
 				</div>
 				<div className='color-container'>
 					{palette.colors.map((color, index) => (

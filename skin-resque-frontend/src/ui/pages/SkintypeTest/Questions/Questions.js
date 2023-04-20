@@ -5,7 +5,6 @@ import './Questions.scss';
 
 function Questions() {
 	const navigate = useNavigate();
-	const URL = 'http://localhost:5000';
 	const [questions, setQuestions] = useState([
 		{
 			'id': 1,

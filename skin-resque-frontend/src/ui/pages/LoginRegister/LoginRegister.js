@@ -31,21 +31,7 @@ function LoginRegister({ isLogin, setUser, createUser }) {
 			}
 			return alert('Something went wrong while creating user. Please try again.');
 		})
-	}
-
-	const signUp = (values) => {
-		console.log(values);
-		createUser(values);
-		//return axios.post(URL, values).then(() => {
-		//	alert('Successfully signed up. You can now sign in.');
-		//})
-		//.catch((error) => {
-		//	if (error.response.status === 400) {
-		//		return alert('This username or email is already taken.');
-		//	}
-		//	return alert('Something went wrong while creating user. Please try again.');
-		//})
-	}
+	};
 
 	return (
 		<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/login-register.svg')` }}>
@@ -84,7 +70,7 @@ function LoginRegister({ isLogin, setUser, createUser }) {
 							}
 							return errors;
 						}}
-						onSubmit={isLogin ? signIn : signUp}
+						onSubmit={isLogin ? signIn : createUser}
 					>{(formProps) => (
 						<form>
 							<div className='field'>

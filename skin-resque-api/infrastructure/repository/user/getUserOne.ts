@@ -14,7 +14,7 @@ const getUserOneByUsernameOrEmail = async (name: string, email: string): Promise
 		{
 			email: email
 		}
-	]});
+	]})
 };
 
 const getUserOneByUsername = async (name: string): Promise<IUser[]> => {

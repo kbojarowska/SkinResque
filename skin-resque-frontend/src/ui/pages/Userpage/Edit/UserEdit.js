@@ -1,11 +1,13 @@
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Heading, Button } from '../../../components';
+import { updateUser, deleteUser } from '../../../../ducks/User/actions';
 import '../Userpage.scss';
 
-function UserEdit({ setCurrentUser }) {
+function UserEdit({ updateUser, deleteUser }) {
 
 	const navigate = useNavigate();
 	const URL = 'http://localhost:5000/users';
@@ -71,27 +73,15 @@ function UserEdit({ setCurrentUser }) {
 		return errors;
 	}
 
-	const updateUser = (values) => {
-		const errors = validatePasswordChange(currentPassword, value, repeatNewPassword);
-		return axios.put(`${URL}/${user._id}?token=${token}`, values).then(_ => {
-			user[currentlyChosenOption] = value;
-			alert(`Succesfully updated ${currentlyChosenOption}`)
-		}).catch(_ => {
-			alert(`Something went wrong while updating ${currentlyChosenOption}`);
-		});
-	};
-
-	const deleteUser = () => {
-		return axios.delete(`${URL}/${user._id}?token=${token}`).then(() => {
-			Cookies.remove('username');
-			Cookies.remove('userId');
-			Cookies.remove('accessToken');
-			setCurrentUser(null);
-			return navigate('/login');
-		}).catch(() => {
-			alert('Something went wrong while deleting account.');
-		})
-	}
+	//const updateUser = (values) => {
+	//	const errors = validatePasswordChange(currentPassword, value, repeatNewPassword);
+	//	return axios.put(`${URL}/${user._id}?token=${token}`, values).then(_ => {
+	//		user[currentlyChosenOption] = value;
+	//		alert(`Succesfully updated ${currentlyChosenOption}`)
+	//	}).catch(_ => {
+	//		alert(`Something went wrong while updating ${currentlyChosenOption}`);
+	//	});
+	//};
 
 	useEffect(() => {
 		const id = Cookies.get('userId');
@@ -159,10 +149,10 @@ function UserEdit({ setCurrentUser }) {
 									/>
 								</div>
 							}
-							<Button onClick={() => updateUser({ [currentlyChosenOption]: value })}>Submit</Button>
+							<Button onClick={() => updateUser(user._id, user.token, { [currentlyChosenOption]: value })}>Submit</Button>
 						</form>}
 					{!currentlyChosenOption &&
-						<Button onClick={deleteUser}>{'Delete profile'}</Button>
+						<Button onClick={() => deleteUser(user._id, user.token)}>{'Delete profile'}</Button>
 					}
 				</div>
 			</div>
@@ -170,4 +160,9 @@ function UserEdit({ setCurrentUser }) {
 	);
 };
 
-export default UserEdit;
+const mapDispatchToProps = {
+	updateUser,
+	deleteUser
+}
+
+export default connect(null, mapDispatchToProps)(UserEdit);

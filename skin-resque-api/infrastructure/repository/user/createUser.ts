@@ -15,15 +15,13 @@ export const createUser = async (name: string, email: string, password: string) 
 
 	const token = jwt.sign(
         { user_id: userToInsert._id, email},
-        process.env.TOKEN_KEY as string,
+        process.env.ACCESS_TOKEN_KEY as string,
         {
             expiresIn: '1h'
         }
     );
 
 	userToInsert.token = token;
-	
-	console.log(userToInsert)
 
     return DB.insert(User, [userToInsert]);
 };

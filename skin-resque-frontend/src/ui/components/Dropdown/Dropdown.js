@@ -21,7 +21,7 @@ function Dropdown({ links, buttonText }) {
 
 	return (
 		<div className='dropdown'>
-			<Button className='dropdown-button' onClick={handleDisplayLinks}>{buttonText}</Button>
+			<Button className='dropdown-button' size='small' onClick={handleDisplayLinks}>{buttonText}</Button>
 			{displayLinks ? <div className='links'>
 				{LinkstoDisplay}
 			</div> : null}

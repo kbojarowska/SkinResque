@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import { FiSave } from 'react-icons/fi';
 import { Heading, Modal, Text } from '../../../components'
 import { getCosmetic } from '../../../../ducks/Cosmetics/selectors';
+import { addCosmetic } from '../../../../ducks/User/actions';
 
 import './RecipeDetails.scss'
 
@@ -23,20 +24,14 @@ function withRouter(Component){
 }
 
 
-function RecipeDetails({ cosmetic }) {
+function RecipeDetails({ cosmetic, addCosmetic }) {
 
-	const URL = 'http://localhost:5000/users'
-	const { cosmeticId } = useParams();
 	const [isOpen, setIsOpen] = useState(false);
 
-	const saveCosmetic = () => {
+	const saveCosmetic = (cosmeticId) => {
 		const userId = Cookies.get('userId');
 		const token = Cookies.get('accessToken');
-		axios.patch(`${URL}/${userId}/cosmetics/${cosmeticId}?token=${token}`).then((response) => {
-			console.log(response);
-		}).catch((error) => {
-			console.log(error);
-		})
+		addCosmetic(userId, '643da13e6c1eb37faa95cfc6', token)
 	}
 
 	return (
@@ -48,7 +43,7 @@ function RecipeDetails({ cosmetic }) {
 						<div className='save' onClick={() => setIsOpen(true)}>
 						<FiSave size={25}/>
 						</div>
-						{isOpen && <Modal setIsOpen={setIsOpen} onSave={saveCosmetic}/>}</Heading>
+						{isOpen && <Modal setIsOpen={setIsOpen} onSave={() => saveCosmetic(cosmetic.id)}/>}</Heading>
 						<div className='details-container'>
 							<img src={cosmetic.photo} className='img'></img>
 							<div className='dark-beige-bg'>
@@ -79,5 +74,9 @@ const mapStateToProps = (state, props) => {
     };
 }
 
+const mapDispatchToProps = {
+	addCosmetic
+}
 
-export default withRouter(connect(mapStateToProps, null)(RecipeDetails));
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RecipeDetails));

@@ -40,7 +40,7 @@ const authorization = (req: any, res: any, next: any) => {
       return res.status(403).send('Token is required for authentication');
     }
     try {
-      const decoded = jwt.verify(token, process.env.TOKEN_KEY as string);
+      const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_KEY as string);
       req.user = decoded;
     } catch (err) {
       return res.status(401).send('Invalid Token');
@@ -65,7 +65,7 @@ const removeProfilePictureFile = (id: string, callback: Function) => {
 const generateUserToken = (user: any, hours: number) => {
 	const token = jwt.sign(
 		{ user_id: user._id, user },
-		process.env.TOKEN_KEY as string,
+		process.env.ACCESS_TOKEN_KEY as string,
 		{
 			expiresIn: `${hours}h`
 		}
@@ -210,6 +210,7 @@ users.post('/', async (req, res) => {
 				res.status(200).send(success);
 			})
 			.catch(err => {
+				console.log(err)
 				return res.status(400).send(badRequestError(err));
 			})
 			res.status(400).send('USERNAME_OR_EMAIL_EXISTS');
@@ -219,6 +220,7 @@ users.post('/', async (req, res) => {
 		})
 	})
 	.catch((err) => {
+		console.log(err)
 		res.status(400).send(badRequestError(err));
 	})
 });
@@ -322,6 +324,7 @@ users.patch('/:id/palettes/:paletteId', authorization, async (req, res) => {
 						res.status(200).send(success);
 					})
 					.catch(err => {
+						console.log(err);
 						res.status(400).send(err);
 					})
 					res.status(400).send(notFoundError());
