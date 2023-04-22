@@ -27,11 +27,11 @@ export const userReducer = (state = {}, action) => {
 		case types.DELETE_USER_FAILURE:
 			return alert('Something went wrong while deleting user profile');
 		case types.DELETE_COSMETIC_SUCCESS:
-			return { ...state, saved_cosmetics: state.saved_cosmetics.filter((cosmeticId) => cosmeticId != action.payload)};
+			return { ...state, saved_cosmetics: state.saved_cosmetics.filter((cosmetic) => cosmetic._id != action.payload)};
 		case types.GET_SAVED_PALETTES_SUCCESS:
 			return { ...state, saved_palettes: action.payload };
 		case types.DELETE_PALETTE_SUCCESS:
-			return { ...state, saved_palettes: state.saved_palettes.filter((paletteId) => paletteId != action.payload)};
+			return { ...state, saved_palettes: state.saved_palettes.filter((palette) =>  palette._id != action.payload)};
 		case types.DELETE_PROFILE_PICTURE_SUCCESS:
 			return state;
 		case types.DELETE_PROFILE_PICTURE_FAILURE:

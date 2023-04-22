@@ -8,7 +8,7 @@ export const removePalette = async (id: string, paletteId: string): Promise<Upda
         { _id: id },
         {
             // @ts-ignore
-            $pull: { saved_palletes: paletteId },
+            $pull: { saved_palettes: paletteId },
         },
         { upsert: false }
     );

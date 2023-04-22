@@ -86,10 +86,10 @@ function Userpage({ savedCosmetics, savedPalettes, getUserSavedCosmetics, getUse
 
 	const cosmeticsList = savedCosmetics && savedCosmetics.map((cosmetic) => {
 		return (
-			<Link to={`/cosmetics/${cosmetic.id}`} key={cosmetic.id}>
+			<Link to={`/cosmetics/${cosmetic._id}`} key={cosmetic._id}>
 				<div className='cosmetic' >
 					<div className='bin'>
-						<FiTrash2 onClick={() => deleteCosmetic(user._id, cosmetic.id, token)} />
+						<FiTrash2 onClick={() => deleteCosmetic(user._id, cosmetic._id, token)} />
 					</div>
 					<img src={cosmetic.photo} className='cosmetic-img' />
 					<Text size='small'>{cosmetic.name}</Text>
