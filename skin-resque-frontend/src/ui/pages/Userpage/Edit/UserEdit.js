@@ -55,23 +55,27 @@ function UserEdit({ user, updateUser, deleteUser }) {
 			</Heading>);
 	});
 
-	// const validatePasswordChange = (givenCurrentPassword, newPassword, repeatNewPassword ) => {
-	// 	const errors = {};
+	const validatePasswordChange = (givenCurrentPassword, newPassword, repeatNewPassword ) => {
+		const errors = {};
 
-	// 	if (!givenCurrentPassword) {
-	// 		errors.givenCurrentPassword = 'Current password is required';
-	// 	} else if (!newPassword) {
-	// 		errors.username = 'New password is required';
-	// 	} else if (!repeatNewPassword) {
-	// 		errors.password = 'Password is required';
-	// 	}  else if (newPassword !== repeatNewPassword) {
-	// 		errors.repeatedPassword = 'Passwords do not match';
-	// 	}
+		if (!givenCurrentPassword) {
+			errors.givenCurrentPassword = 'Current password is required';
+		} else if (!newPassword) {
+			errors.username = 'New password is required';
+		} else if (!repeatNewPassword) {
+			errors.password = 'Password is required';
+		}  else if (newPassword !== repeatNewPassword) {
+			errors.repeatedPassword = 'Passwords do not match';
+		}
 
-	// 	return errors;
-	// };
+		return errors;
+	};
 
 	useEffect(() => {
+		const id = Cookies.get('userId');
+		if (!id) {
+			return navigate('/login');
+		}
 		const token = Cookies.get('accessToken');
 		setToken(token);
 	}, []);

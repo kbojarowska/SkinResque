@@ -38,7 +38,7 @@ function App( { getUser, getUserSavedCosmetics, getUserSavedPalettes, }) {
 	return (
 		<Router>
 			<div className='App'>
-				<Navbar user={user} setUser={setUser}/>
+				<Navbar/>
 				<Routes>
 					<Route path='/' element={<FrontPage />} />
 					<Route path='/cosmetics/page/:currentPage' element={<CosmeticsCatalogue/>} />
@@ -47,10 +47,10 @@ function App( { getUser, getUserSavedCosmetics, getUserSavedPalettes, }) {
 					<Route path='/skintype-test/results/:skintype' element={<SkintypeResult/>}/>
 					<Route path='/color-test/results' element={<CollorPalletResults/>}/>
 					<Route path='/userprofile/:userId' element={<Userpage/>}/>
-					<Route path='/editprofile/:userId' element={<UserEdit setCurrentUser={setUser}/>}/>
+					<Route path='/editprofile/:userId' element={<UserEdit/>}/>
 					<Route path='/color-test/info' element={<Info/>}/>
 					<Route path='/color-test/test' element={<Test/>}/>
-					<Route path='/login' element={<LoginRegister isLogin={true} setUser={setUser}/>}/>
+					<Route path='/login' element={<LoginRegister isLogin={true}/>}/>
 					<Route path='/register' element={<LoginRegister isLogin={false}/>}/>
 				</Routes>
 			</div>

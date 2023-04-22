@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import types from './types';
 
 const USER_URL = 'http://localhost:5000/users';
@@ -26,6 +27,36 @@ export const createUser = (user) => {
 			});
 	};
 };
+
+export const loginUser = (values, navigate) => {
+	return (dispatch) => {
+		return axios.post(`${USER_URL}/login`, values).then((response) => {
+			if (response.data.passwordCorrect) {
+				Cookies.set('username', values.username);
+				Cookies.set('userId', response.data.id);
+				Cookies.set('accessToken', response.data.access_token);
+				navigate('/');
+				return getUser(response.data.id,response.data.access_token)(dispatch);
+			}
+			alert('Wrong password provided.');
+		}).catch((error) => {
+			if (error.response.status === 400) {
+				return alert('There is no user with given username.');
+			}
+			return alert('Something went wrong while logging in. Please try again.');
+		})
+	}
+};
+
+export const logoutUser = (navigate) => {
+	return (dispatch) => {
+		Cookies.remove('username');
+		Cookies.remove('userId');
+		Cookies.remove('accessToken');
+		dispatch({ type: types.LOGOUT_USER_SUCCESS });
+		navigate('/login');
+	}
+}
 
 export const updateUser = (userId, token, toUpdate) => {
 	return (dispatch) => {

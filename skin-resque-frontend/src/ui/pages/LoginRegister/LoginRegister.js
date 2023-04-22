@@ -1,37 +1,14 @@
 import { Formik, Field } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Cookies from 'js-cookie';
-import axios from 'axios';
 import Heading from '../../components/Heading/Heading';
 import Button from '../../components/Button/Button';
-import { createUser } from '../../../ducks/User/actions';
+import { createUser, loginUser } from '../../../ducks/User/actions';
 import './LoginRegister.scss'
 
-function LoginRegister({ isLogin, setUser, createUser }) {
-
-	const URL = 'http://localhost:5000/users';
+function LoginRegister({ isLogin, createUser, loginUser }) {
 
 	const navigate = useNavigate();
-
-	const signIn = (values) => {
-		axios.post(`${URL}/login`, values).then((response) => {
-			if (response.data.passwordCorrect) {
-				setUser(values.username);
-				Cookies.set('username', values.username);
-				Cookies.set('userId', response.data.id);
-				Cookies.set('accessToken', response.data.access_token);
-				return navigate('/');
-			}
-			alert('Wrong password provided.');
-		})
-		.catch((error) => {
-			if (error.response.status === 400) {
-				return alert('There is no user with given username.');
-			}
-			return alert('Something went wrong while creating user. Please try again.');
-		})
-	};
 
 	return (
 		<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/login-register.svg')` }}>
@@ -70,7 +47,7 @@ function LoginRegister({ isLogin, setUser, createUser }) {
 							}
 							return errors;
 						}}
-						onSubmit={isLogin ? signIn : createUser}
+						onSubmit={isLogin ? (values) => loginUser(values, navigate) : createUser}
 					>{(formProps) => (
 						<form>
 							<div className='field'>
@@ -112,6 +89,7 @@ function LoginRegister({ isLogin, setUser, createUser }) {
 }
 
 const mapDispatchToProps = {
+	loginUser,
     createUser
 };
 

@@ -2,18 +2,18 @@ import types from './types';
 
 export const userReducer = (state = {}, action) => {
 	switch (action.type) {
-		case types.CREATE_USER_SUCCESS:
-			alert('Successfully signed up. You can now sign in.');
-			return [state, ...action.payload];
 		case types.CREATE_USER_FAILURE:
 			return state;
+		case types.LOGIN_USER_SUCCESS:
+			return action.payload;
+		case types.LOGOUT_USER_SUCCESS:
+			return {};
 		case types.GET_USER_SUCCESS:
 			return { ...state, ...action.payload };
 		case types.GET_USER_FAILURE:
 			return {};
 		case types.UPDATE_USER_SUCCESS:
-			state = { ...state, ...action.payload };
-			return state;
+			return { ...state, ...action.payload };
 		case types.UPDATE_USER_FAILURE:
 			return state;
 		case types.DELETE_USER_SUCCESS:

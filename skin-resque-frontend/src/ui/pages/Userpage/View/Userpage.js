@@ -26,7 +26,6 @@ function Userpage({ user, savedCosmetics, savedPalettes, getUserSavedCosmetics, 
 
 	const navigate = useNavigate();
 	const URL = 'http://localhost:5000';
-	const [profilePicture] = useState(null);
 	const token = Cookies.get('accessToken');
 
 	useEffect(() => {
