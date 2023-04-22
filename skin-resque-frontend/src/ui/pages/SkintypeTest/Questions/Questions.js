@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Cookies from 'js-cookie';
 import { Arrow, Button, Checkbox, Heading } from '../../../components';
+import { updateUser } from '../../../../ducks/User/actions';
 import './Questions.scss';
 
-function Questions() {
+
+function Questions({ updateUser }) {
 	const navigate = useNavigate();
 	const [questions, setQuestions] = useState([
 		{
@@ -272,6 +276,11 @@ function Questions() {
 		const allQuestionsAnswered = checkIfAllQuestionsAnswered();
 
 		if (allQuestionsAnswered) {
+			const userId = Cookies.get('userId');
+			if (userId) {
+				const token = Cookies.get('accessToken');
+				updateUser(userId, token, { skinType: skinTypeResult });
+			}
 			return navigate(`/skintype-test/results/${skinTypeResult}`);
 		}
 		alert('You need to answer all of the questions');
@@ -316,6 +325,11 @@ function Questions() {
 			</div>
 		</div>
 	);
-}
+};
 
-export default Questions;
+
+const mapDispatchToProps = {
+	updateUser
+};
+
+export default connect(null, mapDispatchToProps)(Questions);
