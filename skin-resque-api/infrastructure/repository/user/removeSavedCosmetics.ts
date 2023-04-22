@@ -11,7 +11,7 @@ export const removeSavedCosmetics = async (
         { _id: id },
         {
             // @ts-ignore
-            $pull: { saved_cosmetics: { $eq: cosmeticId } },
+            $pull: { saved_cosmetics: cosmeticId },
         },
         { upsert: false }
     );
