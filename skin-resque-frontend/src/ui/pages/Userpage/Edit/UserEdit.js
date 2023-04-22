@@ -78,8 +78,6 @@ function UserEdit({ user, updateUser, deleteUser }) {
 
 	useEffect(() => {
 		user && setValue(currentlyChosenOption !== 'password' ? user[currentlyChosenOption] : '')
-		console.log(user, currentlyChosenOption)
-		console.log(user[currentlyChosenOption]);
 	}, [currentlyChosenOption]);
 
 	return (

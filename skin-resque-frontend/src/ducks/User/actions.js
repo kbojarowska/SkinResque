@@ -111,7 +111,6 @@ export const addPalette = (userId, palette, token) => {
 export const deletePalette = (userId, paletteId, token) => {
 	return (dispatch) => {
 		return axios.delete(`${USER_URL}/${userId}/palettes/${paletteId}?token=${token}`).then(() => {
-			console.log(paletteId)
 			dispatch({ type: types.DELETE_PALETTE_SUCCESS, payload: paletteId });
 		}).catch((error) => {
 			dispatch({ type: types.DELETE_PALETTE_FAILURE, payload: error });
