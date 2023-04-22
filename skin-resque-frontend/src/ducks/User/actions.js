@@ -99,7 +99,7 @@ export const addPalette = (userId, palette, token) => {
 
 export const deletePalette = (userId, paletteId, token) => {
 	return (dispatch) => {
-		return axios.delete(`${USER_URL}/users/${userId}/palettes/${paletteId}?token=${token}`).then(() => {
+		return axios.delete(`${USER_URL}/${userId}/palettes/${paletteId}?token=${token}`).then(() => {
 			dispatch({ type: types.DELETE_PALETTE_SUCCESS, payload: paletteId });
 		}).catch((error) => {
 			dispatch({ type: types.DELETE_PALETTE_FAILURE, payload: error });

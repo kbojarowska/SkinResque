@@ -22,7 +22,7 @@ function withRouter(Component){
     return ComponentWithRouterProp;
 };
 
-function Userpage({ savedCosmetics, savedPalettes, getUserSavedCosmetics, getUserSavedPalettes, deleteProfilePicture }) {
+function Userpage({ savedCosmetics, savedPalettes, getUserSavedCosmetics, getUserSavedPalettes, deleteProfilePicture, deleteCosmetic, deletePalette }) {
 
 	const navigate = useNavigate();
 	const URL = 'http://localhost:5000';
@@ -101,9 +101,9 @@ function Userpage({ savedCosmetics, savedPalettes, getUserSavedCosmetics, getUse
 
 	const paletteList = savedPalettes && savedPalettes.map((palette) => {
 		return (
-			<div className='palette' key={palette.id}>
+			<div className='palette' key={palette._id}>
 				<div className='bin'>
-					<FiTrash2 onClick={() => deletePalette(user._id, palette.id, token)} />
+					<FiTrash2 onClick={() => deletePalette(user._id, palette._id, token)} />
 				</div>
 				<div className='color-container'>
 					{palette.colors.map((color, index) => 
@@ -187,9 +187,11 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = {
-    deleteProfilePicture,
 	getUserSavedCosmetics,
-	getUserSavedPalettes
+	getUserSavedPalettes,
+	deleteProfilePicture,
+	deleteCosmetic,
+	deletePalette
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Userpage));

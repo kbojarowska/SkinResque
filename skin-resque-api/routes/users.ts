@@ -29,7 +29,7 @@ import * as yup from 'yup';
 import { DeleteReturns, UpdateReturns } from '../infrastructure/database_abstraction/types.js';
 import fs from 'fs';
 import { getCosmeticsWithIds } from '../infrastructure/repository/cosmetics/getCosmeticsWithIds.js';
-import { getPalettesWithIds } from '../infrastructure/repository/palettes/getPalettesWirthIds.js';
+import { getPalettesWithIds } from '../infrastructure/repository/palettes/getPalettesWithIds.js';
 
 const users = Router({ mergeParams: true });
 const usersProfilePictureDirectoryPath = './public/upload';
@@ -153,7 +153,6 @@ users.get('/:id/saved-palettes', authorization, async (req, res) => {
             .then(_ => {
                 getUserOne(id).then((success: IUser[]) => {
 					if (success.length === 0) return res.status(404).send(notFoundError());
-					console.log(success[0].saved_palettes)
 					const saved_palettes = success[0].saved_palettes;
 					getPalettesWithIds(saved_palettes).then((success) => {
 						console.log(success)
@@ -413,6 +412,7 @@ users.delete('/:id/palettes/:paletteId', authorization, async (req, res) => {
             .validate(id)
             .then(_ => {
                 removePalette(id, paletteId).then((success: UpdateReturns) => {
+					console.log(success);
                     if (!success.acknowledged) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
                 });

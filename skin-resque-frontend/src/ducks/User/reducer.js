@@ -23,8 +23,7 @@ export const userReducer = (state = {}, action) => {
 		case types.GET_SAVED_COSMETICS_SUCCESS:
 			return { ...state, saved_cosmetics: action.payload };
 		case types.ADD_COSMETIC_SUCCESS:
-			//return { ...state, saved_cosmetics: [ ...state.saved_cosmetics, action.payload ]};
-			return state;
+			return { ...state, saved_cosmetics: [ ...state.saved_cosmetics, action.payload ]};
 		case types.DELETE_USER_FAILURE:
 			return alert('Something went wrong while deleting user profile');
 		case types.DELETE_COSMETIC_SUCCESS:
