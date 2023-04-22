@@ -30,6 +30,7 @@ import { DeleteReturns, UpdateReturns } from '../infrastructure/database_abstrac
 import fs from 'fs';
 import { getCosmeticsWithIds } from '../infrastructure/repository/cosmetics/getCosmeticsWithIds.js';
 import { getPalettesWithIds } from '../infrastructure/repository/palettes/getPalettesWithIds.js';
+import { updateUserPassword } from '../infrastructure/repository/user/updateUserPassword.js';
 
 const users = Router({ mergeParams: true });
 const usersProfilePictureDirectoryPath = './public/upload';
@@ -317,6 +318,34 @@ users.post('/login', async (req, res) => {
 		res.status(500).send(serverExceptionError());
 	});
 })
+
+users.patch('/:id/newPassword', authorization, async (req, res) => {
+    const body = req.body;
+    yup.object().shape(
+        {
+            password: yup.string().min(8).max(32).required(),
+            currentPassword: yup.string().min(8).max(32).required()
+        })
+        .validate(body)
+        .then(_ => {
+            const id = req.params.id;
+            getUserOne(id).then(success => {
+                compare(body.currentPassword, success[0].password).then(() => {
+                    updateUserPassword(id, body.password).then((success: UpdateReturns) => {
+                        if (!success.acknowledged) return res.status(404).send(notFoundError());
+                        res.status(200).send(success);
+                    })
+                }).catch((error) => {
+                    return res.status(400).send(badRequestError(error));
+                })
+            }).catch((error) => {
+                return res.status(400).send(badRequestError(error));
+            })
+        })
+        .catch(err => {
+            return res.status(400).send(badRequestError(err));
+        });
+     });
 
 users.patch('/:id/cosmetics/:cosmeticId', authorization, async (req, res) => {
 	try {

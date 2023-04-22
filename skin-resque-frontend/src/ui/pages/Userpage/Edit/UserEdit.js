@@ -2,12 +2,12 @@ import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Heading, Button } from '../../../components';
-import { updateUser, deleteUser } from '../../../../ducks/User/actions';
+import { Heading, Button, Text } from '../../../components';
+import { updateUser, deleteUser, updateUserPassword } from '../../../../ducks/User/actions';
 import { getUser } from '../../../../ducks/User/selectors';
 import '../Userpage.scss';
 
-function UserEdit({ user, updateUser, deleteUser }) {
+function UserEdit({ user, updateUser, deleteUser, updateUserPassword }) {
 
 	const navigate = useNavigate();
 
@@ -37,9 +37,9 @@ function UserEdit({ user, updateUser, deleteUser }) {
 		}
 	];
 
-	const [token, setToken] = useState(null);
-	const [currentlyChosenOption, setCurrentlyChosenOption] = useState(actions[0].property);
+	const [errors, setErrors] = useState({});
 	const [value, setValue] = useState('');
+	const [currentlyChosenOption, setCurrentlyChosenOption] = useState(actions[0].property);
 	const [currentPassword, setCurrentPassword] = useState('');
 	const [repeatNewPassword, setRepeatNewPassword] = useState('');
 
@@ -55,33 +55,45 @@ function UserEdit({ user, updateUser, deleteUser }) {
 			</Heading>);
 	});
 
-	const validatePasswordChange = (givenCurrentPassword, newPassword, repeatNewPassword ) => {
+	const findErrors = (givenCurrentPassword, newPassword, repeatNewPassword ) => {
 		const errors = {};
 
 		if (!givenCurrentPassword) {
 			errors.givenCurrentPassword = 'Current password is required';
-		} else if (!newPassword) {
-			errors.username = 'New password is required';
-		} else if (!repeatNewPassword) {
-			errors.password = 'Password is required';
-		}  else if (newPassword !== repeatNewPassword) {
+		} if (!newPassword) {
+			errors.newPassword = 'New password is required';
+		} if (newPassword !== repeatNewPassword) {
 			errors.repeatedPassword = 'Passwords do not match';
 		}
 
 		return errors;
 	};
 
-	useEffect(() => {
-		const id = Cookies.get('userId');
-		if (!id) {
-			return navigate('/login');
+	const handleUpdateUser = (userId, userToken, values) => {
+		if (currentlyChosenOption === 'password') {
+			values = {
+				currentPassword: currentPassword,
+				...values
+			};
+			const errors = findErrors(currentPassword, value, repeatNewPassword);
+			setErrors(errors);
+			if (Object.keys(errors).length > 0) {
+				return;
+			}
+			return updateUserPassword(userId, userToken, values);
 		}
-		const token = Cookies.get('accessToken');
-		setToken(token);
+		updateUser(userId, userToken, values);
+	};
+
+	useEffect(() => {
+		if (!user) {
+			return navigate('/login');
+		};
 	}, []);
 
 	useEffect(() => {
-		user && setValue(currentlyChosenOption !== 'password' ? user[currentlyChosenOption] : '')
+		user && setValue(currentlyChosenOption !== 'password' ? user[currentlyChosenOption] : '');
+		setErrors({});
 	}, [currentlyChosenOption]);
 
 	return (
@@ -97,18 +109,20 @@ function UserEdit({ user, updateUser, deleteUser }) {
 								<div className='field'>
 									<Heading size='small'>Current password</Heading>
 									<input
-										type='text'
+										type='password'
 										value={currentPassword}
 										name='currentPassword'
 										onChange={(e) => {
 											setCurrentPassword(e.target.value);
 										}}
 									/>
-								</div>}
+								</div>
+							}
+							{currentlyChosenOption === 'password' && errors.givenCurrentPassword ? <Text size='x-small'>{errors.givenCurrentPassword}</Text> : null}
 							<div className='field'>
 								<Heading size='small'>{actions.find((action) => action.property === currentlyChosenOption).display}</Heading>
 								<input
-									type='text'
+									type={currentlyChosenOption === 'password'? 'password' : 'text'}
 									value={value}
 									name={[currentlyChosenOption]}
 									onChange={(e) => {
@@ -116,11 +130,12 @@ function UserEdit({ user, updateUser, deleteUser }) {
 									}}
 								/>
 							</div>
+							{currentlyChosenOption === 'password' && errors.newPassword ? <Text size='x-small'>{errors.newPassword}</Text> : null}
 							{currentlyChosenOption === 'password' &&
 								<div className='field'>
 									<Heading size='small'>Repeat new password</Heading>
 									<input
-										type='text'
+										type='password'
 										value={repeatNewPassword}
 										name={[currentlyChosenOption]}
 										onChange={(e) => {
@@ -129,7 +144,8 @@ function UserEdit({ user, updateUser, deleteUser }) {
 									/>
 								</div>
 							}
-							<Button onClick={() => updateUser(user._id, user.token, { [currentlyChosenOption]: value })}>Submit</Button>
+							{currentlyChosenOption === 'password' && errors.repeatedPassword ? <Text size='x-small'>{errors.repeatedPassword}</Text> : null}
+							<Button onClick={() => handleUpdateUser(user._id, user.token, { [currentlyChosenOption]: value })}>Submit</Button>
 						</form>}
 					{!currentlyChosenOption &&
 						<Button onClick={() => deleteUser(user._id, user.token)}>Delete profile</Button>
@@ -148,7 +164,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
 	updateUser,
-	deleteUser
+	deleteUser,
+	updateUserPassword
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserEdit);

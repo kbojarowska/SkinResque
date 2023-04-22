@@ -1,8 +1,7 @@
 import { Formik, Field } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Heading from '../../components/Heading/Heading';
-import Button from '../../components/Button/Button';
+import { Heading, Text, Button } from '../../components';
 import { createUser, loginUser } from '../../../ducks/User/actions';
 import './LoginRegister.scss'
 
@@ -33,16 +32,16 @@ function LoginRegister({ isLogin, createUser, loginUser }) {
 							const errors = {};
 							if (!isLogin && !values.email) {
 								errors.email = 'Email is required';
-							} else if (
+							} if (
 								!isLogin &&
 								!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
 							) {
 								errors.email = 'Invalid email address';
-							} else if (!values.username) {
+							} if (!values.username) {
 								errors.username = 'Username is required';
-							} else if (!values.password) {
+							} if (!values.password) {
 								errors.password = 'Password is required';
-							}  else if (!isLogin && values.password !== values.repeatedPassword) {
+							} if (!isLogin && values.password !== values.repeatedPassword) {
 								errors.repeatedPassword = 'Passwords do not match';
 							}
 							return errors;
@@ -54,26 +53,26 @@ function LoginRegister({ isLogin, createUser, loginUser }) {
 								<Heading size='small'>Username</Heading>
 								<Field type='text' name='username' />
 							</div>
-							{formProps.touched.username && formProps.errors.username ? <div>{formProps.errors.username}</div> : null}
+							{formProps.touched.username && formProps.errors.username ? <Text size='x-small'>{formProps.errors.username}</Text> : null}
 							{!isLogin &&
 								<><div className='field'>
 									<Heading size='small'>Email</Heading>
 									<Field type='text' name='email' />
 								</div>
-									{formProps.touched.email && formProps.errors.email ? <div>{formProps.errors.email}</div> : null}
+									{formProps.touched.email && formProps.errors.email ? <Text size='x-small'>{formProps.errors.email}</Text> : null}
 								</>
 							}
 							<div className='field'>
 								<Heading size='small'>Password</Heading>
 								<Field type='password' name='password' />
 							</div>
-							{formProps.touched.password && formProps.errors.password ? <div>{formProps.errors.password}</div> : null}
+							{formProps.touched.password && formProps.errors.password ? <Text size='x-small'>{formProps.errors.password}</Text> : null}
 							{!isLogin &&
 								<><div className='field'>
 									<Heading size='small'>Repeat Password</Heading>
 									<Field type='password' name='repeatedPassword' />
 								</div>
-									{formProps.touched.repeatedPassword && formProps.errors.repeatedPassword ? <div>{formProps.errors.repeatedPassword}</div> : null}
+									{formProps.touched.repeatedPassword && formProps.errors.repeatedPassword ? <Text size='x-small'>{formProps.errors.repeatedPassword}</Text> : null}
 								</>}
 							<Button onClick={formProps.handleSubmit} size='large'>{isLogin ? 'Sign in' : 'Sign up'}</Button>
 						</form>

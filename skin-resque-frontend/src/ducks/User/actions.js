@@ -12,9 +12,9 @@ export const getUser = (userId, token) => {
 		})
 		.catch((error) => {
 			dispatch({ type: types.GET_USER_FAILURE, payload: error });
-		})
-	}
-}
+		});
+	};
+};
 
 export const createUser = (user) => {
 	return (dispatch) => {
@@ -44,8 +44,8 @@ export const loginUser = (values, navigate) => {
 				return alert('There is no user with given username.');
 			}
 			return alert('Something went wrong while logging in. Please try again.');
-		})
-	}
+		});
+	};
 };
 
 export const logoutUser = (navigate) => {
@@ -55,8 +55,8 @@ export const logoutUser = (navigate) => {
 		Cookies.remove('accessToken');
 		dispatch({ type: types.LOGOUT_USER_SUCCESS });
 		navigate('/login');
-	}
-}
+	};
+};
 
 export const updateUser = (userId, token, toUpdate) => {
 	return (dispatch) => {
@@ -71,6 +71,20 @@ export const updateUser = (userId, token, toUpdate) => {
 		});
 	};
 };
+
+export const updateUserPassword = (userId, token, toUpdate) => {
+	return (dispatch) => {
+		return axios.patch(`${USER_URL}/${userId}/newPassword?token=${token}`, toUpdate)
+		.then(() => {
+			alert('Succesfully updated user data');
+			dispatch({ type: types.UPDATE_USER_SUCCESS, payload: { password: toUpdate.password} });
+		})
+		.catch((error) => {
+			alert('Something went wrong while updating user data');
+			dispatch({ type: types.UPDATE_USER_FAILURE, payload: error });
+		});
+	};
+}
 
 export const deleteUser = (userId, token) => {
 	return (dispatch) => {
