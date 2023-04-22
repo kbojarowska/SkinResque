@@ -7,7 +7,7 @@ import axios from 'axios';
 import { FiTrash2, FiEdit3 } from 'react-icons/fi';
 import { deleteProfilePicture, deleteCosmetic, deletePalette, getUserSavedCosmetics, getUserSavedPalettes } from '../../../../ducks/User/actions';
 import '../Userpage.scss';
-import { getSavedCosmetics, getSavedPalettes } from '../../../../ducks/User/selectors';
+import { getSavedCosmetics, getSavedPalettes, getUser } from '../../../../ducks/User/selectors';
 
 function withRouter(Component){
     function ComponentWithRouterProp(props){
@@ -22,14 +22,11 @@ function withRouter(Component){
     return ComponentWithRouterProp;
 };
 
-function Userpage({ savedCosmetics, savedPalettes, getUserSavedCosmetics, getUserSavedPalettes, deleteProfilePicture, deleteCosmetic, deletePalette }) {
+function Userpage({ user, savedCosmetics, savedPalettes, getUserSavedCosmetics, getUserSavedPalettes, deleteProfilePicture, deleteCosmetic, deletePalette }) {
 
 	const navigate = useNavigate();
 	const URL = 'http://localhost:5000';
-	const [user, setUser] = useState(null);
-	const [profilePicture, setProfilePicture] = useState(null);
-	const [skinType, setSkinType] = useState(null);
-	const [profilePictureChanged, setProfilePictureChanged] = useState(false);
+	const [profilePicture] = useState(null);
 	const token = Cookies.get('accessToken');
 
 	useEffect(() => {
@@ -38,18 +35,8 @@ function Userpage({ savedCosmetics, savedPalettes, getUserSavedCosmetics, getUse
 			return navigate('/login');
 		}
 		const token = Cookies.get('accessToken');
-		
 		getUserSavedPalettes(id, token);
 		getUserSavedCosmetics(id, token);
-
-		axios.get(`${URL}/users/${id}?token=${token}`).then((response) => {
-			setUser({ ...response.data, token: token });
-			setProfilePicture(response.data.profile_picture);
-			response.data.skin_type && setSkinType(response.data.skin_type);
-		})
-			.catch(() => {
-				alert('Something went wrong while downloading user data.');
-			});
 	}, []);
 
 	const readAsBinaryString = (e) => {
@@ -75,7 +62,6 @@ function Userpage({ savedCosmetics, savedPalettes, getUserSavedCosmetics, getUse
 			readAsBinaryString(e).then((binaryFile) => {
 				const token = Cookies.get('accessToken');
 				return axios.put(`${URL}/users/${user._id}?token=${token}`, { profilePicture: binaryFile }).then(() => {
-					setProfilePictureChanged(!profilePictureChanged);
 					window.location.reload();
 				}).catch(() => {
 					alert('Something went wrong while uploading profile picture');
@@ -106,7 +92,7 @@ function Userpage({ savedCosmetics, savedPalettes, getUserSavedCosmetics, getUse
 					<FiTrash2 onClick={() => deletePalette(user._id, palette._id, token)} />
 				</div>
 				<div className='color-container'>
-					{palette.colors.map((color, index) => 
+					{palette.colors && palette.colors.map((color, index) => 
 						<div className='palette-element' key={index} style={{ 'background-color': `#${color}` }}/>
 					)}
 				</div>
@@ -127,22 +113,22 @@ function Userpage({ savedCosmetics, savedPalettes, getUserSavedCosmetics, getUse
 				<div className='profile-info'>
 					<div className='profile-img'>
 						<div>
-							{!profilePicture ? <div className='no-img' /> :
+							{!user.profile_picture ? <div className='no-img' /> :
 								<img src={`${URL}/upload/${user._id}.jpg`}></img>
 							}
 						</div>
 						<div className='profile-picture-buttons show-on-hover'>
 							<label htmlFor='file'><FiEdit3/></label>
-							<FiTrash2 onClick={() => deleteProfilePicture(user)} display={!profilePicture && 'none'}/>
+							<FiTrash2 onClick={() => deleteProfilePicture(user)} display={!user.profile_picture && 'none'}/>
 							<input id='file' type='file' accept='image/png, image/jpeg' onChange={handleFileChange} />
 						</div>
 					</div>
 					<div className='outer'>
 						<div className='row'>
 							<Text>Skintype:</Text>
-							{skinType == null ?
+							{user.skin_type == null ?
 								<Text>Start test <Link to='/skintype-test' className='link'>here</Link></Text> :
-								<Text>{skinType}</Text>
+								<Text>{user.skin_type}</Text>
 							}
 						</div>
 						<div className='row'>
@@ -181,6 +167,7 @@ function Userpage({ savedCosmetics, savedPalettes, getUserSavedCosmetics, getUse
 
 const mapStateToProps = (state, props) => {
 	return {
+		user: getUser(state),
 		savedCosmetics: getSavedCosmetics(state, props.router.params.userId),
 		savedPalettes: getSavedPalettes(state, props.router.params.userId)
 	};

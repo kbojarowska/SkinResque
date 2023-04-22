@@ -155,9 +155,7 @@ users.get('/:id/saved-palettes', authorization, async (req, res) => {
 					if (success.length === 0) return res.status(404).send(notFoundError());
 					const saved_palettes = success[0].saved_palettes;
 					getPalettesWithIds(saved_palettes).then((success) => {
-						console.log(success)
-						const result = success;
-                    res.status(200).send(result);
+                        res.status(200).send(success);
 					}).catch((error) => {
 						return res.status(400).send(badRequestError(error));
 					})
@@ -198,7 +196,6 @@ users.put('/:id', authorization, async (req, res) => {
                 return res.status(400).send(badRequestError(err));
             });
     } catch (err) {
-        console.log(err);
         res.status(500).send(serverExceptionError());
     }
 });
@@ -223,7 +220,6 @@ users.delete('/:id', authorization, async (req, res) => {
                 return res.status(400).send(badRequestError(err));
             });
     } catch (err) {
-        console.log(err);
         res.status(500).send(serverExceptionError());
     }
 });
@@ -248,7 +244,6 @@ users.delete('/profile-picture/:id', authorization, async (req, res) => {
                 return res.status(400).send(badRequestError(err));
             });
     } catch (err) {
-        console.log(err);
         res.status(500).send(serverExceptionError());
     }
 });
@@ -272,7 +267,6 @@ users.post('/', async (req, res) => {
 				res.status(200).send(success);
 			})
 			.catch(err => {
-				console.log(err)
 				return res.status(400).send(badRequestError(err));
 			})
 			res.status(400).send('USERNAME_OR_EMAIL_EXISTS');
@@ -282,7 +276,6 @@ users.post('/', async (req, res) => {
 		})
 	})
 	.catch((err) => {
-		console.log(err)
 		res.status(400).send(badRequestError(err));
 	})
 });
@@ -386,7 +379,6 @@ users.patch('/:id/palettes/:paletteId', authorization, async (req, res) => {
 						res.status(200).send(success);
 					})
 					.catch(err => {
-						console.log(err);
 						res.status(400).send(err);
 					})
 					res.status(400).send(notFoundError());
@@ -412,7 +404,6 @@ users.delete('/:id/palettes/:paletteId', authorization, async (req, res) => {
             .validate(id)
             .then(_ => {
                 removePalette(id, paletteId).then((success: UpdateReturns) => {
-					console.log(success);
                     if (!success.acknowledged) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
                 });
@@ -424,8 +415,6 @@ users.delete('/:id/palettes/:paletteId', authorization, async (req, res) => {
         res.status(500).send(serverExceptionError());
     }
 });
-
-users.post('/:id/cosmetic', async (req, res) => {});
 
 users.delete('/:id/cosmetics/:cosmeticId', authorization, async (req, res) => {
     try {

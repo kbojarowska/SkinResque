@@ -1,16 +1,15 @@
 import Cookies from 'js-cookie';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Heading, Button } from '../../../components';
 import { updateUser, deleteUser } from '../../../../ducks/User/actions';
+import { getUser } from '../../../../ducks/User/selectors';
 import '../Userpage.scss';
 
-function UserEdit({ updateUser, deleteUser }) {
+function UserEdit({ user, updateUser, deleteUser }) {
 
 	const navigate = useNavigate();
-	const URL = 'http://localhost:5000/users';
 
 	const actions = [
 		{
@@ -38,7 +37,6 @@ function UserEdit({ updateUser, deleteUser }) {
 		}
 	];
 
-	const [user, setUser] = useState(null);
 	const [token, setToken] = useState(null);
 	const [currentlyChosenOption, setCurrentlyChosenOption] = useState(actions[0].property);
 	const [value, setValue] = useState('');
@@ -57,49 +55,31 @@ function UserEdit({ updateUser, deleteUser }) {
 			</Heading>);
 	});
 
-	const validatePasswordChange = (givenCurrentPassword, newPassword, repeatNewPassword ) => {
-		const errors = {};
+	// const validatePasswordChange = (givenCurrentPassword, newPassword, repeatNewPassword ) => {
+	// 	const errors = {};
 
-		if (!givenCurrentPassword) {
-			errors.givenCurrentPassword = 'Current password is required';
-		} else if (!newPassword) {
-			errors.username = 'New password is required';
-		} else if (!repeatNewPassword) {
-			errors.password = 'Password is required';
-		}  else if (newPassword !== repeatNewPassword) {
-			errors.repeatedPassword = 'Passwords do not match';
-		}
+	// 	if (!givenCurrentPassword) {
+	// 		errors.givenCurrentPassword = 'Current password is required';
+	// 	} else if (!newPassword) {
+	// 		errors.username = 'New password is required';
+	// 	} else if (!repeatNewPassword) {
+	// 		errors.password = 'Password is required';
+	// 	}  else if (newPassword !== repeatNewPassword) {
+	// 		errors.repeatedPassword = 'Passwords do not match';
+	// 	}
 
-		return errors;
-	}
-
-	//const updateUser = (values) => {
-	//	const errors = validatePasswordChange(currentPassword, value, repeatNewPassword);
-	//	return axios.put(`${URL}/${user._id}?token=${token}`, values).then(_ => {
-	//		user[currentlyChosenOption] = value;
-	//		alert(`Succesfully updated ${currentlyChosenOption}`)
-	//	}).catch(_ => {
-	//		alert(`Something went wrong while updating ${currentlyChosenOption}`);
-	//	});
-	//};
+	// 	return errors;
+	// };
 
 	useEffect(() => {
-		const id = Cookies.get('userId');
 		const token = Cookies.get('accessToken');
 		setToken(token);
-		axios.get(`${URL}/${id}?token=${token}`).then((response) => {
-			setUser(response.data);
-			currentlyChosenOption !== 'password' && setValue(response.data[currentlyChosenOption]);
-		})
-			.catch((error) => {
-				console.log(error);
-				alert('Something went wrong while downloading user data.');
-			})
-
 	}, []);
 
 	useEffect(() => {
-		user && setValue(currentlyChosenOption !== 'password' ? user[currentlyChosenOption] : '');
+		user && setValue(currentlyChosenOption !== 'password' ? user[currentlyChosenOption] : '')
+		console.log(user, currentlyChosenOption)
+		console.log(user[currentlyChosenOption]);
 	}, [currentlyChosenOption]);
 
 	return (
@@ -109,7 +89,6 @@ function UserEdit({ updateUser, deleteUser }) {
 					{actionsList}
 				</div>
 				<div className='actions-forms'>
-
 					{currentlyChosenOption &&
 						<form>
 							{currentlyChosenOption === 'password' &&
@@ -124,7 +103,6 @@ function UserEdit({ updateUser, deleteUser }) {
 										}}
 									/>
 								</div>}
-
 							<div className='field'>
 								<Heading size='small'>{actions.find((action) => action.property === currentlyChosenOption).display}</Heading>
 								<input
@@ -152,7 +130,7 @@ function UserEdit({ updateUser, deleteUser }) {
 							<Button onClick={() => updateUser(user._id, user.token, { [currentlyChosenOption]: value })}>Submit</Button>
 						</form>}
 					{!currentlyChosenOption &&
-						<Button onClick={() => deleteUser(user._id, user.token)}>{'Delete profile'}</Button>
+						<Button onClick={() => deleteUser(user._id, user.token)}>Delete profile</Button>
 					}
 				</div>
 			</div>
@@ -160,9 +138,15 @@ function UserEdit({ updateUser, deleteUser }) {
 	);
 };
 
+const mapStateToProps = (state) => {
+	return {
+		user: getUser(state)
+	};
+};
+
 const mapDispatchToProps = {
 	updateUser,
 	deleteUser
-}
+};
 
-export default connect(null, mapDispatchToProps)(UserEdit);
+export default connect(mapStateToProps, mapDispatchToProps)(UserEdit);

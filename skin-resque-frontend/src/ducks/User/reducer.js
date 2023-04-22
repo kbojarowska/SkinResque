@@ -8,24 +8,22 @@ export const userReducer = (state = {}, action) => {
 		case types.CREATE_USER_FAILURE:
 			return state;
 		case types.GET_USER_SUCCESS:
-			state = action.payload;
-			return state;
+			return { ...state, ...action.payload };
 		case types.GET_USER_FAILURE:
-			return alert('Something went wrong while downloading user data');
+			return {};
 		case types.UPDATE_USER_SUCCESS:
 			state = { ...state, ...action.payload };
 			return state;
 		case types.UPDATE_USER_FAILURE:
 			return state;
 		case types.DELETE_USER_SUCCESS:
-			alert('Succesfully deleted user profile. You will now be signed out');
 			return {};
 		case types.GET_SAVED_COSMETICS_SUCCESS:
 			return { ...state, saved_cosmetics: action.payload };
 		case types.ADD_COSMETIC_SUCCESS:
 			return { ...state, saved_cosmetics: [ ...state.saved_cosmetics, action.payload ]};
 		case types.DELETE_USER_FAILURE:
-			return alert('Something went wrong while deleting user profile');
+			return state;
 		case types.DELETE_COSMETIC_SUCCESS:
 			return { ...state, saved_cosmetics: state.saved_cosmetics.filter((cosmetic) => cosmetic._id != action.payload)};
 		case types.GET_SAVED_PALETTES_SUCCESS:

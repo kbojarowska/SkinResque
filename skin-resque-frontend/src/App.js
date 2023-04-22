@@ -5,8 +5,8 @@ import {
 	Routes,
 	Route
 } from 'react-router-dom';
-import axios from 'axios';
-import './App.scss';
+import { connect } from 'react-redux';
+import { getUser, getUserSavedCosmetics, getUserSavedPalettes } from './ducks/User/actions';
 import Navbar from './ui/components/Navbar/Navbar';
 import FrontPage from './ui/pages/FrontPage/FrontPage';
 import CosmeticsCatalogue from './ui/pages/Cosmetics/CosmeticsCatalogue/CosmeticsCatalogue';
@@ -19,14 +19,20 @@ import CollorPalletResults from './ui/pages/ColorPalette/Result/Result';
 import LoginRegister from './ui/pages/LoginRegister/LoginRegister';
 import SkintypeResult from './ui/pages/SkintypeTest/Result/Result';
 import UserEdit from './ui/pages/Userpage/Edit/UserEdit';
+import './App.scss';
 
-
-function App() {
+function App( { getUser, getUserSavedCosmetics, getUserSavedPalettes, }) {
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
-		const id = Cookies.get('userId');
-		setUser(id);
+		const userId = Cookies.get('userId');
+		if (userId) {
+			const token = Cookies.get('accessToken');
+			getUser(userId, token);
+			getUserSavedPalettes(userId, token);
+			getUserSavedCosmetics(userId, token);
+			setUser(userId);
+		}
 	}, []);
 
 	return (
@@ -52,4 +58,10 @@ function App() {
 	);
 }
 
-export default App;
+const mapDispatchToProps = {
+	getUser,
+	getUserSavedCosmetics,
+	getUserSavedPalettes,
+}
+
+export default connect(null, mapDispatchToProps)(App);

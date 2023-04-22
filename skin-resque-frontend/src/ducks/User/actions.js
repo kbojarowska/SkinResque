@@ -2,7 +2,18 @@ import axios from 'axios';
 import types from './types';
 
 const USER_URL = 'http://localhost:5000/users';
-const PALETTE_URL = 'http://localhost:5000/palettes'
+const PALETTE_URL = 'http://localhost:5000/palettes';
+
+export const getUser = (userId, token) => {
+	return (dispatch) => {
+		return axios.get(`${USER_URL}/${userId}?token=${token}`).then((response) => {
+			dispatch({ type: types.GET_USER_SUCCESS, payload: response.data });
+		})
+		.catch((error) => {
+			dispatch({ type: types.GET_USER_FAILURE, payload: error });
+		})
+	}
+}
 
 export const createUser = (user) => {
 	return (dispatch) => {
@@ -64,7 +75,7 @@ export const getUserSavedPalettes = (userId, token) => {
 export const addCosmetic = (userId, cosmeticId, token) => {
 	return (dispatch) => {
 		return axios.patch(`${USER_URL}/${userId}/cosmetics/${cosmeticId}?token=${token}`).then(() => {
-			dispatch({ type: types.ADD_COSMETIC_SUCCESS, cosmeticId });
+			dispatch({ type: types.ADD_COSMETIC_SUCCESS, payload: cosmeticId });
 		})
 		.catch((error) => {
 			dispatch({ type: types.ADD_COSMETIC_FAILURE, payload: error });
