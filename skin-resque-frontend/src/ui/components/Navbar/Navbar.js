@@ -10,7 +10,6 @@ import './Navbar.scss';
 function Navbar({ user, logoutUser }) {
 
 	const navigate = useNavigate();
-	console.log(user);
 
 	return (
 		<div className='navbar'>
