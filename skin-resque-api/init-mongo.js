@@ -7,6 +7,9 @@ db.Cosmetics.insert([
         "name": "Balancing Moringa Oil Cleanser",
         "description": "Balancing Moringa Oil Cleanser: a simple cleanser for oily skin made with soothing moringa and tamanu oils.",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2020/03/How-to-Make-Balancing-Moringa-Oil-Cleanser-an-oil-based-cleanser-made-with-virgin-moringa-tamanu-and-black-castor-oils.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "85 ml Moringa Oil",
             "85 ml Tamanu Oil",
@@ -22,6 +25,9 @@ db.Cosmetics.insert([
         "name": "Aloe Cucumber Makeup Setting Spray",
         "description": "Aloe Cucumber Makeup Setting Spray: a cooling facial spray to help fix and mattify cosmetics.",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2019/12/How-to-Make-Makeup-Setting-Spray-using-all-natural-ingredients.jpg?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "90 ml Cucumber Hydrosol",
             "90 ml distilled water",
@@ -42,6 +48,9 @@ db.Cosmetics.insert([
         "name": "Papaya Tamanu Facial Oil",
         "description": "Papaya Tamanu Facial Oil: a balancing facial serum that encourages healthy, clear, and radiant skin.",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2019/12/How-to-make-Papaya-Neem-Facial-Oil-a-balancing-facial-serum-that-encourages-healthy-clear-and-radiant-skin-1.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "30 ml Tamanu Oil",
             "30 ml Organic Virgin Coconut Oil, melted",
@@ -66,6 +75,9 @@ db.Cosmetics.insert([
         "name": "Rose Frankincense Scar Balm",
         "description": "Rose Frankincense Scar Balm: a nourishing moisturizer to support damaged skin.",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2019/11/Learn-how-to-make-Rose-Frankincense-Scar-Balm-a-nourishing-salve-made-with-rose-hip-seed-oil-and-frankincense-2.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "30 grams Beeswax",
             "30 ml Organic Virgin Rose Hip Seed Oil",
@@ -87,6 +99,9 @@ db.Cosmetics.insert([
         "name": "Balancing Clay Facial Mask",
         "description": "Balancing Clay Facial Mask: a deep-cleansing facial mask made with two kinds of cosmetic clay and a special blend of essential oils to promote healthy, glowing skin.",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2019/11/Balancing-Clay-Facial-Mask-a-deep-cleansing-facial-mask-made-with-two-kinds-of-cosmetic-clay-and-a-special-blend-of-essential-oils-to-promote-glowing-skin.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "60 grams French Black Clay",
             "50 grams Glacial Clay",
@@ -109,6 +124,9 @@ db.Cosmetics.insert([
         "name": "Nourishing Jojoba Brow Balm",
         "description": "Nourishing Jojoba Brow Balm: an all-natural conditioning balm for eyebrows",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2019/10/How-to-make-Nourishing-Jojoba-Brow-Balm-an-all-natural-balm-to-condition-eyebrows-2.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "28 grams Brown Jojoba Wax Beads",
             "5 grams Beeswax",
@@ -129,6 +147,9 @@ db.Cosmetics.insert([
         "name": "Coconut Aloe Cleansing Balm",
         "description": "Coconut Aloe Cleansing Balm: a deep cleaning oil cleanser made with virgin coconut and aloe.",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2019/06/Coconut-Aloe-Cleansing-Balm-a-deep-cleaning-oil-cleanser-made-with-virgin-coconut-and-aloe-13.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "120 grams Organic Virgin Coconut Oil",
             "60 grams Aloe Vera Butter",
@@ -149,6 +170,9 @@ db.Cosmetics.insert([
         "name": "Cooling Cucumber Avocado Ice Mask",
         "description": "Cooling Cucumber Avocado Ice Mask: a refreshing facial mask made with Palo Santo and Andean Mint Essential Oils.",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2019/05/How-to-Make-a-Cooling-Cucumber-Avocado-Ice-Mask-a-refreshing-facial-mask-made-with-Palo-Santo-and-Andean-Mint-Essential-Oils-2.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "60 grams fresh avocado",
             "60 grams fresh cucumber, chopped",
@@ -167,6 +191,9 @@ db.Cosmetics.insert([
         "name": "Dead Sea Mud & Palo Santo Mask",
         "description": "Dead Sea Mud & Palo Santo Mask: a deep cleansing facial mask with soothing Palo Santo and Lavandin essential oils.",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2019/04/How-to-Make-a-Dead-Sea-Mud-Palo-Santo-Mask-a-deep-cleansing-facial-mask-with-soothing-Palo-Santo-and-Lavandula-essential-oils.-5.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "100 grams Dead Sea Mud",
             "15 grams Lavender Hydrosol",
@@ -185,6 +212,9 @@ db.Cosmetics.insert([
         "name": "Cucumber Neroli Facial Spray",
         "description": "Cucumber Neroli Facial Spray: a soothing and refreshing facial spritz made with natural hydrosols",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2018/10/How-to-Make-Cucumber-Neroli-Facial-Spray-a-soothing-and-refreshing-facial-spritz-made-with-natural-hydrosols-1-2.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "2 ounces (60 ml) Cucumber Hydrosol",
             "1 ounce (30 ml) Carrot Seed Hydrosol",
@@ -202,6 +232,9 @@ db.Cosmetics.insert([
         "name": "Sea Clay & Aloe Vera Facial Mud Mask",
         "description": "Sea Clay & Aloe Vera Facial Mud Mask: An exfoliating and deep cleansing mask infused with palmarosa and sandalwood",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2018/09/How-to-Make-a-Sea-Clay-and-Aloe-Vera-Facial-Mud-Great-for-Cleansing-and-Exfoliation-1.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "20 grams Organic Camellia Oil",
             "16 grams French Green Clay",
@@ -221,6 +254,9 @@ db.Cosmetics.insert([
         "name": "Coconut Clay Facial Scrub",
         "description": "Coconut\u00a0Clay Facial Scrub: A dry facial scrub made with coconut and yellow illite clay",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2018/08/How-to-Make-Coconut-Clay-Scrub-a-simple-dry-face-wash-made-with-coconut-and-yellow-illite-clay-2.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "3/4 cup Yellow Illite Clay",
             "1/4 cup Fine Shredded Desiccated Coconut (unsweetened)",
@@ -239,6 +275,9 @@ db.Cosmetics.insert([
         "name": "Balancing Ylang Ylang Facial Oil",
         "description": "Balancing Ylang Ylang Facial Oil: A light and moisturizing facial skin care blend featuring organic jojoba, frankincense, and myrrh.",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2018/07/Natural-Beauty-Workshop-4.jpg?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "10 ml (2 teaspoons) Organic Clear Jojoba Oil",
             "10 ml (2 teaspoons) Virgin Rose Hip Seed Oil",
@@ -257,6 +296,9 @@ db.Cosmetics.insert([
         "name": "Strawberry Seed Oil Serum",
         "description": "Strawberry Seed Oil Serum: A soothing night time facial moisturizer made with antioxidant rich carrier oils.",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2018/03/Homemade-Strawberry-Seed-Oil-Serum.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "30 ml\u00a0Strawberry Seed Oil",
             "30 ml\u00a0Organic Camellia Oil",
@@ -275,6 +317,9 @@ db.Cosmetics.insert([
         "name": "Berry Seed Facial Cream",
         "description": "Berry Seed Facial Cream: A simple emulsion of nutritive berry seed oils and fragrant hyrdosols.",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2018/03/Berry-Seed-Facial-Cream-Recipe.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "18 grams Chokeberry Seed Oil",
             "18 grams Raspberry Seed Oil",
@@ -291,6 +336,9 @@ db.Cosmetics.insert([
         "name": "Hibiscus Honey Clay Facial Scrub",
         "description": "Makes about 40 grams",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2018/02/Make-Your-Own-Hibiscus-Honey-Clay-Facial-Scrub.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "1 tablespoon (6 g) Hibiscus Petal Powder",
             "2 teaspoons (9 g) Hibiscus Seed Oil",
@@ -308,6 +356,9 @@ db.Cosmetics.insert([
         "name": "Coconut Honey Turmeric Facial Scrub",
         "description": "Coconut Honey Turmeric Facial Scrub: an all-natural scrub with honey and coconut",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2018/02/6a00e008d395a8883401b7c9477292970b-800wi.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "3 tablespoons (19 g) Finely Shredded Coconut (Unsweetened)",
             "2 tablespoons (19 g) Honey Powder",
@@ -326,6 +377,9 @@ db.Cosmetics.insert([
         "name": "Lavender & Sea Clay Mask",
         "description": "Makes about 4 ounces (by volume)",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2018/02/6a00e008d395a8883401b7c933aa25970b-800wi.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "1/2 cup Sea Clay",
             "1/2 cup Lavender Hydrosol",
@@ -345,6 +399,9 @@ db.Cosmetics.insert([
         "name": "Oatmeal and Chamomile Foaming Cleanser",
         "description": "Makes about 8 ounces (240 ml)",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2017/06/Oatmeal-and-Chamomile-Foaming-Cleanser.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "8 ounces (240 ml) Shea Butter Shower Gel Base or any gentle liquid soap*",
             "3 tablespoons (60 ml) Baby Blue Jojoba Wax Beads",
@@ -364,6 +421,9 @@ db.Cosmetics.insert([
         "name": "Eucalyptus Spearmint Shaving Soap",
         "description": "Makes one 8-ounce container",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2017/06/Eucalyptus-Spearmint-Shaving-Soap.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "8 ounces (240 grams) Hemp Melt and Pour Soap Base",
             "2\u00a0tablespoons (30 ml) White Kaolin\u00a0Clay",
@@ -384,6 +444,9 @@ db.Cosmetics.insert([
         "name": "Clay Facial Masks \u2013 Three Ways",
         "description": "Related",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2017/05/Clay-Facial-Masks-\u2013-Three-Ways.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "1/2 cup\u00a0Sea Clay",
             "1 teaspoon\u00a0Arrowroot Powder",
@@ -399,6 +462,9 @@ db.Cosmetics.insert([
         "name": "Manuka Honey & Banana Facial Mask",
         "description": "Makes about 2 servings",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2017/08/Manuka-Honey-Banana-Facial-Mask.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "1/2 fresh banana, mashed",
             "4 tablespoons (60 ml) White Kaolin Clay",
@@ -418,6 +484,9 @@ db.Cosmetics.insert([
         "name": "Kiwi Seed Facial Mask",
         "description": "Makes 1-2 servings",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2017/08/Kiwi-Seed-Facial-Mask.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "1 tablespoon Bentonite Clay",
             "1/2 fresh Kiwi, mashed",
@@ -434,6 +503,9 @@ db.Cosmetics.insert([
         "name": "Sweet Fennel Facial Steam",
         "description": "Makes about six 1/2-ounce (15g) servings",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2017/08/Sweet-Fennel-Facial-Steam.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "\u00bd ounce Lemongrass (Dried)",
             "\u00bd ounce Spearmint Leaf",
@@ -451,6 +523,9 @@ db.Cosmetics.insert([
         "name": "Peaches & Cream Facial Scrub",
         "description": "Makes one portion",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2017/08/Peaches-Cream-Facial-Scrub.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "1 peach, pit removed and pureed",
             "1 tablespoon plain yogurt",
@@ -468,6 +543,9 @@ db.Cosmetics.insert([
         "name": "Fresh Rose & Almond Milk Beauty Treatments",
         "description": "Makes about 3/4 cup",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2017/08/Fresh-Rose-Almond-Milk-Beauty-Treatments.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "1/4 cup raw almonds*",
             "1 cup water",
@@ -483,6 +561,9 @@ db.Cosmetics.insert([
         "name": "Hydrating Watermelon Rind Facial from Blah Blah Magazine",
         "description": "We are thrilled to be featuring a post today from Cybele Masterman, author of Blah Blah Magazine. Cybele has shared some really beautiful and creative beauty recipes on her site. From skin soothing lotions\u00a0to foaming cleansers, Cybele has a way of making her homemade beauty recipes extra special. This week\u2019s hydrating facial is no exception. Thank you, Cybele, for sharing your recipe with us!",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2017/08/Guest-Post-Hydrating-Watermelon-Rind-Facial-from-Blah-Blah-Magazine.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "2 tablespoons grated Watermelon Rind",
             "2 tablespoons Plain Yogurt (or equivalent yoghurt powder)",
@@ -498,6 +579,9 @@ db.Cosmetics.insert([
         "name": "Guest Post: Hydrating Watermelon Rind Facial from Blah Blah Magazine",
         "description": "We are thrilled to be featuring a post today from Cybele Masterman, author of Blah Blah Magazine. Cybele has shared some really beautiful and creative beauty recipes on her site. From skin soothing lotions\u00a0to foaming cleansers, Cybele has a way of making her homemade beauty recipes extra special. This week's hydrating facial is no exception. Thank you, Cybele, for sharing your recipe with us!",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2014/07/6a00e008d395a8883401a511dd9023970c.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "2 tablespoons grated Watermelon Rind",
             "2 tablespoons Plain Yogurt (or equivalent yoghurt powder)",
@@ -513,6 +597,9 @@ db.Cosmetics.insert([
         "name": "Sacha Inchi Facial Serum",
         "description": "Makes about 1 ounce",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2014/02/yarrow.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "1/2 ounce Organic Sacha Inchi Oil",
             "1/2 ounce Organic Rose Hip Seed Oil",
@@ -531,6 +618,9 @@ db.Cosmetics.insert([
         "name": "Getting Started With the Oil Cleansing Method",
         "description": "My skin is way too oily after cleansing.",
         "photo": "https://i0.wp.com/naturalbeautyworkshop.com/wp-content/uploads/2014/02/yarrow.png?resize=400%2C400&ssl=1",
+        "skinTypeRecommendation": [
+            ""
+        ],
         "ingredients": [
             "1 part Castor Oil",
             "4 parts Carrier Oil"

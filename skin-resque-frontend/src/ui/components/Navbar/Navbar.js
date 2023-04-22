@@ -22,7 +22,7 @@ function Navbar({ user, setUser }) {
 			</div>
 			<div className='linkList'>
 				<Link to='/'><Heading size='small'>HOME</Heading></Link>
-				{ user && <Dropdown buttonText={'PROFILE'} links={[{page: '/userprofile', displayText: 'View'}, {page: '/editprofile', displayText: 'Edit'}]}/>}
+				{ user && <Dropdown buttonText={'PROFILE'} links={[{page: `/userprofile/${Cookies.get('userId')}`, displayText: 'View'}, {page: '/editprofile', displayText: 'Edit'}]}/>}
 				<Link to='/cosmetics/page/1'><Heading size='small'>COSMETICS</Heading></Link>
 				{user ? <Heading size='small'><button className='button-no-decoration' onClick={logOut}>SIGN OUT</button></Heading> : <Link to='/login'><Heading size='small'>SIGN IN</Heading></Link>}
 			</div>

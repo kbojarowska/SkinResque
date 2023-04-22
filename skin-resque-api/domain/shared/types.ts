@@ -27,5 +27,5 @@ export interface IUser {
     profile_picture: Boolean;
     skin_type: null | skinType;
     saved_cosmetics: Array<Schema.Types.ObjectId>;
-    saved_palettes: Array<string>;
+    saved_palettes: Array<Schema.Types.ObjectId>;
 }

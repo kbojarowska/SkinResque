@@ -40,8 +40,8 @@ function App() {
 					<Route path='/skintype-test' element={<SkintypeTestPage/>}/>
 					<Route path='/skintype-test/results/:skintype' element={<SkintypeResult/>}/>
 					<Route path='/color-test/results' element={<CollorPalletResults/>}/>
-					<Route path='/userprofile' element={<Userpage/>}/>
-					<Route path='/editprofile' element={<UserEdit setCurrentUser={setUser}/>}/>
+					<Route path='/userprofile/:userId' element={<Userpage/>}/>
+					<Route path='/editprofile/:userId' element={<UserEdit setCurrentUser={setUser}/>}/>
 					<Route path='/color-test/info' element={<Info/>}/>
 					<Route path='/color-test/test' element={<Test/>}/>
 					<Route path='/login' element={<LoginRegister isLogin={true} setUser={setUser}/>}/>

@@ -28,6 +28,8 @@ import { getUserOneByUsernameOrEmail } from '../infrastructure/repository/user/g
 import * as yup from 'yup';
 import { DeleteReturns, UpdateReturns } from '../infrastructure/database_abstraction/types.js';
 import fs from 'fs';
+import { getCosmeticsWithIds } from '../infrastructure/repository/cosmetics/getCosmeticsWithIds.js';
+import { getPalettesWithIds } from '../infrastructure/repository/palettes/getPalettesWirthIds.js';
 
 const users = Router({ mergeParams: true });
 const usersProfilePictureDirectoryPath = './public/upload';
@@ -97,8 +99,69 @@ users.get('/:id', authorization, async (req, res) => {
             .then(_ => {
                 getUserOne(id).then((success: IUser[]) => {
                     if (success.length === 0) return res.status(404).send(notFoundError());
-					const result = req.query.palettes ? success[0].saved_palettes : req.query.cosmetics ? success[0].saved_cosmetics : success[0];
+					const result = success[0];
                     res.status(200).send(result);
+                });
+            })
+            .catch(err => {
+                return res.status(400).send(badRequestError(err));
+            });
+    } catch (err) {
+        res.status(500).send(serverExceptionError());
+    }
+});
+
+users.get('/:id/saved-cosmetics', authorization, async (req, res) => {
+    try {
+        const { id } = req.params;
+        yup.string()
+            .length(24)
+            .test('isValidObjectId', 'Not a valid ObjectId', (value, context) => {
+                return isValidObjectId(value);
+            })
+            .required()
+            .validate(id)
+            .then(_ => {
+                getUserOne(id).then((success: IUser[]) => {
+					if (success.length === 0) return res.status(404).send(notFoundError());
+					getCosmeticsWithIds(success[0].saved_cosmetics).then((success) => {
+						const result = success;
+                    res.status(200).send(result);
+					}).catch((error) => {
+						return res.status(400).send(badRequestError(error));
+					})
+                });
+            })
+            .catch(err => {
+                return res.status(400).send(badRequestError(err));
+            });
+    } catch (err) {
+        res.status(500).send(serverExceptionError());
+    }
+});
+
+users.get('/:id/saved-palettes', authorization, async (req, res) => {
+    try {
+        const { id } = req.params;
+        yup.string()
+            .length(24)
+            .test('isValidObjectId', 'Not a valid ObjectId', (value, context) => {
+                return isValidObjectId(value);
+            })
+            .required()
+            .validate(id)
+            .then(_ => {
+                getUserOne(id).then((success: IUser[]) => {
+					if (success.length === 0) return res.status(404).send(notFoundError());
+					console.log(success[0].saved_palettes)
+					const saved_palettes = success[0].saved_palettes;
+					getPalettesWithIds(saved_palettes).then((success) => {
+						console.log(success)
+						const result = success;
+                    res.status(200).send(result);
+					}).catch((error) => {
+						return res.status(400).send(badRequestError(error));
+					})
                 });
             })
             .catch(err => {

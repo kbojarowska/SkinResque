@@ -20,6 +20,8 @@ export const userReducer = (state = {}, action) => {
 		case types.DELETE_USER_SUCCESS:
 			alert('Succesfully deleted user profile. You will now be signed out');
 			return {};
+		case types.GET_SAVED_COSMETICS_SUCCESS:
+			return { ...state, saved_cosmetics: action.payload };
 		case types.ADD_COSMETIC_SUCCESS:
 			//return { ...state, saved_cosmetics: [ ...state.saved_cosmetics, action.payload ]};
 			return state;
@@ -27,6 +29,8 @@ export const userReducer = (state = {}, action) => {
 			return alert('Something went wrong while deleting user profile');
 		case types.DELETE_COSMETIC_SUCCESS:
 			return { ...state, saved_cosmetics: state.saved_cosmetics.filter((cosmeticId) => cosmeticId != action.payload)};
+		case types.GET_SAVED_PALETTES_SUCCESS:
+			return { ...state, saved_palettes: action.payload };
 		case types.DELETE_PALETTE_SUCCESS:
 			return { ...state, saved_palettes: state.saved_palettes.filter((paletteId) => paletteId != action.payload)};
 		case types.DELETE_PROFILE_PICTURE_SUCCESS:

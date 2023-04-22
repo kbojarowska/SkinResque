@@ -41,6 +41,26 @@ export const deleteUser = (userId, token) => {
 	};
 };
 
+export const getUserSavedCosmetics = (userId, token) => {
+	return (dispatch) => {
+		return axios.get(`${USER_URL}/${userId}/saved-cosmetics?token=${token}`).then((savedCosmetics) => {
+			dispatch({ type: types.GET_SAVED_COSMETICS_SUCCESS, payload: savedCosmetics.data});
+		}).catch((error) => {
+			dispatch({ type: types.GET_SAVED_COSMETICS_FAILURE, payload: error});
+		});
+	};
+};
+
+export const getUserSavedPalettes = (userId, token) => {
+	return (dispatch) => {
+		return axios.get(`${USER_URL}/${userId}/saved-palettes?token=${token}`).then((savedCosmetics) => {
+			dispatch({ type: types.GET_SAVED_PALETTES_SUCCESS, payload: savedCosmetics.data});
+		}).catch((error) => {
+			dispatch({ type: types.GET_SAVED_PALETTES_FAILURE, payload: error});
+		});
+	};
+};
+
 export const addCosmetic = (userId, cosmeticId, token) => {
 	return (dispatch) => {
 		return axios.patch(`${USER_URL}/${userId}/cosmetics/${cosmeticId}?token=${token}`).then(() => {

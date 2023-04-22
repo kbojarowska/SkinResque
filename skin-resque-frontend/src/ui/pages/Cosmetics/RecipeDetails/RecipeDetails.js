@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import axios from 'axios';
 import Cookies from 'js-cookie';
 import { FiSave } from 'react-icons/fi';
 import { Heading, Modal, Text } from '../../../components'
@@ -31,7 +30,7 @@ function RecipeDetails({ cosmetic, addCosmetic }) {
 	const saveCosmetic = (cosmeticId) => {
 		const userId = Cookies.get('userId');
 		const token = Cookies.get('accessToken');
-		addCosmetic(userId, '643da13e6c1eb37faa95cfc6', token)
+		addCosmetic(userId, cosmeticId, token);
 	}
 
 	return (

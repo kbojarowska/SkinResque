@@ -1,22 +1,34 @@
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { Heading, Text } from '../../../components';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams} from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { FiTrash2, FiEdit3 } from 'react-icons/fi';
-import { deleteProfilePicture, deleteCosmetic, deletePalette } from '../../../../ducks/User/actions';
+import { deleteProfilePicture, deleteCosmetic, deletePalette, getUserSavedCosmetics, getUserSavedPalettes } from '../../../../ducks/User/actions';
 import '../Userpage.scss';
+import { getSavedCosmetics, getSavedPalettes } from '../../../../ducks/User/selectors';
 
-function Userpage({ deleteProfilePicture }) {
+function withRouter(Component){
+    function ComponentWithRouterProp(props){
+        let params = useParams();
+        return(
+            <Component
+                {...props}
+                router={{ params }}
+            />
+        );
+    }
+    return ComponentWithRouterProp;
+};
+
+function Userpage({ savedCosmetics, savedPalettes, getUserSavedCosmetics, getUserSavedPalettes, deleteProfilePicture }) {
 
 	const navigate = useNavigate();
 	const URL = 'http://localhost:5000';
 	const [user, setUser] = useState(null);
 	const [profilePicture, setProfilePicture] = useState(null);
 	const [skinType, setSkinType] = useState(null);
-	const [savedPalettes, setSavedPalettes] = useState([]);
-	const [savedCosmetics, setSavedCosmetics] = useState([]);
 	const [profilePictureChanged, setProfilePictureChanged] = useState(false);
 	const token = Cookies.get('accessToken');
 
@@ -26,11 +38,12 @@ function Userpage({ deleteProfilePicture }) {
 			return navigate('/login');
 		}
 		const token = Cookies.get('accessToken');
+		
+		getUserSavedPalettes(id, token);
+		getUserSavedCosmetics(id, token);
 
 		axios.get(`${URL}/users/${id}?token=${token}`).then((response) => {
 			setUser({ ...response.data, token: token });
-			setSavedPalettes(response.data.saved_palettes);
-			setSavedCosmetics(response.data.saved_cosmetics);
 			setProfilePicture(response.data.profile_picture);
 			response.data.skin_type && setSkinType(response.data.skin_type);
 		})
@@ -71,7 +84,7 @@ function Userpage({ deleteProfilePicture }) {
 		}
 	};
 
-	const cosmeticsList = savedCosmetics.map((cosmetic) => {
+	const cosmeticsList = savedCosmetics && savedCosmetics.map((cosmetic) => {
 		return (
 			<Link to={`/cosmetics/${cosmetic.id}`} key={cosmetic.id}>
 				<div className='cosmetic' >
@@ -84,17 +97,18 @@ function Userpage({ deleteProfilePicture }) {
 			</Link >
 		)
 	})
+	
 
-	const paletteList = savedPalettes.map((palette) => {
+	const paletteList = savedPalettes && savedPalettes.map((palette) => {
 		return (
 			<div className='palette' key={palette.id}>
 				<div className='bin'>
 					<FiTrash2 onClick={() => deletePalette(user._id, palette.id, token)} />
 				</div>
 				<div className='color-container'>
-					{palette.colors.map((color, index) => (
-						<div className='palette-element' key={index} style={{ 'background-color': color }}></div>
-					))}
+					{palette.colors.map((color, index) => 
+						<div className='palette-element' key={index} style={{ 'background-color': `#${color}` }}/>
+					)}
 				</div>
 				<Text size='small'>{palette.name}</Text>
 				<div className='edit'>
@@ -133,11 +147,11 @@ function Userpage({ deleteProfilePicture }) {
 						</div>
 						<div className='row'>
 							<Text>Saved palettes:</Text>
-							<Text>{savedPalettes.length}</Text>
+							<Text>{savedPalettes && savedPalettes.length}</Text>
 						</div>
 						<div className='row'>
 							<Text>Saved cosmetics:</Text>
-							<Text>{savedCosmetics.length}</Text>
+							<Text>{savedCosmetics && savedCosmetics.length}</Text>
 						</div>
 
 					</div>
@@ -145,7 +159,7 @@ function Userpage({ deleteProfilePicture }) {
 			</div>
 			<div className='green-bg'>
 				<Heading>Saved cosmetics:</Heading>
-				{savedCosmetics.length > 0 ?
+				{savedCosmetics && savedCosmetics.length > 0 ?
 					<div className='container'>
 						{cosmeticsList}
 					</div> :
@@ -154,7 +168,7 @@ function Userpage({ deleteProfilePicture }) {
 			</div>
 			<div className='beige-palette-bg'>
 				<Heading>Saved palettes:</Heading>
-				{savedPalettes.length > 0 ?
+				{savedPalettes && savedPalettes.length > 0 ?
 					<div className='container'>
 						{paletteList}
 					</div> :
@@ -165,8 +179,17 @@ function Userpage({ deleteProfilePicture }) {
 	)
 }
 
+const mapStateToProps = (state, props) => {
+	return {
+		savedCosmetics: getSavedCosmetics(state, props.router.params.userId),
+		savedPalettes: getSavedPalettes(state, props.router.params.userId)
+	};
+}
+
 const mapDispatchToProps = {
-    deleteProfilePicture
+    deleteProfilePicture,
+	getUserSavedCosmetics,
+	getUserSavedPalettes
 };
 
-export default connect(null, mapDispatchToProps)(Userpage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Userpage));

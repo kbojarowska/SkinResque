@@ -11,11 +11,6 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 
-@app.route('/')
-def hello():
-    return 'Hello, World!'
-
-
 @app.route('/palettes', methods=['POST'])
 def create_palettes():
     encoded_image = request.json['image'].split(',')[1]
@@ -28,7 +23,9 @@ def create_palettes():
         palettes = palette_finder(found_color)
         return jsonify(palettes=palettes, skin=found_color)
     else:
-        abort(400, 'Invalid data provided')
+        return app.response_class(
+            status=400, response="Invalid data provided.", content_type="text/plain"
+        )
 
 
 if __name__ == '__main__':

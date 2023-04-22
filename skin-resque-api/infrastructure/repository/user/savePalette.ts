@@ -8,7 +8,7 @@ export const savePalette = async (id: string, paletteId: string): Promise<Update
         { _id: id },
         {
             // @ts-ignore
-            $push: { saved_palettes: { $eq: paletteId } },
+            $push: { saved_palettes: paletteId },
         },
         { upsert: false }
     );

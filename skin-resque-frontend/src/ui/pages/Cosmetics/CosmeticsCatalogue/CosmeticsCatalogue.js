@@ -1,12 +1,14 @@
-import { connect } from 'react-redux';
-import { getCosmetics } from '../../../../ducks/Cosmetics/selectors';
+import { connect } from "react-redux";
+import { getCosmetics } from "../../../../ducks/Cosmetics/selectors";
+import { getCosmeticsList } from '../../../../ducks/Cosmetics/operations';
 import { Link, useParams } from 'react-router-dom';
 import { Arrow, Heading, Pagination, RadioButton, Text } from '../../../components';
-import { useState } from 'react';
+import './CosmeticsCatalogue.scss';
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import './CosmeticsCatalogue.scss';
 
-function CosmeticsCatalogue({cosmetics}) {
+function CosmeticsCatalogue({cosmetics, getCosmeticsList}) {
 
 	const { currentPage } = useParams();
 	const [ isOpen, setIsOpen ] = useState(false);
@@ -24,6 +26,10 @@ function CosmeticsCatalogue({cosmetics}) {
 			}).toString(),
 		  });
 	  };
+
+	useEffect(() => {
+		getCosmeticsList(currentPage)
+	}, [currentPage, getCosmeticsList])
 
 	const cosmeticsList = cosmetics.map((cosmetic) => {
 		return (
@@ -68,6 +74,9 @@ const mapStateToProps = (state) =>{
         cosmetics: getCosmetics(state),
     }
 }
-
-export default connect(mapStateToProps, null)(CosmeticsCatalogue);
+const mapDispatchToProps = {
+	getCosmeticsList,
+}
+  
+export default connect(mapStateToProps, mapDispatchToProps)(CosmeticsCatalogue);
 

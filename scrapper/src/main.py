@@ -41,6 +41,7 @@ for page in range(1, 12):
                 'name': name,
                 'description': info,
                 'photo': image,
+                'skinTypeRecommendation': [''],
                 'ingredients': ingredients,
                 'recipe': recipe
             }
