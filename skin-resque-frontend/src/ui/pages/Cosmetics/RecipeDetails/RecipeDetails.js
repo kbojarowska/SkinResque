@@ -42,7 +42,7 @@ function RecipeDetails({ cosmetic, addCosmetic }) {
 						<div className='save' onClick={() => setIsOpen(true)}>
 						<FiSave size={25}/>
 						</div>
-						{isOpen && <Modal setIsOpen={setIsOpen} onSave={() => saveCosmetic(cosmetic._id)}/>}</Heading>
+						{isOpen && <Modal setIsOpen={setIsOpen} onSave={() => saveCosmetic(cosmetic)}/>}</Heading>
 						<div className='details-container'>
 							<img src={cosmetic.photo} className='img'></img>
 							<div className='dark-beige-bg'>

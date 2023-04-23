@@ -117,10 +117,10 @@ export const getUserSavedPalettes = (userId, token) => {
 	};
 };
 
-export const addCosmetic = (userId, cosmeticId, token) => {
+export const addCosmetic = (userId, cosmetic, token) => {
 	return (dispatch) => {
-		return axios.patch(`${USER_URL}/${userId}/cosmetics/${cosmeticId}?token=${token}`).then(() => {
-			dispatch({ type: types.ADD_COSMETIC_SUCCESS, payload: cosmeticId });
+		return axios.patch(`${USER_URL}/${userId}/cosmetics/${cosmetic._id}?token=${token}`).then(() => {
+			dispatch({ type: types.ADD_COSMETIC_SUCCESS, payload: cosmetic });
 		})
 		.catch((error) => {
 			dispatch({ type: types.ADD_COSMETIC_FAILURE, payload: error });
@@ -143,7 +143,7 @@ export const addPalette = (userId, palette, token) => {
 		return axios.post(PALETTE_URL, palette).then((response) => {
 			const paletteId = response.data[0]._id;
 			axios.patch(`${USER_URL}/${userId}/palettes/${paletteId}?token=${token}`).then(() => {
-				dispatch({ type: types.DELETE_COSMETIC_SUCCESS, payload: paletteId });
+				dispatch({ type: types.ADD_PALETTE_SUCCESS, payload: palette });
 			}).catch((error) => {
 				dispatch({ type: types.ADD_PALETTE_FAILURE, payload: error });
 			})
