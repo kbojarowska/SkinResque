@@ -279,7 +279,7 @@ function Questions({ updateUser }) {
 			const userId = Cookies.get('userId');
 			if (userId) {
 				const token = Cookies.get('accessToken');
-				updateUser(userId, token, { skinType: skinTypeResult });
+				updateUser(userId, token, { skin_type: skinTypeResult });
 			}
 			return navigate(`/skintype-test/results/${skinTypeResult}`);
 		}

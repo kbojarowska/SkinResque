@@ -173,7 +173,7 @@ users.get('/:id/saved-palettes', authorization, async (req, res) => {
 users.put('/:id', authorization, async (req, res) => {
     try {
         const { id } = req.params;
-        const { email, name, profilePicture, skinType } = req.body;
+        const { email, name, profilePicture, skin_type } = req.body;
         yup.string()
             .length(24)
             .test('isValidObjectId', 'Not a valid ObjectId', (value, context) => {
@@ -188,7 +188,7 @@ users.put('/:id', authorization, async (req, res) => {
 						if (error) return res.status(500).send(serverExceptionError());
 					})
 				}
-                updateUser(id, email, name, profilePicture ? true : false, skinType).then((success: UpdateReturns) => {
+                updateUser(id, email, name, profilePicture ? true : false, skin_type).then((success: UpdateReturns) => {
                     if (!success.acknowledged) return res.status(404).send(notFoundError());
                     res.status(200).send(success);
                 });
