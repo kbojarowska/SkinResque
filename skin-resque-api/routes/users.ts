@@ -14,7 +14,7 @@ import {
 	removeSavedCosmetics, 
 	removeProfilePicture, 
 	updateUser, 
-	updateUserToken } from '../infrastructure/repository/user/index.js';
+	updateUserTokens } from '../infrastructure/repository/user/index.js';
 import { getCosmeticOne } from '../infrastructure/repository/cosmetics/index.js';
 import { getPaletteOne } from '../infrastructure/repository/palettes/index.js';
 import { IUser } from '../domain/shared/types.js';
@@ -65,10 +65,21 @@ const removeProfilePictureFile = (id: string, callback: Function) => {
 	});
 }
 
-const generateUserToken = (user: any, hours: number) => {
+const generateUserAccessToken = (user: any, hours: number) => {
 	const token = jwt.sign(
 		{ user_id: user._id, user },
 		process.env.ACCESS_TOKEN_KEY as string,
+		{
+			expiresIn: `${hours}h`
+		}
+	);
+	return token;
+};
+
+const generateUserRefreshToken = (user: any, hours: number) => {
+    const token = jwt.sign(
+		{ user_id: user._id, user },
+		process.env.REFRESH_TOKEN_KEY as string,
 		{
 			expiresIn: `${hours}h`
 		}
@@ -295,15 +306,15 @@ users.post('/login', async (req, res) => {
 			if (result.length === 0) return res.status(400).send("USER_DOES_NOT_EXIST");
 
             const user = result[0];
-            
 			compare(body.password, user.password)
 			.then(passwordCorrect => {
 				const tokenExpiryHours = 1;
-                const token = generateUserToken(user, tokenExpiryHours);
+                const accessToken = generateUserAccessToken(user, tokenExpiryHours);
+                const refreshToken = generateUserRefreshToken(user, tokenExpiryHours);
 				const tokenExpiryDate = generateUserTokenExpiryDate(tokenExpiryHours);
-				updateUserToken(user._id.toString(), token, tokenExpiryDate).then((success: UpdateReturns) => {
+				updateUserTokens(user._id.toString(), accessToken, refreshToken, tokenExpiryDate).then((success: UpdateReturns) => {
 					if (!success.acknowledged) return res.status(404).send(notFoundError());
-                    res.status(200).send({ passwordCorrect: passwordCorrect, id: result[0]._id, access_token: token, token_expiry_date: tokenExpiryDate });
+                    res.status(200).send({ passwordCorrect: passwordCorrect, id: result[0]._id, access_token: accessToken, refresh_token: refreshToken, token_expiry_date: tokenExpiryDate });
 				})
 			})
 			.catch(err => {
