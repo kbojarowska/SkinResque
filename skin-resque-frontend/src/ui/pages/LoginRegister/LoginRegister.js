@@ -1,48 +1,13 @@
 import { Formik, Field } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
-import Heading from '../../components/Heading/Heading';
-import Button from '../../components/Button/Button';
+import { connect } from 'react-redux';
+import { Heading, Text, Button } from '../../components';
+import { createUser, loginUser } from '../../../ducks/User/actions';
 import './LoginRegister.scss'
 
-function LoginRegister({ isLogin, users, setUser, setUsers }) {
+function LoginRegister({ isLogin, createUser, loginUser }) {
 
 	const navigate = useNavigate();
-
-	const logIn = (values) => {
-		const user = users.find((user) => {
-			return user.username == values.username;
-		});
-
-		if (user) {
-			if (user.password == values.password) {
-				setUser(values.username);
-				Cookies.set('username', user.username);
-				return navigate('/');
-			}
-			return alert('Wrong password provided');
-		}
-
-		return alert('There is no user with given username');
-	}
-
-	const signUp = (values) => {
-		if (users.find((user) => {
-			return user.username == values.username;
-		})) {
-			return alert('This username is already taken');
-		}
-
-		const newUsers = [...users, {
-			username: values.username,
-			email: values.email,
-			password: values.password
-		}]
-
-		setUsers(newUsers);
-
-		return alert('Succesfully signed up. You can now sign in');
-	}
 
 	return (
 		<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/login-register.svg')` }}>
@@ -51,16 +16,15 @@ function LoginRegister({ isLogin, users, setUser, setUsers }) {
 				<div className='form-links'>
 					<Formik
 						initialValues={
-							isLogin ?
-								{
+							isLogin
+								? {
 									username: '',
 									password: ''
 								}
-								:
-								{
+								: {
 									username: '',
 									password: '',
-									repeatPassword: '',
+									repeatedPassword: '',
 									email: ''
 								}
 						}
@@ -68,47 +32,47 @@ function LoginRegister({ isLogin, users, setUser, setUsers }) {
 							const errors = {};
 							if (!isLogin && !values.email) {
 								errors.email = 'Email is required';
-							} else if (
+							} if (
 								!isLogin &&
 								!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
 							) {
 								errors.email = 'Invalid email address';
-							} else if (!values.username) {
+							} if (!values.username) {
 								errors.username = 'Username is required';
-							} else if (!values.password) {
+							} if (!values.password) {
 								errors.password = 'Password is required';
-							}  else if (!isLogin && values.password !== values.repeatPassword) {
-								errors.repeatPassword = 'Passwords do not match';
+							} if (!isLogin && values.password !== values.repeatedPassword) {
+								errors.repeatedPassword = 'Passwords do not match';
 							}
 							return errors;
 						}}
-						onSubmit={isLogin ? logIn : signUp}
+						onSubmit={isLogin ? (values) => loginUser(values, navigate) : createUser}
 					>{(formProps) => (
 						<form>
 							<div className='field'>
 								<Heading size='small'>Username</Heading>
 								<Field type='text' name='username' />
 							</div>
-							{formProps.touched.username && formProps.errors.username ? <div>{formProps.errors.username}</div> : null}
+							{formProps.touched.username && formProps.errors.username ? <Text size='x-small'>{formProps.errors.username}</Text> : null}
 							{!isLogin &&
 								<><div className='field'>
 									<Heading size='small'>Email</Heading>
 									<Field type='text' name='email' />
 								</div>
-									{formProps.touched.email && formProps.errors.email ? <div>{formProps.errors.email}</div> : null}
+									{formProps.touched.email && formProps.errors.email ? <Text size='x-small'>{formProps.errors.email}</Text> : null}
 								</>
 							}
 							<div className='field'>
 								<Heading size='small'>Password</Heading>
 								<Field type='password' name='password' />
 							</div>
-							{formProps.touched.password && formProps.errors.password ? <div>{formProps.errors.password}</div> : null}
+							{formProps.touched.password && formProps.errors.password ? <Text size='x-small'>{formProps.errors.password}</Text> : null}
 							{!isLogin &&
 								<><div className='field'>
 									<Heading size='small'>Repeat Password</Heading>
-									<Field type='password' name='repeatPassword' />
+									<Field type='password' name='repeatedPassword' />
 								</div>
-									{formProps.touched.repeatPassword && formProps.errors.repeatPassword ? <div>{formProps.errors.repeatPassword}</div> : null}
+									{formProps.touched.repeatedPassword && formProps.errors.repeatedPassword ? <Text size='x-small'>{formProps.errors.repeatedPassword}</Text> : null}
 								</>}
 							<Button onClick={formProps.handleSubmit} size='large'>{isLogin ? 'Sign in' : 'Sign up'}</Button>
 						</form>
@@ -123,4 +87,10 @@ function LoginRegister({ isLogin, users, setUser, setUsers }) {
 	);
 }
 
-export default LoginRegister;
+const mapDispatchToProps = {
+	loginUser,
+    createUser
+};
+
+export default connect(null, mapDispatchToProps)(LoginRegister);
+

@@ -13,5 +13,5 @@ export const getCosmeticsList = (currentPage, skintype) => {
             types.GET_COSMETICS_LIST_SUCCESS,
             types.GET_COSMETICS_LIST_FAILURE
         ]
-    })
-}
+    });
+};

@@ -19,17 +19,20 @@ const DB_DATA = {
 
 const app: Application = express();
 
-app.use(json());
+app.use(json({
+	limit: '20mb'
+}));
 app.use(urlencoded({ extended: true }));
 app.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
+	res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,PATCH,DELETE');
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 	next();
 });
 app.use('/users', users);
 app.use('/cosmetics', cosmetics);
 app.use('/palettes', palettes);
+app.use(express.static('public'));
 
 app.listen(server_params.PORT, async () => {
     console.log(`Server running on port ${server_params.PORT}`);
