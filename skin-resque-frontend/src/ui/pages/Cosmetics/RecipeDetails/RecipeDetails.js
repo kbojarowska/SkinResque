@@ -29,12 +29,7 @@ function RecipeDetails({ cosmetic }) {
 			<Text key={ing} size="small">{ing}</Text>
 		)
 	})
-
-	// const recipe = cosmetic.recipe.map((instruction) => {
-	// 	return (
-	// 		<Text key={instruction} className='recipe text'>{instruction}</Text>
-	// 	)
-	// })
+	
 
 	return (
 		<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/bg-cosmetics.svg')` }}>
@@ -61,6 +56,7 @@ function RecipeDetails({ cosmetic }) {
 								{cosmetic ? ingredients : ''}
 							</div>
 							{/* {cosmetic ? recipe : ''} */}
+							<Text className='recipe text'>{cosmetic.recipe}</Text>
 						</div>
 					</div> : 
 					<Heading size="x-large" className='no-data'>No cosmetic data</Heading>

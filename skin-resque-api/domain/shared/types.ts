@@ -6,7 +6,7 @@ export type skinType = 'drySkin' | 'else';
 export interface ICosmetics {
     name: string;
     description: string;
-    recipe?: string;
+    recipe: Array<string>;
     ingredients: Array<string>;
     skinTypeRecommendation: Array<skinType>;
     photo?: string;
