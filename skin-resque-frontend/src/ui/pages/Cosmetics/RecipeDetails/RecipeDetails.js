@@ -24,6 +24,18 @@ function withRouter(Component){
 function RecipeDetails({ cosmetic }) {
 	const [isOpen, setIsOpen] = useState(false);
 
+	const ingredients = cosmetic.ingredients.map((ing) => {
+		return (
+			<Text key={ing} size="small">{ing}</Text>
+		)
+	})
+
+	// const recipe = cosmetic.recipe.map((instruction) => {
+	// 	return (
+	// 		<Text key={instruction} className='recipe text'>{instruction}</Text>
+	// 	)
+	// })
+
 	return (
 		<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/bg-cosmetics.svg')` }}>
 			<div className='beige-bg'>
@@ -46,9 +58,9 @@ function RecipeDetails({ cosmetic }) {
 						<div className='details-container'>
 							<div className='dark-beige-bg border ingredients'>
 								<Heading className='ing'>Ingredients</Heading>
-								<Text size="small">{cosmetic.ingredients}</Text>
+								{cosmetic ? ingredients : ''}
 							</div>
-							<Text className='recipe text'>{cosmetic.recipe}{cosmetic.recipe}</Text>
+							{/* {cosmetic ? recipe : ''} */}
 						</div>
 					</div> : 
 					<Heading size="x-large" className='no-data'>No cosmetic data</Heading>
