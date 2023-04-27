@@ -14,7 +14,11 @@ const getUserOneByUsernameOrEmail = async (name: string, email: string): Promise
 		{
 			email: email
 		}
-	]});
+	]})
 };
 
-export { getUserOne, getUserOneByUsernameOrEmail };
+const getUserOneByUsername = async (name: string): Promise<IUser[]> => {
+    return DB.find(User, { name: name });
+};
+
+export { getUserOne, getUserOneByUsernameOrEmail, getUserOneByUsername };

@@ -1,9 +1,11 @@
-import { connect } from "react-redux";
-import { getCosmetic } from "../../../../ducks/Cosmetics/selectors";
-import { useParams } from "react-router-dom";
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { useState } from 'react';
+import Cookies from 'js-cookie';
 import { FiSave } from 'react-icons/fi';
 import { Heading, Modal, Text } from '../../../components'
+import { getCosmetic } from '../../../../ducks/Cosmetics/selectors';
+import { addCosmetic } from '../../../../ducks/User/actions';
 
 import './RecipeDetails.scss'
 
@@ -21,7 +23,8 @@ function withRouter(Component){
 }
 
 
-function RecipeDetails({ cosmetic }) {
+function RecipeDetails({ cosmetic, addCosmetic }) {
+
 	const [isOpen, setIsOpen] = useState(false);
 
 	const ingredients = cosmetic.ingredients.map((ing) => {
@@ -30,6 +33,11 @@ function RecipeDetails({ cosmetic }) {
 		)
 	})
 	
+	const saveCosmetic = (cosmeticId) => {
+		const userId = Cookies.get('userId');
+		const token = Cookies.get('accessToken');
+		addCosmetic(userId, cosmeticId, token);
+	}
 
 	return (
 		<div className='page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/bg-cosmetics.svg')` }}>
@@ -40,7 +48,7 @@ function RecipeDetails({ cosmetic }) {
 						<div className='save' onClick={() => setIsOpen(true)}>
 						<FiSave size={25}/>
 						</div>
-						{isOpen && <Modal setIsOpen={setIsOpen} />}</Heading>
+						{isOpen && <Modal setIsOpen={setIsOpen} onSave={() => saveCosmetic(cosmetic._id)}/>}</Heading>
 						<div className='details-container'>
 							<img src={cosmetic.photo} className='img'></img>
 							<div className='dark-beige-bg'>
@@ -72,5 +80,9 @@ const mapStateToProps = (state, props) => {
     };
 }
 
+const mapDispatchToProps = {
+	addCosmetic
+}
 
-export default withRouter(connect(mapStateToProps, null)(RecipeDetails));
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RecipeDetails));

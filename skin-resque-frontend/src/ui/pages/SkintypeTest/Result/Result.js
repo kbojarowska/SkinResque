@@ -1,14 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
 import { FiArrowRight } from 'react-icons/fi';
 import { Arrow, Heading, Text } from "../../../components"
 import './Result.scss';
 
 function Results() {
 
-	const { skintype } = useParams();
-    const [infoPage, setInfoPage ] = useState(true)
-
+	const URL = 'http://localhost:5000';
 	const skinTypes = {
 		'dry': {
 			'info': `Dry skin, or xerosis, is a common complaint that accounts for nearly half of all dermatologist visits. Dry skin can be a result of genetics or environmental factors. People with a dry skin may lack some of the natural moisturizing factors that help the skin retain water and may produces less sebum than other skin types. Sebum is the oil that builds a skin barrier that shields against environmental factors, such as temperature, dirt, and humidity.
@@ -25,77 +24,57 @@ function Results() {
 			'info': `Normal skin, or eudermic skin, is well-balanced skin. Moisture content, sebum production, and other factors that affect the health of your skin are all within normal ranges.
 			Normal skin is less likely to suffer from skin conditions and appears clear, radiant, and healthy. normal skin is more likely to occur in younger people.`
 		}
-	}
+	};
 
-    const bestMatch = [
-        {
-            'id': 1,
-            'name': 'rosemary cream',
-            'description': `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-        sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-            'photo': '/images/cream.png',
-        },
-        {
-            'id': 2,
-            'name': 'thyme peeling',
-            'description': `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-        sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-            'photo': '/images/blue-cream.png',
-        },
-        {
-            'id': 3,
-            'name': 'rose hydrolat',
-            'description': `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-        sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-            'photo': '/images/pink-cream.png',
-        }
-    ]
+	const { skintype } = useParams();
+	const skin = skinTypes[skintype];
+	const [infoPage, setInfoPage] = useState(true);
+	const [bestMatch, setBestMatch] = useState([]);
 
-    const skin = skinTypes[skintype];
+	useEffect(() => {
+		axios.get(`${URL}/cosmetics?size=3&page=1&type=${skintype}`).then((response) => {
+			setBestMatch(response.data);
+		})
+		.catch(() => {
+			alert('Something went wrong while downloading cosmetic propositions.');
+		})
+
+	}, []);
 
 	return (
-        <div className='page'>
-            <div className='title'>
-                <Heading size='large' className='page-title'>Skintype test</Heading>
-                <Heading className='results'>RESULTS</Heading>
-            </div>
-            <div className='results-container'>
-                <div className='uploaded-photo'>
-                    <img src={`/images/skin-${skintype}.jpg`} className='img-skin'></img>
-                </div>
-                <div className='results-save'>
-                        <Heading className='title'>{skintype.toUpperCase()} SKIN</Heading>
-                    {infoPage ? <Text className='text'>{skin.info}</Text> :
-                    <div>
-                        <Heading size='small' className='sub-skin-type-text'>Natural cosmetics proposition</Heading>
-                        {/* <img src='/images/shadow.png' className='shadow'></img> */}
-                        <div className='best-match'>
-                            {bestMatch.map((el)=>{
-                                return(
-                                <div key={el.id} className='cosmetics-container-col'>
-                                    <img className='cosmetics' src={el.photo}></img>
-                                    <Text className='centered-div'>{el.name}</Text>
-                                </div>
-                                )
-                            })}
-                        </div>
-                        <Link to='/cosmetics/page/1'><Text size='small' className='view-more'>View more <FiArrowRight style={{position: 'relative', top: '2px'}}/></Text></Link>
-                    </div>
-                    }
-                        {infoPage ? null : <Arrow className='arrow-left' left onClick={() => setInfoPage(!infoPage)}/>}
-                       {infoPage ? <Arrow className='arrow-right' right onClick={() => setInfoPage(!infoPage)}/> : null}
-                </div>
-            </div>
-        </div>
+		<div className='page'>
+			<div className='title'>
+				<Heading size='large' className='page-title'>Skintype test</Heading>
+				<Heading className='results'>RESULTS</Heading>
+			</div>
+			<div className='results-container'>
+				<div className='uploaded-photo'>
+					<img src={`/images/skin-${skintype}.jpg`} className='img-skin'></img>
+				</div>
+				<div className='results-save'>
+					<Heading className='title'>{skintype.toUpperCase()} SKIN</Heading>
+					{infoPage ? <Text className='text'>{skin.info}</Text> :
+						<div>
+							<Heading size='small' className='sub-skin-type-text'>Natural cosmetics proposition</Heading>
+							{/* <img src='/images/shadow.png' className='shadow'></img> */}
+							<div className='best-match'>
+								{bestMatch.map((el) => {
+									return (
+										<div key={el.id} className='cosmetics-container-col'>
+											<img className='cosmetics' src={el.photo}></img>
+											<Text className='centered-div'>{el.name}</Text>
+										</div>
+									)
+								})}
+							</div>
+							<Link to={`/cosmetics/page/1?type=${skintype}`}><Text size='small' className='view-more'>View more <FiArrowRight style={{ position: 'relative', top: '2px' }} /></Text></Link>
+						</div>
+					}
+					{infoPage ? null : <Arrow className='arrow-left' left onClick={() => setInfoPage(!infoPage)} />}
+					{infoPage ? <Arrow className='arrow-right' right onClick={() => setInfoPage(!infoPage)} /> : null}
+				</div>
+			</div>
+		</div>
 	);
 }
 

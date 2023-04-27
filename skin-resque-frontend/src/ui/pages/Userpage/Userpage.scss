@@ -7,58 +7,145 @@
 	background-size: cover;
 	gap: 3rem;
 
-	.beige-bg{
+	.beige-bg {
 		background-color: #F6EFF0;
 		width: 70%;
 		margin: auto;
 		display: block;
 		overflow: auto;
 
-		.profile-info{
+		.profile-info {
 			display: flex;
 			justify-content: space-around;
 			align-items: center;
-	
-			.profile-img{
-				border-radius: 50%;
-				background-color: #C4C4C4;
-				width: 15rem;
-				height: 15rem;
-				margin: 2rem 0rem 3rem;
+
+			.profile-img {
+				display: flex;
+
+				.no-img {
+					background-color: #C4C4C4;
+				}
+
+				img {
+					object-fit: cover;
+				}
+
+				img,
+				.no-img {
+					border-radius: 50%;
+					width: 15rem;
+					height: 15rem;
+				}
+
+				.show-on-hover {
+					visibility: hidden;
+				}
+
+				&:hover>.show-on-hover {
+					visibility: visible;
+				}
+
+				.profile-picture-buttons {
+					display: flex;
+					gap: 0.5em;
+
+					* {
+						&:hover {
+							cursor: pointer;
+						}
+					}
+				}
 			}
-	
+
 			.outer {
 				display: flex;
 				min-height: 100%;
 				flex-direction: column;
 			}
-	
+
 			.row {
 				display: flex;
-				flex: 1; 
+				flex: 1;
 				justify-content: space-between;
 				gap: 7rem
 			}
-			
-			.link{
+
+			.link {
 				text-decoration: underline;
 			}
 		}
 	}
 
-	.heading{
-		padding: 30px;
+	.beige-bg.edit {
+		width: auto;
 		display: flex;
-		justify-content:center;
+		padding: 0;
+
+		.actions {
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+			padding-right: 20px;
+			border-right: 1px solid gray;
+
+			.action-name {
+				&:hover {
+					text-decoration: underline;
+					cursor: pointer;
+				}
+			}
+
+			.action-name.chosen {
+				text-decoration: underline;
+			}
+		}
+
+		.actions,
+		.actions-forms {
+			padding: 4rem;
+		}
+
+		.actions-forms {
+			display: flex;
+			align-items: center;
+
+			form {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 1em;
+
+				.field {
+					align-self: flex-start;
+
+					input {
+						padding: 1em;
+						border: 1px dashed #A39A9A;
+						background: #F6EFF0;
+					}
+				}
+
+				button {
+					align-self: flex-end;
+				}
+			}
+		}
 	}
 
-	.empty{
+	.heading {
+		padding: 30px;
 		display: flex;
-		justify-content:center;
+		justify-content: center;
+	}
+
+	.empty {
+		display: flex;
+		justify-content: center;
 		padding: 6rem;
 	}
 
-	.green-bg{
+	.green-bg {
 		background-color: #C1E1D2;
 		width: 70%;
 		margin: auto;
@@ -66,10 +153,10 @@
 		overflow: auto;
 		padding: 2rem;
 
-		.cosmetic{
+		.cosmetic {
 			padding: 2rem 1rem 2rem 1rem;
-			
-			.bin{
+
+			.bin {
 				float: right;
 				padding: .5rem;
 				margin-right: 1rem;
@@ -78,32 +165,33 @@
 			}
 		}
 
-		.cosmetic:hover{
+		.cosmetic:hover {
 			background-color: rgba(0, 0, 0, 0.1);
 			width: 80%;
 			box-shadow: 124px 78px 59px rgba(17, 34, 26, 0.01), 70px 44px 50px rgba(17, 34, 26, 0.05), 31px 20px 37px rgba(17, 34, 26, 0.09), 8px 5px 20px rgba(17, 34, 26, 0.1), 0px 0px 0px rgba(17, 34, 26, 0.1);
 			border-radius: 10px;
 			padding-right: 0rem;
-			.bin{
+
+			.bin {
 				display: block;
 			}
 		}
 
-		.bin:hover{
+		.bin:hover {
 			background-color: rgba(0, 0, 0, 0.1);
 		}
 
-		.cosmetic-img{
+		.cosmetic-img {
 			width: 60%;
 		}
 	}
 
-	.container{
+	.container {
 		display: flex;
 		gap: 2rem;
 	}
 
-	.beige-palette-bg{
+	.beige-palette-bg {
 		background-color: #F6EFF0;
 		width: 70%;
 		margin: auto;
@@ -111,19 +199,19 @@
 		overflow: auto;
 		padding: 2rem;
 
-		.palette{
+		.palette {
 			background-color: #C7C7C7;
 			border-radius: 5%;
 			padding: .5rem .5rem 1rem .5rem;
 
-			.bin{
+			.bin {
 				float: right;
 				padding: .5rem;
 				background-color: transparent;
 				display: none;
 			}
 
-			.edit{
+			.edit {
 				float: right;
 				padding: .5rem;
 				display: flex;
@@ -131,9 +219,9 @@
 				display: none;
 			}
 
-			.color-container{
+			.color-container {
 				padding: .5rem;
-				display:grid;
+				display: grid;
 				grid-template-columns: 3rem 3rem;
 				grid-row: auto auto;
 				grid-column-gap: 1rem;
@@ -147,21 +235,21 @@
 			}
 		}
 
-		.palette:hover{
+		.palette:hover {
 			box-shadow: 107px 124px 66px rgba(49, 28, 31, 0.01), 60px 70px 55px rgba(49, 28, 31, 0.05), 27px 31px 41px rgba(49, 28, 31, 0.09), 7px 8px 23px rgba(49, 28, 31, 0.1), 0px 0px 0px rgba(49, 28, 31, 0.1);
 			padding: .5rem .5rem .5rem .5rem;
 
-			.bin{
+			.bin {
 				display: block;
 			}
-			
-			.edit{
+
+			.edit {
 				display: block;
 			}
-			
-			.color-container{
+
+			.color-container {
 				padding: .5rem;
-				display:grid;
+				display: grid;
 				grid-template-columns: 3.25rem 3.25rem;
 				grid-row: auto auto;
 				grid-column-gap: 1rem;
@@ -175,11 +263,11 @@
 			}
 		}
 
-		.bin:hover{
+		.bin:hover {
 			background-color: rgba(0, 0, 0, 0.1);
 		}
 
-		.edit:hover{
+		.edit:hover {
 			background-color: rgba(0, 0, 0, 0.1);
 		}
 	}
