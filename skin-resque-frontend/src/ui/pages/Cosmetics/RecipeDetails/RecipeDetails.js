@@ -27,6 +27,12 @@ function RecipeDetails({ cosmetic, addCosmetic }) {
 
 	const [isOpen, setIsOpen] = useState(false);
 
+	const ingredients = cosmetic.ingredients.map((ing) => {
+		return (
+			<Text key={ing} size="small">{ing}</Text>
+		)
+	})
+	
 	const saveCosmetic = (cosmeticId) => {
 		const userId = Cookies.get('userId');
 		const token = Cookies.get('accessToken');
@@ -55,9 +61,10 @@ function RecipeDetails({ cosmetic, addCosmetic }) {
 						<div className='details-container'>
 							<div className='dark-beige-bg border ingredients'>
 								<Heading className='ing'>Ingredients</Heading>
-								<Text size='small'>{cosmetic.ingredients}</Text>
+								{cosmetic ? ingredients : ''}
 							</div>
-							<Text className='recipe text'>{cosmetic.recipe}{cosmetic.recipe}</Text>
+							{/* {cosmetic ? recipe : ''} */}
+							<Text className='recipe text'>{cosmetic.recipe}</Text>
 						</div>
 					</div> : 
 					<Heading size="x-large" className='no-data'>No cosmetic data</Heading>
