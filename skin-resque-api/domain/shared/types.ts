@@ -6,7 +6,7 @@ export type skinType = 'drySkin' | 'else';
 export interface ICosmetics {
     name: string;
     description: string;
-    recipe?: string;
+    recipe: Array<string>;
     ingredients: Array<string>;
     skinTypeRecommendation: Array<skinType>;
     photo?: string;
@@ -22,8 +22,12 @@ export interface IUser {
     name: string;
     email: string;
 	password: string;
+<<<<<<< HEAD
 	access_token: string;
     refresh_token: string;
+=======
+	token: string;
+>>>>>>> a5dc027238178f2cf7f892619d202294f2fe86aa
 	token_expiry_date: Date;
     profile_picture: Boolean;
     skin_type: null | skinType;

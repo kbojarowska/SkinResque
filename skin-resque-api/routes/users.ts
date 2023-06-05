@@ -14,7 +14,11 @@ import {
 	removeSavedCosmetics, 
 	removeProfilePicture, 
 	updateUser, 
+<<<<<<< HEAD
 	updateUserTokens } from '../infrastructure/repository/user/index.js';
+=======
+	updateUserToken } from '../infrastructure/repository/user/index.js';
+>>>>>>> a5dc027238178f2cf7f892619d202294f2fe86aa
 import { getCosmeticOne } from '../infrastructure/repository/cosmetics/index.js';
 import { getPaletteOne } from '../infrastructure/repository/palettes/index.js';
 import { IUser } from '../domain/shared/types.js';
@@ -65,7 +69,11 @@ const removeProfilePictureFile = (id: string, callback: Function) => {
 	});
 }
 
+<<<<<<< HEAD
 const generateUserAccessToken = (user: any, hours: number) => {
+=======
+const generateUserToken = (user: any, hours: number) => {
+>>>>>>> a5dc027238178f2cf7f892619d202294f2fe86aa
 	const token = jwt.sign(
 		{ user_id: user._id, user },
 		process.env.ACCESS_TOKEN_KEY as string,
@@ -74,6 +82,7 @@ const generateUserAccessToken = (user: any, hours: number) => {
 		}
 	);
 	return token;
+<<<<<<< HEAD
 };
 
 const generateUserRefreshToken = (user: any, hours: number) => {
@@ -85,6 +94,8 @@ const generateUserRefreshToken = (user: any, hours: number) => {
 		}
 	);
 	return token;
+=======
+>>>>>>> a5dc027238178f2cf7f892619d202294f2fe86aa
 }
 
 const generateUserTokenExpiryDate = (hours: number) => {
@@ -306,6 +317,7 @@ users.post('/login', async (req, res) => {
 			if (result.length === 0) return res.status(400).send("USER_DOES_NOT_EXIST");
 
             const user = result[0];
+<<<<<<< HEAD
 			compare(body.password, user.password)
 			.then(passwordCorrect => {
 				const tokenExpiryHours = 1;
@@ -315,6 +327,17 @@ users.post('/login', async (req, res) => {
 				updateUserTokens(user._id.toString(), accessToken, refreshToken, tokenExpiryDate).then((success: UpdateReturns) => {
 					if (!success.acknowledged) return res.status(404).send(notFoundError());
                     res.status(200).send({ passwordCorrect: passwordCorrect, id: result[0]._id, access_token: accessToken, refresh_token: refreshToken, token_expiry_date: tokenExpiryDate });
+=======
+            
+			compare(body.password, user.password)
+			.then(passwordCorrect => {
+				const tokenExpiryHours = 1;
+                const token = generateUserToken(user, tokenExpiryHours);
+				const tokenExpiryDate = generateUserTokenExpiryDate(tokenExpiryHours);
+				updateUserToken(user._id.toString(), token, tokenExpiryDate).then((success: UpdateReturns) => {
+					if (!success.acknowledged) return res.status(404).send(notFoundError());
+                    res.status(200).send({ passwordCorrect: passwordCorrect, id: result[0]._id, access_token: token, token_expiry_date: tokenExpiryDate });
+>>>>>>> a5dc027238178f2cf7f892619d202294f2fe86aa
 				})
 			})
 			.catch(err => {

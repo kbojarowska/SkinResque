@@ -27,6 +27,15 @@ function RecipeDetails({ cosmetic, addCosmetic }) {
 
 	const [isOpen, setIsOpen] = useState(false);
 
+<<<<<<< HEAD
+=======
+	const ingredients = cosmetic.ingredients.map((ing) => {
+		return (
+			<Text key={ing} size="small">{ing}</Text>
+		)
+	})
+	
+>>>>>>> a5dc027238178f2cf7f892619d202294f2fe86aa
 	const saveCosmetic = (cosmeticId) => {
 		const userId = Cookies.get('userId');
 		const token = Cookies.get('accessToken');
@@ -42,7 +51,11 @@ function RecipeDetails({ cosmetic, addCosmetic }) {
 						<div className='save' onClick={() => setIsOpen(true)}>
 						<FiSave size={25}/>
 						</div>
+<<<<<<< HEAD
 						{isOpen && <Modal setIsOpen={setIsOpen} onSave={() => saveCosmetic(cosmetic)}/>}</Heading>
+=======
+						{isOpen && <Modal setIsOpen={setIsOpen} onSave={() => saveCosmetic(cosmetic._id)}/>}</Heading>
+>>>>>>> a5dc027238178f2cf7f892619d202294f2fe86aa
 						<div className='details-container'>
 							<img src={cosmetic.photo} className='img'></img>
 							<div className='dark-beige-bg'>
@@ -55,9 +68,14 @@ function RecipeDetails({ cosmetic, addCosmetic }) {
 						<div className='details-container'>
 							<div className='dark-beige-bg border ingredients'>
 								<Heading className='ing'>Ingredients</Heading>
+<<<<<<< HEAD
 								<Text size='small'>{cosmetic.ingredients}</Text>
+=======
+								{cosmetic ? ingredients : ''}
+>>>>>>> a5dc027238178f2cf7f892619d202294f2fe86aa
 							</div>
-							<Text className='recipe text'>{cosmetic.recipe}{cosmetic.recipe}</Text>
+							{/* {cosmetic ? recipe : ''} */}
+							<Text className='recipe text'>{cosmetic.recipe}</Text>
 						</div>
 					</div> : 
 					<Heading size="x-large" className='no-data'>No cosmetic data</Heading>
