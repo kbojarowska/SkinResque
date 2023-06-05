@@ -56,7 +56,6 @@ function Results() {
 					{infoPage ? <Text className='text'>{skin.info}</Text> :
 						<div>
 							<Heading size='small' className='sub-skin-type-text'>Natural cosmetics proposition</Heading>
-							{/* <img src='/images/shadow.png' className='shadow'></img> */}
 							<div className='best-match'>
 								{bestMatch.map((el) => {
 									return (
