@@ -143,11 +143,13 @@ export const addPalette = (userId, palette, token) => {
 		return axios.post(PALETTE_URL, palette).then((response) => {
 			const paletteId = response.data[0]._id;
 			axios.patch(`${USER_URL}/${userId}/palettes/${paletteId}?token=${token}`).then(() => {
-				dispatch({ type: types.DELETE_COSMETIC_SUCCESS, payload: paletteId });
+				alert('Succesfully added palette');
+				dispatch({ type: types.ADD_PALETTE_SUCCESS, payload: palette });
 			}).catch((error) => {
 				dispatch({ type: types.ADD_PALETTE_FAILURE, payload: error });
 			})
 		}).catch((error) => {
+			alert('Error saving palette');
 			dispatch({ type: types.ADD_PALETTE_FAILURE, payload: error });
 		})
 	};

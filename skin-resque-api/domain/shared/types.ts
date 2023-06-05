@@ -22,7 +22,8 @@ export interface IUser {
     name: string;
     email: string;
 	password: string;
-	token: string;
+	access_token: string;
+    refresh_token: string;
 	token_expiry_date: Date;
     profile_picture: Boolean;
     skin_type: null | skinType;
