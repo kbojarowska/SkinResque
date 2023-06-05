@@ -35,7 +35,7 @@
   
   .modal-content-container {
     padding: 1rem;
-    font-size: 20px;
+    font-size: 1.25rem;
     color: #252525;
     text-align: center;
   }
@@ -55,7 +55,7 @@
   
   .btn-close {
     cursor: pointer;
-    padding: 4px 8px;
+    padding: 0.25rem 0.5rem;
     border: none;
     font-size: 1.25rem;
     color: #252525;
@@ -68,8 +68,8 @@
   }
   
   .btn-close:hover {
-    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
-    transform: translate(-4px, 4px);
+    box-shadow: 0 0.313rem 1.25rem 0 rgba(0, 0, 0, 0.04);
+    transform: translate(-0.25rem, 0.25rem);
     color: #F6EFF0;
     background-color: #BB271A;
   }
@@ -77,7 +77,7 @@
   .btn-save {
     margin-top: 1rem;
     cursor: pointer;
-    padding: 11px 28px;
+    padding: 0.688rem 1.75rem;
     font-size: 0.8rem;
     border: none;
     color: #252525;
@@ -87,15 +87,15 @@
   }
   
   .btn-save:hover {
-    box-shadow: 0 10px 20px -10px #C1E1D2;
-    transform: translateY(-5px);
+    box-shadow: 0 0.625rem 1.25rem -0.625rem #C1E1D2;
+    transform: translateY(-0.313rem);
     background: #C1E1D2;
   }
   
   .btn-cancel {
     margin-top: 1rem;
     cursor: pointer;
-    padding: 11px 28px;
+    padding: 0.688rem 1.75rem;
     font-size: 0.8rem;
     border: none;
     color: #252525;

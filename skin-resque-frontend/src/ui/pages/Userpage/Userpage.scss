@@ -133,8 +133,8 @@
 		}
 	}
 
-	.heading {
-		padding: 30px;
+	.heading{
+		padding: 1.875rem;
 		display: flex;
 		justify-content: center;
 	}
@@ -168,8 +168,8 @@
 		.cosmetic:hover {
 			background-color: rgba(0, 0, 0, 0.1);
 			width: 80%;
-			box-shadow: 124px 78px 59px rgba(17, 34, 26, 0.01), 70px 44px 50px rgba(17, 34, 26, 0.05), 31px 20px 37px rgba(17, 34, 26, 0.09), 8px 5px 20px rgba(17, 34, 26, 0.1), 0px 0px 0px rgba(17, 34, 26, 0.1);
-			border-radius: 10px;
+			box-shadow: 7.75rem 4.875rem 3.688rem rgba(17, 34, 26, 0.01), 4.375rem 2.75rem 3.125rem rgba(17, 34, 26, 0.05), 1.938rem 1.25rem 2.313rem rgba(17, 34, 26, 0.09), 0.5rem 0.313rem 1.25rem rgba(17, 34, 26, 0.1), 0 0 0 rgba(17, 34, 26, 0.1);
+			border-radius: 0.625rem;
 			padding-right: 0rem;
 
 			.bin {
@@ -235,8 +235,9 @@
 			}
 		}
 
-		.palette:hover {
-			box-shadow: 107px 124px 66px rgba(49, 28, 31, 0.01), 60px 70px 55px rgba(49, 28, 31, 0.05), 27px 31px 41px rgba(49, 28, 31, 0.09), 7px 8px 23px rgba(49, 28, 31, 0.1), 0px 0px 0px rgba(49, 28, 31, 0.1);
+		.palette:hover{
+			box-shadow: 6.688rem 7.75rem 4.125rem rgba(49, 28, 31, 0.01), 3.75rem 4.375rem 3.438rem rgba(49, 28, 31, 0.05), 1.688rem 1.938rem 2.563rem rgba(49, 28, 31, 0.09), 0.438rem 0.5rem 1.438rem rgba(49, 28, 31, 0.1), 0 0 0 rgba(49, 28, 31, 0.1);
+
 			padding: .5rem .5rem .5rem .5rem;
 
 			.bin {

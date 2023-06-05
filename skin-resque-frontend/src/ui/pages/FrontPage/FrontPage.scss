@@ -9,7 +9,7 @@
 
 	.pink {
 		width: 100%;
-		height: 400px;
+		height: 25rem;
 		background-color: #F3B4C5;
 		display: flex;
 		align-items: flex-end;
@@ -17,21 +17,21 @@
 
 		.conifer-bush-about {
 			position: absolute;
-			top: 100px;
-			left: 100px;
+			top: 6.25rem;
+			left: 6.25rem;
 			display: flex;
 			flex-direction: column;
 
 			.conifer {
 				position: absolute;
-				top:95px;
-				height: 300px;
-				width: 400px;
+				top: 5.938rem;
+				height: 18.75rem;
+				width: 25rem;
 			}
 
 			.about {
 				position: absolute;
-				top:180px;
+				top: 11.25rem;
 				z-index: 1;
 
 				.page-about {
@@ -39,9 +39,9 @@
 					display: flex;
 					flex-direction: column;
 					justify-content: center;
-					gap: 10px;
-					width: 400px;
-					margin: 10px;
+					gap: 0.625rem;
+					width: 25rem;
+					margin: 0.625rem;
 
 					p {
 						text-align: justify;
@@ -56,13 +56,13 @@
 
 .white {
 	width: 100%;
-	height: 300px;
+	height: 18.75rem;
 
 	.pink-dots {
-		width: 600px;
-		height: 550px;
+		width: 37.5rem;
+		height: 34.375rem;
 		position: absolute;
-		right: 300px;
+		right: 18.75rem;
 		top: 0;
 
 		img {
@@ -74,13 +74,13 @@
 
 .green {
 	width: 100%;
-	height: 270px;
+	height: 16.875rem;
 	background-color: #A2D3BC;
 }
 
 .skin-photo {
 	width: 100%;
-	height: 360px;
+	height: 22.5rem;
 	object-fit: cover;
 }
 
@@ -91,18 +91,18 @@
 	z-index: 0;
 
 	img {
-		width: 200px;
-		height: 100px;
+		width: 12.5rem;
+		height: 6.25rem;
 
 		&:first-of-type {
 			position: absolute;
-			bottom: 50px;
+			bottom: 3.125rem;
 		}
 
 		&:last-of-type {
 			position: absolute;
-			left: 0px;
-			bottom: 150px;
+			left: 0;
+			bottom: 9.375rem;
 		}
 
 		&:first-of-type,
@@ -112,8 +112,8 @@
 
 		&:nth-of-type(2) {
 			position: absolute;
-			left: 0px;
-			bottom: 0px;
+			left: 0;
+			bottom: 0;
 		}
 
 	}
@@ -125,7 +125,7 @@
 	justify-content: space-between;
 	align-items: flex-start;
 	position: absolute;
-	top: 550px;
+	top: 34.375rem;
 	z-index: 1;
 
 	.photo-button {
@@ -135,14 +135,14 @@
 		align-items: center;
 
 		img {
-			width: 300px;
-			height: 300px;
+			width: 18.75rem;
+			height: 18.75rem;
 		}
 
 		button {
 
 			position: relative;
-			bottom: 50px;
+			bottom: 3.125rem;
 
 			a {
 				text-decoration: none;
@@ -164,30 +164,30 @@
     position: relative;
     display: block;
     z-index: 1;
-    top: 400px;
+    top: 25rem;
     }
 
 .info-pic {
-    height: 350px;
-    width: 350px;
+    height: 21.875rem;
+    width: 21.875rem;
 	object-fit: cover;
     background-color: black;
     display: block;
     z-index: 5;
     position: relative;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0 0.5rem 1.5rem;
 }
 
 .behind-bg {
     position: relative;
-    top: 30px;
-    right: 30px;
+    top: 1.875rem;
+    right: 1.875rem;
 }
 
 .bg-pink {
-    width:100%;
-    width: 350px;
-    height: 350px;
+    width: 100%;
+    width: 21.875rem;
+    height: 21.875rem;
     background-color: #F3B4C5;
     display: block;
     z-index: 3;
@@ -199,20 +199,20 @@
     justify-content: center;
     align-items: center;
     justify-content: space-evenly;
-    gap: 110px;
+    gap: 6.875rem;
 }
 
 .photo-container {
     position: relative;
-    top: -225px;
+    top: -14.063rem;
 }
     
 .info-text {
-    width: 500px;
+    width: 31.25rem;
 }
     
 .white-info {
-    height: 500px;
+    height: 31.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
