@@ -1,9 +1,15 @@
 import { createAction } from "redux-api-middleware";
 import types from './types';
 
-export const getCosmeticsList = (currentPage, skintype) => {
+export const getCosmeticsList = (currentPage, filterBy) => {
+    let endpoint = `http://localhost:5000/cosmetics?size=4&page=${currentPage}`;
+
+    if (filterBy !== '') {
+        endpoint += `&type=${filterBy}`;
+    }
+
     return createAction({
-        endpoint: `http://localhost:5000/cosmetics?size=10&page=${currentPage}`,
+        endpoint,
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
