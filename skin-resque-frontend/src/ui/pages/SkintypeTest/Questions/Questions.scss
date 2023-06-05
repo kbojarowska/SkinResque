@@ -1,6 +1,6 @@
 .questions-pagination {
 	width: 60%;
-	height: 350px;
+	height: 21.875rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -10,9 +10,9 @@
 		height: 100%;
 		width: 100%;
 		background-color: #F6EFF0;
-		padding: 20px;
+		padding: 1.25rem;
 		display: flex;
-		gap: 20px;
+		gap: 1.25rem;
 		flex-direction: column;
 
 		.questions {
@@ -49,7 +49,7 @@
 
 				.answers {
 					margin-top: 1em;
-					margin-left: 20px;
+					margin-left: 1.25rem;
 					display: flex;
 					flex-direction: column;
 					justify-content: center;
@@ -75,8 +75,8 @@
 		img {
 			position: absolute;
 			top: 25em;
-			height: 290px;
-			width: 655px;
+			height: 18.125rem;
+			width: 40.938rem;
 			z-index: -1;
 		}
 	}

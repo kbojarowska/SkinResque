@@ -133,8 +133,8 @@
 		}
 	}
 
-	.heading {
-		padding: 30px;
+	.heading{
+		padding: 1.875rem;
 		display: flex;
 		justify-content: center;
 	}
@@ -235,8 +235,9 @@
 			}
 		}
 
-		.palette:hover {
-			box-shadow: 107px 124px 66px rgba(49, 28, 31, 0.01), 60px 70px 55px rgba(49, 28, 31, 0.05), 27px 31px 41px rgba(49, 28, 31, 0.09), 7px 8px 23px rgba(49, 28, 31, 0.1), 0px 0px 0px rgba(49, 28, 31, 0.1);
+		.palette:hover{
+			box-shadow: 6.688rem 7.75rem 4.125rem rgba(49, 28, 31, 0.01), 3.75rem 4.375rem 3.438rem rgba(49, 28, 31, 0.05), 1.688rem 1.938rem 2.563rem rgba(49, 28, 31, 0.09), 0.438rem 0.5rem 1.438rem rgba(49, 28, 31, 0.1), 0 0 0 rgba(49, 28, 31, 0.1);
+
 			padding: .5rem .5rem .5rem .5rem;
 
 			.bin {
