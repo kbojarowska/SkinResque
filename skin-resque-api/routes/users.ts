@@ -39,19 +39,26 @@ import { updateUserPassword } from '../infrastructure/repository/user/updateUser
 const users = Router({ mergeParams: true });
 const usersProfilePictureDirectoryPath = './public/upload';
 
+const tokenExpiryHours = 1;
+
 const authorization = (req: any, res: any, next: any) => {
-    const token =
-      req.body.token || req.query.token || req.headers['x-access-token'];
+    const access_token = req.body.token || req.query.token ;
   
-    if (!token) {
+    if (!access_token) {
       return res.status(403).send('Token is required for authentication');
     }
+
     try {
-      const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_KEY as string);
-      req.user = decoded;
+      jwt.verify(access_token, process.env.ACCESS_TOKEN_KEY as string);
     } catch (err) {
-      return res.status(401).send('Invalid Token');
-    }
+        const refresh_token = req.body.refreshToken || req.query.refreshToken;
+        try {
+            jwt.verify(refresh_token, process.env.REFRESH_TOKEN_KEY as string);
+        } catch {
+            return res.status(401).send('Invalid Token');
+        };
+    };
+
     return next();
 };
 
@@ -320,7 +327,6 @@ users.post('/login', async (req, res) => {
 <<<<<<< HEAD
 			compare(body.password, user.password)
 			.then(passwordCorrect => {
-				const tokenExpiryHours = 1;
                 const accessToken = generateUserAccessToken(user, tokenExpiryHours);
                 const refreshToken = generateUserRefreshToken(user, tokenExpiryHours);
 				const tokenExpiryDate = generateUserTokenExpiryDate(tokenExpiryHours);
