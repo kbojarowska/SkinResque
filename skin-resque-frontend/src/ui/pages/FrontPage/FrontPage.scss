@@ -193,10 +193,9 @@
     z-index: 3;
 }
 
-.info-container {
+.info-container-main-page {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     justify-content: space-evenly;
     gap: 110px;
@@ -212,7 +211,6 @@
 }
     
 .white-info {
-    height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
