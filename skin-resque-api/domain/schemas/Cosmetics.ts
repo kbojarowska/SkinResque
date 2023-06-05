@@ -6,7 +6,7 @@ const CosmeticSchema = new Schema<ICosmetics>(
     {
         name: { type: String, required: true },
         description: { type: String, required: true },
-        recipe: String,
+        recipe: [String],
         ingredients: [String],
         skinTypeRecommendation: [String],
         photo: String,

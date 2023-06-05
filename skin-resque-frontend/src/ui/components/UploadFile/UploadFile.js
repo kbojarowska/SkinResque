@@ -1,9 +1,8 @@
-import Text from '../Text/Text';
-import { connect } from 'react-redux';
-import './UploadFile.scss';
-import { uploadImage } from '../../../ducks/UploadImage/actions';
 import { useState } from 'react';
-
+import { connect } from 'react-redux';
+import Text from '../Text/Text';
+import { uploadImage } from '../../../ducks/UploadImage/actions';
+import './UploadFile.scss';
 
 function UploadFile({ error, uploadImage }) {
 
@@ -18,10 +17,10 @@ function UploadFile({ error, uploadImage }) {
   return (
     <div>
       <div className='upload'>
-        <Text className='file-name' size='small'>{fileName ? fileName: "No image uploaded"}</Text>
+        <Text className='file-name' size='small'>{fileName ? fileName: 'No image uploaded'}</Text>
         <label className='upload-btn'>
           Upload image
-          <input type="file" onChange={handleUpload} />
+          <input type='file' onChange={handleUpload} />
         </label>
       </div>
       {error && <Text className='error'>{error.message}</Text>}

@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 import json
 
+from src.skinTypeRecommendation import skinTypeRecommendation
 
 chrome_options = Options()
 chrome_options.add_argument("--headless")
@@ -36,11 +37,13 @@ for page in range(1, 12):
         recipe_element = subpage_soup.find('div', class_='entry-content').find(['ol'])
         recipe = [li.text.strip() for li in recipe_element.find_all(
             'li')] if recipe_element else []
+        recommendation = skinTypeRecommendation(info)
         if name and image and ingredients and recipe:
             recipe_data = {
                 'name': name,
                 'description': info,
                 'photo': image,
+                'skinTypeRecommendation': recommendation,
                 'ingredients': ingredients,
                 'recipe': recipe
             }

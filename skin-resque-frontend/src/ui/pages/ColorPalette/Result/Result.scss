@@ -27,9 +27,10 @@
 		.uploaded-photo {
 			img {
 				height: 100%;
-				width: 20em;
+				width: 30em;
 				border-top-left-radius: 3.125rem;
 				border-top-right-radius: 3.125rem;
+				object-fit: cover;
 			}
 		}
 

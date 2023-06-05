@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import './Heading.scss';
 
-export default function Heading({size, className='', children}) {
+export default function Heading({size, className='', onClick, children}){
     const tags = {
         'x-large': 'h1',
         'large': 'h2',
@@ -10,9 +10,9 @@ export default function Heading({size, className='', children}) {
     }
     const Tag = tags[size]
   return (
-    <Tag className={className}>{children}</Tag>
-  );
-};
+    <Tag className={className} onClick={onClick}>{children}</Tag>
+  )
+}
 
 Heading.defaultProps = {
   size: 'medium'

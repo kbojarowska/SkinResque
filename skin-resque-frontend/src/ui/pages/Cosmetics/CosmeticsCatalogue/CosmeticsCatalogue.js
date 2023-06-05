@@ -1,16 +1,18 @@
 import { connect } from "react-redux";
 import { getCosmetics } from "../../../../ducks/Cosmetics/selectors";
+import { getCosmeticsList } from '../../../../ducks/Cosmetics/operations';
 import { Link, useParams } from 'react-router-dom';
 import { Arrow, Heading, Pagination, RadioButton, Text } from '../../../components';
 import './CosmeticsCatalogue.scss';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
+import './CosmeticsCatalogue.scss';
 
-function CosmeticsCatalogue({cosmetics}) {
+function CosmeticsCatalogue({cosmetics, getCosmeticsList}) {
 
 	const { currentPage } = useParams();
 	const [ isOpen, setIsOpen ] = useState(false);
-	const [filterBy, setFilterBy] = useState("");
+	const [filterBy, setFilterBy] = useState('');
 	const navigate = useNavigate();
   	const location = useLocation();
 
@@ -24,6 +26,10 @@ function CosmeticsCatalogue({cosmetics}) {
 			}).toString(),
 		  });
 	  };
+
+	useEffect(() => {
+		getCosmeticsList(currentPage)
+	}, [currentPage, getCosmeticsList])
 
 	const cosmeticsList = cosmetics.map((cosmetic) => {
 		return (
@@ -39,14 +45,14 @@ function CosmeticsCatalogue({cosmetics}) {
 	return (
 		<div className='cosmetics-page' style={{ backgroundImage: `url('${process.env.PUBLIC_URL}/images/bg-cosmetics.svg')` }}>
 			<div className={`filter-container ${isOpen ? 'open' : ''}`}>
-				{isOpen ? <Arrow left className="arrow" onClick={() => setIsOpen(!isOpen)}/> : <Arrow right className="arrow" onClick={() => setIsOpen(!isOpen)}/>}
+				{isOpen ? <Arrow left className='arrow' onClick={() => setIsOpen(!isOpen)}/> : <Arrow right className='arrow' onClick={() => setIsOpen(!isOpen)}/>}
 				{isOpen && <div className={`filter ${isOpen ? 'open' : ''}`}>
 					<Text className='text'>Filter by skintype:</Text>
-					<RadioButton key="0" changed={skintypeFilterChangeHandler} isSelected={filterBy=== ""} value="" label="no filter"/>
-					<RadioButton key="dry" changed={skintypeFilterChangeHandler} isSelected={filterBy=== "dry"} value="dry" label="dry"/>
-					<RadioButton key="normal" changed={skintypeFilterChangeHandler} isSelected={filterBy=== "normal"} value="normal" label="normal"/>
-					<RadioButton key="oily" changed={skintypeFilterChangeHandler} isSelected={filterBy=== "oily"} value="oily" label="oily"/>
-					<RadioButton key="mixed" changed={skintypeFilterChangeHandler} isSelected={filterBy=== "mixed"} value="mixed" label="mixed"/>
+					<RadioButton key='0' changed={skintypeFilterChangeHandler} isSelected={filterBy=== ''} value='' label='no filter'/>
+					<RadioButton key='dry' changed={skintypeFilterChangeHandler} isSelected={filterBy=== 'dry'} value='dry' label='dry'/>
+					<RadioButton key='normal' changed={skintypeFilterChangeHandler} isSelected={filterBy=== 'normal'} value='normal' label='normal'/>
+					<RadioButton key='oily' changed={skintypeFilterChangeHandler} isSelected={filterBy=== 'oily'} value='oily' label='oily'/>
+					<RadioButton key='mixed' changed={skintypeFilterChangeHandler} isSelected={filterBy=== 'mixed'} value='mixed' label='mixed'/>
 				</div>}
 			</div>
 			<div className='catalogue'>
@@ -54,7 +60,7 @@ function CosmeticsCatalogue({cosmetics}) {
 					<Heading size='large'>Cosmetics</Heading>
 				</div>
 				<div className='cosmetics-list'>
-					{cosmetics.length>0 && cosmeticsList ?  cosmeticsList : <Heading size="x-large" className='no-data'>No cosmetics to display</Heading>}
+					{cosmetics.length>0 && cosmeticsList ?  cosmeticsList : <Heading size='x-large' className='no-data'>No cosmetics to display</Heading>}
 				</div>
 				<div className='pagination'>
 					<Pagination size={10} url='/cosmetics/page' color='gray' currentPage={currentPage} />
@@ -64,10 +70,13 @@ function CosmeticsCatalogue({cosmetics}) {
 	);
 }
 const mapStateToProps = (state) =>{
-    return{
+    return {
         cosmetics: getCosmetics(state),
     }
 }
-
-export default connect(mapStateToProps, null)(CosmeticsCatalogue);
+const mapDispatchToProps = {
+	getCosmeticsList,
+}
+  
+export default connect(mapStateToProps, mapDispatchToProps)(CosmeticsCatalogue);
 

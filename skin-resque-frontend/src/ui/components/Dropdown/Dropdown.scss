@@ -1,10 +1,12 @@
 .dropdown {
-	position: absolute;
-	right: 12.5rem;
-
+	.dropdown-button {
+		background-color: transparent;
+		padding: 0;
+	};
 	.links {
 		position: absolute;
-		right: 0;
+		z-index: 1;
+		right: auto;
 		background-color: #f1f1f1;
 		min-width: 11.25rem;
 

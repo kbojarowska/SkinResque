@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Modal.scss";
 import { RiCloseLine } from "react-icons/ri";
 
-const Modal = ({ setIsOpen }) => {
+const Modal = ({ setIsOpen, onSave }) => {
   return (
     <>
       <div className="darkBG" onClick={() => setIsOpen(false)} />
@@ -19,7 +19,7 @@ const Modal = ({ setIsOpen }) => {
           </div>
           <div className="btn-container">
             <div className="button-container">
-              <button className="btn-save" onClick={() => setIsOpen(false)}>
+              <button className="btn-save" onClick={() => {onSave(); setIsOpen(false)}}>
                 Save
               </button>
               <button

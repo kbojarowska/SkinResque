@@ -9,9 +9,9 @@ function Dropdown({ links, buttonText }) {
 
 	const [displayLinks, setDisplayLinks] = useState(false);
 
-	const LinksoDisplay = links.map((link) => {
+	const LinkstoDisplay = links.map((link) => {
 		return (
-			<Link to={link.page} key={link.page}><Text size='small'>{link.displayText}</Text></Link>
+			<Link to={link.page} key={link.page} onClick={() => setDisplayLinks(false)} onBlur={() => setDisplayLinks(false)}><Text size='small'>{link.displayText}</Text></Link>
 		)
 	})
 
@@ -21,9 +21,9 @@ function Dropdown({ links, buttonText }) {
 
 	return (
 		<div className='dropdown'>
-			<Button className='dropdown-button' onClick={handleDisplayLinks}>{buttonText}</Button>
+			<Button className='dropdown-button' size='small' onClick={handleDisplayLinks}>{buttonText}</Button>
 			{displayLinks ? <div className='links'>
-				{LinksoDisplay}
+				{LinkstoDisplay}
 			</div> : null}
 		</div>
 	);
