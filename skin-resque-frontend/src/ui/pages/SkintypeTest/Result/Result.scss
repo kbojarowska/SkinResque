@@ -7,7 +7,7 @@
 		display: flex;
 		gap: 3.125rem;
 		justify-content: center;
-		height: 100%;
+		height: 60%;
 		width: 100%;
 
 		.results-save {
@@ -17,16 +17,22 @@
                 .title{
                     padding: 1rem;
                 }
-                .arrow-right {
-                    display: flex;
-                    justify-content: flex-end;
-                    margin-bottom: auto;
-                    margin-top: auto;
-                }
                 .arrow-left {
                     display: flex;
                     justify-content: flex-start;
-                }
+                    align-items: center;
+                    margin-top: auto;
+                    margin-bottom: 2rem;
+                  }
+                  
+                  .arrow-right {
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    margin-top: auto;
+                    margin-bottom: 2rem;
+                  }
+                  
                 .text{
                     width: 80%;
                     margin-left: 3rem;
@@ -41,11 +47,7 @@
                     padding-top: 2rem;
                     display: flex;
                     justify-content: space-around;
-                }
-                .shadow {
-                    width: 90%;
-                }
-            
+                } 
                 .view-more {
                     color: #A39A9A;
                     float: right;
