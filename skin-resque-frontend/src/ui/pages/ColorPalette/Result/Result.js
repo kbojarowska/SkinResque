@@ -3,11 +3,12 @@ import { FiSave } from 'react-icons/fi';
 import Cookies from 'js-cookie';
 import { getUploadedImage, getUploadedPalettes, getUploadedSkinTone } from '../../../../ducks/UploadImage/selectors';
 import { addPalette } from '../../../../ducks/User/actions';
+import { getUser } from '../../../../ducks/User/selectors';
 import { connect } from "react-redux";
 import { Arrow, Heading, Modal } from "../../../components";
 import './Result.scss';
 
-function CollorPalletResults({ skin, palettes, image, addPalette }) {
+function CollorPalletResults({ skin, palettes, image, addPalette, user }) {
 	const id = Cookies.get('userId');
 	const token = Cookies.get('accessToken');
 	const [isOpen, setIsOpen] = useState(false);
@@ -50,9 +51,9 @@ function CollorPalletResults({ skin, palettes, image, addPalette }) {
 					</div>
 					<Arrow right onClick={() => handleNext()}/>
 					</div>
-					<div className='save' onClick={() => setIsOpen(true)}>
-					<FiSave size={25}/>
-					</div>
+					{ Object.keys(user).length > 0 ? <div className='save' onClick={() => setIsOpen(true)}>
+						<FiSave size={25}/>
+					</div>: null}
 					{isOpen && <Modal setIsOpen={setIsOpen} onSave={() => addPalette(id, {name: 'Summer', colors: [palettes[index][0], palettes[index][1], palettes[index][2], palettes[index][3]]}, token)}/>}
 				</div>
 			</div>
@@ -64,7 +65,8 @@ const mapStateToProps = (state) =>{
     return{
         palettes: getUploadedPalettes(state),
 		skin: getUploadedSkinTone(state),
-		image: getUploadedImage(state)
+		image: getUploadedImage(state),
+		user: getUser(state)
     }
 }
 
