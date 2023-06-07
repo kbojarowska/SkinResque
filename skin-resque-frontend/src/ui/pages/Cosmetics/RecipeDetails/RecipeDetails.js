@@ -6,6 +6,7 @@ import { FiSave } from 'react-icons/fi';
 import { Heading, Modal, Text } from '../../../components'
 import { getCosmetic } from '../../../../ducks/Cosmetics/selectors';
 import { addCosmetic } from '../../../../ducks/User/actions';
+import { getUser } from '../../../../ducks/User/selectors';
 
 import './RecipeDetails.scss'
 
