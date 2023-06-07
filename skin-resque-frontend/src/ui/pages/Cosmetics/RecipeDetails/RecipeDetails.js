@@ -23,7 +23,7 @@ function withRouter(Component){
 }
 
 
-function RecipeDetails({ cosmetic, addCosmetic }) {
+function RecipeDetails({ cosmetic, addCosmetic, user }) {
 
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -45,9 +45,9 @@ function RecipeDetails({ cosmetic, addCosmetic }) {
 				{cosmetic ?
 					<div>
 						<Heading className='heading'>{cosmetic.name.toUpperCase()}
-						<div className='save' onClick={() => setIsOpen(true)}>
+						{ Object.keys(user).length > 0 ? <div className='save' onClick={() => setIsOpen(true)}>
 						<FiSave size={25}/>
-						</div>
+						</div> : null}
 						{isOpen && <Modal setIsOpen={setIsOpen} onSave={() => saveCosmetic(cosmetic._id)}/>}</Heading>
 						<div className='details-container'>
 							<img src={cosmetic.photo} className='img'></img>
@@ -63,7 +63,6 @@ function RecipeDetails({ cosmetic, addCosmetic }) {
 								<Heading className='ing'>Ingredients</Heading>
 								{cosmetic ? ingredients : ''}
 							</div>
-							{/* {cosmetic ? recipe : ''} */}
 							<Text className='recipe text'>{cosmetic.recipe}</Text>
 						</div>
 					</div> : 
@@ -77,6 +76,7 @@ function RecipeDetails({ cosmetic, addCosmetic }) {
 const mapStateToProps = (state, props) => {
     return {
         cosmetic: getCosmetic(state, props.router.params.cosmeticId),
+		user: getUser(state)
     };
 }
 
