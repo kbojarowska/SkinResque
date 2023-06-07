@@ -66,9 +66,9 @@ function Results() {
 									)
 								})}
 							</div>
-							<Link to={`/cosmetics/page/1?type=${skintype}`}><Text size='small' className='view-more'>View more <FiArrowRight style={{ position: 'relative', top: '2px' }} /></Text></Link>
 						</div>
 					}
+					{infoPage ? null : <Link to={`/cosmetics/page/1?type=${skintype}`}><Text size='small' className='view-more'>View more <FiArrowRight style={{ position: 'relative', top: '2px' }} /></Text></Link>}
 					{infoPage ? null : <Arrow className='arrow-left' left onClick={() => setInfoPage(!infoPage)} />}
 					{infoPage ? <Arrow className='arrow-right' right onClick={() => setInfoPage(!infoPage)} /> : null}
 				</div>

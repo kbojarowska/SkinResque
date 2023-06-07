@@ -7,12 +7,12 @@
 		display: flex;
 		gap: 3.125rem;
 		justify-content: center;
-		height: 60%;
+		height: 70%;
 		width: 100%;
 
 		.results-save {
 			background-color: #F6EFF0;
-			width: 50%;
+			width: 60%;
             display: flex;
                 .title{
                     padding: 1rem;
@@ -36,6 +36,8 @@
                 .text{
                     width: 80%;
                     margin-left: 3rem;
+                    margin-top: auto;
+                    margin-bottom: auto;
                 }
 
                 .sub-skin-type-text{
@@ -51,10 +53,12 @@
                 .view-more {
                     color: #A39A9A;
                     float: right;
+                    padding-top: 10rem;
                 }
                 .cosmetics-container-col{
+                    max-height: 13rem;
                     .cosmetics {
-                        height: 40%;
+                        height: 100%;
                         display: block;
                         margin-left: auto;
                         margin-right: auto;
@@ -62,6 +66,9 @@
                     .centered-div {
                         display: block;
                         text-align: center;
+                        inline-size: 200px;
+                        margin-left: auto;
+                        margin-right: auto;
                      }
                 }
                 
