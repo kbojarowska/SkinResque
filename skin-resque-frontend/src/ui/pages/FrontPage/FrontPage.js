@@ -130,7 +130,7 @@ function FrontPage() {
 			<div className='green'></div>
 			<img src='/images/front-page-skin-photo.jpg' className='skin-photo'></img>
 			<div className='white-info'>
-        <div key={showIngredient.id} className='info-container'>
+        <div key={showIngredient.id} className='info-container-main-page'>
           <Arrow left onClick={previousIngredient}/>
           <div className='info-text'>
             <Heading>{showIngredient.name.toUpperCase()}</Heading>
