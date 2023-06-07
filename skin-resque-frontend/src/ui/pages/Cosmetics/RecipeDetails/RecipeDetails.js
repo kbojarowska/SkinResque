@@ -27,7 +27,7 @@ function RecipeDetails({ cosmetic, addCosmetic }) {
 
 	const [isOpen, setIsOpen] = useState(false);
 
-	const ingredients = cosmetic.ingredients.map((ing) => {
+	const ingredients = cosmetic && cosmetic.ingredients.map((ing) => {
 		return (
 			<Text key={ing} size="small">{ing}</Text>
 		)

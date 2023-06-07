@@ -20,9 +20,14 @@ export const createUser = (user) => {
 	return (dispatch) => {
 		return axios.post(USER_URL, user)
 			.then((response) => {
+				alert('Successfully signed up! You can now sign in.');
 				dispatch({ type: types.CREATE_USER_SUCCESS, payload: response.data });
 			})
 			.catch((error) => {
+				if (error.response.status === 400) {
+					return alert('This username or email is already taken.');
+				}
+				alert('Something went wrong while creating user.');
 				dispatch({ type: types.CREATE_USER_FAILURE, payload: error });
 			});
 	};
@@ -120,9 +125,11 @@ export const getUserSavedPalettes = (userId, token) => {
 export const addCosmetic = (userId, cosmeticId, token) => {
 	return (dispatch) => {
 		return axios.patch(`${USER_URL}/${userId}/cosmetics/${cosmeticId}?token=${token}`).then(() => {
+			alert('Successfully added cosmetic.');
 			dispatch({ type: types.ADD_COSMETIC_SUCCESS, payload: cosmeticId });
 		})
 		.catch((error) => {
+			alert('Something went wrong while saving cosmetic.');
 			dispatch({ type: types.ADD_COSMETIC_FAILURE, payload: error });
 		});
 	};
@@ -143,7 +150,7 @@ export const addPalette = (userId, palette, token) => {
 		return axios.post(PALETTE_URL, palette).then((response) => {
 			const paletteId = response.data[0]._id;
 			axios.patch(`${USER_URL}/${userId}/palettes/${paletteId}?token=${token}`).then(() => {
-				dispatch({ type: types.DELETE_COSMETIC_SUCCESS, payload: paletteId });
+				dispatch({ type: types.ADD_PALETTE_SUCCESS, payload: paletteId });
 			}).catch((error) => {
 				dispatch({ type: types.ADD_PALETTE_FAILURE, payload: error });
 			})

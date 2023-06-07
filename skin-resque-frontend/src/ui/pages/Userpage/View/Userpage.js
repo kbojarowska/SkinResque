@@ -71,17 +71,17 @@ function Userpage({ user, savedCosmetics, savedPalettes, getUserSavedCosmetics, 
 
 	const cosmeticsList = savedCosmetics && savedCosmetics.map((cosmetic) => {
 		return (
-			<Link to={`/cosmetics/${cosmetic._id}`} key={cosmetic._id}>
-				<div className='cosmetic' >
-					<div className='bin'>
-						<FiTrash2 onClick={() => deleteCosmetic(user._id, cosmetic._id, token)} />
-					</div>
+			<div className='cosmetic' key={cosmetic._id}>
+				<div className='bin'>
+					<FiTrash2 onClick={() => deleteCosmetic(user._id, cosmetic._id, token)} />
+				</div>
+				<Link to={`/cosmetics/${cosmetic._id}`} >
 					<img src={cosmetic.photo} className='cosmetic-img' />
 					<Text size='small'>{cosmetic.name}</Text>
-				</div>
-			</Link >
-		)
-	})
+				</Link>
+			</div>
+		);
+	});
 	
 
 	const paletteList = savedPalettes && savedPalettes.map((palette) => {
@@ -94,10 +94,6 @@ function Userpage({ user, savedCosmetics, savedPalettes, getUserSavedCosmetics, 
 					{palette.colors && palette.colors.map((color, index) => 
 						<div className='palette-element' key={index} style={{ 'background-color': `#${color}` }}/>
 					)}
-				</div>
-				<Text size='small'>{palette.name}</Text>
-				<div className='edit'>
-					<FiEdit3 />
 				</div>
 			</div>
 		)
